@@ -9,6 +9,8 @@
     <color name="index_split">#e1e1e1</color>
     <color name="expert_item_bg_stroke">#FFC7CBCB</color>
     <color name="index_tiwen_item_expert">#FF4081</color>
+    <color name="expert_item_bg">#f1f5f6</color>
+    <color name="expert_bg">#ffffff</color>
     <!--
 1.tabIndicatorColor：TabLayout指示器的颜色
 2.tabTextColor: tab默认字体的颜色

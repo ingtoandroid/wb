@@ -3,9 +3,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title1">title1</string>\
-    <string name="title2">title2</string>
-    <string name="title3">title3</string>
+    <string name="title1">首页</string>\
+    <string name="title2">专家</string>
+    <string name="title3">我的</string>
     <string name="index_string1">找专家</string>
     <string name="index_string2">悦健网-您的运动健康顾问</string>
     <string name="index_string3">专家</string>
