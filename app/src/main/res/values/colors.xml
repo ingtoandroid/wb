@@ -3,4 +3,19 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="tabIndicatorColor">#FF15B8A8</color>
+    <color name="tabtextcolor">#FFC7CBCB</color>
+    <color name="tabSelectedTextColor">#FF454747</color>
+    <color name="index_split">#e1e1e1</color>
+    <color name="expert_item_bg_stroke">#FFC7CBCB</color>
+    <color name="index_tiwen_item_expert">#FF4081</color>
+    <!--
+1.tabIndicatorColor：TabLayout指示器的颜色
+2.tabTextColor: tab默认字体的颜色
+3.tabSelectedTextColor：当前选择的tab的字体颜色
+4.tabBackground：背景
+5.tabIndicatorHeight：TabLayout指示器高度
+-->
+    <color name="expert_bar">#59d8ab</color>
+    <color name="expert_bar_text">#feffff</color>
 </resources>

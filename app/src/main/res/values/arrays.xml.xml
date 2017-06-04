@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="expert_tabs">
+        <item>@drawable/run</item>
+        <item>@drawable/mind</item>
+        <item>@drawable/basketball</item>
+        <item>@drawable/skill</item>
+        <item>@drawable/swim</item>
+        <item>@drawable/yoga</item>
+        <item>@drawable/ride</item>
+        <item>@drawable/gym</item>
+    </string-array>
+    <string-array name="expert_tab_text">
+        <item>跑步</item>
+        <item>心里</item>
+        <item>篮球</item>
+        <item>技能</item>
+        <item>游泳</item>
+        <item>瑜伽</item>
+        <item>骑行</item>
+        <item>体操</item>
+
+    </string-array>
+</resources>
