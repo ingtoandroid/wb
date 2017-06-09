@@ -1,6 +1,7 @@
 package com.example.a.app10.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.a.app10.Activity.Quiz;
 import com.example.a.app10.Adapter.IndexExpertAdapter;
 import com.example.a.app10.Adapter.ShipinAdapter;
 import com.example.a.app10.Adapter.TiWenAdapter;
@@ -26,6 +28,7 @@ public class IndexFragment extends Fragment {
     private TiWenAdapter tiWenAdapter;
     private ShipinAdapter shipinAdapter;
     private RecyclerView indexShipinRecyclerView;
+    private LinearLayout quick_question;
 
 
     public IndexFragment() {
@@ -56,6 +59,7 @@ public class IndexFragment extends Fragment {
         indexExpertRecycleView =(RecyclerView)view.findViewById(R.id.index_recycleview);
         indexTiwenRecycleView=(RecyclerView)view.findViewById(R.id.index_tiwen_recycleview);
         indexShipinRecyclerView=(RecyclerView)view.findViewById(R.id.index_shipin_recyclerview);
+        quick_question=(LinearLayout)view.findViewById(R.id.quick_question);
         init();
         return view;
     }
@@ -72,6 +76,13 @@ public class IndexFragment extends Fragment {
         indexTiwenRecycleView.setAdapter(tiWenAdapter);
         indexShipinRecyclerView.setLayoutManager(linearLayoutManager2);
         indexShipinRecyclerView.setAdapter(shipinAdapter);
+        quick_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), Quiz.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

@@ -17,5 +17,6 @@
     <string name="index_tiwen_string2">查找知名专家，咨询解答</string>
     <string name="index_tiwen_item_expert">专家回复：</string>
     <string name="index_shipin_item_time">开课时间</string>
+    <string name="quiz_title">快速提问</string>
 
 </resources>

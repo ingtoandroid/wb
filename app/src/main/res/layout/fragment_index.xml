@@ -181,45 +181,51 @@
     android:layout_height="1dp"
     android:layout_marginTop="10dp"
     android:background="@color/index_split"></TextView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="94dp"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginTop="10dp">
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/index_tiwen"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dp"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.74">
-            <TextView
+            android:id="@+id/quick_question"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/index_tiwen" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/index_tiwen_string1"
-                android:textSize="25sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/index_tiwen_string2"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"/>
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.74"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/index_tiwen_string1"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/index_tiwen_string2"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical|right"
+                android:scaleType="fitXY"
+                android:src="@drawable/index_right" />
         </LinearLayout>
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/index_right"
-            android:scaleType="fitXY"
-            android:layout_gravity="center_vertical|right"
-            />
-    </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
