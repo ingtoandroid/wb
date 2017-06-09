@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.example.a.app10.Activity.ProfessorDetailActivity">
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/llContent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/professor_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:orientation="vertical"
+            android:background="#fff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="个人简介"
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="互动性强，体验式授课，能用专业经验为学员提供针对性的培训方案"
+                android:textSize="20sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btnComment"
+                    android:text="评价"
+                    android:textSize="20sp"
+                    android:background="@drawable/button_side_press"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+                <Button
+                    android:id="@+id/btnLeave"
+                    android:text="留言"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/button_side_press"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"  />
+                <Button
+                    android:id="@+id/btnOrder"
+                    android:text="预约"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/button_side_press"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:text="视频列表"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvVideo"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:text="课程列表"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:id="@+id/rvCourse"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+        <com.example.sports.view.ExampleLinerLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.example.sports.view.ExampleItemLinearLayout
+                android:background="#fff"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="今天有雨"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="三个月成功减肥20斤"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.example.sports.view.ExampleItemLinearLayout>
+            <com.example.sports.view.ExampleItemLinearLayout
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="今天有雨"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="三个月成功减肥20斤"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.example.sports.view.ExampleItemLinearLayout>
+            <com.example.sports.view.ExampleItemLinearLayout
+                android:background="#fff"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:text="今天有雨"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="三个月成功减肥20斤"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.example.sports.view.ExampleItemLinearLayout>
+        </com.example.sports.view.ExampleLinerLayout>
+    </LinearLayout>
+
+</ScrollView>

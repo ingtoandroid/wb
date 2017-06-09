@@ -3,9 +3,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/main</item>
+        <item name="colorPrimaryDark">@color/main</item>
+        <item name="colorAccent">@color/main</item>
     </style>
 
     <style name="myTab" parent="Widget.Design.TabLayout" >
@@ -15,5 +15,12 @@
         <!--<item name="tabBackground">@drawable/image_select</item>-->
         <item name="tabIndicatorHeight">0dp</item>
     </style>
+
+    <style name="NewsTheme" parent="AppTheme">
+        <item name="colorPrimary">#fff</item>
+        <item name="colorPrimaryDark">#fff</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <dimen name="sicence" >25dp</dimen>
 
 </resources>

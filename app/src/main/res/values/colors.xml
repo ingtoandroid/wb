@@ -14,7 +14,7 @@
     <color name="quiz_bg">#59d8af</color>
     <color name="quiz_title">#fffeff</color>
     <color name="quiz_bar_bg">#00000000</color>
-    <!--
+    <color name="main">#20e274</color>    <!--
 1.tabIndicatorColor：TabLayout指示器的颜色
 2.tabTextColor: tab默认字体的颜色
 3.tabSelectedTextColor：当前选择的tab的字体颜色
@@ -23,4 +23,5 @@
 -->
     <color name="expert_bar">#59d8ab</color>
     <color name="expert_bar_text">#feffff</color>
+    <color name="black">#000</color>
 </resources>

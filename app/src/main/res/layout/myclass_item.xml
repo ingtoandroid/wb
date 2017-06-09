@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+    <RelativeLayout
+        android:layout_width="120dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="bottom"
+                android:background="#bbb"
+                android:id="@+id/tvFinish"
+                android:text="已学完"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:gravity="center_vertical"
+            android:text="2016健身计划"
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp" />
+        <TextView
+            android:gravity="center_vertical"
+            android:text="体育部"
+            android:id="@+id/tvNumber"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>
