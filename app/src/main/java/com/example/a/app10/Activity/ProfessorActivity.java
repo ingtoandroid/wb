@@ -190,7 +190,8 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         adapter.setLisenter(new ProfessorAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(ProfessorActivity.this,ProfessorDetailActivity.class));
+                Intent intent=new Intent(ProfessorActivity.this,ProfessorDetailActivity.class);
+                startActivity(intent);
             }
 
             @Override

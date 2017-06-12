@@ -3,7 +3,6 @@ package com.example.a.app10.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -92,8 +91,8 @@ public class MyClassActivity extends ToolBarBaseActivity {
             e.printStackTrace();
         }
         Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim);
+        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
+        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
         list.add(new MyClassItem(bitmap1,false,0,0,"全民健身计划2016"));
         list.add(new MyClassItem(bitmap2,true,0,0,"全民健身计划2019"));
         list.add(new MyClassItem(bitmap3,false,0,0,"全民健身计划2018"));

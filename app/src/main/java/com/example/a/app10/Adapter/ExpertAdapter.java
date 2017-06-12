@@ -22,6 +22,7 @@ import java.util.HashMap;
 public class ExpertAdapter extends RecyclerView.Adapter<ExpertAdapter.ViewHolder> {
     private ArrayList<HashMap<String,Object>> list;
     private Context context;
+    private ItemOnClickListener itemOnClickListener;
     public ExpertAdapter(Context context) {
         super();
         TypedArray typedArray=context.getResources().obtainTypedArray(R.array.expert_tabs);
@@ -47,7 +48,7 @@ public class ExpertAdapter extends RecyclerView.Adapter<ExpertAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.expert_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.expert_item,parent,false),itemOnClickListener);
     }
 
     @Override
@@ -55,13 +56,32 @@ public class ExpertAdapter extends RecyclerView.Adapter<ExpertAdapter.ViewHolder
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView imageView;
         private TextView textView;
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView,ItemOnClickListener itemOnClickListener)  {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.expert_image);
             textView=(TextView)itemView.findViewById(R.id.expert_text);
+            itemView.setOnClickListener(this);
         }
+
+
+
+        @Override
+        public void onClick(View v) {
+            if (itemOnClickListener != null) {
+                itemOnClickListener.onClick(v,getPosition());
+            }
+
+        }
+    }
+
+    public void setItemOnClickListener(ItemOnClickListener itemOnClickListener) {
+        this.itemOnClickListener = itemOnClickListener;
+    }
+
+    public interface ItemOnClickListener{
+        public void onClick(View view, int position);
     }
 }

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7f000000"
+        android:gravity="top"
+        android:weightSum="1"
+        android:id="@+id/top_contain">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back"/>
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pinglun"/>
+    </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/play"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#7f000000"
+    android:gravity="center_vertical"
+    android:weightSum="1"
+    android:layout_alignParentBottom="true">
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingTop="4dip"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<ImageButton android:id="@+id/prev"-->
+            <!--style="@android:style/MediaButton.Previous"-->
+            <!--android:contentDescription="@string/description" />-->
+
+        <!--<ImageButton android:id="@+id/rew"-->
+            <!--style="@android:style/MediaButton.Rew"-->
+            <!--android:contentDescription="@string/description" />-->
+
+
+        <!--<ImageButton android:id="@+id/pause"-->
+            <!--style="@android:style/MediaButton.Play"></ImageButton>-->
+            <!--&lt;!&ndash;android:contentDescription="@string/description" />&ndash;&gt;-->
+
+        <!--<ImageButton android:id="@+id/ffwd"-->
+            <!--style="@android:style/MediaButton.Ffwd"-->
+            <!--android:contentDescription="@string/description" />-->
+
+        <!--<ImageButton android:id="@+id/next"-->
+            <!--style="@android:style/MediaButton.Next"-->
+            <!--android:contentDescription="@string/description" />-->
+
+    <!--</LinearLayout>-->
+        <ImageButton android:id="@+id/pause"
+         style="@android:style/MediaButton.Play"
+            android:layout_width="0dp"
+            android:layout_weight="0.09"></ImageButton>
+        <TextView android:id="@+id/time_current"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="4dip"
+            android:textColor="@color/video_bar_text"/>
+
+        <SeekBar
+            android:id="@+id/mediacontroller_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="0.50" />
+
+        <TextView android:id="@+id/time"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/video_bar_text"/>
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_weight="0.09"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleHorizontal"
+        />
+    <SeekBar
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_weight="0.30"
+        android:id="@+id/mediacontroller_voice"/>
+
+        <ImageButton android:id="@+id/fullscreen"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/basketball"
+            android:scaleType="centerInside"></ImageButton>
+            <!--android:contentDescription="@string/description" />-->
+
+
+
+</LinearLayout>
+</RelativeLayout>

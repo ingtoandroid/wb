@@ -1,6 +1,7 @@
 package com.example.a.app10.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.a.app10.Activity.Professor;
+import com.example.a.app10.Activity.ProfessorActivity;
 import com.example.a.app10.Adapter.ExpertAdapter;
 import com.example.a.app10.R;
 
@@ -55,6 +58,13 @@ public class ExpertFragment extends Fragment {
         expertAdapter=new ExpertAdapter(getContext());
         expertRecyclerview.setLayoutManager(new GridLayoutManager(getContext(),4));
         expertRecyclerview.setAdapter(expertAdapter);
+        expertAdapter.setItemOnClickListener(new ExpertAdapter.ItemOnClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent=new Intent(getContext(),ProfessorActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

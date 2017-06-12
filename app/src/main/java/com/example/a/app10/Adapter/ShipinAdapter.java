@@ -20,6 +20,7 @@ import java.util.HashMap;
 public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder> {
     private ArrayList<HashMap<String,Object>> list;
     private Context context;
+    private ItemOnClickListener itemOnClickListener;
     public ShipinAdapter(Context context) {
         super();
         list=new ArrayList<HashMap<String, Object>>();
@@ -42,7 +43,7 @@ public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.index_shipin_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.index_shipin_item,parent,false),itemOnClickListener);
     }
 
     @Override
@@ -50,18 +51,31 @@ public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder
         return list.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView imageView;
         private TextView title;
         private TextView count;
         private TextView time;
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView,ItemOnClickListener itemOnClickListener) {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.index_shipin_item_image);
             title=(TextView)itemView.findViewById(R.id.index_shipin_item_title);
             count=(TextView)itemView.findViewById(R.id.index_shipin_item_count);
             time=(TextView)itemView.findViewById(R.id.index_shipin_item_time);
-
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            itemOnClickListener.onClick(v,getPosition());
+        }
+    }
+
+    public void setItemOnClickListener(ItemOnClickListener itemOnClickListener) {
+        this.itemOnClickListener = itemOnClickListener;
+    }
+
+    public interface ItemOnClickListener{
+        public void onClick(View view, int position);
     }
 }

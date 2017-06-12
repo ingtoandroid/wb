@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 public class IndexExpertAdapter extends RecyclerView.Adapter<IndexExpertAdapter.ViewHolder> {
 
+    private IndexExpertAdapter.ItemOnClickListener itemOnClickListener;
     private  ArrayList<HashMap<String,Object>> list;
     private Context context;
     public IndexExpertAdapter(Context context) {
@@ -50,18 +51,32 @@ public class IndexExpertAdapter extends RecyclerView.Adapter<IndexExpertAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.index_expert_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.index_expert_item,parent,false),itemOnClickListener);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView imageView;
         TextView name;
         TextView type;
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView,ItemOnClickListener itemOnClickListener) {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.expert_item_image);
             name=(TextView)itemView.findViewById(R.id.expert_item_name);
             type=(TextView)itemView.findViewById(R.id.expert_item_type);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            itemOnClickListener.onClick(v,getPosition());
+        }
+    }
+
+    public void setItemOnClickListener(ItemOnClickListener itemOnClickListener) {
+        this.itemOnClickListener = itemOnClickListener;
+    }
+
+    public interface ItemOnClickListener{
+        public void onClick(View view, int position);
     }
 }

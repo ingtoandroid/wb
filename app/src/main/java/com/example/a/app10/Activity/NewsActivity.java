@@ -3,15 +3,11 @@ package com.example.a.app10.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 
 import com.example.a.app10.Adapter.ScienceAdapter;
@@ -64,8 +60,8 @@ public class NewsActivity extends ToolBarBaseActivity{
     private void getData() {
         list=new ArrayList<>();
         Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim);
+        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
+        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
         list.add(new ScienceItem(bitmap1,"全民健身计划2016","咨询部","刚刚"));
         list.add(new ScienceItem(bitmap2,"全民健身计划2011","咨询部","一天前"));
         list.add(new ScienceItem(bitmap3,"全民健身计划2012","咨询部","两天前"));

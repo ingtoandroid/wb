@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context="com.example.a.app10.Activity.ClassActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnClub"
+            android:background="#fff"
+            android:textColor="@color/main"
+            android:text="在线视频"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:background="#ccc"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"></LinearLayout>
+        <Button
+            android:id="@+id/btnOrder"
+            android:background="#fff"
+            android:text="直播视频"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+

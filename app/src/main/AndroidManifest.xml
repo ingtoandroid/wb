@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a.app10">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,15 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Activity.Main1Activity" />
         <activity android:name=".Activity.Quiz" />
-        <activity android:name=".Activity.VideoDetail" />
+        <activity
+            android:name=".Activity.VideoDetail"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity" />
@@ -25,7 +23,24 @@
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" />
-        <activity android:name=".Activity.ProfessorDetailActivity"></activity>
+        <activity android:name=".Activity.ProfessorDetailActivity" />
+        <activity android:name=".Activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Main2Activity" />
+        <activity android:name=".Activity.Main3Activity" />
+        <activity android:name=".Activity.Main4Activity" />
+        <activity android:name=".Activity.Main5Activity" />
+        <activity android:name=".Activity.Main6Activity" />
+        <activity android:name=".Activity.Main7Activity" />
+        <activity android:name=".Activity.MyPointsActivity" />
+        <activity android:name=".Activity.MyReservationActivity" />
+        <activity android:name=".Activity.Professor" />
+        <activity android:name=".Activity.ShipinActivity"></activity>
     </application>
 
 </manifest>

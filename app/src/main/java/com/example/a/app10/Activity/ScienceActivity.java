@@ -13,8 +13,6 @@ import android.view.View;
 import android.widget.Button;
 
 
-import com.example.a.app10.Activity.NewsDetailActivity;
-import com.example.a.app10.Activity.ToolBarBaseActivity;
 import com.example.a.app10.Adapter.ScienceAdapter;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ScienceItem;
@@ -78,8 +76,8 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     private void getData() {
         list=new ArrayList<>();
         Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim);
+        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
+        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
         list.add(new ScienceItem(bitmap1,"全民健身计划2016","咨询部","刚刚"));
         list.add(new ScienceItem(bitmap2,"全民健身计划2011","咨询部","一天前"));
         list.add(new ScienceItem(bitmap3,"全民健身计划2012","咨询部","两天前"));

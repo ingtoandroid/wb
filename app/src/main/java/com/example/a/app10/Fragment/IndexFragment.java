@@ -9,9 +9,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.example.a.app10.Activity.ClassActivity;
+import com.example.a.app10.Activity.NewsActivity;
+import com.example.a.app10.Activity.Professor;
+import com.example.a.app10.Activity.ProfessorDetailActivity;
 import com.example.a.app10.Activity.Quiz;
+import com.example.a.app10.Activity.ScienceActivity;
+import com.example.a.app10.Activity.ShipinActivity;
+import com.example.a.app10.Activity.VideoDetail;
 import com.example.a.app10.Adapter.IndexExpertAdapter;
 import com.example.a.app10.Adapter.ShipinAdapter;
 import com.example.a.app10.Adapter.TiWenAdapter;
@@ -29,6 +37,11 @@ public class IndexFragment extends Fragment {
     private ShipinAdapter shipinAdapter;
     private RecyclerView indexShipinRecyclerView;
     private LinearLayout quick_question;
+    private LinearLayout findExpert;
+    private ImageButton kepu;
+    private ImageButton shipin;
+    private ImageButton ketang;
+    private ImageButton zixun;
 
 
     public IndexFragment() {
@@ -60,6 +73,11 @@ public class IndexFragment extends Fragment {
         indexTiwenRecycleView=(RecyclerView)view.findViewById(R.id.index_tiwen_recycleview);
         indexShipinRecyclerView=(RecyclerView)view.findViewById(R.id.index_shipin_recyclerview);
         quick_question=(LinearLayout)view.findViewById(R.id.quick_question);
+        findExpert=(LinearLayout)view.findViewById(R.id.line1);
+        kepu=(ImageButton)view.findViewById(R.id.index_kepu);
+        shipin=(ImageButton)view.findViewById(R.id.index_shipin);
+        ketang=(ImageButton)view.findViewById(R.id.index_ketang);
+        zixun=(ImageButton)view.findViewById(R.id.index_zixun);
         init();
         return view;
     }
@@ -80,6 +98,55 @@ public class IndexFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), Quiz.class);
+                startActivity(intent);
+            }
+        });
+        findExpert.setOnClickListener(new LinearLayout.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), Professor.class);
+                startActivity(intent);
+            }
+        });
+        indexExpertAdapter.setItemOnClickListener(new IndexExpertAdapter.ItemOnClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent=new Intent(getContext(), ProfessorDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+        shipinAdapter.setItemOnClickListener(new ShipinAdapter.ItemOnClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent intent=new Intent(getContext(), VideoDetail.class);
+                startActivity(intent);
+            }
+        });
+        kepu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), ScienceActivity.class);
+                startActivity(intent);
+            }
+        });
+        shipin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), ShipinActivity.class);
+                startActivity(intent);
+            }
+        });
+        ketang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), ClassActivity.class);
+                startActivity(intent);
+            }
+        });
+        zixun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), NewsActivity.class);
                 startActivity(intent);
             }
         });

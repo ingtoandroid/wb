@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -136,8 +135,8 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
     private void getData() {
         list=new ArrayList<>();
         Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim);
+        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
+        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
         list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
         list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
         list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));

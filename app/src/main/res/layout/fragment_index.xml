@@ -10,43 +10,48 @@
     tools:context="com.example.a.app10.Fragment.IndexFragment">
 
     <LinearLayout
+        android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="94dp"
         android:layout_marginTop="140dp"
         android:orientation="horizontal"
         android:weightSum="1">
+
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/index_left"
-            android:scaleType="fitXY"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/index_left" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.74">
+            android:layout_weight="0.74"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/index_string1"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:text="@string/index_string2"
-                android:textSize="15sp"
-                android:layout_marginTop="5dp"/>
+                android:textSize="15sp" />
         </LinearLayout>
+
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:src="@drawable/index_right"
-            android:scaleType="fitXY"
             android:layout_gravity="center_vertical|right"
-            />
+            android:scaleType="fitXY"
+            android:src="@drawable/index_right" />
     </LinearLayout>
 
     <ImageView
@@ -100,22 +105,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/expert_item_bg_stroke"
-            android:weightSum="4"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:weightSum="4">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="fitXY"
-                    android:background="@drawable/chufang"/>
+                    android:background="@drawable/chufang"
+                    android:id="@+id/index_kepu"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,13 +133,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="fitXY"
-                    android:background="@drawable/shipin"/>
+                    android:background="@drawable/shipin"
+                    android:id="@+id/index_shipin"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,13 +154,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="fitXY"
-                    android:background="@drawable/ketang"/>
+                    android:background="@drawable/ketang"
+                    android:id="@+id/index_ketang"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,13 +175,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:scaleType="fitXY"
-                    android:background="@drawable/zixun" />
+                    android:background="@drawable/zixun"
+                    android:id="@+id/index_zixun"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
