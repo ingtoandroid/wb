@@ -1,6 +1,5 @@
 package com.example.a.app10.Activity;
 
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,11 +14,10 @@ import android.widget.TextView;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MyData;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main7Activity extends AppCompatActivity {
+public class QuestionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyData> datas;
     private ImageView back_question;
@@ -27,7 +25,7 @@ public class Main7Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();
-        setContentView(R.layout.activity_main7);
+        setContentView(R.layout.activity_question);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         datas = new ArrayList<>();
@@ -56,7 +54,7 @@ public class Main7Activity extends AppCompatActivity {
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(Main7Activity.this)
+            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(QuestionActivity.this)
                     .inflate(R.layout.item_question,parent,false));
             return holder;
         }

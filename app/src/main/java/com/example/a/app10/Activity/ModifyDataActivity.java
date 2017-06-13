@@ -6,13 +6,13 @@ import android.view.WindowManager;
 
 import com.example.a.app10.R;
 
-public class Main3Activity extends AppCompatActivity {
+public class ModifyDataActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_modify_data);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 }

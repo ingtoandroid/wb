@@ -1,5 +1,6 @@
 package com.example.a.app10.bean;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 
 /**
@@ -7,11 +8,11 @@ import android.media.Image;
  */
 
 public class MyMessage {
-    public Image getHeadImage() {
+    public Bitmap getHeadImage() {
         return headImage;
     }
 
-    public void setHeadImage(Image headImage) {
+    public void setHeadImage(Bitmap headImage) {
         this.headImage = headImage;
     }
 
@@ -31,7 +32,7 @@ public class MyMessage {
         this.content = content;
     }
 
-    private Image headImage;
+    private Bitmap headImage;
     private String username;
     private String content;
 }

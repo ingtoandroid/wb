@@ -8,19 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.a.app10.Activity.ClassDetailActivity;
-import com.example.a.app10.Activity.Main5Activity;
-import com.example.a.app10.Activity.Main6Activity;
-import com.example.a.app10.Activity.Main7Activity;
+import com.example.a.app10.Activity.SettingActivity;
+import com.example.a.app10.Activity.ModifyDataActivity;
+import com.example.a.app10.Activity.QuestionActivity;
 import com.example.a.app10.Activity.MyMessageActivity;
 import com.example.a.app10.Activity.MyPointsActivity;
 import com.example.a.app10.Activity.MyReservationActivity;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.MyPoint;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -128,7 +126,7 @@ public class InfoFragment extends Fragment {
         my_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),Main7Activity.class);
+                Intent intent = new Intent(getContext(),QuestionActivity.class);
                 startActivity(intent);
             }
 
@@ -138,7 +136,7 @@ public class InfoFragment extends Fragment {
         modify_data.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Main6Activity.class);
+                Intent intent = new Intent(getContext(), ModifyDataActivity.class);
                 startActivity(intent);
             }
         });
@@ -147,7 +145,7 @@ public class InfoFragment extends Fragment {
         cog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), Main5Activity.class);
+                Intent intent = new Intent(getContext(), SettingActivity.class);
                 startActivity(intent);
             }
         });

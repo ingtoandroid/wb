@@ -24,19 +24,19 @@
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" />
         <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.Main2Activity" />
-        <activity android:name=".Activity.Main3Activity" />
-        <activity android:name=".Activity.Main4Activity" />
-        <activity android:name=".Activity.Main5Activity" />
-        <activity android:name=".Activity.Main6Activity" />
-        <activity android:name=".Activity.Main7Activity" />
+        <activity android:name=".Activity.PersonalActivity" />
+        <activity android:name=".Activity.ResetPwdActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.SettingActivity" />
+        <activity android:name=".Activity.ModifyDataActivity" />
+        <activity android:name=".Activity.QuestionActivity" />
         <activity android:name=".Activity.MyPointsActivity" />
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />

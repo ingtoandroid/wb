@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.a.app10.Activity.MainActivity">
+    tools:context="com.example.a.app10.Activity.LoginActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:padding="10dp"
         android:background="@drawable/logined"
         android:layout_below="@+id/title"
-        android:id="@+id/ed_login" />
+        android:id="@+id/ed_username" />
 
     <EditText
         android:layout_width="match_parent"
@@ -43,8 +43,8 @@
         android:textSize="20sp"
         android:padding="10dp"
         android:background="@drawable/logined"
-        android:layout_below="@+id/ed_login"
-        android:id="@+id/edpwd"
+        android:layout_below="@+id/ed_username"
+        android:id="@+id/ed_pwd"
         android:inputType="textPassword"
         />
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:text="@string/forget_pwd"
         android:textColor="@color/textGreen"
-        android:layout_below="@+id/edpwd"
+        android:layout_below="@+id/ed_pwd"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="10dp"
         android:id="@+id/forget_pwd"/>

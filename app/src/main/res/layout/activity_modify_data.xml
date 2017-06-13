@@ -177,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/dividColor"
-            android:id="@+id/seventh_divid"
+            android:id="@+id/sixth_divid"
             android:layout_below="@+id/city_item"/>
 
         <LinearLayout
@@ -207,7 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/dividColor"
-            android:id="@+id/sixth_divid"
+            android:id="@+id/seventh_divid"
             android:layout_below="@+id/city_item"/>
     </RelativeLayout>
 </RelativeLayout>
