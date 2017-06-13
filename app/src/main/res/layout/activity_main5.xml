@@ -11,11 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/set_newpassword_title">
+
         <ImageButton
             android:layout_width="40dp"
             android:layout_height="30dp"
-            />
-        <!--android:background="@drawable/get_into"-->
+            android:background="@drawable/back" />
+        android:background="@drawable/get_into"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,8 +58,8 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
         </LinearLayout>
 
         <ImageView
@@ -86,9 +87,8 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
         </LinearLayout>
 
         <ImageView
@@ -116,8 +116,8 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
         </LinearLayout>
 
         <ImageView

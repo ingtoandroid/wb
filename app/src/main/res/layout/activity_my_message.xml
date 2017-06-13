@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:background="@color/textGreen"
-        android:id="@+id/title_question">
+        android:id="@+id/title_message">
         <ImageView
             android:layout_width="25dp"
             android:layout_height="20dp"
@@ -19,11 +19,11 @@
             android:layout_marginLeft="10dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/back"
-            android:id="@+id/back_question"/>
+            android:id="@+id/back_messaage"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/question"
+            android:text="留言"
             android:textSize="20sp"
             android:textColor="@color/textWhiteColor"
             android:layout_centerHorizontal="true"
@@ -34,9 +34,9 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title_question"
-        android:id="@+id/question_view"
+        android:layout_below="@+id/title_message"
+        android:id="@+id/message_view"
         android:divider="#ffff0000"
         android:dividerHeight="10dp"
-    ></android.support.v7.widget.RecyclerView>
+        ></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

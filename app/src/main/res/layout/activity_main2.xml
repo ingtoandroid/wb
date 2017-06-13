@@ -9,23 +9,23 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/back_image"/>
-    <!--android:background="@drawable/back_image"-->
+        android:id="@+id/back_image"
+        android:background="@drawable/back_image"/>
     <Button
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/cog"/>
-    <!--android:background="@drawable/cog"-->
+        android:id="@+id/cog"
+        android:background="@drawable/cog"/>
     <Button
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:id="@+id/speech_bubbles"/>
-    <!--android:background="@drawable/speech_bubbles"-->
+        android:id="@+id/speech_bubbles"
+        android:background="@drawable/speech_bubbles"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -66,113 +66,141 @@
             android:layout_toRightOf="@+id/modify_data"
             android:layout_below="@+id/username"
             android:layout_gravity="center_vertical"
-            />
-        <!--android:background="@drawable/edit"-->
+            android:background="@drawable/edit"/>
     </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/back_image"
-        android:layout_marginTop="20dp"
-        android:id="@+id/four_option">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/back_image"
+        android:background="#e1e1e1">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:scaleType="fitCenter"
-                android:layout_below="@+id/back_image"
-                android:id="@+id/integral" />
-            <!--android:src="@drawable/integral"-->
-            <TextView
-                android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:id="@+id/four_option">
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/integral" />
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitCenter"
+                    android:layout_below="@+id/back_image"
+                    android:id="@+id/integral"
+                    android:src="@drawable/integral"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/integral" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitCenter"
+                    android:layout_below="@+id/back_image"
+                    android:layout_toRightOf="@+id/integral"
+                    android:id="@+id/message"
+                    android:src="@drawable/message"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/message"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitCenter"
+                    android:layout_below="@+id/back_image"
+                    android:layout_toRightOf="@+id/message"
+                    android:id="@+id/body_data"
+                    android:src="@drawable/data"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/body_data"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:scaleType="fitCenter"
+                    android:layout_below="@+id/back_image"
+                    android:layout_toRightOf="@+id/body_data"
+                    android:id="@+id/question"
+                    android:src="@drawable/question"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/qusition"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:scaleType="fitCenter"
-                android:layout_below="@+id/back_image"
-                android:layout_toRightOf="@+id/integral"
-                android:id="@+id/message"/>
-            <!--android:src="@drawable/integral"-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/four_option"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/reservation"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/message"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp">
+                android:layout_marginLeft="10dp"
+                android:text="@string/reservation"
+                android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:scaleType="fitCenter"
-                android:layout_below="@+id/back_image"
-                android:layout_toRightOf="@+id/message"
-                android:id="@+id/body_data"/>
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:background="@drawable/get_into"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/reservation"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/course_infomation"
+            android:background="#ffffff">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/body_data"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginLeft="30dp">
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:text="@string/course_infomation" />
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:scaleType="fitCenter"
-                android:layout_below="@+id/back_image"
-                android:layout_toRightOf="@+id/body_data"
-                android:id="@+id/question"/>
-            <!--android:src="@drawable/integral"-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/qusition"/>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/four_option"
-        android:layout_marginTop="40dp"
-        android:id="@+id/reservation">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reservation"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/reservation"
-        android:layout_marginTop="40dp"
-        android:id="@+id/course_infomation">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/course_infomation" />
-    </LinearLayout>
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:background="@drawable/get_into"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

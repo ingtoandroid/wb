@@ -1,6 +1,6 @@
 package com.example.a.app10.Activity;
 
-import android.media.Image;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,55 +14,55 @@ import android.widget.TextView;
 
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MyData;
+import com.example.a.app10.bean.MyMessage;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main7Activity extends AppCompatActivity {
+public class MyMessageActivity extends AppCompatActivity {
+
     private RecyclerView recyclerView;
-    private List<MyData> datas;
-    private ImageView back_question;
+    private List<MyMessage> datas;
+    private ImageView back_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().hide();
-        setContentView(R.layout.activity_main7);
+        setContentView(R.layout.activity_my_message);
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         datas = new ArrayList<>();
-        MyData myData = new MyData();
-        myData.setUsername("nihao");
-        myData.setContent("hello");
-        MyData myData1 = new MyData();
-        myData1.setUsername("a");
-        myData1.setContent("a");
-        datas.add(myData);
-        datas.add(myData1);
-        recyclerView = (RecyclerView)findViewById(R.id.question_view);
+        MyMessage myMessage = new MyMessage();
+        myMessage.setUsername("nihao");
+        myMessage.setContent("hello");
+        MyMessage myMessage1 = new MyMessage();
+        myMessage1.setUsername("a");
+        myMessage1.setContent("a");
+        datas.add(myMessage);
+        datas.add(myMessage1);
+        recyclerView = (RecyclerView)findViewById(R.id.message_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
-        back_question = (ImageView)findViewById(R.id.back_question);
-        back_question.setOnClickListener(new View.OnClickListener() {
+        back_message = (ImageView)findViewById(R.id.back_messaage);
+        back_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-       // recyclerView.addItemDecoration();
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            MyViewHolder holder = new MyViewHolder(LayoutInflater.from(Main7Activity.this)
-                    .inflate(R.layout.item_question,parent,false));
+        public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            MyAdapter.MyViewHolder holder = new MyAdapter.MyViewHolder(LayoutInflater.from(MyMessageActivity.this)
+                    .inflate(R.layout.item_message,parent,false));
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
         }
@@ -80,10 +80,10 @@ public class Main7Activity extends AppCompatActivity {
 
             public MyViewHolder(View view){
                 super(view);
-                headImage = (ImageView)view.findViewById(R.id.head_image_questions);
-                usernameText = (TextView)view.findViewById(R.id.username_questions);
-                contentText = (TextView)view.findViewById(R.id.content_questions);
-                getInImage = (ImageView)view.findViewById(R.id.get_into_question);
+                headImage = (ImageView)view.findViewById(R.id.head_image_message);
+                usernameText = (TextView)view.findViewById(R.id.username_message);
+                contentText = (TextView)view.findViewById(R.id.content_message);
+                getInImage = (ImageView)view.findViewById(R.id.get_into_message);
             }
         }
     }

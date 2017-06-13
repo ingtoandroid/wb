@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.a.app10.R;
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button login;
     private Button reg;
+    private TextView forget_pwd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private void initViews(){
         login=(Button)findViewById(R.id.bu_login);
         reg=(Button)findViewById(R.id.bu_reg);
+        forget_pwd = (TextView)findViewById(R.id.forget_pwd);
     }
     private void initEvents(){
         login.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this,Main4Activity.class);
+                startActivity(intent);
+            }
+        });
+        forget_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Main3Activity.class);
                 startActivity(intent);
             }
         });

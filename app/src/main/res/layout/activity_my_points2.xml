@@ -14,7 +14,14 @@
             android:layout_width="match_parent"
             android:layout_height="25dp"
             android:orientation="horizontal"
-            android:id="@+id/title_top_point">
+            android:id="@+id/title_top_point"
+            android:layout_marginTop="30dp">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/back"
+                android:background="@drawable/back"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +39,7 @@
             android:textColor="#ffffff"
             android:textStyle="bold"
             android:layout_below="@+id/title_top_point"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:id="@+id/point_tx"/>
         <TextView

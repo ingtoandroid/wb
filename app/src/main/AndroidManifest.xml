@@ -40,7 +40,8 @@
         <activity android:name=".Activity.MyPointsActivity" />
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />
-        <activity android:name=".Activity.ShipinActivity"></activity>
+        <activity android:name=".Activity.ShipinActivity" />
+        <activity android:name=".Activity.MyMessageActivity"></activity>
     </application>
 
 </manifest>

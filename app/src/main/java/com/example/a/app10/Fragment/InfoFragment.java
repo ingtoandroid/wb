@@ -1,13 +1,26 @@
 package com.example.a.app10.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.example.a.app10.Activity.ClassDetailActivity;
+import com.example.a.app10.Activity.Main5Activity;
+import com.example.a.app10.Activity.Main6Activity;
+import com.example.a.app10.Activity.Main7Activity;
+import com.example.a.app10.Activity.MyMessageActivity;
+import com.example.a.app10.Activity.MyPointsActivity;
+import com.example.a.app10.Activity.MyReservationActivity;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MyPoint;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +37,14 @@ public class InfoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    private RelativeLayout reservation;
+    private RelativeLayout course_info;
+    private RelativeLayout my_integral;
+    private RelativeLayout my_message;
+    private RelativeLayout my_body_data;
+    private RelativeLayout my_question;
+    private TextView  modify_data;
+    private Button cog;
     public InfoFragment() {
         // Required empty public constructor
     }
@@ -60,7 +80,78 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        View view=inflater.inflate(R.layout.fragment_info,container,false);
+        reservation = (RelativeLayout)view.findViewById(R.id.reservation);
+        reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),MyReservationActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        course_info = (RelativeLayout)view.findViewById(R.id.course_infomation);
+        course_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),ClassDetailActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        my_integral = (RelativeLayout) view.findViewById(R.id.my_integral);
+        my_integral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MyPointsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        my_message = (RelativeLayout) view.findViewById(R.id.my_message);
+        my_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MyMessageActivity.class);
+                startActivity(intent);
+            }
+        });
+        my_body_data = (RelativeLayout) view.findViewById(R.id.my_body_data);
+        my_body_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        my_question = (RelativeLayout) view.findViewById(R.id.my_question);
+        my_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Main7Activity.class);
+                startActivity(intent);
+            }
+
+        });
+
+        modify_data = (TextView)view.findViewById(R.id.modify_data);
+        modify_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Main6Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        cog = (Button) view.findViewById(R.id.cog);
+        cog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), Main5Activity.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 
 }

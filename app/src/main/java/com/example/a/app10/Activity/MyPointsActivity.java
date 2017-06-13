@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,12 +20,13 @@ import java.util.List;
 public class MyPointsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyPoint> datas;
-
+    private ImageView back_image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         setContentView(R.layout.activity_my_points2);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         datas = new ArrayList();
         MyPoint myPoint = new MyPoint();
         myPoint.setItem_content("成功登录悦健体育");
@@ -40,6 +42,14 @@ public class MyPointsActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview_point);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
+
+        back_image = (ImageView)findViewById(R.id.back);
+        back_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {

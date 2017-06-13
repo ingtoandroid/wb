@@ -108,8 +108,8 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -138,9 +138,9 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
+            android:background="@drawable/get_into"
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -170,8 +170,8 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -200,8 +200,8 @@
                 android:layout_width="10dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
+                android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
-            <!--android:background="@drawable/get_into"-->
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"

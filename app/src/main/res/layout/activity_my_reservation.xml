@@ -4,10 +4,10 @@
     android:id="@+id/activity_my_reservation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.shaoqi.outprojectsport.MyReservationActivity">
+    tools:context="com.example.a.app10.Activity.MyReservationActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="75dp"
         android:background="@color/textGreen"
         android:id="@+id/title">
         <TextView
