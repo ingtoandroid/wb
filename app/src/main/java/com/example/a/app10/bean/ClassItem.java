@@ -12,22 +12,36 @@ import android.graphics.Bitmap;
  */
 
 public class ClassItem {
-    private Bitmap bitmap;
-    private String title,number,time;
+    private String imgUrl;
+    private String courseId;//课程ID
+    private String title,number,time;//题目，已参加人数，开始日期
 
-    public ClassItem(Bitmap bitmap, String title, String number, String time) {
-        this.bitmap = bitmap;
+
+    public String getCourseId() {
+
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+
+    public ClassItem(String imgUrl, String courseId, String title, String number, String time) {
+        this.imgUrl = imgUrl;
+        this.courseId = courseId;
         this.title = title;
         this.number = number;
         this.time = time;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public String getImgUrl() {
+
+        return imgUrl;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public String getTitle() {

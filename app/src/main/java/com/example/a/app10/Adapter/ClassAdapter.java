@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ClassItem;
 
@@ -52,7 +53,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
         holder.tvTitle.setText(item.getTitle());
         holder.tvNumber.setText(item.getNumber());
         holder.tvTime.setText(item.getTime());
-        holder.iv.setImageBitmap(item.getBitmap());
+        Glide.with(context).load(item.getImgUrl()).into(holder.iv);
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
