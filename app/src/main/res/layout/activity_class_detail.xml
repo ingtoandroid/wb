@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/contentView"
     tools:context="com.example.a.app10.Activity.ClassDetailActivity">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/tvTitle"
                     android:textColor="#fff"
                     android:text="HIIT适应性训练"
                     android:textSize="20sp"
@@ -62,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/tvStartDate"
                         android:textColor="#fff"
                         android:text="开课时间
                             2017.01.02"
@@ -74,8 +77,9 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"></LinearLayout>
                     <TextView
+                        android:id="@+id/tvEnterNum"
                         android:textColor="#fff"
-                        android:text="开课时间
+                        android:text="报名人数
                             2017.01.02"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -86,8 +90,9 @@
                         android:layout_width="1dp"
                         android:layout_height="match_parent"></LinearLayout>
                     <TextView
+                        android:id="@+id/tvClassroom"
                         android:textColor="#fff"
-                        android:text="开课时间
+                        android:text="场地
                             2017.01.02"
                         android:layout_width="0dp"
                         android:layout_weight="2"
@@ -127,7 +132,7 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/tvContent1"
+                    android:id="@+id/tvCourseContent"
                     android:lineSpacingExtra="5dp"
                     android:textSize="15sp"
                     android:text="一位留守村庄的德清阿婆，如何成为会用英语招揽游客的民宿主人？一个贫困落后的小村落怎样成了外国人争相涌来的国际村？还是那座山，还是那片林，还是那条播撒着竹叶光斑的羊肠小路，“绿水青山就是金山银山”，一个发人深省的理念，改变了阿婆和更多人的命运，不一样的故事就在这里悄然发生了......浙北大地发生了凤凰涅槃式的蜕变。一条涵盖绿色发展方式和绿色生活方式的中国生态文明之路就这样呈现在世人面前。敬请观看微视频《习近平在这里提出“绿水青山就是金山银山”》。"
@@ -162,12 +167,12 @@
                         android:layout_height="15dp" />
                     <TextView
                         android:layout_marginLeft="10dp"
-                        android:text="课程介绍"
+                        android:text="费用说明"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/tvContent2"
+                    android:id="@+id/tvFee"
                     android:lineSpacingExtra="5dp"
                     android:textSize="15sp"
                     android:text="一位留守村庄的德清阿婆，如何成为会用英语招揽游客的民宿主人？一个贫困落后的小村落怎样成了外国人争相涌来的国际村？还是那座山，还是那片林，还是那条播撒着竹叶光斑的羊肠小路，“绿水青山就是金山银山”，一个发人深省的理念，改变了阿婆和更多人的命运，不一样的故事就在这里悄然发生了......浙北大地发生了凤凰涅槃式的蜕变。一条涵盖绿色发展方式和绿色生活方式的中国生态文明之路就这样呈现在世人面前。敬请观看微视频《习近平在这里提出“绿水青山就是金山银山”》。"
@@ -202,12 +207,12 @@
                         android:layout_height="15dp" />
                     <TextView
                         android:layout_marginLeft="10dp"
-                        android:text="课程介绍"
+                        android:text="风险说明"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <TextView
-                    android:id="@+id/tvContent3"
+                    android:id="@+id/tvRisk"
                     android:lineSpacingExtra="5dp"
                     android:textSize="15sp"
                     android:text="一位留守村庄的德清阿婆，如何成为会用英语招揽游客的民宿主人？一个贫困落后的小村落怎样成了外国人争相涌来的国际村？还是那座山，还是那片林，还是那条播撒着竹叶光斑的羊肠小路，“绿水青山就是金山银山”，一个发人深省的理念，改变了阿婆和更多人的命运，不一样的故事就在这里悄然发生了......浙北大地发生了凤凰涅槃式的蜕变。一条涵盖绿色发展方式和绿色生活方式的中国生态文明之路就这样呈现在世人面前。敬请观看微视频《习近平在这里提出“绿水青山就是金山银山”》。"
