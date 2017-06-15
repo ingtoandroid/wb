@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.a.app10.R;
 import com.example.a.app10.bean.URLString;
+import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
@@ -82,16 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         String password = ed_password.getText().toString().trim();
 
         if(username.length() > 0 && password.length() > 0){
-            strURL.setPath2("user/login");
-            strURL.setParameters("username="+username+"&password="+password);
 
-            String url = strURL.getProtocol() + strURL.getDelimiter()+strURL.getDelimiter()
-                    +strURL.getHostname()+":"+strURL.getPort() +strURL.getDelimiter()
-                    +strURL.getPath1()+strURL.getPath2()+"?"+strURL.getParameters();
-
-            OkHttpClient client = new OkHttpClient();
-            final Request request = new Request.Builder().url(url).build();
-            Call call = client.newCall(request);
+            Call call = Net.getInstance().login(username,password);
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Request request, IOException e) {

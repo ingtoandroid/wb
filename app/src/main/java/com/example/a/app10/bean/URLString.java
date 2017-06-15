@@ -6,67 +6,16 @@ package com.example.a.app10.bean;
 
 public class URLString {
 
-    public String getProtocol() {
-        return protocol;
-    }
 
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
+    final static public String protocol = "http:";
+    final static public String hostname = "192.168.1.131";
+    final static public String port = "8080";
+    final static public String project = "yjtyms/yjty_App/";
+    final static public String path = protocol+hostname+":"+port+"/"+project;
 
-    public String getHostname() {
-        return hostname;
-    }
+    //userAPI
+    final static public String login=path+"user/login";
+    final static public String register=path+"/user/register";
+    final static public String send_code=path+"/user/register";
 
-    public void setHostname(String hostname) {
-        this.hostname = hostname;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
-
-    public String getPath1() {
-        return path1;
-}
-
-    public void setPath1(String path1) {
-        this.path1 = path1;
-    }
-
-    public String getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(String parameters) {
-        this.parameters = parameters;
-    }
-
-    public String getDelimiter() {
-        return delimiter;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
-    }
-
-    public String getPath2() {
-        return path2;
-    }
-
-    public void setPath2(String path2) {
-        this.path2 = path2;
-    }
-
-    private String protocol = "http:";
-    private String hostname = "192.168.1.143";
-    private String port = "8080";
-    private String path1 = "yjtyms/yjty_App/";
-    private String path2 = "";
-    private String parameters = "";
-    private String delimiter = "\\";
 }

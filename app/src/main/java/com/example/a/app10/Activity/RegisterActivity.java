@@ -48,41 +48,41 @@ public class RegisterActivity extends AppCompatActivity {
         ed_new_password = (EditText)findViewById(R.id.input_newpassword);
     }
     private void initEvents(){
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkOutToRegister();
-            }
-        });
+//        login.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                checkOutToRegister();
+//            }
+//        });
     }
-    private void checkOutToRegister(){
-        String phoneNumber = ed_phonenumber.getText().toString().trim();
-        String verificationCode = ed_verification_code.getText().toString().trim();
-        String newPassword = ed_new_password.getText().toString().trim();
-
-        if(phoneNumber.length() > 0 && verificationCode.length() > 0 && newPassword.length() > 0){
-            String url = strUrl.getProtocol()+strUrl.getDelimiter()+strUrl.getDelimiter()+strUrl.getHostname()+":"
-                    +strUrl.getPort()+strUrl.getDelimiter()+strUrl.getPath1()+strUrl.getPath2()+strUrl.getParameters();
-            OkHttpClient client = new OkHttpClient();
-            final Request request = new Request.Builder().url(url).build();
-            Call call = client.newCall(request);
-            call.enqueue(new Callback() {
-                @Override
-                public void onFailure(Request request, IOException e) {
-                    ToastInfo("网络请求错误");
-                }
-
-                @Override
-                public void onResponse(Response response) throws IOException {
-                    String result = response.body().string();
-
-                }
-            });
-        }
-        else {
-            Toast.makeText(RegisterActivity.this,"数据不可为空",Toast.LENGTH_LONG).show();
-        }
-    }
+//    private void checkOutToRegister(){
+//        String phoneNumber = ed_phonenumber.getText().toString().trim();
+//        String verificationCode = ed_verification_code.getText().toString().trim();
+//        String newPassword = ed_new_password.getText().toString().trim();
+//
+//        if(phoneNumber.length() > 0 && verificationCode.length() > 0 && newPassword.length() > 0){
+//            String url = strUrl.getProtocol()+strUrl.getDelimiter()+strUrl.getDelimiter()+strUrl.getHostname()+":"
+//                    +strUrl.getPort()+strUrl.getDelimiter()+strUrl.getPath1()+strUrl.getPath2()+strUrl.getParameters();
+//            OkHttpClient client = new OkHttpClient();
+//            final Request request = new Request.Builder().url(url).build();
+//            Call call = client.newCall(request);
+//            call.enqueue(new Callback() {
+//                @Override
+//                public void onFailure(Request request, IOException e) {
+//                    ToastInfo("网络请求错误");
+//                }
+//
+//                @Override
+//                public void onResponse(Response response) throws IOException {
+//                    String result = response.body().string();
+//
+//                }
+//            });
+//        }
+//        else {
+//            Toast.makeText(RegisterActivity.this,"数据不可为空",Toast.LENGTH_LONG).show();
+//        }
+//    }
 
     private void ToastInfo(final String content){
         handler.post(new Runnable() {
