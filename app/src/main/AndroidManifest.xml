@@ -66,11 +66,7 @@
         <activity android:name=".Activity.ProfessorDetailActivity" />
         <activity android:name=".Activity.LoginActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.PersonalActivity" />
         <activity android:name=".Activity.ResetPwdActivity" />
@@ -81,7 +77,13 @@
         <activity android:name=".Activity.MyPointsActivity" />
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />
-        <activity android:name=".Activity.ShipinActivity" />
+        <activity android:name=".Activity.ShipinActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.MyMessageActivity" />
         <activity android:name=".Activity.ChatActivity">
 

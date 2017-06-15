@@ -29,6 +29,38 @@ public class Net {
         String url= URLString.login+"?"+"username="+name+"&"+"password="+password;
         return get(url);
     }
+
+
+
+    /*
+    *视频*/
+    public Call shipinList(int index,int type){
+        /*
+        * index表示第几页
+        * type 1表示视频，2表示直播*/
+
+        String url=URLString.shipinlist+"?"+"pageIndex="+index+"&"+"videoType="+type;
+        return get(url);
+    }
+    public Call shipinDetail(String  id){
+        String url=URLString.shipin_detail+"?"+"videoId="+id;
+        return get(url);
+    }
+    public Call getComment(String id){
+        String url=URLString.getComment+"?videoId="+id;
+        return get(url);
+    }
+    public Call getTiwen(String id){
+        String url=URLString.getTiwen+"?videoId="+id;
+        return get(url);
+    }
+
+
+
+
+
+
+
     private Call get(String url){
         Request request=new Request.Builder().url(url).build();
         return  okHttpClient.newCall(request);

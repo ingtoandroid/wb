@@ -1,7 +1,6 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,10 +12,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 
-import com.bumptech.glide.Glide;
 import com.example.a.app10.Adapter.ClassAdapter;
+import com.example.a.app10.Adapter.ClassItem;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ClassItem;
+import com.example.a.app10.bean.ShipinItem;
 import com.example.a.app10.tool.MyInternet;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -112,7 +111,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         MyInternet.MyInterface myInterface=new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
-                handleJson(s,type);
+                //handleJson(s,type);
             }
         };
         String url=MyInternet.MAIN_URL+"course/courseRelease_list?pageIndex="+pageIndex+"&courseType="+type;
@@ -162,7 +161,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
 
         @Override
         protected Void doInBackground(URL... urls) {
-            getData();
+            //getData();
             return null;
         }
 

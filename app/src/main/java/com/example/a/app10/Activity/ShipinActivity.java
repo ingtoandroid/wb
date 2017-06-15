@@ -1,11 +1,8 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +10,22 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.a.app10.Adapter.ClassAdapter;
+import com.example.a.app10.Adapter.VideoAdapter;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ClassItem;
+import com.example.a.app10.bean.ShipinItem;
+import com.example.a.app10.tool.Net;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +33,7 @@ import java.util.List;
 public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
     private RecyclerView rv;
-    private List<ClassItem> list;
+    private List<ShipinItem> list;
     private Button btnClub,btnOrder;
     private boolean isClub= true;
     @Override
@@ -56,7 +66,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
 
-        new ShipinActivity.LoadTask().execute(null,null,null);
+        new ShipinActivity.LoadTask().execute(1,null,null);
     }
 
     @Override
@@ -87,12 +97,14 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
     }
 
     private void loadOrder() {
+        new ShipinActivity.LoadTask().execute(2,null,null);
     }
 
     private void loadClub() {
+        new ShipinActivity.LoadTask().execute(1,null,null);
     }
 
-    private class LoadTask extends AsyncTask<URL,Integer,Void> {
+    private class LoadTask extends AsyncTask<Integer,Integer,Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -100,26 +112,27 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         }
 
         @Override
-        protected Void doInBackground(URL... urls) {
-            getData();
+        protected Void doInBackground(Integer... i) {
+            getData(i[0]);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            showRecycler();
         }
     }
 
     private void showRecycler() {
         hideProgress();
         rv.setLayoutManager(new LinearLayoutManager(this));
-        ClassAdapter adapter=new ClassAdapter(list,this);
-        adapter.setLisenter(new ClassAdapter.OnItenClickListener() {
+        VideoAdapter adapter=new VideoAdapter(list,this);
+        adapter.setListener(new VideoAdapter.OnItenClickListener(){
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(ShipinActivity.this,VideoDetail.class));
+                Intent intent=new Intent(ShipinActivity.this,VideoDetail.class);
+                intent.putExtra("id",list.get(position).getVideoId().toString());
+                startActivity(intent);
             }
 
             @Override
@@ -131,21 +144,36 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         rv.setVisibility(View.VISIBLE);
     }
 
-    private void getData() {
+    private void getData(int i) {
         list=new ArrayList<>();
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
 
+        Call call= Net.getInstance().shipinList(0,i);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String string=response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(string);
+                    JSONArray jsonArray=jsonObject.getJSONArray("datalist");
+                    Gson gson=new Gson();
+                    list=gson.fromJson(jsonArray.toString(),new TypeToken<List<ShipinItem>>(){}.getType());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showRecycler();
+                        }
+                    });
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
 
         //测试用手动延迟
         try {
