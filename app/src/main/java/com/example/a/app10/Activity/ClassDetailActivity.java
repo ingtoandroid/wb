@@ -182,7 +182,12 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
     }
 
     private void join() {//课程报名
@@ -205,7 +210,12 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                                     e.printStackTrace();
                                 }
                             }
-                        });
+
+                            @Override
+                            public void mainThread() {
+
+                            }
+                        },ClassDetailActivity.this);
                     }
                 }).setNegativeButton("取消", null).create().show();
     }
@@ -257,7 +267,12 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
 
         while (!isFinish){
             try {

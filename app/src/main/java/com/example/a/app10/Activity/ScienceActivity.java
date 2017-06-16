@@ -119,7 +119,12 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                 }
                 finish=true;
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
         while (!finish){
 
         }

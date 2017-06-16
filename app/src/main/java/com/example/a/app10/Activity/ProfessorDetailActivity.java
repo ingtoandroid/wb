@@ -167,6 +167,11 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
                     e.printStackTrace();
                 }
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
     }
 }

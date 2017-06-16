@@ -83,7 +83,12 @@ public class ExpertOrderActivity extends AppCompatActivity {
             public void handle(String s) {
 
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
         while (!finish){
 
         }

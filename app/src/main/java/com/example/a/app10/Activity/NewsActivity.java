@@ -80,7 +80,12 @@ public class NewsActivity extends ToolBarBaseActivity{
                 }
                 finish=true;
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
         while (!finish){
 
         }

@@ -127,7 +127,12 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
                 }
                 finish=true;
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
         while (!finish){
 
         }

@@ -53,7 +53,9 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
         holder.tvTitle.setText(item.getTitle());
         holder.tvNumber.setText(item.getNumber());
         holder.tvTime.setText(item.getTime());
-        Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        if (item.getImgUrl().length()>1){
+            Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        }
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,4 +93,6 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
             iv= (ImageView) itemView.findViewById(R.id.image);
         }
     }
+
+
 }

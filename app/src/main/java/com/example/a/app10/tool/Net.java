@@ -56,12 +56,7 @@ public class Net {
     }
 
 
-
-
-
-
-
-    private Call get(String url){
+    public Call get(String url){
         Request request=new Request.Builder().url(url).build();
         return  okHttpClient.newCall(request);
     }

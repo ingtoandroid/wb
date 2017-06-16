@@ -56,7 +56,13 @@
         <activity
             android:name=".Activity.VideoDetail"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".Activity.ClassActivity" />
+        <activity android:name=".Activity.ClassActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity" />
         <activity android:name=".Activity.NewsActivity" />
@@ -75,11 +81,7 @@
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />
         <activity android:name=".Activity.ShipinActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.MyMessageActivity" />
         <activity android:name=".Activity.ChatActivity"></activity>

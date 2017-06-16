@@ -137,7 +137,12 @@ public class NewsDetailActivity extends AppCompatActivity {
                 }
                 finish=true;
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
         while (!finish){
 
         }
