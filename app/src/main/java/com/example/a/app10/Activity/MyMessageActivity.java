@@ -12,10 +12,24 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MyData;
 import com.example.a.app10.bean.MyMessage;
+import com.example.a.app10.bean.URLString;
+import com.example.a.app10.tool.Net;
+import com.google.gson.Gson;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,15 +45,19 @@ public class MyMessageActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        datas = new ArrayList<>();
-        MyMessage myMessage = new MyMessage();
-        myMessage.setUsername("nihao");
-        myMessage.setContent("hello");
-        MyMessage myMessage1 = new MyMessage();
-        myMessage1.setUsername("a");
-        myMessage1.setContent("a");
-        datas.add(myMessage);
-        datas.add(myMessage1);
+        initDatas();
+
+//        datas = new ArrayList<>();
+
+//        MyMessage myMessage = new MyMessage();
+//        myMessage.setUsername("nihao");
+//        myMessage.setContent("hello");
+//        MyMessage myMessage1 = new MyMessage();
+//        myMessage1.setUsername("a");
+//        myMessage1.setContent("a");
+//        datas.add(myMessage);
+//        datas.add(myMessage1);
+
         recyclerView = (RecyclerView)findViewById(R.id.message_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
@@ -52,6 +70,42 @@ public class MyMessageActivity extends AppCompatActivity {
         });
     }
 
+    private void initDatas(){
+        datas = new ArrayList<>();
+        Call call = Net.getInstance().getMessage("9629e659-b37a-417f-90cd-1e3ffea7057b");
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String strResponse = response.body().string();
+                JSONTokener jsonTokener = new JSONTokener(strResponse);
+                try {
+                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+                    JSONArray jsonArray = jsonObject.getJSONArray("jifen_new_type_list");
+                    for(int i = 0; i<jsonArray.length(); i++){
+                        MyMessage myMessage = new MyMessage();
+                        myMessage.setContent(((JSONObject)jsonArray.get(i)).getString("questionContent"));
+                        myMessage.setHeadImageURL(((JSONObject)jsonArray.get(i)).getString("filePath"));
+                        datas.add(myMessage);
+                    }
+//
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        recyclerView.setAdapter(new MyAdapter());
+                    }
+                });
+            }
+        });
+    }
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
         @Override
@@ -65,6 +119,9 @@ public class MyMessageActivity extends AppCompatActivity {
         public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
+            String str_url = URLString.path_head_image+datas.get(position).getHeadImageURL();
+//            String str_url = URLString.path_head_image+"lemon/fileDownload?fileName=associator/20170615/1111.png";
+            Glide.with(MyMessageActivity.this).load(str_url).into(holder.headImage);
         }
 
         @Override

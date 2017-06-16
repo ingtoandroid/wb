@@ -28,6 +28,9 @@
     <color name="dividColor">#e1e1e1</color>
     <color name="textWhiteColor">#ffffff</color>
     <color name="wholebackground">#f0f0f0</color>
+    <color name="stringDark">#323232</color>
+    <color name="stringCenter">#646464</color>
+    <color name="stringLight">#909090</color>
     <!--
 1.tabIndicatorColor：TabLayout指示器的颜色
 2.tabTextColor: tab默认字体的颜色

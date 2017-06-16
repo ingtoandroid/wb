@@ -48,19 +48,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/index_string1"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:textColor="#34c87a"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/index_string2"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textColor="@color/stringCenter"/>
             </LinearLayout>
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
                 android:scaleType="fitXY"
                 android:src="@drawable/index_right" />
@@ -99,7 +101,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:text="@string/index_string3"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/stringCenter"/>
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -111,7 +114,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/expert_item_bg_stroke"
+                android:background="#f1f4f5"
                 android:weightSum="4">
 
                 <LinearLayout
@@ -133,7 +136,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/index_s_string1"/>
+                        android:text="@string/index_s_string1"
+                        android:textColor="@color/stringCenter"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -155,7 +159,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/index_s_string2"/>
+                        android:text="@string/index_s_string2"
+                        android:textColor="@color/stringCenter"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,7 +182,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/index_s_string3"/>
+                        android:text="@string/index_s_string3"
+                        android:textColor="@color/stringCenter"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -199,7 +205,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/index_s_string4"/>
+                        android:text="@string/index_s_string4"
+                        android:textColor="@color/stringCenter"/>
                 </LinearLayout>
             </LinearLayout>
             <TextView
@@ -237,14 +244,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/index_tiwen_string1"
-                        android:textSize="25sp" />
+                        android:textSize="25sp"
+                        android:textColor="@color/stringCenter"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="@string/index_tiwen_string2"
-                        android:textSize="15sp" />
+                        android:textSize="15sp"
+                        android:textColor="@color/stringCenter"/>
                 </LinearLayout>
 
                 <ImageView
@@ -285,6 +294,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/index_shipin_recyclerview"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
 

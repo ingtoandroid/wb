@@ -25,8 +25,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginTop="60dp"
         android:textSize="15sp"
         android:textColor="#909090"
@@ -42,8 +42,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         android:layout_marginTop="20dp"
         android:textSize="15sp"
         android:textColor="#909090"
@@ -70,7 +70,7 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:layout_below="@+id/forget_pwd"
         android:text="@string/login"
@@ -80,12 +80,13 @@
         android:paddingRight="40dp"
         android:textColor="#ffffff"
         android:background="@drawable/buttonbackground"
-        android:id="@+id/bu_login"/>
+        android:id="@+id/bu_login"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/forget_pwd"
         android:text="@string/registe"
@@ -96,7 +97,8 @@
         android:textColor="#ffffff"
         android:background="@drawable/buttonbackground"
         android:layout_toRightOf="@+id/bu_login"
-        android:id="@+id/bu_reg"/>
+        android:id="@+id/bu_reg"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <TextView
         android:layout_width="wrap_content"

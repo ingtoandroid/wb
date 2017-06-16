@@ -4,12 +4,21 @@
     android:id="@+id/activity_my_reservation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/wholebackground"
     tools:context="com.example.a.app10.Activity.MyReservationActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="75dp"
         android:background="@color/textGreen"
         android:id="@+id/title">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/back"
+            android:id="@+id/back_reservation"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

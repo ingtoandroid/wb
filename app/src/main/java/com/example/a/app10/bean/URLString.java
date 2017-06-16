@@ -7,20 +7,20 @@ package com.example.a.app10.bean;
 public class URLString {
 
 
-    final static public String protocol = "http:";
+    final static public String protocol = "http://";
 
     final static public String hostname = "192.168.1.150";
 
     final static public String port = "8080";
     final static public String project = "yjtyms/yjty_App/";
+    final static public String super_project = "yjtyms/";
     final static public String path = protocol+hostname+":"+port+"/"+project;
-
+    final static public String path_head_image = protocol+hostname+":"+port+"/"+super_project;
     //userAPI
     final static public String login=path+"user/login";
     final static public String register=path+"user/register";
     final static public String send_code=path+"user/send_code";
     final static public String reset_pwd = path+"user/pwd_reset";
-
 
     //myAPI
     final static public String integral_history_list = path + "jifen/jifen_history_list";

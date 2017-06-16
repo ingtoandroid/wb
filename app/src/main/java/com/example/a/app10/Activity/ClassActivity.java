@@ -149,40 +149,40 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
     private void getData(int i) {
         list=new ArrayList<>();
 
-        Call call= Net.getInstance().get(MyInternet.MAIN_URL+"course/courseRelease_list?pageIndex=1&courseType="+i);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String string=response.body().string();
-                Log.v("tagS",string);
-                try {
-                    JSONObject jsonObject = new JSONObject(string);
-                    JSONArray jsonArray=jsonObject.getJSONArray("datalist");
-                    for (int i=0;i<jsonArray.length();i++){
-                        JSONObject object=jsonArray.getJSONObject(i);
-                        list.add(new ClassItem(object.getString("imageUrl"),
-                                object.getString("courseId"),
-                                object.getString("courseTitle"),
-                                object.getString("startDate"),
-                                object.getString("entereNum")));
-                    }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            showRecycler();
-                        }
-                    });
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-                }
-            }
-        });
+//        Call call= Net.getInstance().get(MyInternet.MAIN_URL+"course/courseRelease_list?pageIndex=1&courseType="+i);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Request request, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Response response) throws IOException {
+//                String string=response.body().string();
+//                Log.v("tagS",string);
+//                try {
+//                    JSONObject jsonObject = new JSONObject(string);
+//                    JSONArray jsonArray=jsonObject.getJSONArray("datalist");
+//                    for (int i=0;i<jsonArray.length();i++){
+//                        JSONObject object=jsonArray.getJSONObject(i);
+//                        list.add(new ClassItem(object.getString("imageUrl"),
+//                                object.getString("courseId"),
+//                                object.getString("courseTitle"),
+//                                object.getString("startDate"),
+//                                object.getString("entereNum")));
+//                    }
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            showRecycler();
+//                        }
+//                    });
+//                }
+//                catch (JSONException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
         //测试用手动延迟
         try {

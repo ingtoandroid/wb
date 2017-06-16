@@ -16,7 +16,6 @@
             android:layout_width="40dp"
             android:layout_height="30dp"
             android:background="@drawable/back" />
-        android:background="@drawable/get_into"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,8 +54,8 @@
                 android:textSize="@dimen/text_size_setteing"
                 android:id="@+id/username_setting"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
@@ -84,8 +83,8 @@
                 android:textSize="@dimen/text_size_setteing"
                 android:id="@+id/about_us_setting"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
@@ -113,8 +112,8 @@
                 android:textSize="@dimen/text_size_setteing"
                 android:id="@+id/feedback_setting"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
                 android:layout_marginLeft="20dp"/>
@@ -193,6 +192,7 @@
             android:background="@drawable/buttonwrite"
             android:text="安全退出"
             android:textColor="@color/text_red"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            style="?android:attr/borderlessButtonStyle"/>
     </RelativeLayout>
 </RelativeLayout>

@@ -49,10 +49,11 @@
                 android:layout_marginRight="10dp">
                 <Button
                     android:layout_width="75dp"
-                    android:layout_height="40dp"
+                    android:layout_height="28dp"
                     android:text="取消预约"
                     android:textColor="@color/textWhiteColor"
                     android:textSize="12sp"
+                    android:background="@drawable/button_reservation_cancle"
                     android:id="@+id/cancel_reservation"
                     style="?android:attr/borderlessButtonStyle"/>
                 <Button
@@ -63,6 +64,7 @@
                     android:textSize="12sp"
                     android:background="@drawable/button_reservation"
                     android:id="@+id/consultation"
+                    android:layout_marginLeft="3dp"
                     style="?android:attr/borderlessButtonStyle"/>
                 <Button
                     android:layout_width="75dp"
