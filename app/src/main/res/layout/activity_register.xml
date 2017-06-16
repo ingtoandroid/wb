@@ -57,7 +57,7 @@
         android:layout_margin="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:id="@+id/input_valid"
+        android:id="@+id/input_verification"
         android:background="@null"/>
     <TextView
         android:layout_width="match_parent"
@@ -70,14 +70,15 @@
         android:paddingTop="10dp"
         android:layout_marginRight="20dp"
         android:textSize="18sp"
-        android:layout_toRightOf="@+id/input_valid"
+        android:layout_toRightOf="@+id/input_verification"
         android:text="@string/send_verification"
-        android:textColor="@color/textGreen"/>
+        android:textColor="@color/textGreen"
+        android:id="@+id/send_verification"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FFC7C7CB"
-        android:layout_below="@+id/input_valid"
+        android:layout_below="@+id/input_verification"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/third_divid"/>
@@ -85,7 +86,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/set_newpassword"
-        android:layout_below="@id/input_valid"
+        android:layout_below="@+id/input_verification"
         android:layout_margin="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -97,12 +98,12 @@
         android:background="#FFC7C7CB"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@+id/set_newpassword"
+        android:layout_below="@+id/input_newpassword"
         android:id="@+id/fouth_divid"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/set_newpassword"
+        android:layout_below="@+id/input_newpassword"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="@string/registe"

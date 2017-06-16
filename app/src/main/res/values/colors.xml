@@ -21,12 +21,13 @@
     <color name="video_string2">#999999</color>
     <color name="video_pinglun_bg">#ffffff</color>
     <color name="video_pinglun_button_bg">#5cdca9</color>
-    <color name="loginColor">#cccacb</color>
+    <color name="loginColor">#e6eaeb</color>
     <color name="textGreen">#56d1b4</color>
     <color name="modifyDataColor">#00af2c</color>
     <color name="text_red">#e94343</color>
     <color name="dividColor">#e1e1e1</color>
     <color name="textWhiteColor">#ffffff</color>
+    <color name="wholebackground">#f0f0f0</color>
     <!--
 1.tabIndicatorColor：TabLayout指示器的颜色
 2.tabTextColor: tab默认字体的颜色

@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="#ffffff"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +53,8 @@
                     android:text="取消预约"
                     android:textColor="@color/textWhiteColor"
                     android:textSize="12sp"
-                    android:id="@+id/cancel_reservation"/>
+                    android:id="@+id/cancel_reservation"
+                    style="?android:attr/borderlessButtonStyle"/>
                 <Button
                     android:layout_width="70dp"
                     android:layout_height="28dp"
@@ -60,7 +62,8 @@
                     android:textColor="@color/textWhiteColor"
                     android:textSize="12sp"
                     android:background="@drawable/button_reservation"
-                    android:id="@+id/consultation"/>
+                    android:id="@+id/consultation"
+                    style="?android:attr/borderlessButtonStyle"/>
                 <Button
                     android:layout_width="75dp"
                     android:layout_height="28dp"
@@ -69,7 +72,8 @@
                     android:textSize="12sp"
                     android:layout_marginLeft="3dp"
                     android:background="@drawable/button_reservation"
-                    android:id="@+id/evaluate"/>
+                    android:id="@+id/evaluate"
+                    style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>

@@ -136,15 +136,15 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
         Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
         Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
-        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap1,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap2,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
+//        list.add(new ClassItem(bitmap3,"HIIT适应性训练","5416574684人已参加","开课时间：    20150202"));
 
 
         //测试用手动延迟

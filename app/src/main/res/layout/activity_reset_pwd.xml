@@ -49,48 +49,56 @@
         android:background="#FFC7C7CB"
         android:layout_below="@+id/input_phontnumber"
         android:id="@+id/second_divid"/>
-    <EditText
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/input_valid"
-        android:layout_below="@id/input_phontnumber"
-        android:layout_margin="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:id="@+id/input_valid"
-        android:background="@null"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/input_valid"
-        android:layout_below="@+id/input_phontnumber"
-        android:text="@string/send_verification"/>
+        android:layout_below="@id/second_divid"
+        android:id="@+id/input_verification_layout">
+        <EditText
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_valid"
+            android:layout_margin="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:id="@+id/input_verification"
+            android:background="@null"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/input_verification"
+            android:text="@string/send_verification"
+            android:textColor="@color/textGreen"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:id="@+id/send_verification"/>
+    </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FFC7C7CB"
-        android:layout_below="@+id/input_valid"
+        android:layout_below="@+id/input_verification_layout"
         android:id="@+id/third_divid"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/set_newpassword"
-        android:layout_below="@id/input_valid"
+        android:layout_below="@id/input_verification_layout"
         android:layout_margin="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:id="@+id/set_newpassword"
+        android:id="@+id/input_newpassword"
         android:background="@null"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#FFC7C7CB"
-        android:layout_below="@+id/set_newpassword"
+        android:layout_below="@+id/input_newpassword"
         android:id="@+id/fouth_divid"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/set_newpassword"
+        android:layout_below="@+id/input_newpassword"
         android:text="@string/login"
         android:textColor="#ffffff"
         android:textSize="20sp"
