@@ -13,10 +13,16 @@ import android.view.View;
 import android.widget.Button;
 
 
-import com.example.a.app10.Adapter.ScienceAdapter;
+import com.example.a.app10.Adapter.NewsAdapter;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ScienceItem;
+import com.example.a.app10.bean.NewsItem;
 import com.example.a.app10.tool.KopItemDecoration;
+import com.example.a.app10.tool.MyInternet;
+import com.squareup.okhttp.OkHttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,7 +31,7 @@ import java.util.List;
 public class ScienceActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
     private RecyclerView rv;
-    private List<ScienceItem> list;
+    private List<NewsItem> list;
     private static int numbersButton=18;
     private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,
             R.id.btn21,R.id.btn22,R.id.btn23,R.id.btn24,R.id.btn25,R.id.btn26,
@@ -34,6 +40,9 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     private Button btnRecycle,btnSure;
     //储存选择结果的标志数组
     private boolean[] isChosen=new boolean[numbersButton];
+    private boolean finish;
+    private OkHttpClient client;
+    private NewsAdapter adapter;
 
     @Override
     protected int getSideMenu() {
@@ -67,31 +76,57 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         btnRecycle.setOnClickListener(this);
         btnSure= (Button) findViewById(R.id.btnSure);
         btnSure.setOnClickListener(this);
+        client=new OkHttpClient();
+        list=new ArrayList<>();
+        adapter=new NewsAdapter(list,this);
+        adapter.setLisenter(new NewsAdapter.OnItenClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                startActivity(new Intent(ScienceActivity.this,NewsDetailActivity.class));
+            }
 
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
+        rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
 
         new LoadTask().execute(null,null,null);
 
     }
 
     private void getData() {
-        list=new ArrayList<>();
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new ScienceItem(bitmap1,"全民健身计划2016","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2011","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2012","咨询部","两天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2013","咨询部","一周前"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2014","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2015","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2017","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2018","咨询部","两天前"));
+        finish=false;
+        String url= MyInternet.MAIN_URL+"get_sports_list";
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                try {
+                    JSONObject object=new JSONObject(s);
+                    JSONArray array=object.getJSONArray("dataList");
+                    int index=array.length();
+                    for (int i=0;i<index;i++){
+                        NewsItem item=new NewsItem(object.getString("newsId"),
+                                object.getString("title"),object.getString("publishTime"),
+                                object.getString("authorName"),object.getString("imageUrl"));
+                        list.add(item);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                finish=true;
+            }
 
-        //测试用手动延迟
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
+        while (!finish){
+
         }
     }
 
@@ -131,6 +166,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     }
 
     private void recycle() {
+        closeDrawer();
         for (int i=0;i<numbersButton;i++){
             Button button=sideButtons[i];
             button.setBackgroundResource(R.drawable.button_side);
@@ -167,21 +203,8 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     //配置并显示列表
     public void showRecycler(){
         hideProgress();
-        ScienceAdapter adapter=new ScienceAdapter(list,this);
-        adapter.setLisenter(new ScienceAdapter.OnItenClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(ScienceActivity.this,NewsDetailActivity.class));
-            }
+        adapter.notifyDataSetChanged();
 
-            @Override
-            public void onItemLongClick(View view, int position) {
-
-            }
-        });
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
-        rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
         rv.setVisibility(View.VISIBLE);
     }
 }

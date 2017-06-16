@@ -24,13 +24,14 @@
             android:layout_height="wrap_content">
             <TextView
                 android:text="个人简介"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/tvIndroduction"
                 android:text="互动性强，体验式授课，能用专业经验为学员提供针对性的培训方案"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"

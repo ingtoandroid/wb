@@ -1,7 +1,13 @@
 package com.example.a.app10.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a.app10.R;
 import com.example.a.app10.tool.MyInternet;
@@ -28,21 +35,54 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
     private boolean[] isOpen={false,false,false};//标记三个文本是否展开
     private Button btnBack,btnJoin;
     private ProgressDialog mProgressDialog;
-    private String url;
+    private String courseId,userid;
     private String courseTitle,startDate,entereNum,classroom,courseContent,feeExplain,risk;
     private boolean isEntere;
     private OkHttpClient client;
     private boolean isFinish;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.arg1){
+                case 0:
+                    Toast.makeText(ClassDetailActivity.this,"报名时间已结束",Toast.LENGTH_SHORT).show();
+                    btnJoin.setText("无法报名");
+                    btnJoin.setBackgroundResource(R.drawable.not_click_button);
+                    break;
+                case 1:
+                    Toast.makeText(ClassDetailActivity.this,"报名成功",Toast.LENGTH_SHORT).show();
+                    btnJoin.setText("取消报名");
+                    btnJoin.setBackgroundResource(R.drawable.not_click_button);
+                    isEntere=true;
+                    break;
+                case 3:
+                    break;
+            }
+            switch (msg.arg2){
+                case 0:
+                    Toast.makeText(ClassDetailActivity.this,"报名时间已结束",Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(ClassDetailActivity.this,"取消报名成功",Toast.LENGTH_SHORT).show();
+                    btnJoin.setText("我要报名");
+                    btnJoin.setBackgroundResource(R.drawable.button_side_press);
+                    break;
+                case 3:
+                    Toast.makeText(ClassDetailActivity.this,"您未报名此课程",Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_detail);
 
-        Window window=getWindow();
+        Window window=getWindow();//设置透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        url=getIntent().getStringExtra("courseId");
+        courseId =getIntent().getStringExtra("courseId");
 
         init();
     }
@@ -117,8 +157,67 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                 onBackPressed();
                 break;
             case R.id.btnJoin:
+                if (!isEntere){
+                    join();
+                } else{
+                    cancelEntere();
+                }
                 break;
         }
+    }
+
+    private void cancelEntere() {
+        String url= MyInternet.MAIN_URL+"course/cancelCourseEntere?courseId="
+                +courseId+"&userid="+userid;
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                try {
+                    JSONObject object=new JSONObject(s);
+                    int result=object.getInt("code");
+                    Message message=new Message();
+                    message.arg2=result;
+                    handler.sendMessage(message);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
+    }
+
+    private void join() {//课程报名
+        new AlertDialog.Builder(this).setMessage("是否确定报名课程："+courseTitle)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String url= MyInternet.MAIN_URL+"course/courseEntere?courseId="
+                                +courseId+"&userid="+userid;
+                        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+                            @Override
+                            public void handle(String s) {
+                                try {
+                                    JSONObject object=new JSONObject(s);
+                                    int result=object.getInt("code");
+                                    Message message=new Message();
+                                    message.arg1=result;
+                                    handler.sendMessage(message);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void mainThread() {
+
+                            }
+                        },ClassDetailActivity.this);
+                    }
+                }).setNegativeButton("取消", null).create().show();
     }
 
     private class LoadTask extends AsyncTask<URL,Integer,Void> {
@@ -144,7 +243,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
     private void getData() {
         isFinish=false;
         String url= MyInternet.MAIN_URL+"course/courseRelease_detail?courseId="
-                +""+"&userid=admin";
+                +courseId+"&userid="+userid;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
@@ -168,7 +267,12 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
             }
-        });
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
 
         while (!isFinish){
             try {

@@ -1,20 +1,26 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
-import com.example.a.app10.Adapter.ScienceAdapter;
+import com.bumptech.glide.Glide;
+import com.example.a.app10.Adapter.NewsAdapter;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ScienceItem;
+import com.example.a.app10.bean.NewsItem;
+import com.example.a.app10.tool.MyInternet;
+import com.squareup.okhttp.OkHttpClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,13 +30,13 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
     private LinearLayout llContent;
     private RecyclerView rvVideo,rvCourse;
-    private List<ScienceItem> list;
+    private List<NewsItem> list;
     private Button btnComment,btnLeave,btnOrder;
+    private String expertId,name,content,indroduction,imageUrl;
+    private OkHttpClient client;
+    private ImageView image;
+    private TextView tvName,tvContent,tvIntroduction;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected int getSideMenu() {
@@ -57,8 +63,16 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         btnLeave.setOnClickListener(this);
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
+        image= (ImageView) findViewById(R.id.image);
+        tvContent= (TextView) findViewById(R.id.tvContent);
+        tvName= (TextView) findViewById(R.id.tvName);
+        tvIntroduction= (TextView) findViewById(R.id.tvIndroduction);
+        client=new OkHttpClient();
 
         list=new ArrayList<>();
+
+        expertId=getIntent().getStringExtra("expertId");
+        imageUrl=getIntent().getStringExtra("imageUrl");
 
         new LoadTask().execute(null,null,null);
     }
@@ -104,8 +118,8 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
     private void show() {
         rvVideo.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        ScienceAdapter adapter1=new ScienceAdapter(list,this);
-        adapter1.setLisenter(new ScienceAdapter.OnItenClickListener() {
+        NewsAdapter adapter1=new NewsAdapter(list,this);
+        adapter1.setLisenter(new NewsAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
@@ -116,8 +130,8 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
             }
         });
-        ScienceAdapter adapter2=new ScienceAdapter(list,this);
-        adapter2.setLisenter(new ScienceAdapter.OnItenClickListener() {
+        NewsAdapter adapter2=new NewsAdapter(list,this);
+        adapter2.setLisenter(new NewsAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
@@ -132,24 +146,32 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         rvCourse.setLayoutManager(new LinearLayoutManager(this));//默认竖直列表
         rvCourse.setAdapter(adapter2);
         llContent.setVisibility(View.VISIBLE);
+
+        Glide.with(this).load(imageUrl).into(image);
+        tvName.setText(name);
+        tvContent.setText("研究方向： "+content);
+        tvIntroduction.setText(indroduction);
     }
 
     private void getData() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new ScienceItem(bitmap1,"全民健身计划2016","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2011","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2012","咨询部","两天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2013","咨询部","一周前"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2014","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2015","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2017","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2018","咨询部","两天前"));
+        String url= MyInternet.MAIN_URL+"expert/get_expert_info?expertId="+expertId;
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                try {
+                    JSONObject object=new JSONObject(s);
+                    name=object.getString("expertName");
+                    content=object.getString("expertArea");
+                    indroduction=object.getString("introduction");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mainThread() {
+
+            }
+        },this);
     }
 }

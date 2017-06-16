@@ -18,6 +18,12 @@ import android.widget.Toast;
 import com.example.a.app10.Adapter.ProfessorAdapter;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ProfessorItem;
+import com.example.a.app10.tool.MyInternet;
+import com.squareup.okhttp.OkHttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,6 +33,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     private RecyclerView rv;
     private List<ProfessorItem> list;
     private static int numbersButton=18;
+    private OkHttpClient client;
     private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,
             R.id.btn21,R.id.btn22,R.id.btn23,R.id.btn24,R.id.btn25,R.id.btn26,
             R.id.btn31,R.id.btn32,R.id.btn33,R.id.btn34,R.id.btn35,R.id.btn36};
@@ -36,6 +43,8 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     private boolean[] isChosen=new boolean[numbersButton];
     private EditText et;
     private Button btnSearch;
+    private boolean finish;
+    private ProfessorAdapter adapter;
 
     @Override
     protected int getSideMenu() {
@@ -73,31 +82,59 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         btnSearch.setOnClickListener(this);
         et= (EditText) findViewById(R.id.et);
 
+        list=new ArrayList<>();
+        adapter=new ProfessorAdapter(list,this);
+        adapter.setLisenter(new ProfessorAdapter.OnItenClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(ProfessorActivity.this,ProfessorDetailActivity.class);
+                intent.putExtra("expertId",list.get(position).getExpertId());
+                intent.putExtra("imageUrl",list.get(position).getImgUrl());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
 
         new LoadTask().execute(null,null,null);
 
     }
 
     private void getData() {
-        list=new ArrayList<>();
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.touxiang);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.touxiang2);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.touxiang3);
-        list.add(new ProfessorItem(bitmap1,"蓝色季风","研究方向：有氧训练",1));
-        list.add(new ProfessorItem(bitmap2,"蓝色季风","研究方向：有氧训练",2));
-        list.add(new ProfessorItem(bitmap3,"蓝色季风","研究方向：有氧训练",3));
-        list.add(new ProfessorItem(bitmap1,"蓝色季风","研究方向：有氧训练",4));
-        list.add(new ProfessorItem(bitmap2,"蓝色季风","研究方向：有氧训练",5));
-        list.add(new ProfessorItem(bitmap3,"蓝色季风","研究方向：有氧训练",1));
-        list.add(new ProfessorItem(bitmap1,"蓝色季风","研究方向：有氧训练",2));
-        list.add(new ProfessorItem(bitmap2,"蓝色季风","研究方向：有氧训练",3));
+        finish=false;
+        String url= MyInternet.MAIN_URL+"expert/get_expert_list";
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                try {
+                    JSONObject obj =new JSONObject(s);
+                    JSONArray array=obj.getJSONArray("dataList");
+                    for (int i=0;i<array.length();i++){
+                        JSONObject object=array.getJSONObject(i);
+                        ProfessorItem item=new ProfessorItem(object.getString("imageUrl"),
+                                object.getString("expertName"),
+                                "研究方向： "+object.getString("expertArea"),
+                                object.getString("expertId"),5);
+                        list.add(item);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                finish=true;
+            }
 
+            @Override
+            public void mainThread() {
 
-        //测试用手动延迟
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            }
+        },this);
+        while (!finish){
+
         }
     }
 
@@ -149,7 +186,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         }
     }
 
-    private void recycle() {
+    private void recycle() {//筛选条件复原
         for (int i=0;i<numbersButton;i++){
             Button button=sideButtons[i];
             button.setBackgroundResource(R.drawable.button_side);
@@ -186,21 +223,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     //配置并显示列表
     public void showRecycler(){
         hideProgress();
-        ProfessorAdapter adapter=new ProfessorAdapter(list,this);
-        adapter.setLisenter(new ProfessorAdapter.OnItenClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent=new Intent(ProfessorActivity.this,ProfessorDetailActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-
-            }
-        });
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
+        adapter.notifyDataSetChanged();//加载后刷新
         rv.setVisibility(View.VISIBLE);
     }
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ClassItem;
+import com.example.a.app10.bean.ShipinItem;
 
 import java.util.List;
 
@@ -49,11 +49,13 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        ClassItem item=list.get(position);
+            ClassItem item=list.get(position);
         holder.tvTitle.setText(item.getTitle());
         holder.tvNumber.setText(item.getNumber());
         holder.tvTime.setText(item.getTime());
-        Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        if (item.getImgUrl().length()>1){
+            Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        }
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,4 +93,6 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
             iv= (ImageView) itemView.findViewById(R.id.image);
         }
     }
+
+
 }

@@ -56,7 +56,13 @@
         <activity
             android:name=".Activity.VideoDetail"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".Activity.ClassActivity" />
+        <activity android:name=".Activity.ClassActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity" />
         <activity android:name=".Activity.NewsActivity" />
@@ -64,14 +70,7 @@
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" />
         <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.LoginActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Activity.LoginActivity"></activity>
         <activity android:name=".Activity.PersonalActivity" />
         <activity android:name=".Activity.ResetPwdActivity" />
         <activity android:name=".Activity.RegisterActivity" />
@@ -81,11 +80,12 @@
         <activity android:name=".Activity.MyPointsActivity" />
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />
-        <activity android:name=".Activity.ShipinActivity" />
-        <activity android:name=".Activity.MyMessageActivity" />
-        <activity android:name=".Activity.ChatActivity">
+        <activity android:name=".Activity.ShipinActivity">
 
         </activity>
+        <activity android:name=".Activity.MyMessageActivity" />
+        <activity android:name=".Activity.ChatActivity"></activity>
+        <activity android:name=".Activity.ExpertOrderActivity"></activity>
     </application>
 
 </manifest>

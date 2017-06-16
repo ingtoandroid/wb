@@ -169,8 +169,31 @@ public class Net {
         return get(url);
     }
 
-    public Call getMyReservation(String infoID){
-        String url = URLString.order_new_type_list+"?"+"infoid="+infoID;
+    public Call getMyReservation(String infoID) {
+        String url = URLString.order_new_type_list + "?" + "infoid=" + infoID;
+        return get(url);
+    }
+
+    /*
+    *视频*/
+    public Call shipinList(int index,int type){
+        /*
+        * index表示第几页
+        * type 1表示视频，2表示直播*/
+
+        String url=URLString.shipinlist+"?"+"pageIndex="+index+"&"+"videoType="+type;
+        return get(url);
+    }
+    public Call shipinDetail(String  id){
+        String url=URLString.shipin_detail+"?"+"videoId="+id;
+        return get(url);
+    }
+    public Call getComment(String id){
+        String url=URLString.getComment+"?videoId="+id;
+        return get(url);
+    }
+    public Call getTiwen(String id){
+        String url=URLString.getTiwen+"?videoId="+id;
         return get(url);
     }
 

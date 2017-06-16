@@ -43,7 +43,8 @@
                     android:gravity="center"
                     android:text="@string/video_string1"
                     android:textSize="22sp"
-                    android:textColor="@color/video_string1"/>
+                    android:textColor="@color/video_string1"
+                    android:id="@+id/pinglun"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,7 +52,9 @@
                     android:gravity="center"
                     android:text="@string/video_string2"
                     android:textSize="22sp"
-                    android:textColor="@color/video_string2"/>
+                    android:textColor="@color/video_string2"
+                    android:id="@+id/tiwen"
+                    />
             </LinearLayout>
 
         </LinearLayout>
@@ -121,7 +124,8 @@
                 android:background="@color/video_pinglun_button_bg"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:id="@+id/comment"/>
     </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
