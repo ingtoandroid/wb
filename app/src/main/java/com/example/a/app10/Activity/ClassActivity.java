@@ -161,7 +161,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
 
         @Override
         protected Void doInBackground(URL... urls) {
-            //getData();
+            getData();
             return null;
         }
 
@@ -236,7 +236,8 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
 
     private void handleJson(String s,int type) {
         try {
-            JSONArray array=new JSONArray(s);
+            JSONObject object2=new JSONObject(s);
+            JSONArray array=object2.getJSONArray("dataList");
             int length=array.length();
             for (int i=0;i<length;i++){
                 JSONObject object=array.getJSONObject(i);

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text=""
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="二 5.22"
+            android:background="@drawable/stroke"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:text="中午"
+                android:background="@drawable/stroke"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"/>
+            <TextView
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:text="中午"
+                android:background="@drawable/stroke"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"/>
+            <TextView
+                android:gravity="center"
+                android:padding="5dp"
+                android:textSize="15sp"
+                android:text="中午"
+                android:background="@drawable/stroke"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"/>
+        </LinearLayout>
+        <com.example.sports.view.MyOrderList
+            android:layout_weight="7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

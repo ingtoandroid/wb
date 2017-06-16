@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ProfessorItem;
 
@@ -56,7 +57,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.MyVi
         ProfessorItem item=list.get(position);
         holder.tvName.setText(item.getName());
         holder.tvContent.setText(item.getContent());
-        holder.image.setImageBitmap(item.getImage());
+        Glide.with(context).load(item.getImgUrl()).into(holder.image);
         holder.ivGrade.setImageBitmap(BitmapFactory.decodeResource(resources,gradeImageIds[item.getGrade()-1]));
 
         if (listener!=null){

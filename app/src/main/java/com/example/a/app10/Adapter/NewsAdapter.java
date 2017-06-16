@@ -9,8 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ScienceItem;
+import com.example.a.app10.bean.NewsItem;
 
 import java.util.List;
 
@@ -18,9 +19,9 @@ import java.util.List;
  * Created by lenovo on 2017/5/30.
  */
 
-public class ScienceAdapter extends RecyclerView.Adapter<ScienceAdapter.MyViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder> {
 
-    private List<ScienceItem> list;
+    private List<NewsItem> list;
     private Context context;
     private OnItenClickListener listener;
 
@@ -34,7 +35,7 @@ public class ScienceAdapter extends RecyclerView.Adapter<ScienceAdapter.MyViewHo
         this.listener=lisenter;
     }
 
-    public ScienceAdapter(List<ScienceItem> list, Context context){
+    public NewsAdapter(List<NewsItem> list, Context context){
         this.list=list;
         this.context=context;
     }
@@ -48,11 +49,11 @@ public class ScienceAdapter extends RecyclerView.Adapter<ScienceAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        ScienceItem item=list.get(position);
+        NewsItem item=list.get(position);
         holder.tvTitle.setText(item.getTitle());
-        holder.tvDepart.setText(item.getDepartment());
-        holder.tvTime.setText(item.getTime());
-        holder.iv.setImageBitmap(item.getBitmap());
+        holder.tvDepart.setText(item.getAuthorName());
+        holder.tvTime.setText(item.getPublishTime());
+        Glide.with(context).load(item.getImageUrl()).into(holder.iv);
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
