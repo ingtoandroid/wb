@@ -32,4 +32,69 @@ public class MyReservation {
     private String item_content_reservation;
     private String item_username_reservation;
     private String item_time_reservation;
+
+    public String getOrderContent() {
+        return orderContent;
+    }
+
+    public void setOrderContent(String orderContent) {
+        this.orderContent = orderContent;
+    }
+
+    private String orderContent;
+    private String orderDate;
+
+    public String getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getOrderStartTime() {
+        return orderStartTime;
+    }
+
+    public void setOrderStartTime(String orderStartTime) {
+        this.orderStartTime = orderStartTime;
+    }
+
+    public String getOrderEndTime() {
+        return orderEndTime;
+    }
+
+    public void setOrderEndTime(String orderEndTime) {
+        this.orderEndTime = orderEndTime;
+    }
+
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getTypeId() {
+        return TypeId;
+    }
+
+    public void setTypeId(String typeId) {
+        TypeId = typeId;
+    }
+
+    private String orderStartTime;
+    private String orderEndTime;
+    private String orderType;
+    private String orderId;
+    private String TypeId;
 }

@@ -16,12 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"></android.support.v4.view.ViewPager>
-
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e1e1e1"/>
     <android.support.design.widget.TabLayout
         android:id="@+id/main_tab"
         style="@style/myTab"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="55dp"
         android:layout_gravity="bottom"></android.support.design.widget.TabLayout>
 
     </LinearLayout>

@@ -26,12 +26,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/index_shipin_item_title"
         android:textSize="20sp"
+        android:textColor="@color/stringDark"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/index_shipin_item_count"
         android:textSize="10sp"
+        android:textColor="@color/stringCenter"
         android:layout_marginTop="10dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -42,11 +44,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/index_shipin_item_time"/>
+            android:text="@string/index_shipin_item_time"
+            android:textColor="@color/stringCenter"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/index_shipin_item_time"/>
+            android:id="@+id/index_shipin_item_time"
+            android:textColor="@color/stringCenter"/>
     </LinearLayout>
 </LinearLayout>
 </RelativeLayout>

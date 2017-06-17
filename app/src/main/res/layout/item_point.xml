@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="成功登录悦健体育"
+                android:text=""
                 android:textSize="15sp"
                 android:id="@+id/itme_content_title"/>
             <LinearLayout
@@ -30,14 +30,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#e1e1e1"
                     android:textSize="13sp"
-                    android:id="@+id/years_and_months"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/times"
-                    android:textColor="#e1e1e1"
-                    android:textSize="13sp"
-                    android:layout_marginLeft="10dp"/>
+                    android:id="@+id/years_and_months_and_time"/>
             </LinearLayout>
         </LinearLayout>
         <TextView
@@ -47,6 +40,7 @@
             android:textColor="@color/textGreen"
             android:textSize="20sp"
             android:layout_toRightOf="@+id/item_left"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:id="@+id/point"/>
     </RelativeLayout>
 </RelativeLayout>

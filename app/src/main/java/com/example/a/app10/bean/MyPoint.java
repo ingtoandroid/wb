@@ -18,28 +18,19 @@ public class MyPoint {
         return item_content_title;
     }
 
-    public void setItem_content(String item_content_title) {
+    public void setItem_content_title(String item_content_title) {
         this.item_content_title = item_content_title;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public int getPoint() {
+    public String getPoint() {
         return point;
     }
 
-    public void setPoint(int point) {
+    public void setPoint(String point) {
         this.point = point;
     }
 
     private String item_content_title;
     private String years_and_months;
-    private String time;
-    private int point;
+    private String point;
 }
