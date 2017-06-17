@@ -1,6 +1,8 @@
 package com.example.a.app10.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -53,15 +56,7 @@ public class QuestionActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         initData();
-        datas = new ArrayList<>();
-//        MyData myData = new MyData();
-//        myData.setUsername("nihao");
-//        myData.setContent("hello");
-//        MyData myData1 = new MyData();
-//        myData1.setUsername("a");
-//        myData1.setContent("a");
-//        datas.add(myData);
-//        datas.add(myData1);
+
         recyclerView = (RecyclerView)findViewById(R.id.question_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
@@ -72,7 +67,6 @@ public class QuestionActivity extends AppCompatActivity {
                 finish();
             }
         });
-       // recyclerView.addItemDecoration();
     }
 
     private void initData(){
@@ -96,6 +90,7 @@ public class QuestionActivity extends AppCompatActivity {
                         MyData myData = new MyData();
                         myData.setContent(((JSONObject)jsonArray.get(i)).getString("questionContent"));
                         myData.setHeadImageURL(((JSONObject)jsonArray.get(i)).getString("filePath"));
+                        myData.setQuestionID(((JSONObject) jsonArray.get(i)).getString("questionId"));
                         datas.add(myData);
                     }
 //
@@ -123,12 +118,20 @@ public class QuestionActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
             String str_url = URLString.path_head_image+datas.get(position).getHeadImageURL();
 //            String str_url = URLString.path_head_image+"lemon/fileDownload?fileName=associator/20170615/1111.png";
             Glide.with(QuestionActivity.this).load(str_url).into(holder.headImage);
+            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(QuestionActivity.this,QuestionDetailedActivity.class);
+                    intent.putExtra("questionID",datas.get(position).getQuestionID());
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -141,6 +144,7 @@ public class QuestionActivity extends AppCompatActivity {
             TextView usernameText;
             TextView contentText;
             ImageView getInImage;
+            RelativeLayout relativeLayout;
 //            CircleImageView circleImageView;
             public MyViewHolder(View view){
                 super(view);
@@ -149,6 +153,7 @@ public class QuestionActivity extends AppCompatActivity {
                 usernameText = (TextView)view.findViewById(R.id.username_questions);
                 contentText = (TextView)view.findViewById(R.id.content_questions);
                 getInImage = (ImageView)view.findViewById(R.id.get_into_question);
+                relativeLayout = (RelativeLayout) view.findViewById(R.id.item_questions);
             }
         }
     }

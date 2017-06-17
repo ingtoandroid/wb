@@ -9,7 +9,7 @@ public class URLString {
 
     final static public String protocol = "http://";
 
-    final static public String hostname = "192.168.1.150";
+    final static public String hostname = "192.168.1.129";
 
     final static public String port = "8080";
     final static public String project = "yjtyms/yjty_App/";
@@ -37,4 +37,9 @@ public class URLString {
     final static public String getComment=path+"video/comment_list";
     final static public String tiwen=path+"video/question";
     final static public String getTiwen=path+"video/question_list";
+
+    //aAPI
+    final static public String PERSONAL_INFO = path+"info/info_history_list";
+    final static public String MODIFY_HEADIMAGE = path+"associator";
+    final static public String MODIFY_INFO = path+"associator/save_associator_message";
 }

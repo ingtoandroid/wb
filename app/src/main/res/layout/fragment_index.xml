@@ -102,7 +102,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="@string/index_string3"
                     android:textSize="20sp"
-                    android:textColor="@color/stringCenter"/>
+                    android:textColor="@color/stringDark"/>
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/index_tiwen_string1"
                         android:textSize="25sp"
-                        android:textColor="@color/stringCenter"/>
+                        android:textColor="@color/stringDark"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -257,8 +257,8 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
                     android:scaleType="fitXY"
                     android:src="@drawable/index_right" />
@@ -287,6 +287,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/index_s_string2"
                     android:textSize="20sp"
+                    android:textColor="@color/stringCenter"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"/>
             </LinearLayout>

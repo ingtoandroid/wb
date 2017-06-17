@@ -32,9 +32,17 @@ public class MyData {
         this.content = content;
     }
 
+    public String getQuestionID() {
+        return questionID;
+    }
+
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
+    }
+
     private String headImageURL;
     private String username = "";
     private String content;
-
+    private String questionID;
 
 }

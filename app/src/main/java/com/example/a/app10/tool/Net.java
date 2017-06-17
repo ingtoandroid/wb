@@ -22,6 +22,8 @@ public class Net {
     private static String personID = "";
     private static String hx_pwd = "";
     private static String username = "";
+    private static String signature = "";
+    private static String sex = "";
 
     //single
     private Net(){
@@ -96,6 +98,22 @@ public class Net {
 
     public static void setUsername(String username) {
         Net.username = username;
+    }
+
+    public static String getSex() {
+        return sex;
+    }
+
+    public static void setSex(String sex) {
+        Net.sex = sex;
+    }
+
+    public static String getSignature() {
+        return signature;
+    }
+
+    public static void setSignature(String signature) {
+        Net.signature = signature;
     }
 
     public OkHttpClient getOkHttpClient() {
@@ -197,6 +215,24 @@ public class Net {
         return get(url);
     }
 
+    /*
+    AAPI
+     */
+    public Call getPersonalInfo(String personID){
+        String url = URLString.PERSONAL_INFO+"?"+"infoId="+personID;
+        return get(url);
+    }
+
+//    public Call modifyHeadImage(){
+//        String url = URLString.MODIFY_HEADIMAGE;
+//
+//    }
+
+    public Call modifyInfo(String personID,String username,String signature,String sex){
+        String url = URLString.MODIFY_INFO+"?"+"infoId="+personID+"&"+"nickName="+username
+                +"&"+"signature="+signature+"&"+"sex="+sex;
+        return get(url);
+    }
 
     //  get/post请求
     private Call get(String url){

@@ -56,9 +56,7 @@
         <activity
             android:name=".Activity.VideoDetail"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".Activity.ClassActivity" >
-
-        </activity>
+        <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity" />
         <activity android:name=".Activity.NewsActivity" />
@@ -82,12 +80,12 @@
         <activity android:name=".Activity.MyPointsActivity" />
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />
-        <activity android:name=".Activity.ShipinActivity">
-
-        </activity>
+        <activity android:name=".Activity.ShipinActivity" />
         <activity android:name=".Activity.MyMessageActivity" />
-        <activity android:name=".Activity.ChatActivity"></activity>
-        <activity android:name=".Activity.ExpertOrderActivity"></activity>
+        <activity android:name=".Activity.ChatActivity" />
+        <activity android:name=".Activity.ExpertOrderActivity" />
+        <activity android:name=".Activity.MessageDetailedActivity" />
+        <activity android:name=".Activity.QuestionDetailedActivity"></activity>
     </application>
 
 </manifest>
