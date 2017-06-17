@@ -89,73 +89,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/rvCourse"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
-        <com.example.sports.view.ExampleLinerLayout
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.example.sports.view.ExampleItemLinearLayout
-                android:background="#fff"
-                android:layout_marginTop="50dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:text="今天有雨"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="三个月成功减肥20斤"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.example.sports.view.ExampleItemLinearLayout>
-            <com.example.sports.view.ExampleItemLinearLayout
-                android:background="#fff"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:text="今天有雨"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="三个月成功减肥20斤"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.example.sports.view.ExampleItemLinearLayout>
-            <com.example.sports.view.ExampleItemLinearLayout
-                android:background="#fff"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginTop="10dp"
-                    android:text="今天有雨"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="三个月成功减肥20斤"
-                    android:layout_marginLeft="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.example.sports.view.ExampleItemLinearLayout>
-        </com.example.sports.view.ExampleLinerLayout>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </ScrollView>

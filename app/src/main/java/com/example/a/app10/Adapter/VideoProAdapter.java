@@ -10,18 +10,17 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ShipinItem;
+import com.example.a.app10.bean.VideoProItem;
 
 import java.util.List;
 
 /**
- * Created by lenovo on 2017/6/9.
- * 课程列表的适配器
+ * Created by lenovo on 2017/6/17.
  */
 
-public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder> {
+public class VideoProAdapter extends RecyclerView.Adapter<VideoProAdapter.MyViewHolder> {
 
-    private List<ClassItem> list;
+    private List<VideoProItem> list;
     private Context context;
     private OnItenClickListener listener;
 
@@ -31,11 +30,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
 
     }
 
-    public void setLisenter(ClassAdapter.OnItenClickListener lisenter){
+    public void setLisenter(OnItenClickListener lisenter){
         this.listener=lisenter;
     }
 
-    public ClassAdapter(List<ClassItem> list, Context context){
+    public VideoProAdapter(List<VideoProItem> list, Context context){
         this.list=list;
         this.context=context;
     }
@@ -43,18 +42,18 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MyViewHolder holder=new MyViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.class_item,parent,false));
+                .inflate(R.layout.video_pro_item,parent,false));
         return holder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-            ClassItem item=list.get(position);
-        holder.tvTitle.setText(item.getTitle());
-        holder.tvNumber.setText(item.getNumber()+"人已参加");
-        holder.tvTime.setText("开课时间："+item.getTime());
-        if (item.getImgUrl().length()>1){
-            Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        VideoProItem item=list.get(position);
+        holder.tvTitle.setText(item.getVideoTitle());
+        holder.tvNumber.setText(item.getPlayNum()+"人已参加");
+        holder.tvTime.setText(item.getStartDate());
+        if (item.getImageUrl().length()>1){
+            Glide.with(context).load(item.getImageUrl()).into(holder.iv);
         }
 
         if (listener!=null){

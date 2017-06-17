@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,12 +14,15 @@ import android.widget.TextView;
 
 
 import com.bumptech.glide.Glide;
-import com.example.a.app10.Adapter.NewsAdapter;
+import com.example.a.app10.Adapter.ClassAdapter;
+import com.example.a.app10.Adapter.ClassItem;
+import com.example.a.app10.Adapter.VideoProAdapter;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.NewsItem;
+import com.example.a.app10.bean.VideoProItem;
 import com.example.a.app10.tool.MyInternet;
 import com.squareup.okhttp.OkHttpClient;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,12 +34,15 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
     private LinearLayout llContent;
     private RecyclerView rvVideo,rvCourse;
-    private List<NewsItem> list;
+    private List<ClassItem> listClass;
+    private List<VideoProItem> listVideo;
     private Button btnComment,btnLeave,btnOrder;
     private String expertId,name,content,indroduction,imageUrl;
     private OkHttpClient client;
-    private ImageView image;
+    private ImageView image,ivGrade;
     private TextView tvName,tvContent,tvIntroduction;
+    private int expertGrade;
+    private int[] grades={R.drawable.star0,R.drawable.star1,R.drawable.star2,R.drawable.star3,R.drawable.star4,R.drawable.star5};
 
 
     @Override
@@ -64,12 +71,14 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
         image= (ImageView) findViewById(R.id.image);
+        ivGrade= (ImageView) findViewById(R.id.ivGrade);
         tvContent= (TextView) findViewById(R.id.tvContent);
         tvName= (TextView) findViewById(R.id.tvName);
         tvIntroduction= (TextView) findViewById(R.id.tvIndroduction);
         client=new OkHttpClient();
 
-        list=new ArrayList<>();
+        listClass =new ArrayList<>();
+        listVideo=new ArrayList<>();
 
         expertId=getIntent().getStringExtra("expertId");
         imageUrl=getIntent().getStringExtra("imageUrl");
@@ -92,6 +101,7 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
                 break;
             case R.id.btnOrder:
                 break;
+
         }
     }
 
@@ -111,18 +121,19 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            hideProgress();
-            show();
         }
     }
 
     private void show() {
+        hideProgress();
         rvVideo.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        NewsAdapter adapter1=new NewsAdapter(list,this);
-        adapter1.setLisenter(new NewsAdapter.OnItenClickListener() {
+        VideoProAdapter adapter1=new VideoProAdapter(listVideo,this);
+        adapter1.setLisenter(new VideoProAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
+                Intent intent=new Intent(ProfessorDetailActivity.this,VideoDetail.class);
+                intent.putExtra("id",listVideo.get(position).getVideoId());
+                startActivity(intent);
             }
 
             @Override
@@ -130,8 +141,8 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
             }
         });
-        NewsAdapter adapter2=new NewsAdapter(list,this);
-        adapter2.setLisenter(new NewsAdapter.OnItenClickListener() {
+        ClassAdapter adapter2=new ClassAdapter(listClass,this);
+        adapter2.setLisenter(new ClassAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
@@ -151,27 +162,54 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         tvName.setText(name);
         tvContent.setText("研究方向： "+content);
         tvIntroduction.setText(indroduction);
+        ivGrade.setImageResource(grades[expertGrade]);
     }
 
     private void getData() {
+        //获取专家信息
         String url= MyInternet.MAIN_URL+"expert/get_expert_info?expertId="+expertId;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
-                try {
-                    JSONObject object=new JSONObject(s);
-                    name=object.getString("expertName");
-                    content=object.getString("expertArea");
-                    indroduction=object.getString("introduction");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                handleJson(s);
             }
 
             @Override
             public void mainThread() {
-
+                show();
             }
         },this);
+    }
+
+    private void handleJson(String s) {
+        try {
+            JSONObject object=new JSONObject(s);
+            //专家信息
+            name=object.getString("expertName");
+            content=object.getString("expertArea");
+            indroduction=object.getString("introduction");
+            expertGrade=object.getInt("expertGrade");
+
+            //课程列表
+            JSONArray arrayList=object.getJSONArray("courseList");
+            for (int i=0;i<arrayList.length();i++){
+                JSONObject obj=arrayList.getJSONObject(i);
+                ClassItem item=new ClassItem(obj.getString("imageUrl"),
+                        obj.getString("courseId"),obj.getString("courseTitle"),
+                        obj.getString("startDate"),obj.getString("entereNum"));
+                listClass.add(item);
+            }
+            //视频列表
+            JSONArray array=object.getJSONArray("videoList");
+            for (int i=0;i<array.length();i++){
+                JSONObject obj=array.getJSONObject(i);
+                VideoProItem item=new VideoProItem(obj.getString("videoId"),
+                        obj.getString("videoTitle"), obj.getString("playNum"),
+                        obj.getString("startDate"),obj.getString("imageUrl"));
+                listVideo.add(item);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
