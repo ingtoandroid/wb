@@ -9,36 +9,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.CommentItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by 12917 on 2017/6/10.
  */
 
 public class VideoRecycleAdapter extends RecyclerView.Adapter<VideoRecycleAdapter.ViewHoler> {
+    private List<CommentItem>  list=null;
     private Context context;
-    private ArrayList<HashMap<String,Object>> list=null;
-    public VideoRecycleAdapter(Context context) {
+    public VideoRecycleAdapter(Context context,List<CommentItem> list) {
         super();
         this.context=context;
-        list=new ArrayList<HashMap<String, Object>>();
-        for(int i=0;i<5;i++){
-            HashMap<String,Object> map=new HashMap<String,Object>();
-            map.put("title","今天有雨");
-            map.put("time","201701.1");
-            map.put("comment","这里是评论内容，这里是评论内容");
-            list.add(map);
-        }
+        this.list=list;
     }
 
     @Override
     public void onBindViewHolder(ViewHoler holder, int position) {
-        holder.title.setText(list.get(position).get("title").toString());
-        holder.time.setText(list.get(position).get("time").toString());
-        holder.comment.setText(list.get(position).get("comment").toString());
+        holder.title.setText(list.get(position).getUserName());
+        holder.time.setText(list.get(position).getCreateTime_sys());
+        holder.comment.setText(list.get(position).getQuestionContent());
+        Glide.with(context).load(list.get(position).getPhotoUrl()).into(holder.imageView);
+
     }
 
     @Override

@@ -46,6 +46,9 @@ import com.baidu.mapapi.map.MyLocationConfiguration.LocationMode;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.R;
 
 public class EaseBaiduMapActivity extends EaseBaseActivity {
@@ -87,6 +90,7 @@ public class EaseBaiduMapActivity extends EaseBaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance = this;
+		init();
 		//initialize SDK with context, should call this before setContentView
         SDKInitializer.initialize(getApplicationContext());  
 		setContentView(R.layout.ease_activity_baidumap);
@@ -257,6 +261,15 @@ public class EaseBaiduMapActivity extends EaseBaseActivity {
 		this.setResult(RESULT_OK, intent);
 		finish();
 		overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
+	}
+	private void init(){
+		EMOptions options = new EMOptions();
+		options.setAutoLogin(false);
+		options.setAcceptInvitationAlways(true);
+		EMClient.getInstance().init(this, options);
+		EMClient.getInstance().setDebugMode(true);
+		Toast.makeText(this, ""+EMClient.getInstance().getCurrentUser(), Toast.LENGTH_SHORT).show();
+
 	}
 
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMVideoMessageBody;
 import com.hyphenate.easeui.R;
 import com.hyphenate.util.EMLog;
@@ -122,6 +123,7 @@ public class EaseShowVideoActivity extends EaseBaseActivity{
 	public void onBackPressed() {
 		finish();
 	}
- 
+
+
 
 }
