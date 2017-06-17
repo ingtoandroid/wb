@@ -44,25 +44,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/btnComment"
-                    android:text="评价"
-                    android:textSize="20sp"
-                    android:background="@drawable/button_side_press"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp" />
-                <Button
-                    android:id="@+id/btnLeave"
-                    android:text="留言"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/button_side_press"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"  />
-                <Button
                     android:id="@+id/btnOrder"
                     android:text="预约"
                     android:textSize="20sp"
-                    android:layout_marginLeft="20dp"
                     android:background="@drawable/button_side_press"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp" />

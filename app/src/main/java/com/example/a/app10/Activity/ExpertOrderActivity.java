@@ -1,17 +1,23 @@
 package com.example.a.app10.Activity;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ProfessorItem;
 import com.example.a.app10.tool.MyInternet;
+import com.example.a.app10.view.MyOrderList;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.net.URL;
@@ -23,6 +29,8 @@ public class ExpertOrderActivity extends AppCompatActivity {
     private boolean finish;
     private OkHttpClient client;
     private ProfessorItem professor;
+    private View head;
+    private MyOrderList form;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +43,37 @@ public class ExpertOrderActivity extends AppCompatActivity {
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle("专家预约");
         toolbar.setNavigationIcon(R.drawable.back);//设置标题栏
 
         professor= (ProfessorItem) getIntent().getExtras().get("professor");
         init();
-        new LoadTask().execute(null,null,null);
+        //new LoadTask().execute(null,null,null);
     }
 
     private void init() {
         client=new OkHttpClient();
+        head=findViewById(R.id.head);
+        head.setBackgroundColor(Color.TRANSPARENT);
+        form= (MyOrderList) findViewById(R.id.form);
+        form.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction()!=MotionEvent.ACTION_UP){//只要拿起事件
+                    return true;
+                }
+                float x=motionEvent.getX();
+                float y=motionEvent.getY();
+                float singleWidth=form.getWidth()/7;
+                float singleHeight=form.getHeight()/3;
+                int index=(int)(y/singleHeight)*7+(int) (x/singleWidth);
+                Log.v("tag","index:"+index);
+                if (form.getState(index)==MyOrderList.FREE){
+                    form.setState(index,MyOrderList.CHOSEN);
+                    form.invalidate();//强制刷新
+                }
+                return true;
+            }
+        });
     }
 
     @Override

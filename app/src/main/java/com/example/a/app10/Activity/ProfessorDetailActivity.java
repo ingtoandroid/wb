@@ -36,7 +36,7 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
     private RecyclerView rvVideo,rvCourse;
     private List<ClassItem> listClass;
     private List<VideoProItem> listVideo;
-    private Button btnComment,btnLeave,btnOrder;
+    private Button btnOrder;
     private String expertId,name,content,indroduction,imageUrl;
     private OkHttpClient client;
     private ImageView image,ivGrade;
@@ -64,10 +64,6 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         llContent= (LinearLayout) findViewById(R.id.llContent);
         rvVideo= (RecyclerView) findViewById(R.id.rvVideo);
         rvCourse= (RecyclerView) findViewById(R.id.rvCourse);
-        btnComment= (Button) findViewById(R.id.btnComment);
-        btnComment.setOnClickListener(this);
-        btnLeave= (Button) findViewById(R.id.btnLeave);
-        btnLeave.setOnClickListener(this);
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
         image= (ImageView) findViewById(R.id.image);
@@ -94,12 +90,10 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btnComment:
-
-                break;
-            case R.id.btnLeave:
-                break;
             case R.id.btnOrder:
+                Intent intent=new Intent(ProfessorDetailActivity.this,ExpertOrderActivity.class);
+                intent.putExtra("expertId",expertId);
+                startActivity(intent);
                 break;
 
         }

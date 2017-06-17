@@ -93,6 +93,7 @@ public class MyClassActivity extends ToolBarBaseActivity {
     }
 
     private void getData() {
+        userId="9629e659-b37a-417f-90cd-1e3ffea7057b";
         String url= MyInternet.MAIN_URL+"kc/kc_new_type_list?infoId="+userId;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
@@ -102,8 +103,10 @@ public class MyClassActivity extends ToolBarBaseActivity {
                     JSONArray array=all.getJSONArray("dataList");
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
-                        //MyClassItem item=new MyClassItem("name","id","title",startDate,"entere","state");
-                        //list.add(item);
+                        MyClassItem item=new MyClassItem(object.getString("modelName"),
+                                object.getString("courseId"),object.getString("courseTitle"),
+                                object.getString("startDate"),object.getString("entereId"),object.getString("state"));
+                        list.add(item);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
