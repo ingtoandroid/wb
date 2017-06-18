@@ -52,8 +52,12 @@
         </receiver>
 
         <activity android:name=".Activity.Main1Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name=".Activity.Quiz" />
         <activity
             android:name=".Activity.VideoDetail"
             android:configChanges="keyboardHidden|orientation|screenSize" />
@@ -82,11 +86,6 @@
         <activity android:name=".Activity.QuestionDetailedActivity" />
         <activity android:name=".Activity.MessageReminderActivity" />
         <activity android:name=".Activity.QuickQuestionActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
