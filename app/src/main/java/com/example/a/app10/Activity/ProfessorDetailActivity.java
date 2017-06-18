@@ -1,20 +1,30 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 
-import com.example.a.app10.Adapter.ScienceAdapter;
+import com.bumptech.glide.Glide;
+import com.example.a.app10.Adapter.ClassAdapter;
+import com.example.a.app10.Adapter.ClassItem;
+import com.example.a.app10.Adapter.VideoProAdapter;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ScienceItem;
+import com.example.a.app10.bean.VideoProItem;
+import com.example.a.app10.tool.MyInternet;
+import com.squareup.okhttp.OkHttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,13 +34,16 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
     private LinearLayout llContent;
     private RecyclerView rvVideo,rvCourse;
-    private List<ScienceItem> list;
-    private Button btnComment,btnLeave,btnOrder;
+    private List<ClassItem> listClass;
+    private List<VideoProItem> listVideo;
+    private Button btnOrder;
+    private String expertId,name,content,indroduction,imageUrl;
+    private OkHttpClient client;
+    private ImageView image,ivGrade;
+    private TextView tvName,tvContent,tvIntroduction;
+    private int expertGrade;
+    private int[] grades={R.drawable.star0,R.drawable.star1,R.drawable.star2,R.drawable.star3,R.drawable.star4,R.drawable.star5};
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     protected int getSideMenu() {
@@ -51,14 +64,20 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         llContent= (LinearLayout) findViewById(R.id.llContent);
         rvVideo= (RecyclerView) findViewById(R.id.rvVideo);
         rvCourse= (RecyclerView) findViewById(R.id.rvCourse);
-        btnComment= (Button) findViewById(R.id.btnComment);
-        btnComment.setOnClickListener(this);
-        btnLeave= (Button) findViewById(R.id.btnLeave);
-        btnLeave.setOnClickListener(this);
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
+        image= (ImageView) findViewById(R.id.image);
+        ivGrade= (ImageView) findViewById(R.id.ivGrade);
+        tvContent= (TextView) findViewById(R.id.tvContent);
+        tvName= (TextView) findViewById(R.id.tvName);
+        tvIntroduction= (TextView) findViewById(R.id.tvIndroduction);
+        client=new OkHttpClient();
 
-        list=new ArrayList<>();
+        listClass =new ArrayList<>();
+        listVideo=new ArrayList<>();
+
+        expertId=getIntent().getStringExtra("expertId");
+        imageUrl=getIntent().getStringExtra("imageUrl");
 
         new LoadTask().execute(null,null,null);
     }
@@ -71,13 +90,12 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btnComment:
-
-                break;
-            case R.id.btnLeave:
-                break;
             case R.id.btnOrder:
+                Intent intent=new Intent(ProfessorDetailActivity.this,ExpertOrderActivity.class);
+                intent.putExtra("expertId",expertId);
+                startActivity(intent);
                 break;
+
         }
     }
 
@@ -97,18 +115,19 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            hideProgress();
-            show();
         }
     }
 
     private void show() {
+        hideProgress();
         rvVideo.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        ScienceAdapter adapter1=new ScienceAdapter(list,this);
-        adapter1.setLisenter(new ScienceAdapter.OnItenClickListener() {
+        VideoProAdapter adapter1=new VideoProAdapter(listVideo,this);
+        adapter1.setLisenter(new VideoProAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
+                Intent intent=new Intent(ProfessorDetailActivity.this,VideoDetail.class);
+                intent.putExtra("id",listVideo.get(position).getVideoId());
+                startActivity(intent);
             }
 
             @Override
@@ -116,8 +135,8 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
 
             }
         });
-        ScienceAdapter adapter2=new ScienceAdapter(list,this);
-        adapter2.setLisenter(new ScienceAdapter.OnItenClickListener() {
+        ClassAdapter adapter2=new ClassAdapter(listClass,this);
+        adapter2.setLisenter(new ClassAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
@@ -132,24 +151,59 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         rvCourse.setLayoutManager(new LinearLayoutManager(this));//默认竖直列表
         rvCourse.setAdapter(adapter2);
         llContent.setVisibility(View.VISIBLE);
+
+        Glide.with(this).load(imageUrl).into(image);
+        tvName.setText(name);
+        tvContent.setText("研究方向： "+content);
+        tvIntroduction.setText(indroduction);
+        ivGrade.setImageResource(grades[expertGrade]);
     }
 
     private void getData() {
+        //获取专家信息
+        String url= MyInternet.MAIN_URL+"expert/get_expert_info?expertId="+expertId;
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                handleJson(s);
+            }
+
+            @Override
+            public void mainThread() {
+                show();
+            }
+        },this);
+    }
+
+    private void handleJson(String s) {
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
+            JSONObject object=new JSONObject(s);
+            //专家信息
+            name=object.getString("expertName");
+            content=object.getString("expertArea");
+            indroduction=object.getString("introduction");
+            expertGrade=object.getInt("expertGrade");
+
+            //课程列表
+            JSONArray arrayList=object.getJSONArray("courseList");
+            for (int i=0;i<arrayList.length();i++){
+                JSONObject obj=arrayList.getJSONObject(i);
+                ClassItem item=new ClassItem(obj.getString("imageUrl"),
+                        obj.getString("courseId"),obj.getString("courseTitle"),
+                        obj.getString("startDate"),obj.getString("entereNum"));
+                listClass.add(item);
+            }
+            //视频列表
+            JSONArray array=object.getJSONArray("videoList");
+            for (int i=0;i<array.length();i++){
+                JSONObject obj=array.getJSONObject(i);
+                VideoProItem item=new VideoProItem(obj.getString("videoId"),
+                        obj.getString("videoTitle"), obj.getString("playNum"),
+                        obj.getString("startDate"),obj.getString("imageUrl"));
+                listVideo.add(item);
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new ScienceItem(bitmap1,"全民健身计划2016","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2011","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2012","咨询部","两天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2013","咨询部","一周前"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2014","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2015","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2017","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2018","咨询部","两天前"));
     }
 }

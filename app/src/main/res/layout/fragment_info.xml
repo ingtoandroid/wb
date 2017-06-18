@@ -69,7 +69,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/back_image">
+        android:layout_below="@+id/back_image"
+        android:background="@color/wholebackground">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -206,8 +207,8 @@
                 android:text="@string/reservation"
                 android:layout_centerVertical="true"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/get_into"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
@@ -229,8 +230,8 @@
                 android:layout_centerVertical="true"
                 android:text="@string/course_infomation" />
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/get_into"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"

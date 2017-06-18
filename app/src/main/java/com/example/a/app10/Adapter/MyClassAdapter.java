@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MyClassItem;
 
@@ -49,10 +50,10 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         MyClassItem item=list.get(position);
-        holder.tvTitle.setText(item.getTitle());
-        holder.tvNumber.setText("评论 "+item.getCommentNumber()+"  提问 "+item.getQuestionNumber());
-        holder.tvFinish.setText(item.isIfFinish()? "已学完":"未学完");
-        holder.iv.setImageBitmap(item.getBitmap());
+        holder.tvTitle.setText(item.getCourseTitle());
+        holder.tvNumber.setText("开课时间："+item.getStartDate());
+        holder.tvFinish.setText(item.getState());
+        Glide.with(context).load("http://192.168.1.129:8080/yjtyms/"+item.getModelName()).into(holder.iv);
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {

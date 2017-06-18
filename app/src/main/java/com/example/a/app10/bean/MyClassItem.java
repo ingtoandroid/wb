@@ -7,56 +7,63 @@ import android.graphics.Bitmap;
  */
 
 public class MyClassItem {
-    private Bitmap bitmap;
-    private boolean ifFinish;
-    private int commentNumber,questionNumber;
-    private String title;
+    private String modelName,courseId,courseTitle,startDate,entereId,state;
 
-    public MyClassItem(Bitmap bitmap, boolean ifFinish, int commentNumber, int questionNumber, String title) {
-        this.bitmap = bitmap;
-        this.ifFinish = ifFinish;
-        this.commentNumber = commentNumber;
-        this.questionNumber = questionNumber;
-        this.title = title;
+    public String getModelName() {
+        return modelName;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public boolean isIfFinish() {
-        return ifFinish;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
-    public void setIfFinish(boolean ifFinish) {
-        this.ifFinish = ifFinish;
+    public String getCourseTitle() {
+        return courseTitle;
     }
 
-    public int getCommentNumber() {
-        return commentNumber;
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
     }
 
-    public void setCommentNumber(int commentNumber) {
-        this.commentNumber = commentNumber;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public int getQuestionNumber() {
-        return questionNumber;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
-    public void setQuestionNumber(int questionNumber) {
-        this.questionNumber = questionNumber;
+    public String getEntereId() {
+        return entereId;
     }
 
-    public String getTitle() {
-        return title;
+    public void setEntereId(String entereId) {
+        this.entereId = entereId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public MyClassItem(String modelName, String courseId, String courseTitle, String startDate, String entereId, String state) {
+        this.modelName = modelName;
+
+        this.courseId = courseId;
+        this.courseTitle = courseTitle;
+        this.startDate = startDate;
+        this.entereId = entereId;
+        this.state = state;
     }
 }

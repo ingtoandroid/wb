@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp">
+    android:layout_height="wrap_content"
+    android:id="@+id/item_questions"
+    android:paddingTop="10dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="69dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/item_content">
-        <ImageView
+        android:id="@+id/item_content"
+        android:paddingBottom="10dp">
+        <!--<ImageView-->
+            <!--android:layout_width="60dp"-->
+            <!--android:layout_height="60dp"-->
+            <!--android:id="@+id/head_image_questions"/>-->
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/head_image_questions"/>
+            android:id="@+id/head_image_questions"
+            android:layout_marginLeft="10dp"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -40,7 +49,6 @@
             android:layout_marginRight="10dp"
             android:background="@drawable/get_into"
             android:id="@+id/get_into_question" />
-
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"

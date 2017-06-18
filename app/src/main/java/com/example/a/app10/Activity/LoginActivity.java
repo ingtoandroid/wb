@@ -59,7 +59,9 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkOutToLogin();
+//                checkOutToLogin();
+                Intent intent = new Intent(LoginActivity.this,Main1Activity.class);
+                startActivity(intent);
             }
         });
         reg.setOnClickListener(new View.OnClickListener() {
@@ -96,16 +98,29 @@ public class LoginActivity extends AppCompatActivity {
                     String result = response.body().string();
                     if(result != ""){
                         int code = -2;
-
+                        JSONTokener jsonTokener = null;
+                        JSONObject jsonObject = null;
                         try {
-                            JSONTokener jsonTokener = new JSONTokener(result);
-                            JSONObject jsonObject = (JSONObject)jsonTokener.nextValue();
+                            jsonTokener = new JSONTokener(result);
+                            jsonObject = (JSONObject)jsonTokener.nextValue();
                             code = jsonObject.getInt("code");
                         }catch (JSONException ex){
-                            //处理结果
+                            //异常处理
                         }
 
                         if(code == 0){
+                            try {
+                                Net.setUserUUID(jsonObject.getString("userUUID"));
+                                Net.setPhotoUrl(jsonObject.getString("photoUrl"));
+                                Net.setRemark(jsonObject.getString("remark"));
+                                Net.setPersonName(jsonObject.getString("personName"));
+                                Net.setPersonID(jsonObject.getString("personId"));
+                                Net.setHx_pwd(jsonObject.getString("hx_pwd"));
+                                Net.setUsername(jsonObject.getString("username"));
+                            }catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                             Intent intent = new Intent(LoginActivity.this,Main1Activity.class);
                             startActivity(intent);
                         }

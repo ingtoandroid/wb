@@ -8,12 +8,12 @@ import android.media.Image;
  */
 
 public class MyData {
-    public Bitmap getHeadImage() {
-        return headImage;
+    public String getHeadImageURL() {
+        return headImageURL;
     }
 
-    public void setHeadImage(Bitmap headImage) {
-        this.headImage = headImage;
+    public void setHeadImageURL(String headImageURL) {
+        this.headImageURL = headImageURL;
     }
 
     public String getUsername() {
@@ -32,9 +32,17 @@ public class MyData {
         this.content = content;
     }
 
-    private Bitmap headImage;
-    private String username;
-    private String content;
+    public String getQuestionID() {
+        return questionID;
+    }
 
+    public void setQuestionID(String questionID) {
+        this.questionID = questionID;
+    }
+
+    private String headImageURL;
+    private String username = "";
+    private String content;
+    private String questionID;
 
 }

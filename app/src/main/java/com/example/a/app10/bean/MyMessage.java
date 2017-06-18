@@ -8,12 +8,12 @@ import android.media.Image;
  */
 
 public class MyMessage {
-    public Bitmap getHeadImage() {
-        return headImage;
+    public String getHeadImageURL() {
+        return headImageURL;
     }
 
-    public void setHeadImage(Bitmap headImage) {
-        this.headImage = headImage;
+    public void setHeadImageURL(String headImageURL) {
+        this.headImageURL = headImageURL;
     }
 
     public String getUsername() {
@@ -32,7 +32,7 @@ public class MyMessage {
         this.content = content;
     }
 
-    private Bitmap headImage;
-    private String username;
+    private String headImageURL;
+    private String username = "";
     private String content;
 }

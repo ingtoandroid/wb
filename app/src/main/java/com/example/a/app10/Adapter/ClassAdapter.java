@@ -51,9 +51,11 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, final int position) {
             ClassItem item=list.get(position);
         holder.tvTitle.setText(item.getTitle());
-        holder.tvNumber.setText(item.getNumber());
-        holder.tvTime.setText(item.getTime());
-        Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        holder.tvNumber.setText(item.getNumber()+"人已参加");
+        holder.tvTime.setText("开课时间："+item.getTime());
+        if (item.getImgUrl().length()>1){
+            Glide.with(context).load(item.getImgUrl()).into(holder.iv);
+        }
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -91,4 +93,6 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder
             iv= (ImageView) itemView.findViewById(R.id.image);
         }
     }
+
+
 }

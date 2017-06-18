@@ -1,6 +1,7 @@
 package com.example.a.app10.tool;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,16 +22,14 @@ public class StatusBarTool {
 
     public static boolean tryLightStatus(Activity activity){
         if (isMIUIV6OrAbove()){
-            setMIUILightStatusBar(activity);
-            return true;
+            return setMIUILightStatusBar(activity);
         }
         if (isFlymeV4OrAbove()){
-            setFlymeLightStatusBar(activity);
-            return true;
+            return  setFlymeLightStatusBar(activity);
+
         }
         if (isAndroidMOrAbove()){
-            setAndroidNativeLightStatusBar(activity);
-            return true;
+            return setAndroidNativeLightStatusBar(activity);
         }
         return false;
     }
@@ -104,6 +103,7 @@ public class StatusBarTool {
             darkModeFlag = field.getInt(layoutParams);
             Method extraFlagField = clazz.getMethod("setExtraFlags", int.class, int.class);
             extraFlagField.invoke(activity.getWindow(), darkModeFlag , darkModeFlag);
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,8 +132,9 @@ public class StatusBarTool {
         }
         return result;
     }
-    private static void setAndroidNativeLightStatusBar(Activity activity) {
+    private static boolean setAndroidNativeLightStatusBar(Activity activity) {
         View decor = activity.getWindow().getDecorView();
         decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        return true;
     }
 }

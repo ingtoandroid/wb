@@ -12,6 +12,12 @@ import com.example.a.app10.Adapter.MyClassAdapter;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MyClassItem;
 import com.example.a.app10.tool.KopItemDecoration;
+import com.example.a.app10.tool.MyInternet;
+import com.squareup.okhttp.OkHttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +27,8 @@ public class MyClassActivity extends ToolBarBaseActivity {
 
     private RecyclerView rv;
     private List<MyClassItem> list;
+    private String userId;
+    private OkHttpClient client;
 
     @Override
     protected int getSideMenu() {
@@ -46,6 +54,7 @@ public class MyClassActivity extends ToolBarBaseActivity {
 
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();
+        client=new OkHttpClient();
 
         new LoadTask().execute(null,null,null);
     }
@@ -71,7 +80,6 @@ public class MyClassActivity extends ToolBarBaseActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            showRecycler();
         }
     }
 
@@ -85,23 +93,31 @@ public class MyClassActivity extends ToolBarBaseActivity {
     }
 
     private void getData() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new MyClassItem(bitmap1,false,0,0,"全民健身计划2016"));
-        list.add(new MyClassItem(bitmap2,true,0,0,"全民健身计划2019"));
-        list.add(new MyClassItem(bitmap3,false,0,0,"全民健身计划2018"));
-        list.add(new MyClassItem(bitmap1,true,0,0,"全民健身计划2018"));
-        list.add(new MyClassItem(bitmap2,false,0,0,"全民健身计划2016"));
-        list.add(new MyClassItem(bitmap3,false,0,0,"全民健身计划2015"));
-        list.add(new MyClassItem(bitmap1,false,0,0,"全民健身计划2017"));
-        list.add(new MyClassItem(bitmap2,false,0,0,"全民健身计划2012"));
-        list.add(new MyClassItem(bitmap3,false,0,0,"全民健身计划2012"));
+        userId="9629e659-b37a-417f-90cd-1e3ffea7057b";
+        String url= MyInternet.MAIN_URL+"kc/kc_new_type_list?infoId="+userId;
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                try {
+                    JSONObject all = new JSONObject(s);
+                    JSONArray array=all.getJSONArray("dataList");
+                    for (int i=0;i<array.length();i++){
+                        JSONObject object=array.getJSONObject(i);
+                        MyClassItem item=new MyClassItem(object.getString("modelName"),
+                                object.getString("courseId"),object.getString("courseTitle"),
+                                object.getString("startDate"),object.getString("entereId"),object.getString("state"));
+                        list.add(item);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mainThread() {
+                showRecycler();
+            }
+        },this);
     }
 
 }

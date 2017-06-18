@@ -66,7 +66,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
 
-        new ShipinActivity.LoadTask().execute(1,null,null);
+        new LoadTask().execute(1,null,null);
     }
 
     @Override

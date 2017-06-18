@@ -1,8 +1,6 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,12 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
-import com.example.a.app10.Adapter.ScienceAdapter;
+import com.example.a.app10.Adapter.NewsAdapter;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.ScienceItem;
+import com.example.a.app10.bean.NewsItem;
 import com.example.a.app10.tool.KopItemDecoration;
+import com.example.a.app10.tool.MyInternet;
+import com.squareup.okhttp.OkHttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,16 +30,23 @@ import java.util.List;
 public class ScienceActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
     private RecyclerView rv;
-    private List<ScienceItem> list;
-    private static int numbersButton=18;
-    private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,
-            R.id.btn21,R.id.btn22,R.id.btn23,R.id.btn24,R.id.btn25,R.id.btn26,
-            R.id.btn31,R.id.btn32,R.id.btn33,R.id.btn34,R.id.btn35,R.id.btn36};
-    private Button[] sideButtons = new Button[numbersButton];
+    private List<NewsItem> list;
+    private final int NUMBERBUTTONS =27;
+    private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,R.id.btn19,
+            R.id.btn21,R.id.btn22,R.id.btn23,R.id.btn24,R.id.btn25,R.id.btn26,R.id.btn27,R.id.btn28,R.id.btn29,
+            R.id.btn31,R.id.btn32,R.id.btn33,R.id.btn34,R.id.btn35,R.id.btn36,R.id.btn37,R.id.btn38,R.id.btn39,};
+    private Button[] sideButtons = new Button[NUMBERBUTTONS];
     private Button btnRecycle,btnSure;
     //储存选择结果的标志数组
-    private boolean[] isChosen=new boolean[numbersButton];
-
+    private boolean[] isChosen=new boolean[NUMBERBUTTONS];
+    private boolean[] isShow=new boolean[NUMBERBUTTONS];
+    private OkHttpClient client;
+    private NewsAdapter adapter;
+    private TextView tvSideTitle1,tvSideTitle2,tvSideTitle3;
+    private String[] sideTitles=new String[3];
+    private String[] buttonTexts,buttonCode;
+    private final int EVEAY_MAX_LINE=9;
+    private int[] numbers=new int[3];
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;
@@ -57,40 +69,108 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         });
 
         rv= (RecyclerView) findViewById(R.id.rv);
-        for (int i=0;i<numbersButton;i++){
+        for (int i = 0; i< NUMBERBUTTONS; i++){
             sideButtons[i]= (Button) findViewById(sideButtonsIds[i]);
             sideButtons[i].setOnClickListener(this);
 
             isChosen[i]=false;
+            isShow[i]=false;
         }
         btnRecycle= (Button) findViewById(R.id.btnRecycle);
         btnRecycle.setOnClickListener(this);
         btnSure= (Button) findViewById(R.id.btnSure);
         btnSure.setOnClickListener(this);
+        tvSideTitle1= (TextView) findViewById(R.id.tvSideTitle1);
+        tvSideTitle2= (TextView) findViewById(R.id.tvSideTitle2);
+        tvSideTitle3= (TextView) findViewById(R.id.tvSideTitle3);
+        client=new OkHttpClient();
+        list=new ArrayList<>();
+        buttonTexts=new String[NUMBERBUTTONS];
+        buttonCode=new String[NUMBERBUTTONS];
 
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
 
         new LoadTask().execute(null,null,null);
 
     }
 
     private void getData() {
-        list=new ArrayList<>();
-        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(),R.drawable.dance);
-        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(),R.drawable.run_pic);
-        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(),R.drawable.swim_pic);
-        list.add(new ScienceItem(bitmap1,"全民健身计划2016","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2011","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2012","咨询部","两天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2013","咨询部","一周前"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2014","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap3,"全民健身计划2015","咨询部","一天前"));
-        list.add(new ScienceItem(bitmap1,"全民健身计划2017","咨询部","刚刚"));
-        list.add(new ScienceItem(bitmap2,"全民健身计划2018","咨询部","两天前"));
+        String url= MyInternet.MAIN_URL+"sports/get_sports_list";
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                try {
+                    JSONObject all=new JSONObject(s);
+                    JSONArray array=all.getJSONArray("dataList");
+                    int index=array.length();
+                    for (int i=0;i<index;i++){
+                        JSONObject object=array.getJSONObject(i);
+                        NewsItem item=new NewsItem(object.getString("newsId"),
+                                object.getString("title"),object.getString("publishTime"),
+                                object.getString("authorName"),object.getString("filePath"));
+                        list.add(item);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-        //测试用手动延迟
+            @Override
+            public void mainThread() {
+                showRecycler();
+            }
+        },this);
+
+        String listUrl=MyInternet.MAIN_URL+"sports/get_sports_search_list";
+        MyInternet.getMessage(listUrl, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+                handleSide(s);
+            }
+
+            @Override
+            public void mainThread() {
+                showSide();
+            }
+        },this);
+    }
+
+    private void showSide() {
+        tvSideTitle1.setText(sideTitles[0]);
+        tvSideTitle2.setText(sideTitles[1]);
+        tvSideTitle3.setText(sideTitles[2]);
+        for (int i=0;i<3;i++){
+            int length=numbers[i]<6 ? numbers[i] :6;
+            for (int j=0;j<length;j++){
+                if (j==5){
+                    //最后一个按钮的处理
+                } else {
+                    int index=i*EVEAY_MAX_LINE+j;
+                    sideButtons[index].setVisibility(View.VISIBLE);
+                    sideButtons[index].setText(buttonTexts[index]);
+                }
+            }
+        }
+    }
+
+    private void handleSide(String s) {//解析侧滑菜单的API
         try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
+            JSONObject all=new JSONObject(s);
+            JSONArray array=all.getJSONArray("dataList");
+            for (int i=0;i<3;i++){
+                JSONObject obj=array.getJSONObject(i);
+                sideTitles[i]=obj.getString("catalogName");
+                Log.v("tagSc",sideTitles[i]);
+                JSONArray array1=obj.getJSONArray("childList");
+                for (int j=0;j<array1.length();j++){
+                    JSONObject object=array1.getJSONObject(j);
+                    buttonTexts[i*EVEAY_MAX_LINE+j]=object.getString("catalogName");
+                    buttonCode[i*EVEAY_MAX_LINE+j]=object.getString("catalogCode");
+                    numbers[i]++;
+                }
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -104,13 +184,17 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     public void onClick(View view) {
         int currentId=view.getId();
         //判断是否是菜单上的按钮
-        for (int i=0;i<numbersButton;i++){
+        for (int i = 0; i< NUMBERBUTTONS; i++){
             if (currentId==sideButtonsIds[i]){
                 if (isChosen[i]==false){
-                    Log.v("tag","dwdfvdvreve");
-                    Button button= (Button) view;
-                    button.setBackgroundResource(R.drawable.button_side_press);
-                    button.setTextColor(Color.WHITE);
+                    int group=i/EVEAY_MAX_LINE;
+                    for (int j=group*EVEAY_MAX_LINE;j<(group+1)*EVEAY_MAX_LINE;j++){//去除原有其他标记
+                        isChosen[j]=false;
+                        sideButtons[j].setBackgroundResource(R.drawable.button_side);
+                        sideButtons[j].setTextColor(getResources().getColor(R.color.main));
+                    }
+                    sideButtons[i].setBackgroundResource(R.drawable.button_side_press);
+                    sideButtons[i].setTextColor(Color.WHITE);
                     isChosen[i]=true;
                 } else {
                     Button button= (Button) view;
@@ -118,20 +202,24 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                     button.setTextColor(getResources().getColor(R.color.main));
                     isChosen[i]=false;
                 }
+                return;
             }
         }
 
         if (currentId==R.id.btnRecycle){
             recycle();
+            return;
         }
 
         if (currentId==R.id.btnSure){
             reLoad();
+            return;
         }
+
     }
 
     private void recycle() {
-        for (int i=0;i<numbersButton;i++){
+        for (int i = 0; i< NUMBERBUTTONS; i++){
             Button button=sideButtons[i];
             button.setBackgroundResource(R.drawable.button_side);
             button.setTextColor(getResources().getColor(R.color.main));
@@ -141,7 +229,50 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
 
     //根据筛选条件重新加载列表
     private void reLoad() {
+        String a="";
+        for (int i=0;i<NUMBERBUTTONS;i++){
+            if (isChosen[i]){
+                a+=buttonCode[i]+",";
+            }
+        }
+        if (a.length()>1){
+            reGetData(a);
+        }
+
+        closeDrawer();
         recycle();//筛选条件复原
+    }
+
+    private void reGetData(String a) {
+        String url=MyInternet.MAIN_URL+"sports/get_sports_list?catalogCode="+a;
+        Log.v("aaaaa",a);
+        showProgress("加载中");
+        MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
+            @Override
+            public void handle(String s) {
+
+                try {
+                    list=new ArrayList<>();
+                    JSONObject all=new JSONObject(s);
+                    JSONArray array=all.getJSONArray("dataList");
+                    for (int i=0;i<array.length();i++){
+                        JSONObject object=array.getJSONObject(i);
+                        NewsItem item=new NewsItem(object.getString("newsId"),
+                                object.getString("title"),object.getString("publishTime"),
+                                object.getString("authorName"),object.getString("filePath"));
+                        list.add(item);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void mainThread() {
+                showRecycler();
+            }
+        },this);
     }
 
     private class LoadTask extends AsyncTask<URL,Integer,Void>{
@@ -160,18 +291,19 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            showRecycler();
         }
     }
 
     //配置并显示列表
     public void showRecycler(){
         hideProgress();
-        ScienceAdapter adapter=new ScienceAdapter(list,this);
-        adapter.setLisenter(new ScienceAdapter.OnItenClickListener() {
+        adapter=new NewsAdapter(list,this);
+        adapter.setLisenter(new NewsAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(ScienceActivity.this,NewsDetailActivity.class));
+                Intent intent=new Intent(ScienceActivity.this,NewsDetailActivity.class);
+                intent.putExtra("newsId",list.get(position).getNewsId());
+                startActivity(intent);
             }
 
             @Override
@@ -179,9 +311,8 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
 
             }
         });
-        rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
-        rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
+
         rv.setVisibility(View.VISIBLE);
     }
 }
