@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -16,7 +17,9 @@ import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.ui.EaseChatFragment;
+import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EasyUtils;
+import com.hyphenate.util.HanziToPinyin;
 
 import java.security.Permission;
 
@@ -33,7 +36,7 @@ public class chat extends AppCompatActivity {
         activityInstance = this;
 //        toChatUsername = getIntent().getExtras().getString("userId");
         //得到对方账号
-        toChatUsername="yuanshuai1";
+        toChatUsername="text";
         ((MyApplication) getApplication()).init();
         init();
         EaseUI.getInstance().setSettingsProvider(new EaseUI.EaseSettingsProvider() {
@@ -112,10 +115,10 @@ public class chat extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EMClient.getInstance().login("yuanshuai", "yuanshuai", new EMCallBack() {
+                EMClient.getInstance().login("android", "android", new EMCallBack() {
                     @Override
                     public void onSuccess() {
-
+                        Log.e("login","success");
                     }
 
                     @Override
@@ -128,6 +131,12 @@ public class chat extends AppCompatActivity {
 
                     }
                 });
+//                try {
+//                    EMClient.getInstance().contactManager().addContact("text", "hello");
+//                }
+//                catch (HyphenateException e){
+//                    e.printStackTrace();
+//                }
             }
         }).start();
     }

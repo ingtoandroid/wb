@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -48,12 +49,12 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
 public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Callback  {
 
-    private SurfaceView videoSurface;
+    private static SurfaceView videoSurface;
     private TextView pinglun;
     private TextView tiwen;
     private Button comment;
-    private MediaPlayer player;
-    private VideoControllerView controller;
+    public static MediaPlayer player;
+    public static VideoControllerView controller;
     private int screenWidth;
     private int screenHeight;
     private int width;
@@ -138,6 +139,9 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         id=getIntent().getStringExtra("id");
         initView();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        WindowManager wm = this.getWindowManager();
+        screenWidth=this.getWindowManager().getDefaultDisplay().getWidth();
+        screenHeight=this.getWindowManager().getDefaultDisplay().getHeight();
         initEvent();
     }
     private void initView(){
@@ -159,8 +163,8 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                Toast.makeText(VideoDetail.this, "propare", Toast.LENGTH_SHORT).show();
                 player.start();
+                player.pause();
             }
         });
         screenWidth=getWindowManager().getDefaultDisplay().getWidth();
@@ -178,9 +182,9 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
             @Override
             public void onResponse(Response response) throws IOException {
                 String string=response.body().string();
-                try {
-                    JSONObject jsonObject = new JSONObject(string);
-                    uri=jsonObject.getString("filePath");
+
+                    //JSONObject jsonObject = new JSONObject(string);
+                    //uri=jsonObject.getString("filePath");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -202,10 +206,10 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                         }
                     });
 
-                }
-                catch (JSONException e){
-                    e.printStackTrace();
-                }
+
+//                catch (JSONException e){
+//                    e.printStackTrace();
+//                }
             }
         }
         );
@@ -249,18 +253,22 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
 
     /*全屏*/
     public void full(){
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        scrollView.scrollTo(0,300);
-        setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
-        width=container.getWidth();
-        height=container.getHeight();
-        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(screenHeight,screenWidth);
-        container.setLayoutParams(layoutParams);
-
-        scrollView.fullScroll(View.FOCUS_UP);
-
-        isFull=true;
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        scrollView.scrollTo(0,300);
+//        setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
+//        width=container.getWidth();
+//        height=container.getHeight();
+//        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(screenHeight,screenWidth);
+//        container.setLayoutParams(layoutParams);
+//
+//        scrollView.fullScroll(View.FOCUS_UP);
+//
+//        isFull=true;
+        controller.setmShowing(false);
+        container.removeView(controller);
+        Intent intent=new Intent(VideoDetail.this,FullscreenVideo.class);
+        startActivity(intent);
     }
     /*推出全屏*/
     public void quitFull(){

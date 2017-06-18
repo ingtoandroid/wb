@@ -42,8 +42,8 @@ import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
@@ -66,6 +66,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.
@@ -118,10 +119,10 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_FILE=5;
     static final int ITEM_VOICE=6;
     static final int ITEM_VIDEO_CALL=7;
-    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location ,R.string.attach_video,R.string.attach_file,R.string.attach_voice_call,R.string.video_call};
+    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location ,R.string.attach_video,R.string.attach_file};
     protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector,R.drawable.ease_chat_video_call_receive,R.drawable.ease_chat_item_file,R.drawable.ease_chat_voice_call_self,R.drawable.ease_chat_video_call_self };
-    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_VIDEO,ITEM_FILE,ITEM_VOICE,ITEM_VIDEO_CALL };
+            R.drawable.ease_chat_location_selector,R.drawable.em_chat_video_selector,R.drawable.em_chat_file_selector };
+    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_VIDEO,ITEM_FILE };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
 

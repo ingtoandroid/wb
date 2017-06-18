@@ -20,8 +20,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -71,7 +73,10 @@ public class VideoControllerView extends FrameLayout {
     private ImageButton         mPrevButton;
     private ImageButton         mFullscreenButton;
     private ImageButton         pinglun;
+    private ImageButton         tiwen;
     private Handler mHandler = new MessageHandler(this);
+    private RelativeLayout.LayoutParams layoutParams=null;
+    private RelativeLayout.LayoutParams layoutParams2=null;
 
     public VideoControllerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -89,6 +94,10 @@ public class VideoControllerView extends FrameLayout {
         mUseFastForward = useFastForward;
         manager = (AudioManager) getContext().getSystemService(AUDIO_SERVICE);
         max=manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        layoutParams=new RelativeLayout.LayoutParams(150,150);
+        layoutParams2=new RelativeLayout.LayoutParams(300,300);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+        layoutParams2.addRule(RelativeLayout.CENTER_IN_PARENT);
         Log.i(TAG, TAG);
     }
 
@@ -148,6 +157,8 @@ public class VideoControllerView extends FrameLayout {
     private void initControllerView(View v) {
         imageButton=(ImageButton)v.findViewById(R.id.play);
         pinglun=(ImageButton)v.findViewById(R.id.pinglun);
+        tiwen=(ImageButton)v.findViewById(R.id.tiwen);
+        pinglun.setOnClickListener(tiwenListener);
         pinglun.setOnClickListener(pinglunListener);
         back=(ImageButton)v.findViewById(R.id.back);
         back.setOnClickListener(backListener);
@@ -270,10 +281,14 @@ public class VideoControllerView extends FrameLayout {
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     Gravity.BOTTOM
             );
-            if(!mPlayer.isFullScreen())
+            if(!mPlayer.isFullScreen()) {
                 topContain.setVisibility(INVISIBLE);
-            else
+                imageButton.setLayoutParams(layoutParams2);
+            }
+            else {
                 topContain.setVisibility(VISIBLE);
+                imageButton.setLayoutParams(layoutParams);
+            }
             mAnchor.addView(this, tlp);
             mShowing = true;
         }
@@ -462,6 +477,26 @@ public class VideoControllerView extends FrameLayout {
             }
         }
     };
+    private OnClickListener tiwenListener=new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(mPlayer.isFullScreen())
+            {
+                AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+                View view=LayoutInflater.from(getContext()).inflate(R.layout.dialog2,null);
+                EditText editText=(EditText)view.findViewById(R.id.input);
+                Button commit=(Button)view.findViewById(R.id.commit);
+                builder.setView(view);
+                AlertDialog alertDialog=builder.create();
+                Window window=alertDialog.getWindow();
+                WindowManager.LayoutParams layoutParams=window.getAttributes();
+                layoutParams.alpha=0.6f;
+                window.setAttributes(layoutParams);
+                alertDialog.show();
+            }
+
+        }
+    };
 
     public void updatePausePlay() {
         if (mRoot == null || mPauseButton == null || mPlayer == null) {
@@ -469,11 +504,13 @@ public class VideoControllerView extends FrameLayout {
         }
 
         if (mPlayer.isPlaying()) {
-            //mPauseButton.setImageResource(R.drawable.ic_media_pause);
-            //imageButton.setImageResource(R.drawable.play);
+            imageButton.setVisibility(INVISIBLE);
+            mPauseButton.setBackgroundResource(R.drawable.small_pause);
+            imageButton.setBackgroundResource(R.drawable.play);
         } else {
-            //mPauseButton.setImageResource(R.drawable.ic_media_play);
-            //imageButton.setImageResource(R.drawable.stop);
+            imageButton.setVisibility(VISIBLE);
+            mPauseButton.setBackgroundResource(R.drawable.small_play);
+            imageButton.setBackgroundResource(R.drawable.play);
         }
     }
 
@@ -484,9 +521,13 @@ public class VideoControllerView extends FrameLayout {
 
         if (mPlayer.isFullScreen()) {
             //mFullscreenButton.setImageResource(R.drawable.ic_media_fullscreen_shrink);
+            mFullscreenButton.setBackgroundResource(R.drawable.tuichuquanping);
+            imageButton.setLayoutParams(layoutParams2);
         }
         else {
             //mFullscreenButton.setImageResource(R.drawable.ic_media_fullscreen_stretch);
+            mFullscreenButton.setBackgroundResource(R.drawable.quanping);
+            imageButton.setLayoutParams(layoutParams);
         }
     }
 
@@ -723,5 +764,9 @@ public class VideoControllerView extends FrameLayout {
                     break;
             }
         }
+    }
+
+    public void setmShowing(boolean mShowing) {
+        this.mShowing = mShowing;
     }
 }

@@ -44,6 +44,7 @@ public class Net {
     }
     public Call shipinDetail(String  id){
         String url=URLString.shipin_detail+"?"+"videoId="+id;
+        url="http://www.baidu.com";
         return get(url);
     }
     public Call getComment(String id){

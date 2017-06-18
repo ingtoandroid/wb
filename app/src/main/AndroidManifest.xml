@@ -23,8 +23,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:allowBackup="true"
         android:name=".tool.MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -32,7 +32,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1140170613115884#ysapp1" />
+            android:value="1168170607178561#yuejiansports" />
         <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -59,7 +59,13 @@
         <activity android:name=".Activity.Quiz" />
         <activity
             android:name=".Activity.VideoDetail"
-            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
+            android:configChanges="keyboardHidden|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity" />
@@ -68,7 +74,7 @@
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" />
         <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity" />
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity" />
         <activity android:name=".Activity.PersonalActivity" />
@@ -80,19 +86,12 @@
         <activity android:name=".Activity.MyPointsActivity" />
         <activity android:name=".Activity.MyReservationActivity" />
         <activity android:name=".Activity.Professor" />
-        <activity android:name=".Activity.ShipinActivity"></activity>
+        <activity android:name=".Activity.ShipinActivity" />
         <activity android:name=".Activity.MyMessageActivity" />
-        <activity android:name=".Activity.ChatActivity">
+        <activity android:name=".Activity.ChatActivity"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity" />
+        <activity android:name=".Activity.chat"></activity>
 
-        </activity>
-        <activity android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"></activity>
-        <activity android:name=".Activity.chat">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.ys.android.fileprovider"
@@ -100,8 +99,14 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <activity
+            android:name=".Activity.FullscreenVideo"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_fullscreen_video"
+            android:theme="@style/FullscreenTheme"></activity>
     </application>
 
 </manifest>
