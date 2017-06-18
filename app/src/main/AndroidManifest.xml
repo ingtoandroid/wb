@@ -65,11 +65,6 @@
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.ProfessorDetailActivity" />
         <activity android:name=".Activity.LoginActivity">
@@ -86,7 +81,13 @@
         <activity android:name=".Activity.Professor" />
         <activity android:name=".Activity.ShipinActivity" />
         <activity android:name=".Activity.MyMessageActivity" />
-        <activity android:name=".Activity.ExpertOrderActivity" />
+        <activity android:name=".Activity.ExpertOrderActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity.MessageDetailedActivity" />
         <activity android:name=".Activity.QuestionDetailedActivity"></activity>
     </application>
