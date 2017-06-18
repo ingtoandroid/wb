@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.example.a.app10.Adapter.MyClassAdapter;
@@ -13,6 +14,7 @@ import com.example.a.app10.R;
 import com.example.a.app10.bean.MyClassItem;
 import com.example.a.app10.tool.KopItemDecoration;
 import com.example.a.app10.tool.MyInternet;
+import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
@@ -22,6 +24,8 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import q.rorbin.badgeview.QBadgeView;
 
 public class MyClassActivity extends ToolBarBaseActivity {
 
@@ -38,6 +42,7 @@ public class MyClassActivity extends ToolBarBaseActivity {
     @Override
     protected void init(Bundle savedInstanceState) {
         hideDrawer();
+        userId= Net.getPersonID();
         setMyTitle("我的课程");
         setLeftButton(R.drawable.back, new MyOnClickListener() {
             @Override
@@ -55,6 +60,9 @@ public class MyClassActivity extends ToolBarBaseActivity {
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();
         client=new OkHttpClient();
+
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
 
         new LoadTask().execute(null,null,null);
     }
@@ -93,7 +101,6 @@ public class MyClassActivity extends ToolBarBaseActivity {
     }
 
     private void getData() {
-        userId="9629e659-b37a-417f-90cd-1e3ffea7057b";
         String url= MyInternet.MAIN_URL+"kc/kc_new_type_list?infoId="+userId;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override

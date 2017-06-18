@@ -25,7 +25,7 @@
             <TextView
                 android:maxLines="2"
                 android:textSize="15sp"
-                android:textColor="#000"
+                android:textColor="@color/stringDark"
                 android:gravity="center_vertical"
                 android:text="2016健身计划"
                 android:id="@+id/tvTitle"
@@ -33,6 +33,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
             <TextView
+                android:textColor="@color/stringCenter"
                 android:gravity="center_vertical"
                 android:text="刚刚"
                 android:id="@+id/tvTime"
@@ -40,6 +41,7 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
         <TextView
+            android:textColor="@color/stringLight"
             android:gravity="center_vertical"
             android:text="体育部"
             android:id="@+id/tvDepart"

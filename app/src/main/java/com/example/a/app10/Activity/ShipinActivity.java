@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
@@ -30,6 +31,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import q.rorbin.badgeview.QBadgeView;
+
 public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
     private RecyclerView rv;
@@ -44,6 +47,8 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
     @Override
     protected void init(Bundle savedInstanceState) {
         hideDrawer();
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
         setMyTitle("视频列表");
         setLeftButton(R.drawable.back, new MyOnClickListener() {
             @Override
@@ -51,7 +56,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message, "消息", new MyOnClickListener() {
+        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
 

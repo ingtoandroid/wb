@@ -89,6 +89,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         courseId =getIntent().getStringExtra("courseId");
+        userid=Net.getPersonID();
 
         init();
     }

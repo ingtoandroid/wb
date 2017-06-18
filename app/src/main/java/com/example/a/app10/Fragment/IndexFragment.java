@@ -16,7 +16,7 @@ import com.example.a.app10.Activity.ClassActivity;
 import com.example.a.app10.Activity.NewsActivity;
 import com.example.a.app10.Activity.Professor;
 import com.example.a.app10.Activity.ProfessorDetailActivity;
-import com.example.a.app10.Activity.Quiz;
+import com.example.a.app10.Activity.QuickQuestionActivity;
 import com.example.a.app10.Activity.ScienceActivity;
 import com.example.a.app10.Activity.ShipinActivity;
 import com.example.a.app10.Activity.VideoDetail;
@@ -97,7 +97,7 @@ public class IndexFragment extends Fragment {
         quick_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), Quiz.class);
+                Intent intent=new Intent(getContext(), QuickQuestionActivity.class);
                 startActivity(intent);
             }
         });

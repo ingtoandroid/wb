@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <TextView
+                android:textColor="#fff"
                 android:layout_gravity="bottom"
                 android:background="#bbb"
                 android:id="@+id/tvFinish"
@@ -31,8 +32,8 @@
         android:layout_marginLeft="10dp"
         android:orientation="vertical">
         <TextView
+            android:textColor="@color/stringDark"
             android:textSize="15sp"
-            android:textColor="#000"
             android:gravity="center_vertical"
             android:text="2016健身计划"
             android:id="@+id/tvTitle"
@@ -40,6 +41,7 @@
             android:layout_weight="1"
             android:layout_height="0dp" />
         <TextView
+            android:textColor="@color/stringLight"
             android:gravity="center_vertical"
             android:text="体育部"
             android:id="@+id/tvNumber"

@@ -36,15 +36,6 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"></LinearLayout>
-                <Button
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/search"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp" />
-                <Button
-                    android:background="@drawable/message"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -124,16 +115,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@drawable/class1"
+                        android:src="@drawable/class3"
                         android:layout_width="15dp"
                         android:layout_height="15dp" />
                     <TextView
+                        android:textColor="@color/stringDark"
                         android:layout_marginLeft="10dp"
                         android:text="课程介绍"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <TextView
+                    android:textColor="@color/stringCenter"
                     android:id="@+id/tvCourseContent"
                     android:lineSpacingExtra="5dp"
                     android:textSize="15sp"
@@ -164,16 +157,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@drawable/class2"
+                        android:src="@drawable/class1"
                         android:layout_width="15dp"
                         android:layout_height="15dp" />
                     <TextView
+                        android:textColor="@color/stringDark"
                         android:layout_marginLeft="10dp"
                         android:text="费用说明"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <TextView
+                    android:textColor="@color/stringCenter"
                     android:id="@+id/tvFee"
                     android:lineSpacingExtra="5dp"
                     android:textSize="15sp"
@@ -204,16 +199,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ImageView
-                        android:src="@drawable/class3"
+                        android:src="@drawable/class2"
                         android:layout_width="15dp"
                         android:layout_height="15dp" />
                     <TextView
+                        android:textColor="@color/stringDark"
                         android:layout_marginLeft="10dp"
                         android:text="风险说明"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <TextView
+                    android:textColor="@color/stringCenter"
                     android:id="@+id/tvRisk"
                     android:lineSpacingExtra="5dp"
                     android:textSize="15sp"

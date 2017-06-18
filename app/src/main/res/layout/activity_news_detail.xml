@@ -30,7 +30,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/tvTitle"
-                android:textColor="@color/black"
+                android:textColor="@color/stringDark"
                 android:textSize="25sp"
                 android:layout_marginTop="15dp"
                 android:text="对接“一带一路”推进国际合作办学"
@@ -42,19 +42,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:textColor="@color/stringLight"
                     android:id="@+id/tvAuthor"
                     android:text="发布者：宣传部      05/27"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:textColor="@color/stringLight"
                     android:id="@+id/tvTotal"
                     android:text="浏览1616846次"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <TextView
-                android:textColor="@color/black"
+                android:textColor="@color/stringDark"
                 android:textSize="20sp"
                 android:text="山东体育学院爱马人国际学院"
                 android:gravity="center"
