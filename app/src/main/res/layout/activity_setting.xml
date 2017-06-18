@@ -4,24 +4,28 @@
     android:id="@+id/activity_main5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="35dp"
-    android:paddingTop="35dp"
     tools:context="com.example.a.app10.Activity.Main1Activity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/set_newpassword_title">
-
-        <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="30dp"
-            android:background="@drawable/back" />
+        android:layout_height="75dp"
+        android:id="@+id/set_newpassword_title"
+        android:gravity="bottom">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/backblack"
+            android:id="@+id/back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/setting"
             android:textColor="#000000"
             android:textSize="25sp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 

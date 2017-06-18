@@ -54,8 +54,8 @@ public class MyCourse {
         this.state = state;
     }
 
-    private String modelName;
-    private String courseId;
+    private String modelName;//图片
+    private String courseId;//id
     private String courseTitle;
     private String startData;
     private String enterId;

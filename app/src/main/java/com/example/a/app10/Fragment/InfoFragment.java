@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.a.app10.Activity.ClassDetailActivity;
+import com.example.a.app10.Activity.MessageReminderActivity;
 import com.example.a.app10.Activity.SettingActivity;
 import com.example.a.app10.Activity.ModifyDataActivity;
 import com.example.a.app10.Activity.QuestionActivity;
@@ -43,6 +45,7 @@ public class InfoFragment extends Fragment {
     private RelativeLayout my_question;
     private TextView  modify_data;
     private Button cog;
+    private Button messageMinder;
     public InfoFragment() {
         // Required empty public constructor
     }
@@ -146,6 +149,15 @@ public class InfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        messageMinder = (Button) view.findViewById(R.id.speech_bubbles);
+        messageMinder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), MessageReminderActivity.class);
                 startActivity(intent);
             }
         });

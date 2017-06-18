@@ -20,7 +20,7 @@ public class URLString {
     final static public String login=path+"user/login";
     final static public String register=path+"user/register";
     final static public String send_code=path+"user/send_code";
-    final static public String reset_pwd = path+"user/pwd_reset";
+        final static public String reset_pwd = path+"user/pwd_reset";
 
     //myAPI
     final static public String integral_history_list = path + "jifen/jifen_history_list";
@@ -42,4 +42,11 @@ public class URLString {
     final static public String PERSONAL_INFO = path+"info/info_history_list";
     final static public String MODIFY_HEADIMAGE = path+"associator";
     final static public String MODIFY_INFO = path+"associator/save_associator_message";
+
+    //courseAPI
+    final static public String message_list = path+"message/message_list";
+    final static public String deleteMessage = path+"message/deleateMessage";
+    final static public String quickQuestion = path+"question/quickQuestion";
+    final static public String question_list = path+"question/question_list";
 }
+

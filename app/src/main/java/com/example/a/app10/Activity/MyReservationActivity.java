@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a.app10.R;
@@ -31,12 +32,21 @@ public class MyReservationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<MyReservation> datas;
+    private ImageView back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_my_reservation);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        back = (ImageView)findViewById(R.id.back_reservation);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         datas = new ArrayList<>();
         initData();
 //        MyReservation myReservation = new MyReservation();
