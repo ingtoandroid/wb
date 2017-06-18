@@ -1,6 +1,8 @@
 package com.example.a.app10.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -78,11 +80,26 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        SharedPreferences sharedPreferences=getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        String name=sharedPreferences.getString("id","-1");
+        String pwd=sharedPreferences.getString("pwd","-1");
+        if(pwd.equals("-1")){
+            ed_password.setText("");
+        }
+        else
+        {
+            if(name.equals("-1")){
+                ed_username.setText("");
+            }
+            else
+                ed_username.setText(name);
+        }
+
     }
 
     private void checkOutToLogin(){
-        String username = ed_username.getText().toString().trim();
-        String password = ed_password.getText().toString().trim();
+        final String username = ed_username.getText().toString().trim();
+        final String password = ed_password.getText().toString().trim();
 
         if(username.length() > 0 && password.length() > 0){
 
@@ -121,7 +138,11 @@ public class LoginActivity extends AppCompatActivity {
                             }catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
+                            SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sp.edit();
+                            editor.putString("id", username);
+                            editor.putString("pwd", password);
+                            editor.commit();
                             Intent intent = new Intent(LoginActivity.this,Main1Activity.class);
                             startActivity(intent);
                         }

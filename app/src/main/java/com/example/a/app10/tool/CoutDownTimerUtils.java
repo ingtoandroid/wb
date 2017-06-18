@@ -1,4 +1,4 @@
-package com.example.a.internet.Utils;
+package com.example.a.app10.tool;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
@@ -6,8 +6,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.widget.TextView;
-
-import com.example.a.internet.R;
+;import com.example.a.app10.R;
 
 /**
  * Created by 12917 on 2017/3/14.

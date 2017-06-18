@@ -55,22 +55,17 @@
         </receiver>
 
         <activity android:name=".Activity.Main1Activity" />
-        <activity android:name=".Activity.Quiz" />
         <activity
             android:name=".Activity.VideoDetail"
             />
         <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity"></activity>
-        <activity android:name=".Activity.MyClassActivity" />
         <activity android:name=".Activity.NewsActivity" />
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" />
-        <activity android:name=".Activity.ProfessorActivity">
-        </activity>
         <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity" />
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity" />
@@ -89,6 +84,9 @@
         <activity android:name=".Activity.MessageDetailedActivity" />
         <activity android:name=".Activity.QuestionDetailedActivity" />
         <activity android:name=".Activity.MessageReminderActivity" />
+        <activity android:name=".Activity.FullscreenVideo"
+            android:configChanges="orientation|keyboard|screenSize">
+        </activity>
         <activity android:name=".Activity.QuickQuestionActivity"></activity>
         <activity android:name=".Activity.SplashActivity">
             <intent-filter>
@@ -97,7 +95,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MessageReminderActivity" />
         <activity android:name=".Activity.Comment">
         </activity>
     </application>

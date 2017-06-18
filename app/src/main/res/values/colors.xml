@@ -14,7 +14,6 @@
     <color name="quiz_bg">#59d8af</color>
     <color name="quiz_title">#fffeff</color>
     <color name="quiz_bar_bg">#00000000</color>
-    <color name="main">#20e274</color>
     <color name="main">#5ee0a4</color>
     <color name="video_bar_text">#fefffd</color>
     <color name="video_bottom_bg">#f0f0f0</color>
@@ -32,6 +31,9 @@
     <color name="stringDark">#323232</color>
     <color name="stringCenter">#646464</color>
     <color name="stringLight">#909090</color>
+    <color name="black_overlay">#000000</color>
+    <color name="code_press">#c0c0c0</color>
+    <color name="code_normal">#ff9933</color>
     <!--
 1.tabIndicatorColor：TabLayout指示器的颜色
 2.tabTextColor: tab默认字体的颜色
