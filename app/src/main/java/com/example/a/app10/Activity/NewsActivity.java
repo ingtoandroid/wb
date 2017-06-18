@@ -5,15 +5,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
 
 import com.example.a.app10.Adapter.NewsAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MessageReminder;
 import com.example.a.app10.bean.NewsItem;
 import com.example.a.app10.tool.KopItemDecoration;
 import com.example.a.app10.tool.MyInternet;
+import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
@@ -23,6 +26,8 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import q.rorbin.badgeview.QBadgeView;
 
 public class NewsActivity extends ToolBarBaseActivity{
 
@@ -46,10 +51,10 @@ public class NewsActivity extends ToolBarBaseActivity{
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message, "消息", new MyOnClickListener() {
+        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-
+                startActivity(new Intent(NewsActivity.this, MessageReminder.class));
             }
         });
 
@@ -58,6 +63,9 @@ public class NewsActivity extends ToolBarBaseActivity{
         rv= (RecyclerView) findViewById(R.id.rv);
         client=new OkHttpClient();
         hideDrawer();
+
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
 
         new LoadTask().execute(null,null,null);
 

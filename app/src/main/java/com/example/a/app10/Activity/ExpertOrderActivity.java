@@ -29,6 +29,7 @@ import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ProfessorItem;
 import com.example.a.app10.tool.MyInternet;
+import com.example.a.app10.tool.Net;
 import com.example.a.app10.view.MyOrderList;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -88,6 +89,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
         toolbar.setNavigationIcon(R.drawable.back);//设置标题栏
 
         professor= (ProfessorItem) getIntent().getExtras().get("professor");
+        userid= Net.getPersonID();
         init();
         new LoadTask().execute(null,null,null);
     }

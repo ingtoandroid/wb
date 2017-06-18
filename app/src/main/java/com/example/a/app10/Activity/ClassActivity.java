@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.example.a.app10.Adapter.ClassAdapter;
 import com.example.a.app10.Adapter.ClassItem;
 import com.example.a.app10.Adapter.VideoAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MessageReminder;
 import com.example.a.app10.bean.ShipinItem;
 import com.example.a.app10.tool.MyInternet;
 import com.example.a.app10.tool.Net;
@@ -32,12 +34,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import q.rorbin.badgeview.QBadgeView;
+
 public class ClassActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
     private RecyclerView rv;
     private List<ClassItem> list;
     private Button btnClub, btnPersonal;
     private boolean isClub= true;
+    private View item1;
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;
@@ -53,10 +58,10 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message, "消息", new MyOnClickListener() {
+        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-
+                startActivity(new Intent(ClassActivity.this, MessageReminder.class));
             }
         });
 
@@ -67,6 +72,9 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         btnClub.setOnClickListener(this);
         btnPersonal = (Button) findViewById(R.id.btnPersonal);
         btnPersonal.setOnClickListener(this);
+
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
 
         new LoadTask().execute(1,null,null);
     }

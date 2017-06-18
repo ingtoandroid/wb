@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 
 import com.example.a.app10.Adapter.NewsAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MessageReminder;
 import com.example.a.app10.bean.NewsItem;
 import com.example.a.app10.tool.KopItemDecoration;
 import com.example.a.app10.tool.MyInternet;
+import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
@@ -26,6 +29,8 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import q.rorbin.badgeview.QBadgeView;
 
 public class ScienceActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
@@ -61,12 +66,15 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message, "消息", new MyOnClickListener() {
+        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-                //openDrawer();
+                startActivity(new Intent(ScienceActivity.this, MessageReminder.class));
             }
         });
+
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
 
         rv= (RecyclerView) findViewById(R.id.rv);
         for (int i = 0; i< NUMBERBUTTONS; i++){
