@@ -55,8 +55,13 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        initData();
-
+//        initData();
+        datas = new ArrayList<>();
+        MyData myData = new MyData();
+        myData.setContent("123");
+        myData.setHeadImageURL("233");
+        myData.setUsername("333");
+        datas.add(myData);
         recyclerView = (RecyclerView)findViewById(R.id.question_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());

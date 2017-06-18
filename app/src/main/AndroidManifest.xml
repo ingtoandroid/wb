@@ -65,15 +65,15 @@
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" >
+
+        </activity>
+        <activity android:name=".Activity.ProfessorDetailActivity" />
+        <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.LoginActivity">
-
         </activity>
         <activity android:name=".Activity.PersonalActivity" />
         <activity android:name=".Activity.ResetPwdActivity" />

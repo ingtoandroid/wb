@@ -24,16 +24,11 @@ public class Net {
     private static String username = "";
     private static String signature = "";
     private static String sex = "";
-
-    public static int getMegsSize() {
-        return megsSize;
-    }
-
-    public static void setMegsSize(int megsSize) {
-        Net.megsSize = megsSize;
-    }
-
     private static int megsSize = 0;
+
+
+
+
     //single
     private Net(){
         okHttpClient=new OkHttpClient();
@@ -123,6 +118,14 @@ public class Net {
 
     public static void setSignature(String signature) {
         Net.signature = signature;
+    }
+
+    public static int getMegsSize() {
+        return megsSize;
+    }
+
+    public static void setMegsSize(int megsSize) {
+        Net.megsSize = megsSize;
     }
 
     public OkHttpClient getOkHttpClient() {

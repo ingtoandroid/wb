@@ -32,7 +32,16 @@ public class MyMessage {
         this.content = content;
     }
 
+    public String getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(String messageID) {
+        this.messageID = messageID;
+    }
+
     private String headImageURL;
     private String username = "";
     private String content;
+    private String messageID;
 }

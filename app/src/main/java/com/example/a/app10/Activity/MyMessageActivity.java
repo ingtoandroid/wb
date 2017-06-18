@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -45,18 +46,18 @@ public class MyMessageActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        initDatas();
+//        initDatas();
 
-//        datas = new ArrayList<>();
+        datas = new ArrayList<>();
 
-//        MyMessage myMessage = new MyMessage();
-//        myMessage.setUsername("nihao");
-//        myMessage.setContent("hello");
-//        MyMessage myMessage1 = new MyMessage();
-//        myMessage1.setUsername("a");
-//        myMessage1.setContent("a");
-//        datas.add(myMessage);
-//        datas.add(myMessage1);
+        MyMessage myMessage = new MyMessage();
+        myMessage.setUsername("nihao");
+        myMessage.setContent("hello");
+        MyMessage myMessage1 = new MyMessage();
+        myMessage1.setUsername("a");
+        myMessage1.setContent("a");
+        datas.add(myMessage);
+        datas.add(myMessage1);
 
         recyclerView = (RecyclerView)findViewById(R.id.message_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -88,6 +89,7 @@ public class MyMessageActivity extends AppCompatActivity {
                     JSONArray jsonArray = jsonObject.getJSONArray("jifen_new_type_list");
                     for(int i = 0; i<jsonArray.length(); i++){
                         MyMessage myMessage = new MyMessage();
+                        myMessage.setMessageID(((JSONObject)jsonArray.get(i)).getString("questionId"));
                         myMessage.setContent(((JSONObject)jsonArray.get(i)).getString("questionContent"));
                         myMessage.setHeadImageURL(((JSONObject)jsonArray.get(i)).getString("filePath"));
                         datas.add(myMessage);
@@ -116,12 +118,20 @@ public class MyMessageActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyAdapter.MyViewHolder holder, final int position) {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
             String str_url = URLString.path_head_image+datas.get(position).getHeadImageURL();
 //            String str_url = URLString.path_head_image+"lemon/fileDownload?fileName=associator/20170615/1111.png";
             Glide.with(MyMessageActivity.this).load(str_url).into(holder.headImage);
+            holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MyMessageActivity.this,MessageDetailedActivity.class);
+                    intent.putExtra("questionID",datas.get(position).getMessageID());
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -134,13 +144,14 @@ public class MyMessageActivity extends AppCompatActivity {
             TextView usernameText;
             TextView contentText;
             ImageView getInImage;
-
+            RelativeLayout relativeLayout;
             public MyViewHolder(View view){
                 super(view);
                 headImage = (ImageView)view.findViewById(R.id.head_image_message);
                 usernameText = (TextView)view.findViewById(R.id.username_message);
                 contentText = (TextView)view.findViewById(R.id.content_message);
                 getInImage = (ImageView)view.findViewById(R.id.get_into_message);
+                relativeLayout = (RelativeLayout) view.findViewById(R.id.item_messages);
             }
         }
     }

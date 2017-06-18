@@ -97,7 +97,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/about_us_item"
             android:id="@+id/thrid_divid"/>
 
@@ -126,7 +126,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/feedback_item"
             android:id="@+id/fourth_divid"/>
 
@@ -155,7 +155,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/clear_cache_item"
             android:id="@+id/fifth_divid"/>
 
@@ -185,7 +185,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/current_version_item"
             android:id="@+id/sixth_divid"/>
 

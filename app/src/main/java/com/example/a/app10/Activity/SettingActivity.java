@@ -21,12 +21,11 @@ public class SettingActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         init();
-
+        initEvent();
     }
 
     private void init(){
         back = (ImageView)findViewById(R.id.back);
-
     }
 
     private void initEvent(){
@@ -36,6 +35,5 @@ public class SettingActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }
