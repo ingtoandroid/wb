@@ -27,7 +27,7 @@ public class FullscreenVideo extends AppCompatActivity {
     private SurfaceView video;
     private MediaPlayer player;
     private VideoControllerView controller;
-
+    private String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +36,10 @@ public class FullscreenVideo extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
+        id=getIntent().getStringExtra("id");
         player=VideoDetail.player;
         controller=new VideoControllerView(this);
+        controller.setId(id);
         controller.setMediaPlayer(new VideoControllerView.MediaPlayerControl() {
             @Override
             public boolean canPause() {
@@ -96,7 +98,7 @@ public class FullscreenVideo extends AppCompatActivity {
 
             @Override
             public void toggleFullScreen() {
-
+                finish();
             }
         });
         controller.setAnchorView((FrameLayout)findViewById(R.id.full_container));
@@ -120,7 +122,7 @@ public class FullscreenVideo extends AppCompatActivity {
         video.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(FullscreenVideo.this, "aaa", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(FullscreenVideo.this, "aaa", Toast.LENGTH_SHORT).show();
                 controller.show();
             }
         });

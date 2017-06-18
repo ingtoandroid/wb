@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,7 +63,7 @@ public class MyReservationActivity extends AppCompatActivity {
 
     private void initData(){
 //        datas = new ArrayList<>();
-        Call call = Net.getInstance().getMyReservation("6b8c6112-305e-4bb2-991b-b00805669fe0");
+        Call call = Net.getInstance().getMyReservation();
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -113,11 +115,26 @@ public class MyReservationActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             myReservation = datas.get(position);
             holder.item_content_reservation.setText(myReservation.getItem_content_reservation());
             holder.item_username_reservation.setText(myReservation.getItem_username_reservation());
             holder.item_time_reservation.setText(myReservation.getItem_time_reservation());
+            holder.consultation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(MyReservationActivity.this,chat.class);
+                    intent.putExtra("name",datas.get(position).getItem_username_reservation());
+                    startActivity(intent);
+                }
+            });
+            holder.evaluate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(MyReservationActivity.this,Comment.class);
+                    startActivity(intent);
+                }
+            });
 
         }
 
@@ -130,12 +147,16 @@ public class MyReservationActivity extends AppCompatActivity {
             TextView item_content_reservation;
             TextView item_username_reservation;
             TextView item_time_reservation;
-
+            Button consultation;
+            Button evaluate;
             public MyViewHolder(View view) {
                 super(view);
                 item_content_reservation = (TextView) view.findViewById(R.id.item_content_reservation);
                 item_username_reservation = (TextView) view.findViewById(R.id.item_username_reservation);
                 item_time_reservation = (TextView) view.findViewById(R.id.item_time_reservation);
+                consultation=(Button)view.findViewById(R.id.consultation);
+                evaluate=(Button)view.findViewById(R.id.evaluate);
+
             }
         }
     }

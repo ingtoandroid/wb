@@ -9,36 +9,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a.app10.R;
+import com.example.a.app10.bean.ShipinItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by 12917 on 2017/6/3.
  */
 
 public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder> {
-    private ArrayList<HashMap<String,Object>> list;
+    private List<ShipinItem> list;
     private Context context;
     private ItemOnClickListener itemOnClickListener;
-    public ShipinAdapter(Context context) {
+    public ShipinAdapter(Context context,List<ShipinItem> list) {
         super();
-        list=new ArrayList<HashMap<String, Object>>();
+        this.list=list;
         this.context=context;
-        for(int i=0;i<2;i++){
-            HashMap<String,Object> map=new HashMap<String,Object>();
-            map.put("title","Hiit适应性训练");
-            map.put("count","123456");
-            map.put("time","2017.10.10");
-            list.add(map);
-        }
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(list.get(position).get("title").toString());
-        holder.count.setText("已有"+list.get(position).get("count").toString()+"人参加");
-        holder.time.setText(list.get(position).get("time").toString());
+        holder.title.setText(list.get(position).getVideoTitle());
+        holder.count.setText("已有"+list.get(position).getPlayNum().toString()+"人参加");
+        holder.time.setText(list.get(position).getStartDate().toString());
     }
 
     @Override

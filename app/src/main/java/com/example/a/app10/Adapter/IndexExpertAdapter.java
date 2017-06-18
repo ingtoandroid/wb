@@ -9,10 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.ExpertItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by 12917 on 2017/6/2.
@@ -21,26 +24,19 @@ import java.util.HashMap;
 public class IndexExpertAdapter extends RecyclerView.Adapter<IndexExpertAdapter.ViewHolder> {
 
     private IndexExpertAdapter.ItemOnClickListener itemOnClickListener;
-    private  ArrayList<HashMap<String,Object>> list;
+    private  List<ExpertItem> list;
     private Context context;
-    public IndexExpertAdapter(Context context) {
+    public IndexExpertAdapter(Context context, List<ExpertItem> list) {
         super();
         this.context=context;
-        list=new ArrayList<HashMap<String, Object>>();
-        for(int i=0;i<5;i++){
-            HashMap<String,Object> map=new HashMap<String,Object>();
-            map.put("image", BitmapFactory.decodeResource(context.getResources(),R.drawable.expert));
-            map.put("name","Mikie");
-            map.put("type","有氧训练");
-            list.add(map);
-        }
+        this.list=list;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.imageView.setImageBitmap((Bitmap)list.get(position).get("image"));
-        holder.name.setText(list.get(position).get("name").toString());
-        holder.type.setText(list.get(position).get("type").toString());
+        Glide.with(context).load(list.get(position).getImageUrl()).into(holder.imageView);
+        holder.name.setText(list.get(position).getExpertName());
+        holder.type.setText(list.get(position).getExpertArea());
 
     }
 

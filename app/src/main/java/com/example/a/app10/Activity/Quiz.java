@@ -71,7 +71,7 @@ public class Quiz extends AppCompatActivity {
 
     //获取提问内容
     private void getQuestionList(){
-        Call call = Net.getInstance().getQuestionList("562889f7-a858-4a4b-9ed1-70d23a100e95");
+        Call call = Net.getInstance().getQuestionList();
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

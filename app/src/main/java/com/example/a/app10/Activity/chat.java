@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.a.app10.R;
 import com.example.a.app10.tool.MyApplication;
+import com.example.a.app10.tool.Net;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
@@ -34,7 +35,7 @@ public class chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat2);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         activityInstance = this;
-//        toChatUsername = getIntent().getExtras().getString("userId");
+        toChatUsername = getIntent().getExtras().getString("name");
         //得到对方账号
         toChatUsername="text";
         ((MyApplication) getApplication()).init();
@@ -115,15 +116,15 @@ public class chat extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EMClient.getInstance().login("android", "android", new EMCallBack() {
+                EMClient.getInstance().login(Net.getInstance().getUsername(), Net.getHx_pwd(), new EMCallBack() {
                     @Override
                     public void onSuccess() {
-                        Log.e("login","success");
+                        Toast.makeText(chat.this,"success",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(int code, String error) {
-
+                        Toast.makeText(chat.this,""+error,Toast.LENGTH_LONG).show();
                     }
 
                     @Override

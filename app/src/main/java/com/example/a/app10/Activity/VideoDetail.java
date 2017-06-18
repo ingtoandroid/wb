@@ -139,7 +139,6 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         id=getIntent().getStringExtra("id");
         initView();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        WindowManager wm = this.getWindowManager();
         screenWidth=this.getWindowManager().getDefaultDisplay().getWidth();
         screenHeight=this.getWindowManager().getDefaultDisplay().getHeight();
         initEvent();
@@ -182,15 +181,15 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
             @Override
             public void onResponse(Response response) throws IOException {
                 String string=response.body().string();
-
-                    //JSONObject jsonObject = new JSONObject(string);
-                    //uri=jsonObject.getString("filePath");
+                try {
+                    JSONObject jsonObject = new JSONObject(string);
+                    uri = jsonObject.getString("filePath");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                player.setDataSource(VideoDetail.this, Uri.parse("http://www.androidbook.com/akc/filestorage/android/documentfiles/3389/movie.mp4"));
+                                player.setDataSource(VideoDetail.this, Uri.parse(uri));
                                 player.prepare();
 
 
@@ -205,11 +204,12 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                             }
                         }
                     });
+                }
 
 
-//                catch (JSONException e){
-//                    e.printStackTrace();
-//                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
             }
         }
         );
@@ -268,6 +268,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         controller.setmShowing(false);
         container.removeView(controller);
         Intent intent=new Intent(VideoDetail.this,FullscreenVideo.class);
+        intent.putExtra("id",id);
         startActivity(intent);
     }
     /*推出全屏*/

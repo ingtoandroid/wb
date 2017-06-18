@@ -21,9 +21,7 @@
         <item name="colorPrimaryDark">#fff</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
     <dimen name="sicence">25dp</dimen>
-
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>

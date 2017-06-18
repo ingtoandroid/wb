@@ -124,14 +124,15 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="15dp"
-                    android:paddingBottom="15dp">
+                    android:paddingBottom="15dp"
+                    android:id="@+id/index_kepu">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
                         android:background="@drawable/chufang"
-                        android:id="@+id/index_kepu"/>
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -147,14 +148,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="15dp"
-                    android:paddingBottom="15dp">
+                    android:paddingBottom="15dp"
+                    android:id="@+id/index_shipin">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
-                        android:background="@drawable/shipin"
-                        android:id="@+id/index_shipin"/>
+                        android:background="@drawable/shipin" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -170,14 +171,14 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:paddingTop="15dp"
-                    android:paddingBottom="15dp">
+                    android:paddingBottom="15dp"
+                    android:id="@+id/index_ketang">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
-                        android:background="@drawable/ketang"
-                        android:id="@+id/index_ketang"/>
+                        android:background="@drawable/ketang" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -193,14 +194,14 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:paddingTop="15dp"
-                    android:paddingBottom="15dp">
+                    android:paddingBottom="15dp"
+                    android:id="@+id/index_zixun">
 
                     <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:scaleType="fitXY"
-                        android:background="@drawable/zixun"
-                        android:id="@+id/index_zixun"/>
+                        android:background="@drawable/zixun" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
