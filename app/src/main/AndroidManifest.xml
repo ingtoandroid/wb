@@ -52,24 +52,20 @@
         </receiver>
 
         <activity android:name=".Activity.Main1Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.VideoDetail"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".Activity.ClassActivity"></activity>
+        <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
-        <activity android:name=".Activity.MyClassActivity"></activity>
+        <activity android:name=".Activity.MyClassActivity" />
         <activity android:name=".Activity.NewsActivity" />
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
-        <activity android:name=".Activity.ProfessorActivity"></activity>
+        <activity android:name=".Activity.ProfessorActivity" />
         <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.PersonalActivity" />
         <activity android:name=".Activity.ResetPwdActivity" />
         <activity android:name=".Activity.RegisterActivity" />
@@ -81,11 +77,17 @@
         <activity android:name=".Activity.Professor" />
         <activity android:name=".Activity.ShipinActivity" />
         <activity android:name=".Activity.MyMessageActivity" />
-        <activity android:name=".Activity.ExpertOrderActivity"></activity>
+        <activity android:name=".Activity.ExpertOrderActivity" />
         <activity android:name=".Activity.MessageDetailedActivity" />
         <activity android:name=".Activity.QuestionDetailedActivity" />
         <activity android:name=".Activity.MessageReminderActivity" />
-        <activity android:name=".Activity.QuickQuestionActivity">
+        <activity android:name=".Activity.QuickQuestionActivity"></activity>
+        <activity android:name=".Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
