@@ -43,6 +43,8 @@ public class MessageReminderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message_reminder);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+        Net.setMegsSize(0);
+
         deleteText = (TextView)findViewById(R.id.deleteMessage);
         deleteText.setOnClickListener(new View.OnClickListener() {
             @Override

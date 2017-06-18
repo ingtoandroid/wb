@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="10"
-            android:background="@color/expert_bar"
+            android:background="@drawable/backgroundcolor"
             android:paddingTop="10dp">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -23,22 +23,24 @@
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="25dp"
                 android:layout_weight="8"
                 android:gravity="center"
                 android:text="@string/index_string1"
                 android:textSize="20sp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/expert_bar_text"/>
-            <LinearLayout
+            <ImageView
+                android:id="@+id/ivMessage"
+                android:src="@drawable/message_reminder"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"></LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
         </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/professor_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/professor_recyclerview"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </RelativeLayout>

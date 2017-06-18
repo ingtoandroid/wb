@@ -53,12 +53,23 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:gravity="center"
+            <LinearLayout
                 android:layout_marginBottom="10dp"
-                android:text="专家预约时间表"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="30dp">
+                <TextView
+                    android:gravity="center"
+                    android:text="专家预约时间表"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnChooseDate"
+                    android:background="@drawable/choose_time"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
             <include
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,48 +77,35 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView
+        android:id="@+id/cardDetail"
+        android:visibility="gone"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
-                android:id="@+id/llChooseDate"
-                android:orientation="horizontal"
+            <Spinner
+                android:id="@+id/spinner"
                 android:background="@drawable/stroke"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_margin="5dp"
-                    android:text="选择时间"
-                    android:textColor="@color/main"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <View
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"/>
-                <Button
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/data"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp" />
-            </LinearLayout>
-            <TextView
+                android:layout_height="wrap_content"/>
+
+            <EditText
+                android:id="@+id/etTitle"
                 android:layout_marginTop="10dp"
-                android:text="预约标题"
+                android:hint="预约标题"
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginTop="10dp"
-                android:text="这里是详细的预约内容这里是详细的预约内容这里是详细的预约内容"
+            <EditText
+                android:id="@+id/etContent"
+                android:hint="这里是详细的预约内容"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -117,6 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"/>
     <Button
+        android:id="@+id/btnOrder"
         android:text="预约"
         android:textColor="#fff"
         android:textSize="20sp"

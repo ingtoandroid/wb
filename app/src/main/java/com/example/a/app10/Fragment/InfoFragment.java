@@ -21,6 +21,9 @@ import com.example.a.app10.Activity.MyMessageActivity;
 import com.example.a.app10.Activity.MyPointsActivity;
 import com.example.a.app10.Activity.MyReservationActivity;
 import com.example.a.app10.R;
+import com.example.a.app10.tool.Net;
+
+import q.rorbin.badgeview.QBadgeView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,6 +78,7 @@ public class InfoFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -154,6 +158,7 @@ public class InfoFragment extends Fragment {
         });
 
         messageMinder = (Button) view.findViewById(R.id.speech_bubbles);
+        new QBadgeView(getContext()).bindTarget(messageMinder).setBadgeNumber(Net.getMegsSize());
         messageMinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

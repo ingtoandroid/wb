@@ -15,6 +15,7 @@
     <color name="quiz_title">#fffeff</color>
     <color name="quiz_bar_bg">#00000000</color>
     <color name="main">#20e274</color>
+    <color name="main">#5ee0a4</color>
     <color name="video_bar_text">#fefffd</color>
     <color name="video_bottom_bg">#f0f0f0</color>
     <color name="video_string1">#58d0b5</color>
@@ -41,6 +42,4 @@
     <color name="expert_bar">#59d8ab</color>
     <color name="expert_bar_text">#feffff</color>
     <color name="black">#000</color>
-
-    <color name="black_overlay">#66000000</color>
 </resources>

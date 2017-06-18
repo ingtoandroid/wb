@@ -20,6 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a.app10.R;
+import com.example.a.app10.tool.Net;
+
+import q.rorbin.badgeview.QBadgeView;
 
 public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
     private TextView tv;
     private DrawerLayout drawer;
     private ProgressDialog mProgressDialog;
+    private TextView tvLeft;
 
     public interface MyOnClickListener{
         void onClick();
@@ -43,6 +47,7 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
 
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         tv= (TextView) findViewById(R.id.title);
+        tvLeft= (TextView) findViewById(R.id.tvLeft);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);//原默认标题不显示
         //将子活动的布局加载到内容布局中
@@ -100,6 +105,12 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(buttonId);
     }
 
+    protected  void setLeftButton(String buttonText, View.OnClickListener listener){
+        tvLeft.setVisibility(View.VISIBLE);
+        tvLeft.setText(buttonText);
+        tvLeft.setOnClickListener(listener);
+    }
+
     protected void setRightButton(int i,String s,MyOnClickListener rightlistener){
         this.rightId=i;
         this.rightTitle=s;
@@ -143,4 +154,5 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
     protected void closeDrawer(){
         drawer.closeDrawer(GravityCompat.END);
     }
+
 }

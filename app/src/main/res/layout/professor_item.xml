@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp">
                 <TextView
+                    android:textColor="@color/stringCenter"
                     android:id="@+id/tvName"
                     android:textSize="20sp"
                     android:text="蓝色季风"
@@ -40,6 +41,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <TextView
+                android:textColor="@color/stringCenter"
                 android:id="@+id/tvContent"
                 android:text="研究方向：有氧训练"
                 android:gravity="center_vertical"

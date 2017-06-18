@@ -46,7 +46,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         toolbar= (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);//原默认标题不显示
-        toolbar.setNavigationIcon(R.drawable.back);
+        toolbar.setNavigationIcon(R.drawable.backblack);
 
         init();
 
@@ -82,7 +82,7 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.news_toolbar_menu,menu);
+        //getMenuInflater().inflate(R.menu.news_toolbar_menu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -93,7 +93,7 @@ public class NewsDetailActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.item1:
-                Toast.makeText(this,"已点击",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"已点击",Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;

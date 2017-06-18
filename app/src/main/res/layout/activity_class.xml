@@ -7,7 +7,7 @@
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
     android:orientation="vertical"
-    android:background="#fff"
+    android:background="@color/wholebackground"
     tools:context="com.example.a.app10.Activity.ClassActivity">
     <LinearLayout
         android:orientation="horizontal"
@@ -26,6 +26,7 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"></LinearLayout>
         <Button
+            android:textColor="@color/stringLight"
             android:id="@+id/btnPersonal"
             android:background="#fff"
             android:text="私人课程"

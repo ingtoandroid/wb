@@ -16,6 +16,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"/>
         <TextView
+            android:id="@+id/tvMonday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -25,6 +26,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvTuesday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -34,6 +36,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvWendsday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -43,6 +46,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvThursday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -52,6 +56,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvFriday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -61,6 +66,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvSatday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -70,6 +76,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/tvSunday"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="15sp"
@@ -92,7 +99,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:textSize="15sp"
-                android:text="中午"
+                android:text="上午"
                 android:background="@drawable/stroke"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -101,7 +108,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:textSize="15sp"
-                android:text="中午"
+                android:text="下午"
                 android:background="@drawable/stroke"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
@@ -110,7 +117,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:textSize="15sp"
-                android:text="中午"
+                android:text="晚上"
                 android:background="@drawable/stroke"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
