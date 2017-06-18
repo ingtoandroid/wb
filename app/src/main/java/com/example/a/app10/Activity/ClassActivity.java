@@ -132,8 +132,8 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         adapter.setLisenter(new ClassAdapter.OnItenClickListener(){
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent=new Intent(ClassActivity.this,VideoDetail.class);
-                //intent.putExtra("id",list.get(position).getVideoId().toString());
+                Intent intent=new Intent(ClassActivity.this,ClassDetailActivity.class);
+                intent.putExtra("courseId",list.get(position).getCourseId());
                 startActivity(intent);
             }
 

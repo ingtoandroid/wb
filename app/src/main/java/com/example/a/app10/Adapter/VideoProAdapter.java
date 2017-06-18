@@ -8,20 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
-import com.example.a.app10.bean.MyClassItem;
+import com.example.a.app10.bean.VideoProItem;
 
 import java.util.List;
 
 /**
- * Created by lenovo on 2017/6/7.
+ * Created by lenovo on 2017/6/17.
  */
 
-public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.MyViewHolder> {
+public class VideoProAdapter extends RecyclerView.Adapter<VideoProAdapter.MyViewHolder> {
 
-    private List<MyClassItem> list;
+    private List<VideoProItem> list;
     private Context context;
     private OnItenClickListener listener;
 
@@ -35,7 +34,7 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.MyViewHo
         this.listener=lisenter;
     }
 
-    public MyClassAdapter(List<MyClassItem> list, Context context){
+    public VideoProAdapter(List<VideoProItem> list, Context context){
         this.list=list;
         this.context=context;
     }
@@ -43,17 +42,19 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.MyViewHo
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         MyViewHolder holder=new MyViewHolder(LayoutInflater.from(context)
-                .inflate(R.layout.myclass_item,parent,false));
+                .inflate(R.layout.video_pro_item,parent,false));
         return holder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        MyClassItem item=list.get(position);
-        holder.tvTitle.setText(item.getCourseTitle());
-        holder.tvNumber.setText("开课时间："+item.getStartDate());
-        holder.tvFinish.setText(item.getState());
-        Glide.with(context).load("http://192.168.1.129:8080/yjtyms/"+item.getModelName()).into(holder.iv);
+        VideoProItem item=list.get(position);
+        holder.tvTitle.setText(item.getVideoTitle());
+        holder.tvNumber.setText(item.getPlayNum()+"人已参加");
+        holder.tvTime.setText(item.getStartDate());
+        if (item.getImageUrl().length()>1){
+            Glide.with(context).load(item.getImageUrl()).into(holder.iv);
+        }
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,15 +81,17 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.MyViewHo
 
     class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle,tvNumber,tvFinish;
+        TextView tvTitle,tvNumber,tvTime;
         ImageView iv;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tvTitle= (TextView) itemView.findViewById(R.id.tvTitle);
             tvNumber= (TextView) itemView.findViewById(R.id.tvNumber);
-            tvFinish= (TextView) itemView.findViewById(R.id.tvFinish);
+            tvTime= (TextView) itemView.findViewById(R.id.tvTime);
             iv= (ImageView) itemView.findViewById(R.id.image);
         }
     }
+
+
 }

@@ -23,6 +23,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:maxLines="2"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:gravity="center_vertical"
@@ -31,15 +32,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
-
             <TextView
                 android:gravity="center_vertical"
                 android:text="刚刚"
                 android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent" />
         </LinearLayout>
-
         <TextView
             android:gravity="center_vertical"
             android:text="体育部"

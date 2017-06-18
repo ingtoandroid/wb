@@ -27,7 +27,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.MyVi
     private Context context;
     private Resources resources;
     private ProfessorAdapter.OnItenClickListener listener;
-    private int[] gradeImageIds={R.drawable.star1, R.drawable.star2,R.drawable.star3,R.drawable.star4,R.drawable.star5};
+    private int[] gradeImageIds={R.drawable.star0,R.drawable.star1, R.drawable.star2,R.drawable.star3,R.drawable.star4,R.drawable.star5};
 
     public interface OnItenClickListener {
         public void onItemClick(View view, int position);
@@ -58,7 +58,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.MyVi
         holder.tvName.setText(item.getName());
         holder.tvContent.setText(item.getContent());
         Glide.with(context).load(item.getImgUrl()).into(holder.image);
-        holder.ivGrade.setImageBitmap(BitmapFactory.decodeResource(resources,gradeImageIds[item.getGrade()-1]));
+        holder.ivGrade.setImageBitmap(BitmapFactory.decodeResource(resources,gradeImageIds[item.getGrade()]));
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
