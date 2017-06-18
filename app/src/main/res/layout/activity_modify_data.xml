@@ -4,35 +4,40 @@
     android:id="@+id/activity_main6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.a.app10.Activity.Main1Activity">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="75dp"
         android:id="@+id/data_setting_title"
-        android:layout_marginTop="25dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="@drawable/backblack"
+            android:id="@+id/back"
+            android:layout_marginBottom="12dp"
+            android:layout_alignParentBottom="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/data_modification"
+            android:textColor="@color/stringDark"
             android:textSize="20sp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentBottom="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/preservation"
             android:textSize="17sp"
-            android:textColor="@color/textGreen"/>
-    </LinearLayout>
+            android:textColor="@color/textGreen"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/save_info"/>
+    </RelativeLayout>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -42,8 +47,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_below="@+id/first_divid">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/head_image_change_item">
@@ -52,15 +59,22 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/data_modification_item_pidding"
                 android:paddingTop="@dimen/data_modification_item_pidding"
-                android:text="@string/change_headimage" />
-        </LinearLayout>
+                android:text="@string/change_headimage"
+                android:textColor="@color/stringDark"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/head_image"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/dividColor"
             android:id="@+id/second_divid"
             android:layout_below="@+id/head_image_change_item"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,13 +85,17 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/data_modification_item_pidding"
                 android:paddingTop="@dimen/data_modification_item_pidding"
-                android:text="@string/modify_nickname" />
-            <TextView
+                android:text="@string/modify_nickname"
+                android:textColor="@color/stringDark"/>
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="今天有雨"
+                android:textSize="15sp"
                 android:textColor="@color/textGreen"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:background="@null"
+                android:id="@+id/username"/>
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -96,20 +114,24 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/data_modification_item_pidding"
                 android:paddingTop="@dimen/data_modification_item_pidding"
-                android:text="@string/phonenumber"/>
+                android:text="@string/phonenumber"
+                android:textColor="@color/stringDark"/>
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/bind_phonenumber"
+                android:textSize="15sp"
                 android:textColor="@color/text_red"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:background="@null"
+                android:id="@+id/phone_number"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginRight="10dp"/>
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -128,19 +150,22 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/data_modification_item_pidding"
                 android:paddingTop="@dimen/data_modification_item_pidding"
-                android:text="@string/sex"/>
-            <TextView
+                android:text="@string/sex"
+                android:textColor="@color/stringDark"/>
+            <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="男"/>
+                android:text="男"
+                android:textSize="15sp"
+                android:background="@null"
+                android:id="@+id/sex"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
-                android:layout_marginLeft="20dp"/>
-            android:background="@drawable/get_into"
+                android:layout_marginRight="10dp"/>
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -159,19 +184,23 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/data_modification_item_pidding"
                 android:paddingTop="@dimen/data_modification_item_pidding"
-                android:text="@string/city"/>
-            <TextView
+                android:text="@string/city"
+                android:textColor="@color/stringDark"/>
+            <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="济南市"
-                android:textColor="@color/textGreen" />
+                android:textSize="15sp"
+                android:background="@null"
+                android:textColor="@color/textGreen"
+                android:id="@+id/location"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginRight="10dp"/>
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"
@@ -190,18 +219,23 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/data_modification_item_pidding"
                 android:paddingTop="@dimen/data_modification_item_pidding"
-                android:text="签名"/>
-            <TextView
+                android:text="签名"
+                android:textColor="@color/stringDark"/>
+            <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="最多200字"/>
+                android:background="@null"
+                android:text="最多200字"
+                android:textSize="15sp"
+                android:textColor="@color/stringCenter"
+                android:id="@+id/signature"/>
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/get_into"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginRight="10dp"/>
         </LinearLayout>
         <ImageView
             android:layout_width="match_parent"

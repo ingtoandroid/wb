@@ -3,6 +3,7 @@ package com.example.a.app10.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.a.app10.R;
 import com.example.a.app10.tool.Net;
@@ -18,6 +19,7 @@ import org.json.JSONTokener;
 import java.io.IOException;
 
 public class PersonalActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
