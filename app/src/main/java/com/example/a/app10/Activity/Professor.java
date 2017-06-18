@@ -7,13 +7,19 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.a.app10.Adapter.ExpertAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MessageReminder;
+import com.example.a.app10.tool.Net;
+
+import q.rorbin.badgeview.QBadgeView;
 
 public class Professor extends AppCompatActivity {
     private RecyclerView professor;
     private ExpertAdapter expertAdapter;
+    private ImageView ivMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +30,14 @@ public class Professor extends AppCompatActivity {
     }
     private void initViews(){
         professor=(RecyclerView)findViewById(R.id.professor_recyclerview);
+        ivMessage= (ImageView) findViewById(R.id.ivMessage);
+        new QBadgeView(this).bindTarget(ivMessage).setBadgeNumber(Net.getMegsSize());
+        ivMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Professor.this, MessageReminder.class));
+            }
+        });
     }
     private void initEvents(){
         expertAdapter=new ExpertAdapter(Professor.this);

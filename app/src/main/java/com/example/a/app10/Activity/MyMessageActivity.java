@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MessageReminder;
 import com.example.a.app10.bean.MyData;
 import com.example.a.app10.bean.MyMessage;
 import com.example.a.app10.bean.URLString;
@@ -33,11 +34,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import q.rorbin.badgeview.QBadgeView;
+
 public class MyMessageActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<MyMessage> datas;
-    private ImageView back_message;
+    private ImageView back_message,ivMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,14 @@ public class MyMessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        ivMessage= (ImageView) findViewById(R.id.ivMessage);
+        new QBadgeView(this).bindTarget(ivMessage).setBadgeNumber(Net.getMegsSize());
+        ivMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyMessageActivity.this, MessageReminder.class));
             }
         });
     }

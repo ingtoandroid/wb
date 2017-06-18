@@ -139,7 +139,9 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         adapter2.setLisenter(new ClassAdapter.OnItenClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(ProfessorDetailActivity.this,NewsDetailActivity.class));
+                Intent intent=new Intent(ProfessorDetailActivity.this,ClassDetailActivity.class);
+                intent.putExtra("courseId",listClass.get(position).getCourseId());
+                startActivity(intent);
             }
 
             @Override
