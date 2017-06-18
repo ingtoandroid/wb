@@ -117,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Net.setPersonID(jsonObject.getString("personId"));
                                 Net.setHx_pwd(jsonObject.getString("hx_pwd"));
                                 Net.setUsername(jsonObject.getString("username"));
+                                Net.setMegsSize(jsonObject.getInt("megsSize"));
                             }catch (JSONException e) {
                                 e.printStackTrace();
                             }

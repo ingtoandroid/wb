@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -179,6 +180,8 @@ public class ResetPwdActivity extends AppCompatActivity {
                                 Toast.makeText(ResetPwdActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        Intent intent = new Intent(ResetPwdActivity.this,Main1Activity.class);
+                        startActivity(intent);
                     }
                 }
             }

@@ -85,7 +85,8 @@
         <activity android:name=".Activity.ChatActivity" />
         <activity android:name=".Activity.ExpertOrderActivity" />
         <activity android:name=".Activity.MessageDetailedActivity" />
-        <activity android:name=".Activity.QuestionDetailedActivity"></activity>
+        <activity android:name=".Activity.QuestionDetailedActivity" />
+        <activity android:name=".Activity.MessageReminderActivity"></activity>
     </application>
 
 </manifest>

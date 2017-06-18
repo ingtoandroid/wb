@@ -25,6 +25,15 @@ public class Net {
     private static String signature = "";
     private static String sex = "";
 
+    public static int getMegsSize() {
+        return megsSize;
+    }
+
+    public static void setMegsSize(int megsSize) {
+        Net.megsSize = megsSize;
+    }
+
+    private static int megsSize = 0;
     //single
     private Net(){
         okHttpClient=new OkHttpClient();
@@ -141,7 +150,7 @@ public class Net {
 
     public Call resetPwd(String phone,String password,String checkCode){
         String url = URLString.reset_pwd+"?"+"phone="+phone+"&"+"password="+password
-                +"&checkCode="+checkCode;
+                +"&code="+checkCode;
         return get(url);
     }
     public Call getCodeForRegister(String phone){
@@ -231,6 +240,32 @@ public class Net {
     public Call modifyInfo(String personID,String username,String signature,String sex){
         String url = URLString.MODIFY_INFO+"?"+"infoId="+personID+"&"+"nickName="+username
                 +"&"+"signature="+signature+"&"+"sex="+sex;
+        return get(url);
+    }
+
+
+    /*
+    courseAPI
+     */
+
+    public Call getMessageList(String personID){
+        String url = URLString.message_list+"?"+"pageIndex=1"+"&"+"infoId="+personID;
+        return get(url);
+    }
+
+    public Call deleteMessageList(String personID){
+        String url =  URLString.deleteMessage+"?"+"infoId="+personID;
+        return get(url);
+    }
+
+    public Call quickQuestion(String personID,String question){
+        String url = URLString.quickQuestion+"?"+"personId="+personID+"&"
+                +"question=" +question;
+        return get(url);
+    }
+
+    public Call getQuestionList(String personID){
+        String url = URLString.question_list+"?"+"personId="+personID;
         return get(url);
     }
 

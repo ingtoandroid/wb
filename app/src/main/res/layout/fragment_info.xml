@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/head_image"
         android:id="@+id/head_image"/>
     <TextView
@@ -102,6 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/integral"
+                    android:textColor="@color/stringCenter"
                     android:layout_below="@+id/integral"/>
             </RelativeLayout>
 
@@ -131,7 +132,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/message"
-                    android:text="@string/message"/>
+                    android:text="@string/message"
+                    android:textColor="@color/stringCenter"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -159,6 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/body_data"
+                    android:textColor="@color/stringCenter"
                     android:layout_below="@+id/data"/>
             </RelativeLayout>
             <RelativeLayout
@@ -187,7 +190,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/question"
-                    android:text="@string/qusition"/>
+                    android:text="@string/qusition"
+                    android:textColor="@color/stringCenter"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -205,6 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="@string/reservation"
+                android:textColor="@color/stringCenter"
                 android:layout_centerVertical="true"/>
             <ImageView
                 android:layout_width="wrap_content"
@@ -228,7 +233,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_centerVertical="true"
-                android:text="@string/course_infomation" />
+                android:text="@string/course_infomation"
+                android:textColor="@color/stringCenter"/>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
