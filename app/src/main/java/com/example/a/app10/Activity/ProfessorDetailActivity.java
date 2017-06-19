@@ -18,6 +18,7 @@ import com.example.a.app10.Adapter.ClassAdapter;
 import com.example.a.app10.Adapter.ClassItem;
 import com.example.a.app10.Adapter.VideoProAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.ProfessorItem;
 import com.example.a.app10.bean.VideoProItem;
 import com.example.a.app10.tool.MyInternet;
 import com.squareup.okhttp.OkHttpClient;
@@ -92,7 +93,10 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         switch (view.getId()){
             case R.id.btnOrder:
                 Intent intent=new Intent(ProfessorDetailActivity.this,ExpertOrderActivity.class);
-                intent.putExtra("expertId",expertId);
+                ProfessorItem item=new ProfessorItem(imageUrl,name,content,expertId,expertGrade);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("professor",item);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
 
