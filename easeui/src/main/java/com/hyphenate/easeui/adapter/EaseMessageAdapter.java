@@ -15,6 +15,7 @@ package com.hyphenate.easeui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
@@ -64,7 +65,7 @@ public class EaseMessageAdapter extends BaseAdapter{
 	private static final int MESSAGE_TYPE_SENT_EXPRESSION = 12;
 	private static final int MESSAGE_TYPE_RECV_EXPRESSION = 13;
 	
-	
+
 	public int itemTypeCount; 
 	
 	// reference to conversation object in chatsdk
@@ -84,11 +85,13 @@ public class EaseMessageAdapter extends BaseAdapter{
     private ListView listView;
 	private EaseMessageListItemStyle itemStyle;
 
-	public EaseMessageAdapter(Context context, String username, int chatType, ListView listView) {
+	private String[] paths;
+	public EaseMessageAdapter(Context context, String username, int chatType, ListView listView,String[] path) {
 		this.context = context;
 		this.listView = listView;
 		toChatUsername = username;
 		this.conversation = EMClient.getInstance().chatManager().getConversation(username, EaseCommonUtils.getConversationType(chatType), true);
+		this.paths=path;
 	}
 	
 	Handler handler = new Handler() {
@@ -251,7 +254,7 @@ public class EaseMessageAdapter extends BaseAdapter{
         default:
             break;
         }
-
+		chatRow.setPaths(paths);
         return chatRow;
     }
     

@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.widget.Toast;
 
-import com.example.a.app10.Activity.ChatActivity;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;

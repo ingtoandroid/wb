@@ -1,6 +1,7 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class chat extends AppCompatActivity {
     public static chat activityInstance;
     private EaseChatFragment chatFragment;
     String toChatUsername;
+    private String[] paths=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +68,7 @@ public class chat extends AppCompatActivity {
         Bundle b=new Bundle();
         b.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         b.putString(EaseConstant.EXTRA_USER_ID,toChatUsername);
+        b.putStringArray("paths",paths);
         chatFragment.setArguments(b);
         getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
 

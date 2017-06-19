@@ -125,6 +125,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_VIDEO,ITEM_FILE };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
+    private String[] paths=null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -139,6 +140,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
+        paths=fragmentArgs.getStringArray("paths");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -158,8 +160,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
 //        messageList.setAvatarShape(1);
         listView = messageList.getListView();
-
-
         extendMenuItemClickListener = new MyItemClickListener();
         inputMenu = (EaseChatInputMenu) getView().findViewById(R.id.input_menu);
         registerExtendMenuItem();
@@ -288,7 +288,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     
     protected void onMessageListInit(){
         messageList.init(toChatUsername, chatType, chatFragmentHelper != null ? 
-                chatFragmentHelper.onSetCustomChatRowProvider() : null);
+                chatFragmentHelper.onSetCustomChatRowProvider() : null,paths);
         setListItemClickListener();
         
         messageList.getListView().setOnTouchListener(new OnTouchListener() {

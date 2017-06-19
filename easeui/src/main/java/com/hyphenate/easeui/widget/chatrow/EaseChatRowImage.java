@@ -51,6 +51,7 @@ public class EaseChatRowImage extends EaseChatRowFile{
                     imgBody.thumbnailDownloadStatus() == EMFileMessageBody.EMDownloadStatus.PENDING) {
                 imageView.setImageResource(R.drawable.ease_default_image);
                 //set the receive message callback
+
                 setMessageReceiveCallback();
             } else {
                 progressBar.setVisibility(View.GONE);

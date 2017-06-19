@@ -56,16 +56,18 @@
         <activity android:name=".Activity.Quiz" />
         <activity
             android:name=".Activity.VideoDetail"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
+            />
         <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
-        <activity android:name=".Activity.MyClassActivity" />
+        <activity android:name=".Activity.MyClassActivity"></activity>
         <activity android:name=".Activity.NewsActivity" />
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
         <activity android:name=".Activity.ProfessorActivity" />
         <activity android:name=".Activity.ProfessorDetailActivity" />
-        <activity android:name=".Activity.LoginActivity"></activity>
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity" />
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity" />
         <activity android:name=".Activity.PersonalActivity" />
         <activity android:name=".Activity.ResetPwdActivity" />
         <activity android:name=".Activity.RegisterActivity" />
