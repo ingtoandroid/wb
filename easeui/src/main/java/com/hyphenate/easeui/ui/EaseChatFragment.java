@@ -3,14 +3,18 @@ package com.hyphenate.easeui.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.Gravity;
@@ -25,6 +29,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMChatRoom;
@@ -34,10 +39,11 @@ import com.hyphenate.chat.EMGroup;
 import com.hyphenate.chat.EMImageMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
+import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
@@ -53,10 +59,14 @@ import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView.EaseVoiceRecorderCallback;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.hyphenate.util.EMLog;
+import com.hyphenate.util.FileUtils;
 import com.hyphenate.util.PathUtil;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+
 
 /**
  * you can new an EaseChatFragment to use or you can inherit it to expand.
@@ -71,6 +81,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected static final int REQUEST_CODE_MAP = 1;
     protected static final int REQUEST_CODE_CAMERA = 2;
     protected static final int REQUEST_CODE_LOCAL = 3;
+    protected static final int REQUEST_CODE_VIDEO=4;
+    protected static final int REQUEST_CODE_SELECT_FILE=5;
 
     /**
      * params to fragment
@@ -103,11 +115,14 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_TAKE_PICTURE = 1;
     static final int ITEM_PICTURE = 2;
     static final int ITEM_LOCATION = 3;
-    
-    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location };
+    static final int ITEM_VIDEO=4;
+    static final int ITEM_FILE=5;
+    static final int ITEM_VOICE=6;
+    static final int ITEM_VIDEO_CALL=7;
+    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location ,R.string.attach_video,R.string.attach_file};
     protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector };
-    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION };
+            R.drawable.ease_chat_location_selector,R.drawable.em_chat_video_selector,R.drawable.em_chat_file_selector };
+    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_VIDEO,ITEM_FILE };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
 
@@ -118,7 +133,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-
+        init();
         fragmentArgs = getArguments();
         // check if single chat or group chat
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
@@ -140,8 +155,10 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         messageList = (EaseChatMessageList) getView().findViewById(R.id.message_list);
         if(chatType != EaseConstant.CHATTYPE_SINGLE)
             messageList.setShowUserNick(true);
+
 //        messageList.setAvatarShape(1);
         listView = messageList.getListView();
+
 
         extendMenuItemClickListener = new MyItemClickListener();
         inputMenu = (EaseChatInputMenu) getView().findViewById(R.id.input_menu);
@@ -405,7 +422,46 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                     Toast.makeText(getActivity(), R.string.unable_to_get_loaction, Toast.LENGTH_SHORT).show();
                 }
                 
+            } else if(requestCode==REQUEST_CODE_VIDEO){//VIDEO
+                if (data != null) {
+                    /*找本地视频并发送*/
+                        Cursor cursor=getContext().getContentResolver().query(data.getData(),null,null,null,null);
+                        cursor.moveToFirst();
+                        String path=cursor.getString(1);// 图片文件路径   
+                        String dur=cursor.getString(3);// 图片
+                        File file = new File(PathUtil.getInstance().getImagePath(), "thvideo" + System.currentTimeMillis());
+                        try {
+                            FileOutputStream fos = new FileOutputStream(file);
+                            Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(path, 3);
+                            ThumbBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.close();
+                            sendVideoMessage(path, file.getAbsolutePath(), Integer.valueOf(dur));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+//                    Uri selectedVideo = data.getData();
+//                    String[] filePathColumn = { MediaStore.Video.Media.DATA };
+//                    Cursor cursor = getContext().getContentResolver().query(selectedVideo ,filePathColumn, null, null, null);
+//                    cursor.moveToFirst();
+//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                    String videoPath = cursor.getString(columnIndex);
+//                    cursor.close();
+
+
+                }
+
+
+
+            } else if(requestCode==REQUEST_CODE_SELECT_FILE){
+                if (data != null) {
+                    Uri uri = data.getData();
+                    if (uri != null) {
+                        sendFileByUri(uri);
+                    }
+                }
+
             }
+
         }
     }
 
@@ -648,6 +704,20 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             case ITEM_LOCATION:
                 startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
                 break;
+            case ITEM_VIDEO:
+                /*发送视频*/
+                selectVideoFromLocal();
+                break;
+            case ITEM_FILE:
+                /*发送文件*/
+                selectFileFromLocal();
+                break;
+            case ITEM_VOICE:
+                /*语音通话*/
+                break;
+            case ITEM_VIDEO_CALL:
+                /*视频通话*/
+                break;
 
             default:
                 break;
@@ -872,9 +942,38 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                 + System.currentTimeMillis() + ".jpg");
         //noinspection ResultOfMethodCallIgnored
         cameraFile.getParentFile().mkdirs();
-        startActivityForResult(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
-                REQUEST_CODE_CAMERA);
+        int current= Build.VERSION.SDK_INT;
+        if(current<24){
+            startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(cameraFile)),REQUEST_CODE_CAMERA);
+        }
+        else
+        {
+            Uri u= FileProvider.getUriForFile(getContext(),"com.ys.android.fileprovider",cameraFile);
+            startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, u), REQUEST_CODE_CAMERA);
+        }
+
+//        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        int current= Build.VERSION.SDK_INT;
+//        if(intent.resolveActivity(getActivity().getPackageManager())!=null){
+//                cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+//                        + System.currentTimeMillis() + ".jpg");
+//            cameraFile.mkdir();
+//            cameraFile.getParentFile().mkdirs();
+//
+//        }
+//        if(cameraFile!=null&&cameraFile.exists()){
+//            if(current<24){
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile));
+//                startActivityForResult(intent,REQUEST_CODE_CAMERA);
+//            }
+//            else{
+//                ContentValues contentValues=new ContentValues(1);
+//                contentValues.put(MediaStore.Images.Media.DATA,cameraFile.getAbsolutePath());
+//                Uri uri=getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
+//                startActivityForResult(intent,REQUEST_CODE_CAMERA);
+//            }
+//        }
     }
 
     /**
@@ -890,6 +989,31 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         }
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
+    }
+
+    /*select local video*/
+    protected void selectVideoFromLocal(){
+        Intent intent=new Intent();
+        intent.setType("video/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,REQUEST_CODE_VIDEO);
+    }
+
+
+    /*select file*/
+    protected void selectFileFromLocal() {
+        Intent intent = null;
+//        if (Build.VERSION.SDK_INT < 19) { //api 19 and later, we can't use this way, demo just select from images
+//            intent = new Intent(Intent.ACTION_GET_CONTENT);
+//            intent.setType("*/*");
+//            intent.addCategory(Intent.CATEGORY_OPENABLE);
+//        } else {
+//            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        }
+        intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, REQUEST_CODE_SELECT_FILE);
     }
 
 
@@ -1136,6 +1260,34 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
          * @return
          */
         EaseCustomChatRowProvider onSetCustomChatRowProvider();
+    }
+    private void init(){
+        EMOptions options = new EMOptions();
+        options.setAutoLogin(false);
+        options.setAcceptInvitationAlways(true);
+        EMClient.getInstance().init(getContext(), options);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                EMClient.getInstance().login("yuanshuai1", "yuanshuai", new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError(int code, String error) {
+
+                    }
+
+                    @Override
+                    public void onProgress(int progress, String status) {
+
+                    }
+                });
+            }
+        }).start();
+
     }
     
 }

@@ -9,40 +9,37 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.QuestionDetail;
+import com.example.a.app10.bean.QuestionItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by 12917 on 2017/6/3.
  */
 
 public class TiWenAdapter extends  RecyclerView.Adapter<TiWenAdapter.ViewHolder>  {
-    private ArrayList<HashMap<String,Object>> list=null;
+    private List<QuestionItem> list;
     private Context context;
-    public TiWenAdapter(Context context) {
+    public TiWenAdapter(Context context,List<QuestionItem> list) {
         super();
         this.context=context;
-        list=new ArrayList<HashMap<String, Object>>();
-        for(int i=0;i<2;i++){
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("title","今天有雨");
-            map.put("time","2017.04.14");
-            map.put("question","骑自行车可以瘦腿嘛");
-            map.put("answer","貌似，好像，可以的");
-            list.add(map);
-        }
+        this.list=list;
 
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(list.get(position).get("title").toString());
-        holder.time.setText(list.get(position).get("time").toString());
+        holder.title.setText(list.get(position).getQuestionTitle());
+        holder.time.setText(list.get(position).getCreateTime_sys());
         //holder.imageView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(),));
-        holder.question.setText(list.get(position).get("question").toString());
-        holder.answer.setText(list.get(position).get("answer").toString());
+        Glide.with(context).load(list.get(position)).into(holder.imageView);
+        holder.question.setText(list.get(position).getQuestionContent());
+
     }
 
     @Override
@@ -67,7 +64,7 @@ public class TiWenAdapter extends  RecyclerView.Adapter<TiWenAdapter.ViewHolder>
             title=(TextView)itemView.findViewById(R.id.index_tiwen_index_title);
             time=(TextView)itemView.findViewById(R.id.index_tiwen_index_time);
             question=(TextView)itemView.findViewById(R.id.index_tiwen_item_question);
-            answer=(TextView)itemView.findViewById(R.id.index_tiwen_item_answer);
+            //answer=(TextView)itemView.findViewById(R.id.index_tiwen_item_answer);
         }
     }
 }

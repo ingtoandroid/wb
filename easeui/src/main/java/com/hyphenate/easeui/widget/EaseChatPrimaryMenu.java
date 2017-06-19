@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -145,11 +146,12 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
             }
         });
 
-        
+        buttonPressToSpeak.setClickable(true);
         buttonPressToSpeak.setOnTouchListener(new OnTouchListener() {
             
             @Override 
             public boolean onTouch(View v, MotionEvent event) {
+
                 if(listener != null){
                     return listener.onPressToSpeakBtnTouch(v, event);
                 }

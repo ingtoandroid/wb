@@ -1,11 +1,18 @@
 package com.example.a.app10.tool;
 
 import com.example.a.app10.bean.URLString;
+import com.google.android.gms.common.internal.GetServiceRequest;
 import com.squareup.okhttp.Call;
+import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.HttpUrl;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
+
+import java.io.File;
+import java.net.URL;
 
 /**
  * Created by 12917 on 2017/6/15.
@@ -162,6 +169,11 @@ public class Net {
         String url = URLString.send_code+"?"+"phone="+phone+"&"+"fs=1";
         return get(url);
     }
+    public Call setHeadImage(File file){
+        String url=URLString.head_image;
+        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("iamge",file.getName(),RequestBody.create(MediaType.parse("application/octet-stream"),file)).build();
+        return post(url,requestBody);
+    }
 
     /*myAPI
      */
@@ -196,8 +208,8 @@ public class Net {
         return get(url);
     }
 
-    public Call getMyReservation(String infoID) {
-        String url = URLString.order_new_type_list + "?" + "infoid=" + infoID;
+    public Call getMyReservation() {
+        String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
         return get(url);
     }
 
@@ -221,6 +233,14 @@ public class Net {
     }
     public Call getTiwen(String id){
         String url=URLString.getTiwen+"?videoId="+id;
+        return get(url);
+    }
+    public Call commitPinglun(String comment,String videoId){
+        String url=URLString.comment+"?personId="+personID+"&conmment="+comment+"&userName="+username+"&videoId="+videoId;
+        return get(url);
+    }
+    public Call commitTiwen(String tiwen,String videoId){
+        String url=URLString.tiwen+"?personId="+personID+"&question="+tiwen+"&userName="+username+"&videoId="+videoId;
         return get(url);
     }
 
@@ -264,8 +284,15 @@ public class Net {
         return get(url);
     }
 
-    public Call getQuestionList(String personID){
+    public Call getQuestionList(){
         String url = URLString.question_list+"?"+"personId="+personID;
+        return get(url);
+    }
+
+
+    /*专家*/
+    public Call getExpertList(){
+        String url= URLString.expert_list;
         return get(url);
     }
 
@@ -279,5 +306,8 @@ public class Net {
         Request request = new Request.Builder().url(url).method("POST",requestBody).build();
         return okHttpClient.newCall(request);
     }
+
+    //
+
 
 }

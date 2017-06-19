@@ -2,9 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height_top_bar"
+    android:layout_height="71dp"
     android:background="@color/top_bar_normal_bg"
-    android:gravity="center_vertical" >
+    android:gravity="center_vertical"
+    android:paddingTop="25dp">
 
     <RelativeLayout
         android:id="@+id/left_layout"
@@ -26,8 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
         android:textColor="#ffffff"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:paddingBottom="10dp"/>
 
     <RelativeLayout
         android:id="@+id/right_layout"

@@ -1,6 +1,8 @@
 package com.example.a.app10.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -128,7 +130,7 @@ public class ResetPwdActivity extends AppCompatActivity {
     private void resetPwdAndLogin(){
         String phoneNumber = ed_phonenumber.getText().toString().trim();
         String code = ed_verification_code.getText().toString().trim();
-        String newPwd = ed_new_password.getText().toString().trim();
+        final String newPwd = ed_new_password.getText().toString().trim();
 
         Call call = Net.getInstance().resetPwd(phoneNumber,code,newPwd);
         call.enqueue(new Callback() {
@@ -180,8 +182,13 @@ public class ResetPwdActivity extends AppCompatActivity {
                                 Toast.makeText(ResetPwdActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                             }
                         });
-                        Intent intent = new Intent(ResetPwdActivity.this,Main1Activity.class);
-                        startActivity(intent);
+                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("pwd", newPwd);
+                        editor.commit();
+//                        Intent intent = new Intent(ResetPwdActivity.this,Main1Activity.class);
+//                        startActivity(intent);
+                        finish();
                     }
                 }
             }

@@ -24,6 +24,27 @@ import com.example.a.app10.Adapter.IndexExpertAdapter;
 import com.example.a.app10.Adapter.ShipinAdapter;
 import com.example.a.app10.Adapter.TiWenAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.ExpertItem;
+import com.example.a.app10.bean.ProfessorItem;
+import com.example.a.app10.bean.QuestionDetail;
+import com.example.a.app10.bean.QuestionItem;
+import com.example.a.app10.bean.ShipinItem;
+import com.example.a.app10.tool.Net;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IndexFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -38,11 +59,13 @@ public class IndexFragment extends Fragment {
     private RecyclerView indexShipinRecyclerView;
     private LinearLayout quick_question;
     private LinearLayout findExpert;
-    private ImageButton kepu;
-    private ImageButton shipin;
-    private ImageButton ketang;
-    private ImageButton zixun;
-
+    private LinearLayout kepu;
+    private LinearLayout shipin;
+    private LinearLayout ketang;
+    private LinearLayout zixun;
+    private List<ExpertItem> list1;
+    private List<QuestionItem> list2;
+    private List<ShipinItem> list3;
 
     public IndexFragment() {
 
@@ -74,26 +97,15 @@ public class IndexFragment extends Fragment {
         indexShipinRecyclerView=(RecyclerView)view.findViewById(R.id.index_shipin_recyclerview);
         quick_question=(LinearLayout)view.findViewById(R.id.quick_question);
         findExpert=(LinearLayout)view.findViewById(R.id.line1);
-        kepu=(ImageButton)view.findViewById(R.id.index_kepu);
-        shipin=(ImageButton)view.findViewById(R.id.index_shipin);
-        ketang=(ImageButton)view.findViewById(R.id.index_ketang);
-        zixun=(ImageButton)view.findViewById(R.id.index_zixun);
+        kepu=(LinearLayout)view.findViewById(R.id.index_kepu);
+        shipin=(LinearLayout)view.findViewById(R.id.index_shipin);
+        ketang=(LinearLayout)view.findViewById(R.id.index_ketang);
+        zixun=(LinearLayout)view.findViewById(R.id.index_zixun);
         init();
+        getData();
         return view;
     }
     private void init(){
-        indexExpertAdapter =new IndexExpertAdapter(getContext());
-        tiWenAdapter=new TiWenAdapter(getContext());
-        shipinAdapter=new ShipinAdapter(getContext());
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL,false);
-        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
-        LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
-        indexExpertRecycleView.setLayoutManager(linearLayoutManager);
-        indexExpertRecycleView.setAdapter(indexExpertAdapter);
-        indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
-        indexTiwenRecycleView.setAdapter(tiWenAdapter);
-        indexShipinRecyclerView.setLayoutManager(linearLayoutManager2);
-        indexShipinRecyclerView.setAdapter(shipinAdapter);
         quick_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,4 +164,109 @@ public class IndexFragment extends Fragment {
         });
     }
 
+    private void getData(){
+        Call call=Net.getInstance().getExpertList();
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String s=response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray jsonArray=jsonObject.getJSONArray("datalist");
+                    Gson gson=new Gson();
+                    list1=gson.fromJson(jsonArray.toString(),new TypeToken<List<ExpertItem>>(){}.getType());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            indexExpertAdapter =new IndexExpertAdapter(getContext(),list1);
+                            LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL,false);
+                            indexExpertRecycleView.setLayoutManager(linearLayoutManager);
+                            indexExpertRecycleView.setAdapter(indexExpertAdapter);
+                        }
+                    });
+                }
+                catch (JSONException E){
+                    E.printStackTrace();
+                }
+            }
+        });
+        Call call1=Net.getInstance().getQuestionList();
+        call1.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                list2=new ArrayList<QuestionItem>();
+                String str_response = response.body().string();
+                JSONTokener jsonTokener = new JSONTokener(str_response);
+                try {
+                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+                    JSONArray jsonArray = jsonObject.getJSONArray("datalist");
+                    for(int i = 0 ;i<jsonArray.length();i++){
+                        JSONObject item = jsonArray.getJSONObject(i);
+                        QuestionItem questionItem = new QuestionItem();
+                        questionItem.setQuestionID(item.getString("questionId"));
+                        questionItem.setQuestionTitle(item.getString("questionTitle"));
+                        questionItem.setUsername(item.getString("userName"));
+                        questionItem.setCreateTime_sys(item.getString("createTime_sys"));
+                        questionItem.setPhotoUrl(item.getString("photoUrl"));
+                        list2.add(questionItem);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        tiWenAdapter=new TiWenAdapter(getContext(),list2);
+                        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
+                        indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
+                        indexExpertRecycleView.setAdapter(tiWenAdapter);
+                    }
+                });
+
+            }
+
+
+
+        });
+        Call call2=Net.getInstance().shipinList(0,1);
+        call2.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String s=response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    JSONArray jsonArray = jsonObject.getJSONArray("datalist");
+                    Gson gson=new Gson();
+                    list3=gson.fromJson(jsonArray.toString(),new TypeToken<List<ShipinItem>>(){}.getType());
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        shipinAdapter=new ShipinAdapter(getContext(),list3);
+                        LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
+                        indexShipinRecyclerView.setLayoutManager(linearLayoutManager2);
+                        indexExpertRecycleView.setAdapter(shipinAdapter);
+                    }
+                });
+            }
+        });
+    }
 }
