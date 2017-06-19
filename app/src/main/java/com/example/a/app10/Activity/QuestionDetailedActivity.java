@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -42,13 +43,14 @@ import java.util.List;
 import java.util.zip.CheckedOutputStream;
 
 public class QuestionDetailedActivity extends AppCompatActivity {
-    private EditText ed;
+    private EditText ed_question;
     private String questionID;
     private String questioner = "我";
     private List<QuestionDetail> list;
     private List<MyCourse> courses;
     private RecyclerView recyclerView;
     private ImageView imageView;
+    private Button askPurse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,15 @@ public class QuestionDetailedActivity extends AppCompatActivity {
             }
         });
 
+        ed_question = (EditText)findViewById(R.id.edit_question);
+
+        askPurse = (Button)findViewById(R.id.askPurse);
+        askPurse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendQuestion();
+            }
+        });
         list = new ArrayList<>();
         getQuestionHistory();
 
@@ -145,95 +156,101 @@ public class QuestionDetailedActivity extends AppCompatActivity {
         });
     }
 
-    private void getMyCourse(){
-        Call call = Net.getInstance().getMyCourse("9629e659-b37a-417f-90cd-1e3ffea7057b");
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
+//    private void getMyCourse(){
+//        Call call = Net.getInstance().getMyCourse("9629e659-b37a-417f-90cd-1e3ffea7057b");
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Request request, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Response response) throws IOException {
+//                String str_response = response.body().string();
+//                JSONTokener jsonTokener = new JSONTokener(str_response);
+//                try {
+//                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+//                    JSONArray jsonArray = jsonObject.getJSONArray("dataList");
+//                    for(int i = 0; i < jsonArray.length();i++){
+//                        JSONObject item = (JSONObject) jsonArray.get(i);
+//                        MyCourse myCourse = new MyCourse();
+//                        myCourse.setModelName(item.getString("modelName"));
+//                        myCourse.setCourseId(item.getString("courseId"));
+//                        myCourse.setCourseTitle(item.getString("courseTitle"));
+//                        myCourse.setStartData(item.getString("startDate"));
+//                        myCourse.setEnterId(item.getString("entereId"));
+//                        myCourse.setState(item.getString("state"));
+//                        courses.add(myCourse);
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                courses.get(0);
+//            }
+//        });
+//    }
 
-            }
+//    private void askPursue(){
+//        Call call = Net.getInstance().getAskPurse("85d3864a-4d58-4ba7-a6fb-8c22c1697e05","haha");
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Request request, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Response response) throws IOException {
+//                String str_response = response.body().string();
+//                JSONTokener jsonTokener = new JSONTokener(str_response);
+//                try {
+//                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+//                    String megs = jsonObject.getString("megs");
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String str_response = response.body().string();
-                JSONTokener jsonTokener = new JSONTokener(str_response);
-                try {
-                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-                    JSONArray jsonArray = jsonObject.getJSONArray("dataList");
-                    for(int i = 0; i < jsonArray.length();i++){
-                        JSONObject item = (JSONObject) jsonArray.get(i);
-                        MyCourse myCourse = new MyCourse();
-                        myCourse.setModelName(item.getString("modelName"));
-                        myCourse.setCourseId(item.getString("courseId"));
-                        myCourse.setCourseTitle(item.getString("courseTitle"));
-                        myCourse.setStartData(item.getString("startDate"));
-                        myCourse.setEnterId(item.getString("entereId"));
-                        myCourse.setState(item.getString("state"));
-                        courses.add(myCourse);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                courses.get(0);
-            }
-        });
-    }
-
-    private void askPursue(){
-        Call call = Net.getInstance().getAskPurse("85d3864a-4d58-4ba7-a6fb-8c22c1697e05","haha");
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String str_response = response.body().string();
-                JSONTokener jsonTokener = new JSONTokener(str_response);
-                try {
-                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-                    String megs = jsonObject.getString("megs");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
     private void sendQuestion(){
-        String strContent = ed.getText().toString().trim();
-        Call call = Net.getInstance().getAskPurse(questionID,strContent);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
+        String strContent = ed_question.getText().toString().trim();
+        if(strContent.length() > 0) {
+            Call call = Net.getInstance().getAskPurse(questionID, strContent);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
 
-            }
+                }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String str_response = response.body().string();
-                if(str_response.length() > 0){
-                    JSONTokener jsonTokener = new JSONTokener(str_response);
-                    String megs = null;
-                    try {
-                        JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-                        megs = jsonObject.getString("megs");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    if(megs != null){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(QuestionDetailedActivity.this,"追问成功",Toast.LENGTH_SHORT);
-                            }
-                        });
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String str_response = response.body().string();
+                    if (str_response.length() > 0) {
+                        JSONTokener jsonTokener = new JSONTokener(str_response);
+                        String megs = null;
+                        try {
+                            JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+                            megs = jsonObject.getString("megs");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        if (megs != null) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(QuestionDetailedActivity.this, "追问成功", Toast.LENGTH_SHORT);
+                                }
+                            });
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else{
+            Toast.makeText(QuestionDetailedActivity.this,"消息不能为空",Toast.LENGTH_SHORT).show();
+        }
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{

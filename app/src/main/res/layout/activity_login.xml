@@ -111,45 +111,62 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:id="@+id/xinlang"
-        app:civ_border_width="2dp"
-        app:civ_fill_color="#000000"
-        android:src="@drawable/whitebackground"
-        app:civ_border_color="#ffffff"/>
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/weibo"
+        android:layout_below="@+id/quick_login"
+        android:layout_toLeftOf="@+id/qq"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/background" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/weibo"
+        android:layout_below="@+id/quick_login"
+        android:layout_toLeftOf="@+id/qq"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="37dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/quick_login"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:id="@+id/qq"
-        app:civ_border_width="2dp"
-        app:civ_fill_color="#000000"
-        android:src="@drawable/whitebackground"
-        app:civ_border_color="#ffffff"/>
+        android:src="@drawable/background" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/qq"
+        android:layout_below="@+id/quick_login"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/weixin"
-        app:civ_border_width="2dp"
-        app:civ_fill_color="#000000"
-        android:src="@drawable/whitebackground"
-        app:civ_border_color="#ffffff"/>
+        android:src="@drawable/background"
+        android:layout_below="@+id/quick_login"
+        android:layout_toRightOf="@+id/qq"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/weixin"
+        android:layout_below="@+id/quick_login"
+        android:layout_toRightOf="@+id/qq"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="37dp"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:layout_width="wrap_content"

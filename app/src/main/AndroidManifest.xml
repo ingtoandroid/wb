@@ -58,15 +58,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
-        <activity android:name=".Activity.MyClassActivity" >
-
-        </activity>
+        <activity android:name=".Activity.MyClassActivity"></activity>
         <activity android:name=".Activity.NewsActivity" />
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
-        <activity android:name=".Activity.ProfessorActivity" >
-
-        </activity>
+        <activity android:name=".Activity.ProfessorActivity"></activity>
         <activity android:name=".Activity.ProfessorDetailActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
@@ -89,7 +85,8 @@
         <activity android:name=".Activity.ExpertOrderActivity" />
         <activity android:name=".Activity.MessageDetailedActivity" />
         <activity android:name=".Activity.QuestionDetailedActivity" />
-        <activity android:name=".Activity.MessageReminderActivity"></activity>
+        <activity android:name=".Activity.MessageReminderActivity" />
+        <activity android:name=".Activity.AboutUsActivity"></activity>
     </application>
 
 </manifest>

@@ -49,18 +49,18 @@ public class MyMessageActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-//        initDatas();
+
 
         datas = new ArrayList<>();
-
-        MyMessage myMessage = new MyMessage();
-        myMessage.setUsername("nihao");
-        myMessage.setContent("hello");
-        MyMessage myMessage1 = new MyMessage();
-        myMessage1.setUsername("a");
-        myMessage1.setContent("a");
-        datas.add(myMessage);
-        datas.add(myMessage1);
+        initDatas();
+//        MyMessage myMessage = new MyMessage();
+//        myMessage.setUsername("nihao");
+//        myMessage.setContent("hello");
+//        MyMessage myMessage1 = new MyMessage();
+//        myMessage1.setUsername("a");
+//        myMessage1.setContent("a");
+//        datas.add(myMessage);
+//        datas.add(myMessage1);
 
         recyclerView = (RecyclerView)findViewById(R.id.message_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,7 +84,7 @@ public class MyMessageActivity extends AppCompatActivity {
 
     private void initDatas(){
         datas = new ArrayList<>();
-        Call call = Net.getInstance().getMessage("9629e659-b37a-417f-90cd-1e3ffea7057b");
+        Call call = Net.getInstance().getMessage(Net.getPersonID());
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

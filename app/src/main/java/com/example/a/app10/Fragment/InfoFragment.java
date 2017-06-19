@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.a.app10.Activity.ClassDetailActivity;
 import com.example.a.app10.Activity.MessageReminderActivity;
+import com.example.a.app10.Activity.MyClassActivity;
 import com.example.a.app10.Activity.SettingActivity;
 import com.example.a.app10.Activity.ModifyDataActivity;
 import com.example.a.app10.Activity.QuestionActivity;
@@ -99,7 +100,7 @@ public class InfoFragment extends Fragment {
         course_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),ClassDetailActivity.class);
+                Intent intent = new Intent(getContext(),MyClassActivity.class);
                 startActivity(intent);
             }
         });

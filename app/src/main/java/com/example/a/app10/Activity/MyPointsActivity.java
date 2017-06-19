@@ -76,8 +76,7 @@ public class MyPointsActivity extends AppCompatActivity {
     }
 
     private void getHistory(){
-//        Call call = Net.getInstance().getIntegralHistory(Net.getPersonID());
-        Call call = Net.getInstance().getIntegralHistory("a81b0180-8d81-4f01-a1f3-5449ec297b7c");
+        Call call = Net.getInstance().getIntegralHistory(Net.getPersonID());
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

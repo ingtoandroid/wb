@@ -32,7 +32,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFC7C7CB"
+        android:background="#e1e1e1"
         android:layout_below="@+id/set_newpassword_title"
         android:id="@+id/first_divid"/>
     <RelativeLayout

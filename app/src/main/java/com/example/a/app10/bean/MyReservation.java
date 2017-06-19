@@ -84,17 +84,17 @@ public class MyReservation {
         this.orderId = orderId;
     }
 
-    public String getTypeId() {
-        return TypeId;
+    public int getType() {
+        return type;
     }
 
-    public void setTypeId(String typeId) {
-        TypeId = typeId;
+    public void setType(int type) {
+        this.type = type;
     }
 
     private String orderStartTime;
     private String orderEndTime;
     private String orderType;
     private String orderId;
-    private String TypeId;
+    private int type;
 }
