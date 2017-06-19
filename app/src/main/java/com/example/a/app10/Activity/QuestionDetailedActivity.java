@@ -46,6 +46,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
     private EditText ed_question;
     private String questionID;
     private String questioner = "我";
+    private String headImageUrl;
     private List<QuestionDetail> list;
     private List<MyCourse> courses;
     private RecyclerView recyclerView;
@@ -125,6 +126,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                         questioner = jsonObject.getString("nickName");
+                        headImageUrl = jsonObject.getString("filePath");
                         questionDetail.setHeadImage(jsonObject.getString("filePath"));
                         questionDetail.setQuestionContent(jsonObject.getString("questionContent"));
                         questionDetail.setQuestionData(jsonObject.getString("questionDate"));
@@ -149,6 +151,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             recyclerView.setAdapter(new MyAdapter());
+                            recyclerView.scrollToPosition(list.size()-1);
                         }
                     });
                 }
@@ -156,66 +159,9 @@ public class QuestionDetailedActivity extends AppCompatActivity {
         });
     }
 
-//    private void getMyCourse(){
-//        Call call = Net.getInstance().getMyCourse("9629e659-b37a-417f-90cd-1e3ffea7057b");
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Request request, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Response response) throws IOException {
-//                String str_response = response.body().string();
-//                JSONTokener jsonTokener = new JSONTokener(str_response);
-//                try {
-//                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-//                    JSONArray jsonArray = jsonObject.getJSONArray("dataList");
-//                    for(int i = 0; i < jsonArray.length();i++){
-//                        JSONObject item = (JSONObject) jsonArray.get(i);
-//                        MyCourse myCourse = new MyCourse();
-//                        myCourse.setModelName(item.getString("modelName"));
-//                        myCourse.setCourseId(item.getString("courseId"));
-//                        myCourse.setCourseTitle(item.getString("courseTitle"));
-//                        myCourse.setStartData(item.getString("startDate"));
-//                        myCourse.setEnterId(item.getString("entereId"));
-//                        myCourse.setState(item.getString("state"));
-//                        courses.add(myCourse);
-//                    }
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                courses.get(0);
-//            }
-//        });
-//    }
-
-//    private void askPursue(){
-//        Call call = Net.getInstance().getAskPurse("85d3864a-4d58-4ba7-a6fb-8c22c1697e05","haha");
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Request request, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Response response) throws IOException {
-//                String str_response = response.body().string();
-//                JSONTokener jsonTokener = new JSONTokener(str_response);
-//                try {
-//                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-//                    String megs = jsonObject.getString("megs");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
     private void sendQuestion(){
-        String strContent = ed_question.getText().toString().trim();
+        final String strContent = ed_question.getText().toString().trim();
         if(strContent.length() > 0) {
             Call call = Net.getInstance().getAskPurse(questionID, strContent);
             call.enqueue(new Callback() {
@@ -233,16 +179,24 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                             megs = jsonObject.getString("megs");
+                            if (megs.equals("追问成功")){
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ed_question.setText("");
+                                        QuestionDetail questionDetail = new QuestionDetail();
+                                        questionDetail.setType("追问");
+                                        questionDetail.setQuestionContent(strContent);
+                                        questionDetail.setHeadImage(headImageUrl);
+                                        questionDetail.setQuestionData("刚刚");
+                                        list.add(questionDetail);
+                                        recyclerView.setAdapter(new MyAdapter());
+                                        recyclerView.scrollToPosition(list.size()-1);
+                                    }
+                                });
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                        }
-                        if (megs != null) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(QuestionDetailedActivity.this, "追问成功", Toast.LENGTH_SHORT);
-                                }
-                            });
                         }
                     }
                 }
@@ -293,6 +247,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                     holder.tx_reseiver.setText("");
                     holder.tx_type.setText("");
                 }
+
             }else if(questionDetail.getType().equals("回复")){
                 Resources resource = (Resources) getBaseContext().getResources();
 

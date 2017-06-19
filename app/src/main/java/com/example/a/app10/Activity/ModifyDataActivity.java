@@ -9,6 +9,7 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -91,7 +92,11 @@ public class ModifyDataActivity extends AppCompatActivity {
                 String str_username = ed_username.getText().toString().trim();
                 String str_signature = ed_signature.getText().toString().trim();
                 String str_sex = ed_sex.getText().toString().trim();
-                modifyInfo(str_username,str_signature,str_sex);
+                if(str_sex.equals("男")||str_sex.equals("女")) {
+                    modifyInfo(str_username, str_signature, str_sex);
+                }else{
+                    Toast.makeText(ModifyDataActivity.this,"性别不符",Toast.LENGTH_SHORT).show();
+                }
             }
         });
         relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +185,8 @@ public class ModifyDataActivity extends AppCompatActivity {
             }
         });
     }
+
+
     protected void selectPicFromLocal() {
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
@@ -200,7 +207,7 @@ public class ModifyDataActivity extends AppCompatActivity {
             call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Request request, IOException e) {
-
+                    e.printStackTrace();
                 }
 
                 @Override
@@ -208,7 +215,24 @@ public class ModifyDataActivity extends AppCompatActivity {
                     String s=response.body().string();
                     try {
                         JSONObject jsonObject = new JSONObject(s);
-
+                        int megs = jsonObject.getInt("megs");
+                        if(megs == 0){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Glide.with(ModifyDataActivity.this).load(uri).into(im_headImage);
+                                    Toast.makeText(ModifyDataActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        else if(megs == -1){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(ModifyDataActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
                     }
                     catch (JSONException E){
                         E.printStackTrace();
@@ -217,12 +241,14 @@ public class ModifyDataActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Glide.with(ModifyDataActivity.this).load(uri).into(im_headImage);
+
                         }
                     });
                 }
             });
         }
     }
+
     protected String  getPath(Uri selectedImage) {
         String[] filePathColumn = { MediaStore.Images.Media.DATA };
         Cursor cursor = this.getContentResolver().query(selectedImage, filePathColumn, null, null, null);

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -38,11 +39,14 @@ import java.util.List;
 
 public class MessageDetailedActivity extends AppCompatActivity {
 
-    private EditText ed;
+    private ImageView back;
+    private EditText ed_message;
     private String questionID;
     private String messager;
+    private String headImageUrl;
     private List<MessageDetail> list;
     private RecyclerView recyclerView;
+    private Button bu_send;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,22 @@ public class MessageDetailedActivity extends AppCompatActivity {
         }
 
         list = new ArrayList<>();
+
+        back = (ImageView)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        bu_send = (Button)findViewById(R.id.askPurse);
+        bu_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendQuestion();
+            }
+        });
 
 //        MessageDetail questionDetail = new MessageDetail();
 //        questionDetail.setType("追问");
@@ -67,46 +87,60 @@ public class MessageDetailedActivity extends AppCompatActivity {
 //        questionDetail1.setMessageContent("hahaha");
 //        questionDetail1.setMessageData("2017/5/7 18:00");
 //        list.add(questionDetail1);
-
+        ed_message = (EditText)findViewById(R.id.edit_question);
         getMessageHistory();
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
     }
 
-    private void sendMessage(){
-        String strContent = ed.getText().toString().trim();
-        Call call = Net.getInstance().getAskPurse(questionID,strContent);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
+    private void sendQuestion(){
+        final String strContent = ed_message.getText().toString().trim();
+        if(strContent.length() > 0) {
+            Call call = Net.getInstance().getAskPurse(questionID, strContent);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
 
-            }
+                }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String str_response = response.body().string();
-                if(str_response.length() > 0){
-                    JSONTokener jsonTokener = new JSONTokener(str_response);
-                    String megs = null;
-                    try {
-                        JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-                        megs = jsonObject.getString("megs");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    if(megs != null){
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MessageDetailedActivity.this,"追问成功",Toast.LENGTH_SHORT);
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String str_response = response.body().string();
+                    if (str_response.length() > 0) {
+                        JSONTokener jsonTokener = new JSONTokener(str_response);
+                        String megs = null;
+                        try {
+                            JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+                            megs = jsonObject.getString("megs");
+                            if (megs.equals("追问成功")){
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ed_message.setText("");
+                                        MessageDetail questionDetail = new MessageDetail();
+                                        questionDetail.setType("追问");
+                                        questionDetail.setMessageContent(strContent);
+                                        questionDetail.setHeadImage(headImageUrl);
+                                        questionDetail.setMessageData("刚刚");
+                                        list.add(questionDetail);
+                                        recyclerView.setAdapter(new MyAdapter());
+                                        recyclerView.scrollToPosition(list.size()-1);
+                                    }
+                                });
                             }
-                        });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else{
+            Toast.makeText(MessageDetailedActivity.this,"消息不能为空",Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     private void getMessageHistory(){
         Call call = Net.getInstance().getQuestionDatails(questionID);
@@ -127,9 +161,10 @@ public class MessageDetailedActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                         messager = jsonObject.getString("nickName");
+                        headImageUrl = jsonObject.getString("filePath");
                         messageDetail.setHeadImage(jsonObject.getString("filePath"));
                         messageDetail.setMessageContent(jsonObject.getString("questionContent"));
-                        messageDetail.setMessageData(jsonObject.getString("questionData"));
+                        messageDetail.setMessageData(jsonObject.getString("questionDate"));
                         messageDetail.setType("追问");
                         list.add(messageDetail);
                         JSONArray jsonArray = jsonObject.getJSONArray("dataList");
@@ -146,6 +181,14 @@ public class MessageDetailedActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(new MyAdapter());
+                            recyclerView.scrollToPosition(list.size()-1);
+                        }
+                    });
 
                 }
             }
@@ -193,6 +236,7 @@ public class MessageDetailedActivity extends AppCompatActivity {
                     holder.tx_reseiver.setText("");
                     holder.tx_type.setText("");
                 }
+
             }else if(messageDetail.getType().equals("回复")){
                 Resources resource = (Resources) getBaseContext().getResources();
 

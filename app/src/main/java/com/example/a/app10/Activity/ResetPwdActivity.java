@@ -196,7 +196,7 @@ public class ResetPwdActivity extends AppCompatActivity {
                                     Toast.makeText(ResetPwdActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                 }
                             });
-//                            SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                            SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sp.edit();
                             editor.putString("pwd", newPwd);
                             editor.commit();

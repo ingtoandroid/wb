@@ -37,7 +37,7 @@ public class TiWenAdapter extends  RecyclerView.Adapter<TiWenAdapter.ViewHolder>
         holder.title.setText(list.get(position).getQuestionTitle());
         holder.time.setText(list.get(position).getCreateTime_sys());
         //holder.imageView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(),));
-        Glide.with(context).load(list.get(position)).into(holder.imageView);
+        Glide.with(context).load(list.get(position).getPhotoUrl()).into(holder.imageView);
         holder.question.setText(list.get(position).getQuestionContent());
 
     }

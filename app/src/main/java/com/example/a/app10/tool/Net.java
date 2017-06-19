@@ -201,7 +201,7 @@ public class Net {
     }
 
     public Call getAskPurse(String questionID,String questionContent){
-        String url = URLString.save_question_again+"?"+"qusetionId="+questionID+"&"
+        String url = URLString.save_question_again+"?"+"questionId="+questionID+"&"
                 +"questionContent="+questionContent;
         return get(url);
     }
