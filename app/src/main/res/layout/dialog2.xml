@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7f000000"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提问"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20sp"
+        android:textColor="@color/video_bar_text"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/video_text_bg"
+        android:weightSum="1"
+
+        >
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/input"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textCursorDrawable="@null"
+            android:inputType="textMultiLine"
+            android:gravity="left|top"/>/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="@string/video_pinglun_bottom"
+            android:gravity="right"
+            android:textColor="@color/video_bar_text"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/commit"
+        android:text="提交"
+        android:layout_gravity="right"
+        android:textColor="@color/video_bar_text"
+        android:background="@color/video_pinglun_button_bg"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"/>
+
+
+</LinearLayout>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.test.suitebuilder.TestMethod;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -16,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.a.app10.R;
 import com.example.a.app10.bean.URLString;
+import com.example.a.app10.tool.CoutDownTimerUtils;
 import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -26,11 +26,9 @@ import com.squareup.okhttp.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import java.io.IOException;
-import java.nio.charset.MalformedInputException;
-
 public class RegisterActivity extends AppCompatActivity {
+    private CoutDownTimerUtils coutDownTimerUtils;
 
     private ImageButton back;
     private Button login;
@@ -56,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         ed_verification_code = (EditText)findViewById(R.id.input_verification);
         ed_new_password = (EditText)findViewById(R.id.input_newpassword);
         tx_send_verification = (TextView)findViewById(R.id.send_verification);
+        coutDownTimerUtils=new CoutDownTimerUtils(tx_send_verification,60000,1000);
         tx_to_login = (TextView)findViewById(R.id.tologin);
     }
     private void initEvents(){
@@ -141,8 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegisterActivity.this, Main1Activity.class);
-                                    startActivity(intent);
+                                    finish();
                                 }
                             });
                         }
@@ -161,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
         String phoneNumber = ed_phonenumber.getText().toString().trim();
 
         if(phoneNumber.length()>0){
-
+            coutDownTimerUtils.start();
             Call call = Net.getInstance().getCodeForRegister(phoneNumber);
             call.enqueue(new Callback() {
                 @Override

@@ -58,4 +58,6 @@
     <string name="integration_details">积分明细</string>
     <string name="my_reservation">我的预约</string>
 
+    <string name="title_activity_fullscreen_video">FullscreenVideo</string>
+
 </resources>

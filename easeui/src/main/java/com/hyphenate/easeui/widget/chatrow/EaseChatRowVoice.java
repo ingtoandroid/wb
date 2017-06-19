@@ -93,7 +93,7 @@ public class EaseChatRowVoice extends EaseChatRowFile{
     }
 
     @Override
-    protected void onBubbleClick() {
+    public void onBubbleClick() {
         new EaseChatRowVoicePlayClickListener(message, voiceImageView, readStatusView, adapter, activity).onClick(bubbleLayout);
     }
     

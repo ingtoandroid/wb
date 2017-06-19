@@ -58,11 +58,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
-        <activity android:name=".Activity.MyClassActivity"></activity>
+        <activity android:name=".Activity.MyClassActivity" />
         <activity android:name=".Activity.NewsActivity" />
         <activity android:name=".Activity.NewsDetailActivity" />
         <activity android:name=".Activity.ScienceActivity" />
-        <activity android:name=".Activity.ProfessorActivity"></activity>
+        <activity android:name=".Activity.ProfessorActivity" />
         <activity android:name=".Activity.ProfessorDetailActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
@@ -86,7 +86,19 @@
         <activity android:name=".Activity.MessageDetailedActivity" />
         <activity android:name=".Activity.QuestionDetailedActivity" />
         <activity android:name=".Activity.MessageReminderActivity" />
-        <activity android:name=".Activity.AboutUsActivity"></activity>
+        <activity android:name=".Activity.FullscreenVideo"
+            android:configChanges="orientation|keyboard|screenSize">
+        </activity>
+        <activity android:name=".Activity.QuickQuestionActivity"></activity>
+        <activity android:name=".Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Comment">
+        </activity>
     </application>
 
 </manifest>

@@ -21,6 +21,7 @@ public class URLString {
     final static public String register=path+"user/register";
     final static public String send_code=path+"user/send_code";
         final static public String reset_pwd = path+"user/pwd_reset";
+    final static public String head_image=path+"associator/modelName_associator_save";
 
     //myAPI
     final static public String integral_history_list = path + "jifen/jifen_history_list";
@@ -48,5 +49,8 @@ public class URLString {
     final static public String deleteMessage = path+"message/deleateMessage";
     final static public String quickQuestion = path+"question/quickQuestion";
     final static public String question_list = path+"question/question_list";
+
+    //专家
+    final static public String expert_list=path+"expert/get_expert_list";
 }
 

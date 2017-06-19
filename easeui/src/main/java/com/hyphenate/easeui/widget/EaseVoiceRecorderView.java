@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -95,6 +96,7 @@ public class EaseVoiceRecorderView extends RelativeLayout {
     public boolean onPressToSpeakBtnTouch(View v, MotionEvent event, EaseVoiceRecorderCallback recorderCallback) {
         switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
+            Log.e("aaa","down");
             try {
                 if (EaseChatRowVoicePlayClickListener.isPlaying)
                     EaseChatRowVoicePlayClickListener.currentPlayListener.stopPlayVoice();
@@ -110,6 +112,7 @@ public class EaseVoiceRecorderView extends RelativeLayout {
             } else {
                 showMoveUpToCancelHint();
             }
+            Log.e("aaa","move");
             return true;
         case MotionEvent.ACTION_UP:
             v.setPressed(false);
@@ -134,6 +137,7 @@ public class EaseVoiceRecorderView extends RelativeLayout {
                     Toast.makeText(context, R.string.send_failure_please, Toast.LENGTH_SHORT).show();
                 }
             }
+            Log.e("aaa","up");
             return true;
         default:
             discardRecording();

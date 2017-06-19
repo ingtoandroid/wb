@@ -58,21 +58,7 @@ public class MyReservationActivity extends AppCompatActivity {
 //        myReservation.setItem_content_reservation("在这里预约内容");
 //        myReservation.setItem_username_reservation("今天有雨");
 //        myReservation.setItem_time_reservation("18:00-18:30");
-//        myReservation.setType(0);
 //        datas.add(myReservation);
-//        myReservation = new MyReservation();
-//        myReservation.setItem_content_reservation("在这里预约内容");
-//        myReservation.setItem_username_reservation("今天有雨");
-//        myReservation.setItem_time_reservation("18:00-18:30");
-//        myReservation.setType(1);
-//        datas.add(myReservation);
-//        myReservation = new MyReservation();
-//        myReservation.setItem_content_reservation("在这里预约内容");
-//        myReservation.setItem_username_reservation("今天有雨");
-//        myReservation.setItem_time_reservation("18:00-18:30");
-//        myReservation.setType(2);
-//        datas.add(myReservation);
-
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview_reservation);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
@@ -139,48 +125,49 @@ public class MyReservationActivity extends AppCompatActivity {
             holder.item_time_reservation.setText(myReservation.getItem_time_reservation());
             int str_type = myReservation.getType();
 
-            if(str_type == 0){
-                holder.item_consultation_reservation.setEnabled(false);
-                holder.item_evaluate_reservation.setEnabled(false);
+        }
 
-                Resources resource = (Resources) getBaseContext().getResources();
+        if(str_type == 0){
+            holder.item_consultation_reservation.setEnabled(false);
+            holder.item_evaluate_reservation.setEnabled(false);
+
+            Resources resource = (Resources) getBaseContext().getResources();
 
 //                ColorStateList csl_gray = (ColorStateList) resource.getColorStateList(R.color.dividColor);
-                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
-                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
-            }
-            else if(str_type == 1){
-                holder.item_cancle_reservation.setEnabled(false);
-                holder.item_evaluate_reservation.setEnabled(false);
-
-                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
-                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
-            }
-            else if(str_type == 2){
-                holder.item_cancle_reservation.setEnabled(false);
-                holder.item_consultation_reservation.setEnabled(false);
-
-                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
-                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
-            }
-
-            holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MyReservationActivity.this,chat.class);
-                    intent.putExtra("name",datas.get(position).getItem_username_reservation());
-                    startActivity(intent);
-                }
-            });
-
-            holder.item_evaluate_reservation.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MyReservationActivity.this,Comment.class);
-                    startActivity(intent);
-                }
-            });
+            holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
+            holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
         }
+        else if(str_type == 1){
+            holder.item_cancle_reservation.setEnabled(false);
+            holder.item_evaluate_reservation.setEnabled(false);
+
+            holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
+            holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
+        }
+        else if(str_type == 2){
+            holder.item_cancle_reservation.setEnabled(false);
+            holder.item_consultation_reservation.setEnabled(false);
+
+            holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
+            holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
+        }
+
+        holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyReservationActivity.this,chat.class);
+                intent.putExtra("name",datas.get(position).getItem_username_reservation());
+                startActivity(intent);
+            }
+        });
+
+        holder.item_evaluate_reservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyReservationActivity.this,Comment.class);
+                startActivity(intent);
+            }
+        });
 
         @Override
         public int getItemCount() {

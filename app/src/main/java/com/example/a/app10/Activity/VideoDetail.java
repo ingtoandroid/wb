@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -20,11 +21,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a.app10.Adapter.VideoRecycleAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.CommentItem;
+import com.example.a.app10.bean.ShipinItem;
 import com.example.a.app10.tool.Net;
 import com.example.a.app10.tool.VideoControllerView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -33,19 +39,22 @@ import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Comment;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
-public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Callback ,View.OnClickListener {
+public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Callback  {
 
-    private SurfaceView videoSurface;
+    private static SurfaceView videoSurface;
     private TextView pinglun;
     private TextView tiwen;
     private Button comment;
-    private MediaPlayer player;
-    private VideoControllerView controller;
+    public static MediaPlayer player;
+    public static VideoControllerView controller;
     private int screenWidth;
     private int screenHeight;
     private int width;
@@ -58,6 +67,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     private ScrollView scrollView;
     private String  id;
     private String uri=null;
+    List<CommentItem> list;
     private VideoControllerView.MediaPlayerControl mediaPlayerControl=new VideoControllerView.MediaPlayerControl() {
         @Override
         public boolean canPause() {
@@ -129,6 +139,8 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         id=getIntent().getStringExtra("id");
         initView();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        screenWidth=this.getWindowManager().getDefaultDisplay().getWidth();
+        screenHeight=this.getWindowManager().getDefaultDisplay().getHeight();
         initEvent();
     }
     private void initView(){
@@ -138,7 +150,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
         recyclerView=(RecyclerView)findViewById(R.id.video_pinglun);
         scrollView=(ScrollView)findViewById(R.id.scroll);
-        adapter=new VideoRecycleAdapter(this);
+        //showView(0);
         SurfaceHolder videoHolder = videoSurface.getHolder();
         container=(FrameLayout)findViewById(R.id.videoSurfaceContainer);
         linearLayout=(LinearLayout)findViewById(R.id.line);
@@ -146,6 +158,14 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         player = new MediaPlayer();
         controller = new VideoControllerView(this);
         controller.setMediaPlayer(mediaPlayerControl);
+        controller.setAnchorView((FrameLayout) findViewById(R.id.videoSurfaceContainer));
+        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                player.start();
+                player.pause();
+            }
+        });
         screenWidth=getWindowManager().getDefaultDisplay().getWidth();
         screenHeight=getWindowManager().getDefaultDisplay().getHeight();
 
@@ -163,21 +183,14 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 String string=response.body().string();
                 try {
                     JSONObject jsonObject = new JSONObject(string);
-                    uri=jsonObject.getString("filePath");
+                    uri = jsonObject.getString("filePath");
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                player.setDataSource(VideoDetail.this, Uri.parse("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"));
-                                player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                    @Override
-                                    public void onPrepared(MediaPlayer mp) {
-                                        controller.setMediaPlayer(mediaPlayerControl);
-                                        controller.setAnchorView((FrameLayout) findViewById(R.id.videoSurfaceContainer));
-                                        player.start();
-                                    }
-                                });
+                                player.setDataSource(VideoDetail.this, Uri.parse(uri));
+                                player.prepare();
 
 
                             } catch (IllegalArgumentException e) {
@@ -191,22 +204,34 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                             }
                         }
                     });
-
                 }
+
+
                 catch (JSONException e){
                     e.printStackTrace();
                 }
             }
-        });
+        }
+        );
         videoSurface.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 controller.show();
             }
         });
-        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(this,LinearLayout.VERTICAL,false);
-        recyclerView.setLayoutManager(linearLayoutManager1);
-        recyclerView.setAdapter(adapter);
+        pinglun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showView(0);
+            }
+        });
+        tiwen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showView(1);
+            }
+        });
+
     }
 
     @Override
@@ -228,18 +253,23 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
 
     /*全屏*/
     public void full(){
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        scrollView.scrollTo(0,300);
-        setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
-        width=container.getWidth();
-        height=container.getHeight();
-        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(screenHeight,screenWidth);
-        container.setLayoutParams(layoutParams);
-
-        scrollView.fullScroll(View.FOCUS_UP);
-
-        isFull=true;
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        scrollView.scrollTo(0,300);
+//        setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
+//        width=container.getWidth();
+//        height=container.getHeight();
+//        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(screenHeight,screenWidth);
+//        container.setLayoutParams(layoutParams);
+//
+//        scrollView.fullScroll(View.FOCUS_UP);
+//
+//        isFull=true;
+        controller.setmShowing(false);
+        container.removeView(controller);
+        Intent intent=new Intent(VideoDetail.this,FullscreenVideo.class);
+        intent.putExtra("id",id);
+        startActivity(intent);
     }
     /*推出全屏*/
     public void quitFull(){
@@ -256,19 +286,8 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         isFull=false;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.pinglun:
-                break;
-            case R.id.tiwen:
-                break;
-            case R.id.comment:
-                break;
-
-        }
-    }
     private void showView(int type){
+        list=new ArrayList<>();
         if(type==0){
             comment.setText("发表评论");
             showRecyclerView(type);
@@ -284,6 +303,68 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         }
     }
     private void showRecyclerView(int type){
+        if(type==0){
         Call call=Net.getInstance().getComment(id);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String string=response.body().string();
+                try {
+                    JSONArray jsonArray = new JSONArray(new JSONObject(string).getJSONArray("datalist").toString());
+                    Gson gson=new Gson();
+                    list=gson.fromJson(jsonArray.toString(),new TypeToken<List<CommentItem>>(){}.getType());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter=new VideoRecycleAdapter(VideoDetail.this,list);
+                            LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(VideoDetail.this,LinearLayout.VERTICAL,false);
+                            recyclerView.setLayoutManager(linearLayoutManager1);
+                            recyclerView.setAdapter(adapter);
+
+                        }
+                    });
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });}
+        else
+        {
+            Call call=Net.getInstance().getTiwen(id);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String string=response.body().string();
+                    try {
+                        JSONArray jsonArray = new JSONArray(new JSONObject(string).getJSONArray("datalist").toString());
+                        Gson gson=new Gson();
+                        list=gson.fromJson(jsonArray.toString(),new TypeToken<List<CommentItem>>(){}.getType());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter=new VideoRecycleAdapter(VideoDetail.this,list);
+                                LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(VideoDetail.this,LinearLayout.VERTICAL,false);
+                                recyclerView.setLayoutManager(linearLayoutManager1);
+                                recyclerView.setAdapter(adapter);
+
+                            }
+                        });
+                    }
+                    catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            });}
     }
 }

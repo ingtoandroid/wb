@@ -1,13 +1,20 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.media.Image;
+import android.net.Uri;
+import android.os.Build;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ModifyDataActivity extends AppCompatActivity {
@@ -42,6 +50,8 @@ public class ModifyDataActivity extends AppCompatActivity {
     private EditText ed_location;
     private EditText ed_signature;
     private TextView tx_saveInfo;
+    private RelativeLayout relativeLayout;
+    private int REQUEST_CODE_LOCAL=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +74,7 @@ public class ModifyDataActivity extends AppCompatActivity {
         ed_location = (EditText)findViewById(R.id.location);
         ed_signature = (EditText)findViewById(R.id.signature);
         tx_saveInfo = (TextView)findViewById(R.id.save_info);
+        relativeLayout=(RelativeLayout)findViewById(R.id.head_image_change_item);
     }
 
     private void initEvent(){
@@ -81,6 +92,12 @@ public class ModifyDataActivity extends AppCompatActivity {
                 String str_signature = ed_signature.getText().toString().trim();
                 String str_sex = ed_sex.getText().toString().trim();
                 modifyInfo(str_username,str_signature,str_sex);
+            }
+        });
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectPicFromLocal();
             }
         });
     }
@@ -162,5 +179,78 @@ public class ModifyDataActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    protected void selectPicFromLocal() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+
+        } else {
+            intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        }
+        startActivityForResult(intent, REQUEST_CODE_LOCAL);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
+        if(requestCode==REQUEST_CODE_LOCAL){
+            final Uri uri=data.getData();
+            Call call=Net.getInstance().setHeadImage(new File(getPath(uri)));
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String s=response.body().string();
+                    try {
+                        JSONObject jsonObject = new JSONObject(s);
+
+                    }
+                    catch (JSONException E){
+                        E.printStackTrace();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Glide.with(ModifyDataActivity.this).load(uri).into(im_headImage);
+                        }
+                    });
+                }
+            });
+        }
+    }
+    protected String  getPath(Uri selectedImage) {
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = this.getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            cursor = null;
+
+            if (picturePath == null || picturePath.equals("null")) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return null;
+            }
+            return picturePath;
+        } else {
+            File file = new File(selectedImage.getPath());
+            if (!file.exists()) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return null;
+
+            }
+            return  file.getAbsolutePath();
+        }
+
     }
 }
