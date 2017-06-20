@@ -24,6 +24,7 @@ import com.hyphenate.easeui.adapter.EaseMessageAdapter;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.model.styles.EaseMessageListItemStyle;
 import com.hyphenate.easeui.utils.EaseUserUtils;
+import com.hyphenate.easeui.utils.GlideCircleTransform;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.EaseChatMessageList.MessageListItemClickListener;
 import com.hyphenate.easeui.widget.EaseImageView;
@@ -131,11 +132,12 @@ public abstract class EaseChatRow extends LinearLayout {
         if(message.direct() == Direct.SEND){
             //EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
             if(paths[0]!=null)
-            Glide.with(context).load(paths[0]).into(userAvatarView);
+            Glide.with(context).load(paths[0]).transform(new GlideCircleTransform(context)).into(userAvatarView);
         }else{
             //EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
             if(paths[1]!=null)
-            Glide.with(context).load(paths[1]).into(userAvatarView);
+            Glide.with(context).load(paths[1]).transform(new GlideCircleTransform(context)).into(userAvatarView);
+
             EaseUserUtils.setUserNick(message.getFrom(), usernickView);
         }
         

@@ -268,6 +268,7 @@ public class IndexFragment extends Fragment {
                             @Override
                             public void onClick(View view, int position) {
                                 Intent intent=new Intent(getContext(), VideoDetail.class);
+                                intent.putExtra("id",list3.get(position).getVideoId());
                                 startActivity(intent);
                             }
                         });

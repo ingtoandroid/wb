@@ -54,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"
-                android:text="今天有雨"
                 android:textSize="@dimen/text_size_setteing"
                 android:id="@+id/username_setting"/>
             <ImageView

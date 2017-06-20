@@ -1,12 +1,17 @@
 package com.example.a.app10.Activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,6 +58,8 @@ public class ModifyDataActivity extends AppCompatActivity {
     private TextView tx_saveInfo;
     private RelativeLayout relativeLayout;
     private int REQUEST_CODE_LOCAL=0;
+
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,6 +195,11 @@ public class ModifyDataActivity extends AppCompatActivity {
 
 
     protected void selectPicFromLocal() {
+        if(ContextCompat.checkSelfPermission(ModifyDataActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(ModifyDataActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+        }
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
             intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -197,6 +209,11 @@ public class ModifyDataActivity extends AppCompatActivity {
             intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         }
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override
@@ -237,13 +254,6 @@ public class ModifyDataActivity extends AppCompatActivity {
                     catch (JSONException E){
                         E.printStackTrace();
                     }
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Glide.with(ModifyDataActivity.this).load(uri).into(im_headImage);
-
-                        }
-                    });
                 }
             });
         }

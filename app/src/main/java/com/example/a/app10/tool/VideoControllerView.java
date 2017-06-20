@@ -59,7 +59,7 @@ public class VideoControllerView extends FrameLayout {
     private ImageButton back;
     private View mRoot;
     private ProgressBar mProgress;
-    private ProgressBar voice;
+    //private ProgressBar voice;
     private TextView mEndTime, mCurrentTime;
     private LinearLayout topContain;
     private AudioManager manager;
@@ -81,12 +81,12 @@ public class VideoControllerView extends FrameLayout {
     private ImageButton         mNextButton;
     private ImageButton         mPrevButton;
     private ImageButton         mFullscreenButton;
-    private ImageButton         pinglun;
-    private ImageButton         tiwen;
+//    private ImageButton         pinglun;
+//    private ImageButton         tiwen;
     private Handler mHandler = new MessageHandler(this);
     private RelativeLayout.LayoutParams layoutParams=null;
     private RelativeLayout.LayoutParams layoutParams2=null;
-
+    private int type=1;
     public VideoControllerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mRoot = null;
@@ -110,9 +110,9 @@ public class VideoControllerView extends FrameLayout {
         Log.i(TAG, TAG);
     }
 
-    public VideoControllerView(Context context) {
+    public VideoControllerView(Context context,int type) {
         this(context, true);
-
+        type=type;
         Log.i(TAG, TAG);
     }
 
@@ -161,7 +161,10 @@ public class VideoControllerView extends FrameLayout {
      */
     protected View makeControllerView() {
         LayoutInflater inflate = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(type==1)
         mRoot = inflate.inflate(R.layout.media_controller, null);
+        else
+        mRoot=inflate.inflate(R.layout.media_controller2,null);
 
         initControllerView(mRoot);
 
@@ -170,10 +173,10 @@ public class VideoControllerView extends FrameLayout {
 
     private void initControllerView(View v) {
         imageButton=(ImageButton)v.findViewById(R.id.play);
-        pinglun=(ImageButton)v.findViewById(R.id.pinglun);
-        tiwen=(ImageButton)v.findViewById(R.id.tiwen);
-        tiwen.setOnClickListener(tiwenListener);
-        pinglun.setOnClickListener(pinglunListener);
+//        pinglun=(ImageButton)v.findViewById(R.id.pinglun);
+//        tiwen=(ImageButton)v.findViewById(R.id.tiwen);
+//        tiwen.setOnClickListener(tiwenListener);
+//        pinglun.setOnClickListener(pinglunListener);
         back=(ImageButton)v.findViewById(R.id.back);
         back.setOnClickListener(backListener);
         topContain=(LinearLayout)v.findViewById(R.id.top_contain) ;
@@ -224,14 +227,14 @@ public class VideoControllerView extends FrameLayout {
             }
             mProgress.setMax(1000);
         }
-        voice=(SeekBar)v.findViewById(R.id.mediacontroller_voice);
-        if(voice!=null){
-            if(voice instanceof SeekBar){
-                SeekBar seekBar=(SeekBar)voice;
-                seekBar.setOnSeekBarChangeListener(mSeekListener1);
-            }
-            voice.setMax(1000 );
-        }
+//        voice=(SeekBar)v.findViewById(R.id.mediacontroller_voice);
+//        if(voice!=null){
+//            if(voice instanceof SeekBar){
+//                SeekBar seekBar=(SeekBar)voice;
+//                seekBar.setOnSeekBarChangeListener(mSeekListener1);
+//            }
+//            voice.setMax(1000 );
+//        }
 
         mEndTime = (TextView) v.findViewById(R.id.time);
         mCurrentTime = (TextView) v.findViewById(R.id.time_current);

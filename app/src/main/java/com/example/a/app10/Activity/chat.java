@@ -29,17 +29,23 @@ public class chat extends AppCompatActivity {
 
     public static chat activityInstance;
     private EaseChatFragment chatFragment;
-    String toChatUsername;
-    private String[] paths=null;
+    private String toChatUsername;
+    private String headurl;
+    private String[] paths={"",""};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         activityInstance = this;
+        if(getIntent().hasExtra("name"))
         toChatUsername = getIntent().getExtras().getString("name");
         //得到对方账号
-        toChatUsername="text";
+        if(getIntent().hasExtra("filePath"))
+            headurl=getIntent().getStringExtra("filePath");
+        paths[0]=Net.getPhotoUrl();
+        paths[1]=headurl;
+
         ((MyApplication) getApplication()).init();
         init();
         EaseUI.getInstance().setSettingsProvider(new EaseUI.EaseSettingsProvider() {
@@ -109,10 +115,7 @@ public class chat extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        chatFragment.onBackPressed();
-//        if (EasyUtils.isSingleActivity(this)) {
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
+        chatFragment.onBackPressed();
         }
     private void init(){
         /*登陆*/

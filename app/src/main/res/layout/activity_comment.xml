@@ -6,31 +6,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.a.app10.Activity.Comment">
-<android.support.v7.widget.Toolbar
-    android:layout_width="match_parent"
-    android:layout_height="75dp"
-    android:background="#f9fafe"
-    ><LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="bottom">
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/back_imag"
-        android:background="@drawable/backblack"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="5dp"/>
-    <TextView
+    <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="发表评价"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="5dp"/>
-</LinearLayout>
-</android.support.v7.widget.Toolbar>
+        android:layout_height="75dp"
+        android:background="#f0f0f0">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/back_imag"
+                android:background="@drawable/backblack"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="12dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发表评价"
+                android:textSize="20sp"
+                android:textColor="@color/stringDark"
+                android:gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,11 +41,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="请评价一下为你服务的专家吧"
+            android:textColor="@color/stringDark"
             android:gravity="center"
-            android:textSize="22sp"
-            android:layout_marginTop="20dp"/>
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"/>
         <ImageView
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="30dp"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/rating"
@@ -55,9 +57,11 @@
             android:layout_height="0dp"
             android:focusable="true"/>
         <EditText
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="80dp"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/input"
             android:layout_weight="0.49"
             android:hint="填写其它评价"
@@ -70,6 +74,9 @@
             android:layout_height="wrap_content"
             android:text="评价"
             android:textSize="20dp"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:id="@+id/comment"
             android:background="@drawable/radio_back"/>
     </LinearLayout>

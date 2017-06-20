@@ -38,7 +38,7 @@ public class FullscreenVideo extends AppCompatActivity {
         setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
         id=getIntent().getStringExtra("id");
         player=VideoDetail.player;
-        controller=new VideoControllerView(this);
+        controller=new VideoControllerView(this,1);
         controller.setId(id);
         controller.setMediaPlayer(new VideoControllerView.MediaPlayerControl() {
             @Override

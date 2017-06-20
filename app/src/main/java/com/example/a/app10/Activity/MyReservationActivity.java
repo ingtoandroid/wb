@@ -89,6 +89,7 @@ public class MyReservationActivity extends AppCompatActivity {
                         myReservation.setOrderDate(jObject.getString("orderDate"));
                         myReservation.setOrderId(jObject.getString("orderId"));
                         myReservation.setOrderType(jObject.getString("orderType"));
+                        myReservation.setFilePath(jObject.getString("filePath"));
                         myReservation.setType(jObject.getInt("type"));
                         datas.add(myReservation);
                     }
@@ -125,29 +126,37 @@ public class MyReservationActivity extends AppCompatActivity {
             holder.item_time_reservation.setText(myReservation.getItem_time_reservation());
             int str_type = myReservation.getType();
 
-            if(str_type == 0){
+            if(str_type == 2){
                 holder.item_consultation_reservation.setEnabled(false);
                 holder.item_evaluate_reservation.setEnabled(false);
 
-                Resources resource = (Resources) getBaseContext().getResources();
+                holder.item_cancle_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+                holder.item_evaluate_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
 
-//                ColorStateList csl_gray = (ColorStateList) resource.getColorStateList(R.color.dividColor);
-                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
-                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
+//                Resources resource = (Resources) getBaseContext().getResources();
+//
+////                ColorStateList csl_gray = (ColorStateList) resource.getColorStateList(R.color.dividColor);
+//                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
+//                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
+            }
+            else if(str_type == 0){
+                holder.item_cancle_reservation.setEnabled(false);
+                holder.item_evaluate_reservation.setEnabled(false);
+
+                holder.item_cancle_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+                holder.item_evaluate_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+
+//                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
+//                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
             }
             else if(str_type == 1){
                 holder.item_cancle_reservation.setEnabled(false);
-                holder.item_evaluate_reservation.setEnabled(false);
-
-                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
-                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
-            }
-            else if(str_type == 2){
-                holder.item_cancle_reservation.setEnabled(false);
                 holder.item_consultation_reservation.setEnabled(false);
 
-                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
-                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
+                holder.item_cancle_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+                holder.item_consultation_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+//                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
+//                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
             }
 
             holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +164,7 @@ public class MyReservationActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(MyReservationActivity.this,chat.class);
                     intent.putExtra("name",datas.get(position).getItem_username_reservation());
+                    intent.putExtra("filePath",datas.get(position).getFilePath());
                     startActivity(intent);
                 }
             });

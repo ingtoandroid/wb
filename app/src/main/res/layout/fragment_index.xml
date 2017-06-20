@@ -38,10 +38,10 @@
                 android:layout_marginBottom="10dp"/>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_weight="0.74"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -64,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/index_right" />
         </LinearLayout>
@@ -108,7 +109,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/index_recycleview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="177dp"
                 android:layout_marginTop="7dp"></android.support.v7.widget.RecyclerView>
 
             <LinearLayout
@@ -234,10 +235,10 @@
                     android:src="@drawable/index_tiwen" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="0.74"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_marginLeft="10dp">
 
@@ -262,6 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
                     android:scaleType="fitXY"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/index_right" />
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
@@ -288,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/index_s_string2"
                     android:textSize="20sp"
-                    android:textColor="@color/stringCenter"
+                    android:textColor="@color/stringDark"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"/>
             </LinearLayout>
@@ -297,7 +299,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/index_shipin_recyclerview"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"></android.support.v7.widget.RecyclerView>
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
     </RelativeLayout>

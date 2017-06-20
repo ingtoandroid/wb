@@ -89,16 +89,16 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.btnClub:
                 if (!isClub){
-                    btnClub.setTextColor(getResources().getColor(R.color.main));
-                    btnPersonal.setTextColor(Color.BLACK);
+                    btnClub.setTextColor(getResources().getColor(R.color.textGreen));
+                    btnPersonal.setTextColor(Color.rgb(50,50,50));
                     isClub=true;
                     loadClub();
                 }
                 break;
             case R.id.btnPersonal:
                 if (isClub){
-                    btnPersonal.setTextColor(getResources().getColor(R.color.main));
-                    btnClub.setTextColor(Color.BLACK);
+                    btnPersonal.setTextColor(getResources().getColor(R.color.textGreen));
+                    btnClub.setTextColor(Color.rgb(50,50,50));
                     isClub=false;
                     loadOrder();
                 }

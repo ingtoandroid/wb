@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -225,6 +226,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                 ColorStateList csl_darkBlack = (ColorStateList) resource.getColorStateList(R.color.stringDark);
                 ColorStateList csl_centerBlack = (ColorStateList) resource.getColorStateList(R.color.stringCenter);
 
+                holder.relativeLayout.setBackgroundResource(R.drawable.tx_background);
                 if (csl_green != null) {
                     holder.tx_sender.setTextColor(csl_green);
                     holder.tx_reseiver.setTextColor(csl_green);
@@ -248,12 +250,22 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                     holder.tx_type.setText("");
                 }
 
+                TextPaint paint = holder.tx_sender.getPaint();
+                paint.setFakeBoldText(true);
+
+                paint = holder.tx_type.getPaint();
+                paint.setFakeBoldText(true);
+
+                paint = holder.tx_reseiver.getPaint();
+                paint.setFakeBoldText(true);
+
             }else if(questionDetail.getType().equals("回复")){
                 Resources resource = (Resources) getBaseContext().getResources();
 
                 ColorStateList csl_white = (ColorStateList) resource.getColorStateList(R.color.textWhiteColor);
 
-                holder.relativeLayout.setBackgroundResource(R.drawable.backgroundcolor);
+                holder.relativeLayout.setBackgroundResource(R.drawable.button_reservation);
+
                 if(csl_white != null){
                     holder.tx_sender.setTextColor(csl_white);
                     holder.tx_reseiver.setTextColor(csl_white);

@@ -92,9 +92,18 @@ public class MyReservation {
         this.type = type;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     private String orderStartTime;
     private String orderEndTime;
     private String orderType;
     private String orderId;
+    private String filePath;
     private int type;
 }
