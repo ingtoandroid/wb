@@ -125,12 +125,12 @@ public class chat extends AppCompatActivity {
                 EMClient.getInstance().login(Net.getInstance().getUsername(), Net.getHx_pwd(), new EMCallBack() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(chat.this,"success",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(chat.this,"success",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(int code, String error) {
-                        Toast.makeText(chat.this,""+error,Toast.LENGTH_LONG).show();
+                        //Toast.makeText(chat.this,""+error,Toast.LENGTH_LONG).show();
                     }
 
                     @Override

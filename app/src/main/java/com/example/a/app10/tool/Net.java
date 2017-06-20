@@ -300,6 +300,11 @@ public class Net {
         return get(url);
     }
 
+    public Call getClassList(String s){
+        String url=URLString.class_list+s;
+        return get(url);
+    }
+
     //  get/post请求
     private Call get(String url){
         Request request = new Request.Builder().url(url).build();
@@ -312,6 +317,7 @@ public class Net {
     }
 
     //
+
 
 
 }
