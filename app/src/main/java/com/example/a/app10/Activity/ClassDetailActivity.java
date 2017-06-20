@@ -55,7 +55,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                     case 1:
                         Toast.makeText(ClassDetailActivity.this,"报名成功",Toast.LENGTH_SHORT).show();
                         btnJoin.setText("取消报名");
-                        btnJoin.setBackgroundResource(R.drawable.not_click_button);
+                        btnJoin.setBackgroundResource(R.drawable.redbutton);
                         isEntere=true;
                         break;
                     case 3:
