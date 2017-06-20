@@ -69,7 +69,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-                startActivity(new Intent(ScienceActivity.this, MessageReminder.class));
+                startActivity(new Intent(ScienceActivity.this, MessageReminderActivity.class));
             }
         });
 

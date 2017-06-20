@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.view.View;
 
 import com.example.a.app10.Adapter.MyClassAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.MessageReminder;
 import com.example.a.app10.bean.MyClassItem;
 import com.example.a.app10.tool.KopItemDecoration;
 import com.example.a.app10.tool.MyInternet;
@@ -50,10 +52,10 @@ public class MyClassActivity extends ToolBarBaseActivity {
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message, "消息", new MyOnClickListener() {
+        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-
+                startActivity(new Intent(MyClassActivity.this, MessageReminderActivity.class));
             }
         });
 

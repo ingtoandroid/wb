@@ -59,7 +59,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-
+                startActivity(new Intent(ShipinActivity.this,MessageReminderActivity.class));
             }
         });
 

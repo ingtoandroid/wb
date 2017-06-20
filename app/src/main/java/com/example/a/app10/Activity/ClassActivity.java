@@ -61,7 +61,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
             @Override
             public void onClick() {
-                startActivity(new Intent(ClassActivity.this, MessageReminder.class));
+                startActivity(new Intent(ClassActivity.this, MessageReminderActivity.class));
             }
         });
 
