@@ -41,7 +41,7 @@ public class MyMessageActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<MyMessage> datas;
-    private ImageView back_message,ivMessage;
+    private ImageView back_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,14 +72,7 @@ public class MyMessageActivity extends AppCompatActivity {
                 finish();
             }
         });
-        ivMessage= (ImageView) findViewById(R.id.ivMessage);
-        new QBadgeView(this).bindTarget(ivMessage).setBadgeNumber(Net.getMegsSize());
-        ivMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyMessageActivity.this, MessageReminder.class));
-            }
-        });
+
     }
 
     private void initDatas(){

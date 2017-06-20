@@ -178,10 +178,12 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                     JSONArray array=all.getJSONArray("dataList");
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
-                        spinnerTexts.add(object.getString("time"));
-                        startTime.add(object.getString("serviceStartTime"));
-                        endTime.add(object.getString("serviceEndTime"));
-                        timeIds.add(object.getString("timeId"));
+                        if (object.getBoolean("abled")){
+                            spinnerTexts.add(object.getString("time"));
+                            startTime.add(object.getString("serviceStartTime"));
+                            endTime.add(object.getString("serviceEndTime"));
+                            timeIds.add(object.getString("timeId"));
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -378,15 +380,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     }
 
     public String getDate(String s){//字符串转“01.01”格式
-        DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date=format.parse(s);
-            int month=date.getMonth();
-            int day=date.getDay();
-            return month+"."+day;
-        } catch (ParseException e) {
-            return s;
-        }
+        //DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        return s.substring(5,6)+"."+s.substring(8,9);
     }
 
     public int getState(boolean b){//获取状态
