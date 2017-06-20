@@ -58,7 +58,9 @@
         <activity
             android:name=".Activity.VideoDetail"
             />
-        <activity android:name=".Activity.ClassActivity" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".Activity.ClassActivity" />
         <activity android:name=".Activity.ClassDetailActivity" />
         <activity android:name=".Activity.MyClassActivity"></activity>
         <activity android:name=".Activity.NewsActivity" />
