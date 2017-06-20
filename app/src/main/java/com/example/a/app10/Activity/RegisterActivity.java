@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +29,14 @@ import org.json.JSONTokener;
 import java.io.IOException;
 public class RegisterActivity extends AppCompatActivity {
     private CoutDownTimerUtils coutDownTimerUtils;
+
+    private ImageButton back;
     private Button login;
     private EditText ed_phonenumber;
     private EditText ed_verification_code;
     private EditText ed_new_password;
     private TextView tx_send_verification;
+    private TextView tx_to_login;
     private URLString strUrl = new URLString();
     private Handler handler = new Handler();
     @Override
@@ -43,14 +48,22 @@ public class RegisterActivity extends AppCompatActivity {
         initEvents();
     }
     private void initViews(){
+        back = (ImageButton)findViewById(R.id.back);
         login=(Button)findViewById(R.id.bu_login_set_newpwd);
         ed_phonenumber = (EditText)findViewById(R.id.input_phontnumber);
         ed_verification_code = (EditText)findViewById(R.id.input_verification);
         ed_new_password = (EditText)findViewById(R.id.input_newpassword);
         tx_send_verification = (TextView)findViewById(R.id.send_verification);
         coutDownTimerUtils=new CoutDownTimerUtils(tx_send_verification,60000,1000);
+        tx_to_login = (TextView)findViewById(R.id.tologin);
     }
     private void initEvents(){
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +76,13 @@ public class RegisterActivity extends AppCompatActivity {
                 getCodeForRegister();
             }
         });
+        tx_to_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     private void checkOutToRegister(){
@@ -198,6 +218,10 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             });
         }
+        else{
+            Toast.makeText(RegisterActivity.this,"手机号不能为空",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void ToastInfo(final String content){

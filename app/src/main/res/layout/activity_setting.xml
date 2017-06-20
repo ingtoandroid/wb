@@ -32,7 +32,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFC7C7CB"
+        android:background="#e1e1e1"
         android:layout_below="@+id/set_newpassword_title"
         android:id="@+id/first_divid"/>
     <RelativeLayout
@@ -54,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
                 android:paddingTop="20dp"
-                android:text="今天有雨"
                 android:textSize="@dimen/text_size_setteing"
                 android:id="@+id/username_setting"/>
             <ImageView
@@ -97,7 +96,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/about_us_item"
             android:id="@+id/thrid_divid"/>
 
@@ -126,7 +125,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/feedback_item"
             android:id="@+id/fourth_divid"/>
 
@@ -155,7 +154,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/clear_cache_item"
             android:id="@+id/fifth_divid"/>
 
@@ -185,7 +184,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFC7C7CB"
+            android:background="@color/dividColor"
             android:layout_below="@+id/current_version_item"
             android:id="@+id/sixth_divid"/>
 

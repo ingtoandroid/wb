@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.a.app10.R;
 
 public class Comment extends AppCompatActivity {
     private ImageView imageView;
+    private ImageView back;
+    private Button commit;
     private EditText editText;
     private int[] pic={R.drawable.star1,R.drawable.star2,R.drawable.star3,R.drawable.star4,R.drawable.star5};
     @Override
@@ -25,6 +29,8 @@ public class Comment extends AppCompatActivity {
     private void init(){
         imageView=(ImageView)findViewById(R.id.rating);
         editText=(EditText)findViewById(R.id.input);
+        back=(ImageButton) findViewById(R.id.back_imag);
+        commit=(Button)findViewById(R.id.comment);
 
     }
     private void initEvent(){
@@ -44,6 +50,18 @@ public class Comment extends AppCompatActivity {
                 else
                     imageView.setBackgroundResource(pic[4]);
                 return false;
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        commit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 

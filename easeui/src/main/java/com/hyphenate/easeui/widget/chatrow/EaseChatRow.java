@@ -2,6 +2,7 @@ package com.hyphenate.easeui.widget.chatrow;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
@@ -22,6 +24,7 @@ import com.hyphenate.easeui.adapter.EaseMessageAdapter;
 import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.model.styles.EaseMessageListItemStyle;
 import com.hyphenate.easeui.utils.EaseUserUtils;
+import com.hyphenate.easeui.utils.GlideCircleTransform;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
 import com.hyphenate.easeui.widget.EaseChatMessageList.MessageListItemClickListener;
 import com.hyphenate.easeui.widget.EaseImageView;
@@ -31,7 +34,7 @@ import java.util.Date;
 
 public abstract class EaseChatRow extends LinearLayout {
     protected static final String TAG = EaseChatRow.class.getSimpleName();
-
+    private String[] paths=null;
     protected LayoutInflater inflater;
     protected Context context;
     protected BaseAdapter adapter;
@@ -69,10 +72,14 @@ public abstract class EaseChatRow extends LinearLayout {
         initView();
     }
 
+    public void setPaths(String[] paths) {
+        this.paths = paths;
+    }
+
     private void initView() {
         onInflateView();
         timeStampView = (TextView) findViewById(R.id.timestamp);
-        userAvatarView = (ImageView) findViewById(R.id.iv_userhead);
+        userAvatarView = (ImageView) findViewById(R.id.iv_userhead);                                                    //头像
         bubbleLayout = findViewById(R.id.bubble);
         usernickView = (TextView) findViewById(R.id.tv_userid);
 
@@ -123,9 +130,14 @@ public abstract class EaseChatRow extends LinearLayout {
         }
         //set nickname and avatar
         if(message.direct() == Direct.SEND){
-            EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
+            //EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
+            if(paths[0]!=null)
+            Glide.with(context).load(paths[0]).transform(new GlideCircleTransform(context)).into(userAvatarView);
         }else{
-            EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
+            //EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
+            if(paths[1]!=null)
+            Glide.with(context).load(paths[1]).transform(new GlideCircleTransform(context)).into(userAvatarView);
+
             EaseUserUtils.setUserNick(message.getFrom(), usernickView);
         }
         

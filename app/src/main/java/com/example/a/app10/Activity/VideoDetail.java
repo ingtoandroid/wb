@@ -11,11 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -67,7 +69,9 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     private ScrollView scrollView;
     private String  id;
     private String uri=null;
+    private EditText ed;
     List<CommentItem> list;
+    private int type=0;
     private VideoControllerView.MediaPlayerControl mediaPlayerControl=new VideoControllerView.MediaPlayerControl() {
         @Override
         public boolean canPause() {
@@ -136,7 +140,8 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_detail);
-        id=getIntent().getStringExtra("id");
+        if(getIntent().hasExtra("id"))
+            id=getIntent().getStringExtra("id");
         initView();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         screenWidth=this.getWindowManager().getDefaultDisplay().getWidth();
@@ -147,16 +152,17 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         pinglun=(TextView)findViewById(R.id.pinglun);
         tiwen=(TextView)findViewById(R.id.tiwen);
         comment=(Button)findViewById(R.id.comment);
+        ed=(EditText)findViewById(R.id.ed);
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
         recyclerView=(RecyclerView)findViewById(R.id.video_pinglun);
         scrollView=(ScrollView)findViewById(R.id.scroll);
-        //showView(0);
+
         SurfaceHolder videoHolder = videoSurface.getHolder();
         container=(FrameLayout)findViewById(R.id.videoSurfaceContainer);
         linearLayout=(LinearLayout)findViewById(R.id.line);
         videoHolder.addCallback(this);
         player = new MediaPlayer();
-        controller = new VideoControllerView(this);
+        controller = new VideoControllerView(this,2);
         controller.setMediaPlayer(mediaPlayerControl);
         controller.setAnchorView((FrameLayout) findViewById(R.id.videoSurfaceContainer));
         player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -168,7 +174,13 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         });
         screenWidth=getWindowManager().getDefaultDisplay().getWidth();
         screenHeight=getWindowManager().getDefaultDisplay().getHeight();
-
+        comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                commit();
+            }
+        });
+        showView(0);
     }
     private void initEvent(){
         Call call=Net.getInstance().shipinDetail(id);
@@ -184,6 +196,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 try {
                     JSONObject jsonObject = new JSONObject(string);
                     uri = jsonObject.getString("filePath");
+                    Log.e("path",""+uri);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -223,12 +236,14 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
             @Override
             public void onClick(View v) {
                 showView(0);
+                type=0;
             }
         });
         tiwen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showView(1);
+                type=1;
             }
         });
 
@@ -291,49 +306,50 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         if(type==0){
             comment.setText("发表评论");
             showRecyclerView(type);
-            pinglun.setTextColor(getResources().getColor(R.color.main));
-            tiwen.setTextColor(Color.BLACK);
+            pinglun.setTextColor(getResources().getColor(R.color.textGreen));
+            tiwen.setTextColor(getResources().getColor(R.color.stringDark));
 
         }
         else{
             comment.setText("提问");
             showRecyclerView(type);
-            pinglun.setTextColor(Color.BLACK);
-            tiwen.setTextColor(getResources().getColor(R.color.main));
+            pinglun.setTextColor(getResources().getColor(R.color.stringDark));
+            tiwen.setTextColor(getResources().getColor(R.color.textGreen));
         }
     }
     private void showRecyclerView(int type){
         if(type==0){
-        Call call=Net.getInstance().getComment(id);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
+            Call call=Net.getInstance().getComment(id);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
 
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String string=response.body().string();
-                try {
-                    JSONArray jsonArray = new JSONArray(new JSONObject(string).getJSONArray("datalist").toString());
-                    Gson gson=new Gson();
-                    list=gson.fromJson(jsonArray.toString(),new TypeToken<List<CommentItem>>(){}.getType());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter=new VideoRecycleAdapter(VideoDetail.this,list);
-                            LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(VideoDetail.this,LinearLayout.VERTICAL,false);
-                            recyclerView.setLayoutManager(linearLayoutManager1);
-                            recyclerView.setAdapter(adapter);
-
-                        }
-                    });
                 }
-                catch (JSONException e){
-                    e.printStackTrace();
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String string=response.body().string();
+                    try {
+                        JSONArray jsonArray = new JSONArray(new JSONObject(string).getJSONArray("datalist").toString());
+                        Gson gson=new Gson();
+                        list=gson.fromJson(jsonArray.toString(),new TypeToken<List<CommentItem>>(){}.getType());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter=new VideoRecycleAdapter(VideoDetail.this,list);
+                                LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(VideoDetail.this,LinearLayout.VERTICAL,false);
+                                recyclerView.setLayoutManager(linearLayoutManager1);
+                                recyclerView.setAdapter(adapter);
+                                Log.e("aaa","s");
+                            }
+                        });
+                    }
+                    catch (JSONException e){
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });}
+            });
+        }
         else
         {
             Call call=Net.getInstance().getTiwen(id);
@@ -366,5 +382,83 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                     }
                 }
             });}
+    }
+    private void commit(){
+        if(type==0){
+            Call call=Net.getInstance().commitPinglun(ed.getText().toString(),id);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+
+
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String s=response.body().string();
+                    try {
+                        JSONObject jsonObject = new JSONObject(s);
+                        if(("1").equals(jsonObject.getString("code"))){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(VideoDetail.this, "评论成功", Toast.LENGTH_SHORT).show();
+                                    ed.setText("");
+                                }
+                            });
+                        }
+                        else
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(VideoDetail.this, "评论失败", Toast.LENGTH_SHORT).show();
+                                    ed.setText("");
+                                }
+                            });
+                    }
+                    catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        }
+        else{
+            Call call =Net.getInstance().commitTiwen(ed.getText().toString(),id);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    String s=response.body().string();
+                    try {
+                        JSONObject jsonObject = new JSONObject(s);
+                        if(("1").equals(jsonObject.getString("code"))){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(VideoDetail.this, "提问成功", Toast.LENGTH_SHORT).show();
+                                    ed.setText("");
+                                }
+                            });
+                        }
+                        else
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(VideoDetail.this, "提问失败", Toast.LENGTH_SHORT).show();
+                                    ed.setText("");
+                                }
+                            });
+                    }
+                    catch (JSONException e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 }

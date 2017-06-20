@@ -4,43 +4,75 @@
     android:id="@+id/activity_content_detailed"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:fitsSystemWindows="true"
     tools:context="com.example.a.app10.Activity.MessageDetailedActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="@drawable/backgroundcolor">
-        <RelativeLayout
+        android:layout_height="50dp"
+        android:id="@+id/title">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backblack"
+            android:id="@+id/back"
+            android:layout_marginBottom="13dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="留言"
+            android:textColor="@color/stringDark"
+            android:textSize="20sp"
+            android:gravity="center"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="快速提问"
-                android:textSize="20sp"
-
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="取消"
-                android:textColor="#ffffff"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="下一步"
-                android:textColor="#ffffff"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
+            android:layout_marginBottom="8dp"/>
     </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/title"
+        android:background="@color/dividColor"
+        android:id="@+id/divid"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/divid"
+        android:layout_above="@+id/send_question_bottom"
+        android:id="@+id/recyclerview"></android.support.v7.widget.RecyclerView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e1e1e1"
+        android:layout_below="@+id/recyclerview"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/send_question_bottom"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/say"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/edit_question"
+            android:hint="想说点什么..."
+            android:background="@null"
+            android:textSize="12sp"
+            android:textColor="@color/stringCenter"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发送"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:id="@+id/askPurse"
+            android:background="@drawable/button_reservation"/>
+    </LinearLayout>
 </RelativeLayout>

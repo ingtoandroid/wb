@@ -31,16 +31,11 @@ public class Net {
     private static String username = "";
     private static String signature = "";
     private static String sex = "";
-
-    public static int getMegsSize() {
-        return megsSize;
-    }
-
-    public static void setMegsSize(int megsSize) {
-        Net.megsSize = megsSize;
-    }
-
     private static int megsSize = 0;
+
+
+
+
     //single
     private Net(){
         okHttpClient=new OkHttpClient();
@@ -132,6 +127,14 @@ public class Net {
         Net.signature = signature;
     }
 
+    public static int getMegsSize() {
+        return megsSize;
+    }
+
+    public static void setMegsSize(int megsSize) {
+        Net.megsSize = megsSize;
+    }
+
     public OkHttpClient getOkHttpClient() {
         return okHttpClient;
     }
@@ -171,7 +174,7 @@ public class Net {
     }
     public Call setHeadImage(File file){
         String url=URLString.head_image;
-        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("iamge",file.getName(),RequestBody.create(MediaType.parse("application/octet-stream"),file)).build();
+        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("avatar",file.getName(),RequestBody.create(MediaType.parse("application/octet-stream"),file)).build();
         return post(url,requestBody);
     }
 
@@ -198,7 +201,7 @@ public class Net {
     }
 
     public Call getAskPurse(String questionID,String questionContent){
-        String url = URLString.save_question_again+"?"+"qusetionId="+questionID+"&"
+        String url = URLString.save_question_again+"?"+"questionId="+questionID+"&"
                 +"questionContent="+questionContent;
         return get(url);
     }
@@ -209,7 +212,8 @@ public class Net {
     }
 
     public Call getMyReservation() {
-        String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
+//        String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
+        String url = URLString.order_new_type_list + "?" + "infoid=" + "6b8c6112-305e-4bb2-991b-b00805669fe0";
         return get(url);
     }
 

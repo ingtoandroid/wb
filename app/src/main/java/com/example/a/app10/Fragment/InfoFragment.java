@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.Activity.ClassDetailActivity;
 import com.example.a.app10.Activity.MessageReminderActivity;
+import com.example.a.app10.Activity.MyClassActivity;
 import com.example.a.app10.Activity.SettingActivity;
 import com.example.a.app10.Activity.ModifyDataActivity;
 import com.example.a.app10.Activity.QuestionActivity;
@@ -21,6 +23,7 @@ import com.example.a.app10.Activity.MyMessageActivity;
 import com.example.a.app10.Activity.MyPointsActivity;
 import com.example.a.app10.Activity.MyReservationActivity;
 import com.example.a.app10.R;
+import com.example.a.app10.tool.GlideCircleTransform;
 import com.example.a.app10.tool.Net;
 
 import q.rorbin.badgeview.QBadgeView;
@@ -46,9 +49,10 @@ public class InfoFragment extends Fragment {
     private RelativeLayout my_message;
     private RelativeLayout my_body_data;
     private RelativeLayout my_question;
-    private TextView  modify_data;
     private Button cog;
     private Button messageMinder;
+    private TextView username;
+    private ImageView headImage;
     public InfoFragment() {
         // Required empty public constructor
     }
@@ -99,7 +103,7 @@ public class InfoFragment extends Fragment {
         course_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),ClassDetailActivity.class);
+                Intent intent = new Intent(getContext(),MyClassActivity.class);
                 startActivity(intent);
             }
         });
@@ -139,15 +143,6 @@ public class InfoFragment extends Fragment {
 
         });
 
-        modify_data = (TextView)view.findViewById(R.id.modify_data);
-        modify_data.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ModifyDataActivity.class);
-                startActivity(intent);
-            }
-        });
-
         cog = (Button) view.findViewById(R.id.cog);
         cog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +161,12 @@ public class InfoFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        username = (TextView)view.findViewById(R.id.username);
+        username.setText(Net.getPersonName());
+
+        headImage = (ImageView)view.findViewById(R.id.head_image);
+        Glide.with(getContext()).load(Net.getPhotoUrl()).into(headImage);
         return view;
     }
 

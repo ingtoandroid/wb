@@ -1,6 +1,7 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,16 +29,23 @@ public class chat extends AppCompatActivity {
 
     public static chat activityInstance;
     private EaseChatFragment chatFragment;
-    String toChatUsername;
+    private String toChatUsername;
+    private String headurl;
+    private String[] paths={"",""};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         activityInstance = this;
+        if(getIntent().hasExtra("name"))
         toChatUsername = getIntent().getExtras().getString("name");
         //得到对方账号
-        toChatUsername="text";
+        if(getIntent().hasExtra("filePath"))
+            headurl=getIntent().getStringExtra("filePath");
+        paths[0]=Net.getPhotoUrl();
+        paths[1]=headurl;
+
         ((MyApplication) getApplication()).init();
         init();
         EaseUI.getInstance().setSettingsProvider(new EaseUI.EaseSettingsProvider() {
@@ -66,6 +74,7 @@ public class chat extends AppCompatActivity {
         Bundle b=new Bundle();
         b.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         b.putString(EaseConstant.EXTRA_USER_ID,toChatUsername);
+        b.putStringArray("paths",paths);
         chatFragment.setArguments(b);
         getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
 
@@ -106,10 +115,7 @@ public class chat extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        chatFragment.onBackPressed();
-//        if (EasyUtils.isSingleActivity(this)) {
-//            Intent intent = new Intent(this, MainActivity.class);
-//            startActivity(intent);
+        chatFragment.onBackPressed();
         }
     private void init(){
         /*登陆*/

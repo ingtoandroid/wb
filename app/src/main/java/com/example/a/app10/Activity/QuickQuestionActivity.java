@@ -64,14 +64,26 @@ public class QuickQuestionActivity extends ToolBarBaseActivity {
                     int code = jsonObject.getInt("code");
                     if(code == 1) {
                         //成功
-                        Toast.makeText(QuickQuestionActivity.this,"发送成功",Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(QuickQuestionActivity.this,"发送成功",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     } else {
-                        Toast.makeText(QuickQuestionActivity.this,"发送失败",Toast.LENGTH_SHORT).show();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(QuickQuestionActivity.this,"发送失败",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                onBackPressed();
+                finish();
             }
         });
     }

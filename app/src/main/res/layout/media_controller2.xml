@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#7f000000"
+        android:gravity="top"
+        android:weightSum="1"
+        android:id="@+id/top_contain"
+        >
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/back"
+            android:background="@drawable/back"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/tiwen"
+            android:layout_gravity="center_vertical"/>
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/pinglun"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/play"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#7f000000"
+        android:id="@+id/container_tool"
+        android:gravity="center_vertical"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:paddingTop="4dip"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<ImageButton android:id="@+id/prev"-->
+        <!--style="@android:style/MediaButton.Previous"-->
+        <!--android:contentDescription="@string/description" />-->
+
+        <!--<ImageButton android:id="@+id/rew"-->
+        <!--style="@android:style/MediaButton.Rew"-->
+        <!--android:contentDescription="@string/description" />-->
+
+
+        <!--<ImageButton android:id="@+id/pause"-->
+        <!--style="@android:style/MediaButton.Play"></ImageButton>-->
+        <!--&lt;!&ndash;android:contentDescription="@string/description" />&ndash;&gt;-->
+
+        <!--<ImageButton android:id="@+id/ffwd"-->
+        <!--style="@android:style/MediaButton.Ffwd"-->
+        <!--android:contentDescription="@string/description" />-->
+
+        <!--<ImageButton android:id="@+id/next"-->
+        <!--style="@android:style/MediaButton.Next"-->
+        <!--android:contentDescription="@string/description" />-->
+
+        <!--</LinearLayout>-->
+        <ImageButton android:id="@+id/pause"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="5dp"></ImageButton>
+        <TextView android:id="@+id/time_current"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/video_bar_text"
+            android:layout_weight="1.5"/>
+
+        <SeekBar
+            android:id="@+id/mediacontroller_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+
+            android:layout_height="32dp"
+            android:layout_weight="4" />
+
+        <TextView android:id="@+id/time"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="@color/video_bar_text"
+            android:layout_weight="1.5"/>
+        <!--<ImageButton-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:background="@drawable/voice"-->
+            <!--android:scaleType="centerInside"-->
+
+
+            <!--/>-->
+        <!--<SeekBar-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:layout_weight="3"-->
+            <!--android:id="@+id/mediacontroller_voice"/>-->
+    </LinearLayout>
+        <ImageButton android:id="@+id/fullscreen"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:scaleType="centerInside"
+            android:layout_marginRight="10dp"
+
+            android:layout_weight="1"></ImageButton>
+        <!--android:contentDescription="@string/description" />-->
+
+
+
+    </LinearLayout>
+</RelativeLayout>

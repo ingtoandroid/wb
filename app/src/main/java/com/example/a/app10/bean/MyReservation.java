@@ -84,17 +84,26 @@ public class MyReservation {
         this.orderId = orderId;
     }
 
-    public String getTypeId() {
-        return TypeId;
+    public int getType() {
+        return type;
     }
 
-    public void setTypeId(String typeId) {
-        TypeId = typeId;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
     private String orderStartTime;
     private String orderEndTime;
     private String orderType;
     private String orderId;
-    private String TypeId;
+    private String filePath;
+    private int type;
 }

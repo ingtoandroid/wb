@@ -55,8 +55,13 @@ public class QuestionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+        datas = new ArrayList<>();
         initData();
-
+//        MyData myData = new MyData();
+//        myData.setContent("123");
+//        myData.setHeadImageURL("233");
+//        myData.setUsername("333");
+//        datas.add(myData);
         recyclerView = (RecyclerView)findViewById(R.id.question_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
@@ -70,9 +75,8 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void initData(){
-        datas = new ArrayList<>();
 
-        Call call = Net.getInstance().getQuestion("cf4c3c57-9a94-43e8-b72e-d89a586506dc");
+        Call call = Net.getInstance().getQuestion(Net.getPersonID());
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

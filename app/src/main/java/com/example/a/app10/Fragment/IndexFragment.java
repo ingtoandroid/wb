@@ -101,9 +101,13 @@ public class IndexFragment extends Fragment {
         shipin=(LinearLayout)view.findViewById(R.id.index_shipin);
         ketang=(LinearLayout)view.findViewById(R.id.index_ketang);
         zixun=(LinearLayout)view.findViewById(R.id.index_zixun);
-        init();
         getData();
+        init();
         return view;
+    }
+
+    private void initEvent(){
+
     }
     private void init(){
         quick_question.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +117,7 @@ public class IndexFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         findExpert.setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,20 +125,7 @@ public class IndexFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        indexExpertAdapter.setItemOnClickListener(new IndexExpertAdapter.ItemOnClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent=new Intent(getContext(), ProfessorDetailActivity.class);
-                startActivity(intent);
-            }
-        });
-        shipinAdapter.setItemOnClickListener(new ShipinAdapter.ItemOnClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Intent intent=new Intent(getContext(), VideoDetail.class);
-                startActivity(intent);
-            }
-        });
+
         kepu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,6 +179,13 @@ public class IndexFragment extends Fragment {
                             LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL,false);
                             indexExpertRecycleView.setLayoutManager(linearLayoutManager);
                             indexExpertRecycleView.setAdapter(indexExpertAdapter);
+                            indexExpertAdapter.setItemOnClickListener(new IndexExpertAdapter.ItemOnClickListener() {
+                                @Override
+                                public void onClick(View view, int position) {
+                                    Intent intent=new Intent(getContext(), ProfessorDetailActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     });
                 }
@@ -229,7 +228,8 @@ public class IndexFragment extends Fragment {
                         tiWenAdapter=new TiWenAdapter(getContext(),list2);
                         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
                         indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
-                        indexExpertRecycleView.setAdapter(tiWenAdapter);
+                        indexTiwenRecycleView.setAdapter(tiWenAdapter);
+
                     }
                 });
 
@@ -263,7 +263,15 @@ public class IndexFragment extends Fragment {
                         shipinAdapter=new ShipinAdapter(getContext(),list3);
                         LinearLayoutManager linearLayoutManager2=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
                         indexShipinRecyclerView.setLayoutManager(linearLayoutManager2);
-                        indexExpertRecycleView.setAdapter(shipinAdapter);
+                        indexShipinRecyclerView.setAdapter(shipinAdapter);
+                        shipinAdapter.setItemOnClickListener(new ShipinAdapter.ItemOnClickListener() {
+                            @Override
+                            public void onClick(View view, int position) {
+                                Intent intent=new Intent(getContext(), VideoDetail.class);
+                                intent.putExtra("id",list3.get(position).getVideoId());
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
             }
