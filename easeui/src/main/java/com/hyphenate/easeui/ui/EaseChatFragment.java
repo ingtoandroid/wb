@@ -115,14 +115,11 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     static final int ITEM_TAKE_PICTURE = 1;
     static final int ITEM_PICTURE = 2;
     static final int ITEM_LOCATION = 3;
-    static final int ITEM_VIDEO=4;
-    static final int ITEM_FILE=5;
-    static final int ITEM_VOICE=6;
-    static final int ITEM_VIDEO_CALL=7;
-    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location ,R.string.attach_video,R.string.attach_file};
+    protected int[] itemStrings = { R.string.attach_take_pic, R.string.attach_picture, R.string.attach_location};
     protected int[] itemdrawables = { R.drawable.ease_chat_takepic_selector, R.drawable.ease_chat_image_selector,
-            R.drawable.ease_chat_location_selector,R.drawable.em_chat_video_selector,R.drawable.em_chat_file_selector };
-    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION,ITEM_VIDEO,ITEM_FILE };
+            R.drawable.ease_chat_location_selector,R.drawable.em_chat_video_selector,R.drawable.em_chat_file_selector ,
+            R.drawable.em_chat_video_call_selector,R.drawable.em_chat_voice_call_selector};
+    protected int[] itemIds = { ITEM_TAKE_PICTURE, ITEM_PICTURE, ITEM_LOCATION };
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
     private String[] paths=null;
@@ -422,44 +419,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                     Toast.makeText(getActivity(), R.string.unable_to_get_loaction, Toast.LENGTH_SHORT).show();
                 }
                 
-            } else if(requestCode==REQUEST_CODE_VIDEO){//VIDEO
-                if (data != null) {
-                    /*找本地视频并发送*/
-                        Cursor cursor=getContext().getContentResolver().query(data.getData(),null,null,null,null);
-                        cursor.moveToFirst();
-                        String path=cursor.getString(1);// 图片文件路径   
-                        String dur=cursor.getString(3);// 图片
-                        File file = new File(PathUtil.getInstance().getImagePath(), "thvideo" + System.currentTimeMillis());
-                        try {
-                            FileOutputStream fos = new FileOutputStream(file);
-                            Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(path, 3);
-                            ThumbBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            fos.close();
-                            sendVideoMessage(path, file.getAbsolutePath(), Integer.valueOf(dur));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-//                    Uri selectedVideo = data.getData();
-//                    String[] filePathColumn = { MediaStore.Video.Media.DATA };
-//                    Cursor cursor = getContext().getContentResolver().query(selectedVideo ,filePathColumn, null, null, null);
-//                    cursor.moveToFirst();
-//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                    String videoPath = cursor.getString(columnIndex);
-//                    cursor.close();
-
-
-                }
-
-
-
-            } else if(requestCode==REQUEST_CODE_SELECT_FILE){
-                if (data != null) {
-                    Uri uri = data.getData();
-                    if (uri != null) {
-                        sendFileByUri(uri);
-                    }
-                }
-
             }
 
         }
@@ -704,21 +663,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             case ITEM_LOCATION:
                 startActivityForResult(new Intent(getActivity(), EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
                 break;
-            case ITEM_VIDEO:
-                /*发送视频*/
-                selectVideoFromLocal();
-                break;
-            case ITEM_FILE:
-                /*发送文件*/
-                selectFileFromLocal();
-                break;
-            case ITEM_VOICE:
-                /*语音通话*/
-                break;
-            case ITEM_VIDEO_CALL:
-                /*视频通话*/
-                break;
-
             default:
                 break;
             }

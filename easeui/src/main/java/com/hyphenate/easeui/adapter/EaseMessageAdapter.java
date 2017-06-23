@@ -242,10 +242,11 @@ public class EaseMessageAdapter extends BaseAdapter{
         case FILE:
             chatRow = new EaseChatRowFile(context, message, position, this);
             break;
-        case IMAGE:
-            chatRow = new EaseChatRowImage(context, message, position, this);
-            break;
-        case VOICE:
+			case IMAGE:
+				chatRow = new EaseChatRowImage(context, message, position, this);
+				break;
+			case VOICE:
+
             chatRow = new EaseChatRowVoice(context, message, position, this);
             break;
         case VIDEO:

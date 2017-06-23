@@ -16,8 +16,10 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.DemoHelper;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.ui.ChatFragment;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EasyUtils;
@@ -41,12 +43,13 @@ public class chat extends AppCompatActivity {
         if(getIntent().hasExtra("name"))
         toChatUsername = getIntent().getExtras().getString("name");
         //得到对方账号
+        toChatUsername="yuanshuai1";
         if(getIntent().hasExtra("filePath"))
             headurl=getIntent().getStringExtra("filePath");
         paths[0]=Net.getPhotoUrl();
         paths[1]=headurl;
 
-        ((MyApplication) getApplication()).init();
+        //((MyApplication) getApplication()).init();
         init();
         EaseUI.getInstance().setSettingsProvider(new EaseUI.EaseSettingsProvider() {
             @Override
@@ -70,7 +73,7 @@ public class chat extends AppCompatActivity {
             }
         });
 
-        chatFragment = new EaseChatFragment();
+        chatFragment = new ChatFragment();
         Bundle b=new Bundle();
         b.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         b.putString(EaseConstant.EXTRA_USER_ID,toChatUsername);
@@ -118,11 +121,12 @@ public class chat extends AppCompatActivity {
         chatFragment.onBackPressed();
         }
     private void init(){
+        DemoHelper.getInstance().init(this);
         /*登陆*/
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EMClient.getInstance().login(Net.getInstance().getUsername(), Net.getHx_pwd(), new EMCallBack() {
+                EMClient.getInstance().login("yuanshuai", "yuanshuai", new EMCallBack() {
                     @Override
                     public void onSuccess() {
                         //Toast.makeText(chat.this,"success",Toast.LENGTH_LONG).show();
