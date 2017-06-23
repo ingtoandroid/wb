@@ -43,7 +43,7 @@ public class chat extends AppCompatActivity {
         if(getIntent().hasExtra("name"))
         toChatUsername = getIntent().getExtras().getString("name");
         //得到对方账号
-        toChatUsername="yuanshuai1";
+        //toChatUsername="yuanshuai1";
         if(getIntent().hasExtra("filePath"))
             headurl=getIntent().getStringExtra("filePath");
         paths[0]=Net.getPhotoUrl();
@@ -126,7 +126,7 @@ public class chat extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EMClient.getInstance().login("yuanshuai", "yuanshuai", new EMCallBack() {
+                EMClient.getInstance().login(Net.getUsername(), Net.getHx_pwd(), new EMCallBack() {
                     @Override
                     public void onSuccess() {
                         //Toast.makeText(chat.this,"success",Toast.LENGTH_LONG).show();

@@ -30,7 +30,7 @@
         android:name="com.hyphenate.easeui.DemoApplication">
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1140170613115884#ysapp1" />
+            android:value="	1168170607178561#yuejiansports" />
         <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -117,7 +117,11 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity.SplashActivity"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
         <activity android:name=".Activity.Comment"
@@ -127,11 +131,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.chat"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.hyphenate.easeui.ui.VoiceCallActivity"></activity>
         <activity android:name="com.hyphenate.easeui.ui.VideoCallActivity"></activity>
