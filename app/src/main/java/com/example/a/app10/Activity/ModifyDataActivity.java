@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class ModifyDataActivity extends AppCompatActivity {
     private String signature = "";
     private String headImageUrl = "";
 
-    private ImageView back;
+    private ImageButton back;
     private ImageView im_headImage;
     private EditText ed_username;
     private TextView tx_phoneNumber;
@@ -74,7 +75,7 @@ public class ModifyDataActivity extends AppCompatActivity {
     }
 
     private void init(){
-        back = (ImageView)findViewById(R.id.back);
+        back = (ImageButton) findViewById(R.id.back);
         im_headImage = (ImageView)findViewById(R.id.head_image);
         ed_username = (EditText)findViewById(R.id.username);
         tx_phoneNumber = (TextView)findViewById(R.id.phone_number);

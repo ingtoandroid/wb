@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class QuestionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyData> datas;
-    private ImageView back_question;
+    private ImageButton back_question;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.question_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
-        back_question = (ImageView)findViewById(R.id.back_question);
+        back_question = (ImageButton) findViewById(R.id.back_question);
         back_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

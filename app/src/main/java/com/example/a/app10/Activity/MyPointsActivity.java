@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ import java.util.List;
 public class MyPointsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyPoint> datas;
-    private ImageView back_image;
+    private ImageButton back_image;
     private Handler handler = new Handler();
     private TextView tx_point;
     private String integral;
@@ -61,7 +62,7 @@ public class MyPointsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
 
-        back_image = (ImageView)findViewById(R.id.back);
+        back_image = (ImageButton) findViewById(R.id.back);
         back_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

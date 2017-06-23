@@ -1,6 +1,7 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,7 +43,8 @@ public class MyMessageActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<MyMessage> datas;
-    private ImageView back_message,ivMessage;
+    private ImageButton back_message;
+    private ImageView ivMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +68,7 @@ public class MyMessageActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.message_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MyAdapter());
-        back_message = (ImageView)findViewById(R.id.back_messaage);
+        back_message = (ImageButton) findViewById(R.id.back_messaage);
         back_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

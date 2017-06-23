@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ public class MyReservationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<MyReservation> datas;
-    private ImageView back;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class MyReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_reservation);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        back = (ImageView)findViewById(R.id.back_reservation);
+        back = (ImageButton) findViewById(R.id.back_reservation);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

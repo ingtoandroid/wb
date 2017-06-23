@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,7 +53,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
     private List<QuestionDetail> list;
     private List<MyCourse> courses;
     private RecyclerView recyclerView;
-    private ImageView imageView;
+    private ImageButton imageView;
     private Button askPurse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
             questionID = getIntent().getStringExtra("questionID");
         }
 
-        imageView = (ImageView)findViewById(R.id.back);
+        imageView = (ImageButton)findViewById(R.id.back);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

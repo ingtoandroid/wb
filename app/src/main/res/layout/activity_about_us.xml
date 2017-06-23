@@ -10,7 +10,7 @@
         android:layout_height="75dp"
         android:id="@+id/set_newpassword_title"
         android:gravity="bottom">
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
