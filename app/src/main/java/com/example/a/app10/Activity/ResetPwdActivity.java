@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.a.app10.R;
 import com.example.a.app10.bean.URLString;
+import com.example.a.app10.tool.CoutDownTimerUtils;
 import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -36,6 +37,7 @@ public class ResetPwdActivity extends AppCompatActivity {
     private Button login;
     private ImageButton back;
     private Handler handler = new Handler();
+    private CoutDownTimerUtils coutDownTimerUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class ResetPwdActivity extends AppCompatActivity {
         ed_phonenumber = (EditText)findViewById(R.id.input_phontnumber);
         ed_verification_code = (EditText)findViewById(R.id.input_verification);
         ed_new_password = (EditText)findViewById(R.id.input_newpassword);
+        coutDownTimerUtils=new CoutDownTimerUtils(send_verification,60000,1000);
     }
 
     private void initEvent(){
@@ -128,6 +131,7 @@ public class ResetPwdActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(ResetPwdActivity.this, "发送成功", Toast.LENGTH_SHORT).show();
+                                    coutDownTimerUtils.start();
                                 }
                             });
                         }

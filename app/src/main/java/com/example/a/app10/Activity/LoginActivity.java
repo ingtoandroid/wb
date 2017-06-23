@@ -143,8 +143,9 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("id", username);
                             editor.putString("pwd", password);
                             editor.commit();
-                            Intent intent = new Intent(LoginActivity.this,Main1Activity.class);
-                            startActivity(intent);
+                            finish();
+//                            Intent intent = new Intent(LoginActivity.this,Main1Activity.class);
+//                            startActivity(intent);
                         }
                         else if(code == 100){
                             handler.post(new Runnable() {

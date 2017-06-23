@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.a.app10.Activity.ClassDetailActivity;
+import com.example.a.app10.Activity.LoginActivity;
 import com.example.a.app10.Activity.MessageReminderActivity;
 import com.example.a.app10.Activity.MyClassActivity;
 import com.example.a.app10.Activity.SettingActivity;
@@ -89,6 +90,12 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        if(Net.getPersonID().equals("")){
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+        }
+
         View view=inflater.inflate(R.layout.fragment_info,container,false);
         reservation = (RelativeLayout)view.findViewById(R.id.reservation);
         reservation.setOnClickListener(new View.OnClickListener() {

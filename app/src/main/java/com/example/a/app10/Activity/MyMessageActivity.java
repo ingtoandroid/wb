@@ -77,7 +77,7 @@ public class MyMessageActivity extends AppCompatActivity {
         ivMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyMessageActivity.this, MessageReminder.class));
+                startActivity(new Intent(MyMessageActivity.this, MessageReminderActivity.class));
             }
         });
     }

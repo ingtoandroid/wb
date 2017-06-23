@@ -17,21 +17,21 @@
             android:background="@drawable/back"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"/>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"></LinearLayout>
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/tiwen"
-            android:layout_gravity="center_vertical"/>
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/pinglun"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"/>
+        <!--<LinearLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"></LinearLayout>-->
+        <!--<ImageButton-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:id="@+id/tiwen"-->
+        <!--android:layout_gravity="center_vertical"/>-->
+        <!--<ImageButton-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:id="@+id/pinglun"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_gravity="center_vertical"/>-->
     </LinearLayout>
     <ImageButton
         android:layout_width="wrap_content"
@@ -49,11 +49,6 @@
         android:paddingLeft="5dp"
         android:paddingRight="5dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
         <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
@@ -83,64 +78,66 @@
         <!--android:contentDescription="@string/description" />-->
 
         <!--</LinearLayout>-->
-        <ImageButton android:id="@+id/pause"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginLeft="5dp"></ImageButton>
-        <TextView android:id="@+id/time_current"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/video_bar_text"
-            android:layout_weight="1.5"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <ImageButton android:id="@+id/pause"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"></ImageButton>
+            <TextView
+                android:id="@+id/time_current"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_width="65dp"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textColor="@color/video_bar_text" />
 
-        <SeekBar
-            android:id="@+id/mediacontroller_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="wrap_content"
+            <SeekBar
+                android:id="@+id/mediacontroller_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                />
 
-            android:layout_height="32dp"
-            android:layout_weight="4" />
-
-        <TextView android:id="@+id/time"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:textColor="@color/video_bar_text"
-            android:layout_weight="1.5"/>
+            <TextView android:id="@+id/time"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:layout_width="65dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/video_bar_text"
+                />
+        </LinearLayout>
         <!--<ImageButton-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="20dp"-->
-            <!--android:background="@drawable/voice"-->
-            <!--android:scaleType="centerInside"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/voice"-->
+        <!--android:scaleType="centerInside"-->
 
-
-            <!--/>-->
+        <!--/>-->
         <!--<SeekBar-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="32dp"-->
-            <!--android:layout_weight="3"-->
-            <!--android:id="@+id/mediacontroller_voice"/>-->
-    </LinearLayout>
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="32dp"-->
+        <!--android:layout_weight="3"-->
+        <!--android:id="@+id/mediacontroller_voice"/>-->
+
         <ImageButton android:id="@+id/fullscreen"
             android:layout_marginLeft="5dp"
             android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:scaleType="centerInside"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
             android:layout_marginRight="10dp"
-
-            android:layout_weight="1"></ImageButton>
+            ></ImageButton>
         <!--android:contentDescription="@string/description" />-->
 
 

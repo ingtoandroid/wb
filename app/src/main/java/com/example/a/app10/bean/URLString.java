@@ -20,7 +20,7 @@ public class URLString {
     final static public String login=path+"user/login";
     final static public String register=path+"user/register";
     final static public String send_code=path+"user/send_code";
-        final static public String reset_pwd = path+"user/pwd_reset";
+    final static public String reset_pwd = path+"user/pwd_reset";
     final static public String head_image=path+"associator/modelName_associator_save";
 
     //myAPI

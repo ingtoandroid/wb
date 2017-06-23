@@ -28,6 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".tool.MyApplication">
+        <!--<provider-->
+            <!--android:authorities=""-->
+            <!--android:name=""-->
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1140170613115884#ysapp1" />
@@ -79,7 +82,7 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity.PersonalActivity"
             android:screenOrientation="portrait">
-
+            
         </activity>
         <activity android:name=".Activity.ResetPwdActivity"
             android:screenOrientation="portrait"/>
@@ -129,6 +132,15 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.chat"
             android:screenOrientation="portrait"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.ys.android.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

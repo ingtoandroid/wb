@@ -64,7 +64,7 @@
             android:layout_below="@id/second_divid"
             android:id="@+id/input_verification_layout">
             <EditText
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/input_valid"
                 android:textColor="@color/stringCenter"
@@ -79,9 +79,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/input_verification"
+                android:gravity="right"
                 android:text="@string/send_verification"
+                android:textSize="18sp"
                 android:textColor="@color/textGreen"
-                android:textSize="20sp"
                 android:layout_centerVertical="true"
                 android:id="@+id/send_verification"/>
         </RelativeLayout>

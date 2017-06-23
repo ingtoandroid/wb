@@ -1,11 +1,13 @@
 package com.example.a.app10.Activity;
 
 import android.annotation.SuppressLint;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -28,6 +30,11 @@ public class FullscreenVideo extends AppCompatActivity {
     private MediaPlayer player;
     private VideoControllerView controller;
     private String id;
+    private float ox,oy;
+    private float nx,ny;
+    private AudioManager audioManager;
+    private int  max;
+    private final float f=40f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +44,8 @@ public class FullscreenVideo extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(SCREEN_ORIENTATION_LANDSCAPE);
         id=getIntent().getStringExtra("id");
+        audioManager = (AudioManager) this.getSystemService(AUDIO_SERVICE);
+        max=audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         player=VideoDetail.player;
         controller=new VideoControllerView(this,1);
         controller.setId(id);
@@ -119,15 +128,102 @@ public class FullscreenVideo extends AppCompatActivity {
 
             }
         });
-        video.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(FullscreenVideo.this, "aaa", Toast.LENGTH_SHORT).show();
-                controller.show();
-            }
-        });
+//        video.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Toast.makeText(FullscreenVideo.this, "aaa", Toast.LENGTH_SHORT).show();
+//                controller.show();
+//            }
+//        });
+//        video.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()){
+//                    case MotionEvent.ACTION_DOWN:
+//                        ox=event.getX();
+//                        oy=event.getY();
+//                        Toast.makeText(FullscreenVideo.this, "down", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        nx=event.getX();
+//                        ny=event.getY();
+//                        Toast.makeText(FullscreenVideo.this, "move", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        Toast.makeText(FullscreenVideo.this, "up ", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                float dx=Math.abs(nx-ox);
+//                float dy=Math.abs(ny-oy);
+//                if(dy>dx){
+//                    if(ny>oy){
+//                /*降低音量*/
+//                        subVoice();
+//
+//                    }
+//                    else{
+//                /*提高音量*/
+//                        addvoice();
+//                    }
+//                }
+//                return false;
+//            }
+//        });
 
     }
 
+    private void addvoice(){
+        int duration=audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        int  n=++duration;
+        if(n>max)
+            n=max;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,n,AudioManager.FLAG_SHOW_UI);
+    }
+    private void subVoice(){
+        int duration=audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        int n=--duration;
+        if(n<0)
+            n=0;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,n,AudioManager.FLAG_SHOW_UI);
+    }
 
-}
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                ox=event.getX();
+                oy=event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                nx=event.getX();
+                ny=event.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                if(Math.abs(event.getY()-oy)<f)
+                    controller.show();
+                break;
+            default:
+                break;
+        }
+        float dx=Math.abs(nx-ox);
+        float dy=Math.abs(ny-oy);
+        if(dy>f){
+            if(dy>dx){
+                if(ny>oy){
+                /*降低音量*/
+                    subVoice();
+
+                }
+                else{
+                /*提高音量*/
+                    addvoice();
+                }
+            }
+        }
+
+        return false;
+    }
+    }
+

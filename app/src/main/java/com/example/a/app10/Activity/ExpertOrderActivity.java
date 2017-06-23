@@ -2,6 +2,7 @@ package com.example.a.app10.Activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -241,6 +242,10 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 dialog.show();
                 break;
             case R.id.btnOrder:
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(ExpertOrderActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
                 order();
                 break;
         }

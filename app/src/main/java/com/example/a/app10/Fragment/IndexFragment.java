@@ -205,8 +205,9 @@ public class IndexFragment extends Fragment {
             public void onResponse(Response response) throws IOException {
                 list2=new ArrayList<QuestionItem>();
                 String str_response = response.body().string();
-                JSONTokener jsonTokener = new JSONTokener(str_response);
+
                 try {
+                    JSONTokener jsonTokener = new JSONTokener(str_response);
                     JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                     JSONArray jsonArray = jsonObject.getJSONArray("datalist");
                     for(int i = 0 ;i<jsonArray.length();i++){

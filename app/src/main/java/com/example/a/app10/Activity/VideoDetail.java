@@ -177,6 +177,10 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(VideoDetail.this,LoginActivity.class);
+                    startActivity(intent);
+                }
                 commit();
             }
         });
