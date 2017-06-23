@@ -42,7 +42,6 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
     private List<ClassItem> list;
     private Button btnClub, btnPersonal;
     private boolean isClub= true;
-    private View item1;
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;

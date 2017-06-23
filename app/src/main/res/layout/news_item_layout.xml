@@ -16,19 +16,29 @@
         android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
+        <TextView
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:id="@+id/tvTitle"
+            android:textColor="@color/stringDark"
+            android:gravity="center_vertical"
+            android:text="体育部"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
-
             <TextView
-                android:maxLines="2"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="15sp"
-                android:textColor="@color/stringDark"
+                android:textColor="@color/stringLight"
                 android:gravity="center_vertical"
                 android:text="2016健身计划"
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvDepart"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
@@ -40,13 +50,5 @@
                 android:layout_width="80dp"
                 android:layout_height="match_parent" />
         </LinearLayout>
-        <TextView
-            android:textColor="@color/stringLight"
-            android:gravity="center_vertical"
-            android:text="体育部"
-            android:id="@+id/tvDepart"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

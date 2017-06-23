@@ -183,6 +183,8 @@ public class IndexFragment extends Fragment {
                                 @Override
                                 public void onClick(View view, int position) {
                                     Intent intent=new Intent(getContext(), ProfessorDetailActivity.class);
+                                    intent.putExtra("expertId",list1.get(position).getExpertId());
+                                    intent.putExtra("imageUrl",list1.get(position).getImageUrl());
                                     startActivity(intent);
                                 }
                             });

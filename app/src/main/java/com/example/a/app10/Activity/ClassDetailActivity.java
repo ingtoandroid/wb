@@ -305,6 +305,8 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
         if (isEntere){//判断是否已报名
             btnJoin.setText("已报名");
             btnJoin.setBackgroundResource(R.drawable.not_click_button);
+        } else {
+
         }
     }
 
