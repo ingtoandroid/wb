@@ -66,10 +66,10 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
+        setRightButton(0, "筛选", new MyOnClickListener() {
             @Override
             public void onClick() {
-                startActivity(new Intent(ScienceActivity.this, MessageReminder.class));
+                openDrawer();
             }
         });
 
@@ -151,10 +151,14 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         for (int i=0;i<3;i++){
             int length=numbers[i]<6 ? numbers[i] :6;
             for (int j=0;j<length;j++){
+                int index=i*EVEAY_MAX_LINE+j;
                 if (j==5){
                     //最后一个按钮的处理
+                    //最后一个按钮的处理
+                    sideButtons[index].setVisibility(View.VISIBLE);
+                    sideButtons[index].setText("更多");
+                    sideButtons[index].setOnClickListener(new MyListener(i));
                 } else {
-                    int index=i*EVEAY_MAX_LINE+j;
                     sideButtons[index].setVisibility(View.VISIBLE);
                     sideButtons[index].setText(buttonTexts[index]);
                 }
@@ -322,5 +326,24 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         rv.setAdapter(adapter);
 
         rv.setVisibility(View.VISIBLE);
+    }
+
+    private class MyListener implements View.OnClickListener{//更多的点击事件
+
+        private int line;//组号，从零开始
+
+        @Override
+        public void onClick(View view) {
+            view.setOnClickListener(this);//修改监听器
+            for (int i=5;i<9;i++){
+                int index=line*EVEAY_MAX_LINE+i;
+                sideButtons[index].setVisibility(View.VISIBLE);
+                sideButtons[index].setText(buttonTexts[index]);
+            }
+        }
+
+        public MyListener(int line){
+            this.line=line;
+        }
     }
 }

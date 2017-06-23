@@ -70,6 +70,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     private boolean isChosen=false;//是否已经有被选中的表格
     private int choseIndex=0;//被选中的标号
     private int choseTimeIndex=0;
+    private String str="";
     private int[] states=new int[21];
     private String[] serviceIds=new String[21];
     private String monday,tues,wens,thur,fri,sat,sun;
@@ -103,8 +104,10 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
         ivGrade= (ImageView) findViewById(R.id.ivGrade);
         ivGrade.setImageResource(grades[professor.getGrade()]);
         tvName= (TextView) findViewById(R.id.tvName);
+        tvName.setTextColor(Color.WHITE);
         tvName.setText(professor.getName());
         tvContent= (TextView) findViewById(R.id.tvContent);
+        tvContent.setTextColor(Color.WHITE);
         tvContent.setText(professor.getContent());
         tvMonday= (TextView) findViewById(R.id.tvMonday);
         tvTuesday= (TextView) findViewById(R.id.tvTuesday);
@@ -135,6 +138,9 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 float singleWidth=form.getWidth()/7;
                 float singleHeight=form.getHeight()/3;
                 int index=((int)(y/singleHeight))*7+(int) (x/singleWidth);
+                if (index>=20){
+                   return true;
+                }
                 if (isChosen){
                     form.setState(choseIndex,MyOrderList.FREE);
                 }
@@ -164,7 +170,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 startTime=new ArrayList<>();
                 timeIds=new ArrayList<String>();
                 endTime=new ArrayList<>();//几个数组的初始化
-                spinnerTexts.add("");
+                spinnerTexts.add("选择时间");
                 startTime.add("");
                 timeIds.add("");
                 endTime.add("");//默认项
@@ -173,10 +179,12 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                     JSONArray array=all.getJSONArray("dataList");
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
-                        spinnerTexts.add(object.getString("time"));
-                        startTime.add(object.getString("serviceStartTime"));
-                        endTime.add(object.getString("serviceEndTime"));
-                        timeIds.add(object.getString("timeId"));
+                        if (object.getBoolean("abled")){
+                            spinnerTexts.add(object.getString("time"));
+                            startTime.add(object.getString("serviceStartTime"));
+                            endTime.add(object.getString("serviceEndTime"));
+                            timeIds.add(object.getString("timeId"));
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -195,7 +203,6 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-
                     }
                 });
                 cardDetail.setVisibility(View.VISIBLE);
@@ -221,10 +228,9 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void changeDate(int i, int i1, int i2) {
-        //showProgress("加载中");
+        showProgress("加载中");
         String date="&dateStr="+i+"/"+i1+"/"+i2;
-        Log.v("tagD",date);
-        //getData(date);
+        getData(date);
     }
 
     @Override
@@ -254,6 +260,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     private void order() {//预约
         if (choseTimeIndex==0){
             Toast.makeText(this,"请选择时间",Toast.LENGTH_SHORT).show();
+            return;
         }
         String url=MyInternet.MAIN_URL+"expert/expert_order_service_time_save?timeId="+timeIds.get(choseTimeIndex)
                 +"&expertId="+professor.getExpertId()
@@ -267,13 +274,14 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
-                Toast.makeText(ExpertOrderActivity.this,""+s,Toast.LENGTH_SHORT).show();
+                str=s;
             }
 
             @Override
             public void mainThread() {
                 btnOrder.setClickable(false);
                 btnOrder.setBackgroundResource(R.drawable.not_click_button);
+                Toast.makeText(ExpertOrderActivity.this,str,Toast.LENGTH_SHORT).show();
             }
         },this);
     }
@@ -304,19 +312,19 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
             public void handle(String s) {
                 try {
                     JSONObject all=new JSONObject(s);
-                    monday=getDate("一"+"\n"+all.getString("monday"));
+                    monday="一"+"\n"+getDate(all.getString("monday"));
                     rawDates[0]=all.getString("monday");
-                    tues=getDate("二"+"\n"+all.getString("seconday"));
-                    rawDates[1]=all.getString("secondday");
-                    wens=getDate("三"+"\n"+all.getString("wednesday"));
+                    tues="二"+"\n"+getDate(all.getString("seconday"));
+                    rawDates[1]=all.getString("seconday");
+                    wens="三"+"\n"+getDate(all.getString("wednesday"));
                     rawDates[2]=all.getString("wednesday");
-                    thur=getDate("四"+"\n"+all.getString("thursday"));
+                    thur="四"+"\n"+getDate(all.getString("thursday"));
                     rawDates[3]=all.getString("thursday");
-                    fri=getDate("五"+"\n"+all.getString("friday"));
+                    fri="五"+"\n"+getDate(all.getString("friday"));
                     rawDates[4]=all.getString("friday");
-                    sat=getDate("六"+"\n"+all.getString("saturday"));
+                    sat="六"+"\n"+getDate(all.getString("saturday"));
                     rawDates[5]=all.getString("saturday");
-                    sun=getDate("日"+"\n"+all.getString("sunday"));
+                    sun="日"+"\n"+getDate(all.getString("sunday"));
                     rawDates[6]=all.getString("sunday");
                     JSONArray array=all.getJSONArray("dataList");
                     for (int i=0;i<array.length();i++){//设置表格状态
@@ -377,15 +385,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     }
 
     public String getDate(String s){//字符串转“01.01”格式
-        DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date=format.parse(s);
-            int month=date.getMonth();
-            int day=date.getDay();
-            return month+"."+day;
-        } catch (ParseException e) {
-            return s;
-        }
+        //DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        return s.substring(5,6)+"."+s.substring(8,9);
     }
 
     public int getState(boolean b){//获取状态

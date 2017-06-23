@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.a.app10.Activity.QuickQuestionActivity">
     <EditText
+        android:textColor="@color/stringDark"
         android:layout_margin="10dp"
         android:gravity="start"
         android:id="@+id/et"

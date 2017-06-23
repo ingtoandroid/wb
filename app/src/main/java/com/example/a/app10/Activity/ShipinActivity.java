@@ -56,12 +56,6 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
-            @Override
-            public void onClick() {
-
-            }
-        });
 
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();

@@ -24,7 +24,7 @@
             <ImageView
                 android:layout_width="@dimen/sicence"
                 android:layout_height="@dimen/sicence"
-                android:src="@drawable/zhanxianxingshi" />
+                android:src="@drawable/zhicheng" />
 
             <TextView
                 android:id="@+id/tvSideTitle1"
@@ -32,7 +32,7 @@
                 android:layout_height="@dimen/sicence"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="展现形式"
+                android:text="职称"
                 android:textColor="@color/stringDark" />
         </LinearLayout>
 
@@ -43,8 +43,8 @@
             android:orientation="horizontal">
 
             <Button
-                android:visibility="gone"
                 style="?android:attr/borderlessButtonStyle"
+                android:visibility="gone"
                 android:id="@+id/btn11"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/sicence"
@@ -54,8 +54,8 @@
                 android:textColor="@color/main" />
 
             <Button
-                android:visibility="gone"
                 style="?android:attr/borderlessButtonStyle"
+                android:visibility="gone"
                 android:id="@+id/btn12"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/sicence"
@@ -66,8 +66,8 @@
                 android:textColor="@color/main" />
 
             <Button
-                android:visibility="gone"
                 style="?android:attr/borderlessButtonStyle"
+                android:visibility="gone"
                 android:id="@+id/btn13"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/sicence"
@@ -171,7 +171,7 @@
             <ImageView
                 android:layout_width="@dimen/sicence"
                 android:layout_height="@dimen/sicence"
-                android:src="@drawable/yundongxiangmu" />
+                android:src="@drawable/yanjiufangxiang" />
 
             <TextView
                 android:id="@+id/tvSideTitle2"
@@ -179,7 +179,7 @@
                 android:layout_height="@dimen/sicence"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="展现形式"
+                android:text="研究方向"
                 android:textColor="@color/stringDark" />
         </LinearLayout>
 
@@ -318,7 +318,7 @@
             <ImageView
                 android:layout_width="@dimen/sicence"
                 android:layout_height="@dimen/sicence"
-                android:src="@drawable/yundongmubiao" />
+                android:src="@drawable/shanchangfangxiang" />
 
             <TextView
                 android:id="@+id/tvSideTitle3"
@@ -326,7 +326,7 @@
                 android:layout_height="@dimen/sicence"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="展现形式"
+                android:text="擅长方向"
                 android:textColor="@color/stringDark" />
         </LinearLayout>
 
@@ -473,7 +473,7 @@
             android:text="重置" />
 
         <Button
-            android:textColor="#fff"
+            android:textColor="@color/stringCenter"
             android:id="@+id/btnSure"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

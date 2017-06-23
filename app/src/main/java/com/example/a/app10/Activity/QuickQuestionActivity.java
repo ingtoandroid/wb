@@ -48,6 +48,7 @@ public class QuickQuestionActivity extends ToolBarBaseActivity {
 
     private void sendQuestion(){
         Call call = Net.getInstance().quickQuestion(Net.getPersonID(),et.getText().toString());
+        et.setText("");
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
