@@ -21,6 +21,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,6 +61,7 @@ public class ModifyDataActivity extends AppCompatActivity {
     private TextView tx_saveInfo;
     private RelativeLayout relativeLayout;
     private int REQUEST_CODE_LOCAL=0;
+    private RadioGroup radioGroup;
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     @Override
@@ -79,11 +82,12 @@ public class ModifyDataActivity extends AppCompatActivity {
         im_headImage = (ImageView)findViewById(R.id.head_image);
         ed_username = (EditText)findViewById(R.id.username);
         tx_phoneNumber = (TextView)findViewById(R.id.phone_number);
-        ed_sex = (EditText)findViewById(R.id.sex);
+//        ed_sex = (EditText)findViewById(R.id.sex);
         ed_location = (EditText)findViewById(R.id.location);
         ed_signature = (EditText)findViewById(R.id.signature);
         tx_saveInfo = (TextView)findViewById(R.id.save_info);
         relativeLayout=(RelativeLayout)findViewById(R.id.head_image_change_item);
+        radioGroup = (RadioGroup)findViewById(R.id.rg);
     }
 
     private void initEvent(){
@@ -99,7 +103,8 @@ public class ModifyDataActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String str_username = ed_username.getText().toString().trim();
                 String str_signature = ed_signature.getText().toString().trim();
-                String str_sex = ed_sex.getText().toString().trim();
+                RadioButton rb = (RadioButton)findViewById(radioGroup.getCheckedRadioButtonId());
+                String str_sex = rb.getText().toString().trim();
                 if(str_sex.equals("男")||str_sex.equals("女")) {
                     modifyInfo(str_username, str_signature, str_sex);
                 }else{
@@ -143,7 +148,12 @@ public class ModifyDataActivity extends AppCompatActivity {
                     public void run() {
                         ed_username.setText(nickName);
                         tx_phoneNumber.setText(telephone);
-                        ed_sex.setText(sex);
+                        if(sex.equals("1")){
+                            radioGroup.check(R.id.rb1);
+                        }else {
+                            radioGroup.check(R.id.rb2);
+                        }
+//                        ed_sex.setText(sex);
                         Glide.with(ModifyDataActivity.this).load(headImageUrl).into(im_headImage);
                         //头像设置
 //                        ed_location.setText();

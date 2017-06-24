@@ -90,10 +90,10 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if(Net.getPersonID().equals("")){
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-        }
+//        if(Net.getPersonID().equals("")){
+//            Intent intent = new Intent(getContext(), LoginActivity.class);
+//            startActivity(intent);
+//        }
 
 
         View view=inflater.inflate(R.layout.fragment_info,container,false);
