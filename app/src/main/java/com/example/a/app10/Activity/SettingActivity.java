@@ -1,6 +1,8 @@
 package com.example.a.app10.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,8 +62,13 @@ public class SettingActivity extends AppCompatActivity {
         username_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this,ModifyDataActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(SettingActivity.this, ModifyDataActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         exit.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +80,15 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void exit(){
-
+        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("id", "-1");
+        editor.putString("pwd", "-1");
+        editor.commit();
+        
         Intent intent = new Intent(SettingActivity.this,SplashActivity.class);
         startActivity(intent);
+        finish();
     }
 }
 

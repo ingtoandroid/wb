@@ -90,19 +90,24 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         if(Net.getPersonID().equals("")){
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
         }
+
 
         View view=inflater.inflate(R.layout.fragment_info,container,false);
         reservation = (RelativeLayout)view.findViewById(R.id.reservation);
         reservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),MyReservationActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), MyReservationActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -110,8 +115,13 @@ public class InfoFragment extends Fragment {
         course_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),MyClassActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), MyClassActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -119,8 +129,13 @@ public class InfoFragment extends Fragment {
         my_integral.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyPointsActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), MyPointsActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -128,8 +143,13 @@ public class InfoFragment extends Fragment {
         my_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MyMessageActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), MyMessageActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         my_body_data = (RelativeLayout) view.findViewById(R.id.my_body_data);
@@ -144,8 +164,13 @@ public class InfoFragment extends Fragment {
         my_question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),QuestionActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), QuestionActivity.class);
+                    startActivity(intent);
+                }
             }
 
         });
@@ -164,8 +189,13 @@ public class InfoFragment extends Fragment {
         messageMinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), MessageReminderActivity.class);
-                startActivity(intent);
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getContext(), MessageReminderActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -177,4 +207,8 @@ public class InfoFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

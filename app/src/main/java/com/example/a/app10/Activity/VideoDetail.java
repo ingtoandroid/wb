@@ -184,8 +184,9 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 if(Net.getPersonID().equals("")){
                     Intent intent = new Intent(VideoDetail.this,LoginActivity.class);
                     startActivity(intent);
+                }else {
+                    commit();
                 }
-                commit();
             }
         });
         ed.addTextChangedListener(new TextWatcher() {
@@ -221,9 +222,6 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                     JSONObject jsonObject = new JSONObject(string);
                     uri = jsonObject.getString("filePath");
                     Log.e("path",""+uri);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
                             try {
                                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                                 player.setDataSource(VideoDetail.this, Uri.parse(uri));
@@ -239,8 +237,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                        }
-                    });
+
                 }
 
 

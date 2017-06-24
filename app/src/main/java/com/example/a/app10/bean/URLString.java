@@ -9,7 +9,7 @@ public class URLString {
 
     final static public String protocol = "http://";
 
-    final static public String hostname = "192.168.1.129";
+    final static public String hostname = "192.168.1.131";
 
     final static public String port = "8080";
     final static public String project = "yjtyms/yjty_App/";

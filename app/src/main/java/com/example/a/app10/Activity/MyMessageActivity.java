@@ -75,14 +75,14 @@ public class MyMessageActivity extends AppCompatActivity {
                 finish();
             }
         });
-        ivMessage= (ImageView) findViewById(R.id.ivMessage);
-        new QBadgeView(this).bindTarget(ivMessage).setBadgeNumber(Net.getMegsSize());
-        ivMessage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MyMessageActivity.this, MessageReminderActivity.class));
-            }
-        });
+        //ivMessage= (ImageView) findViewById(R.id.ivMessage);
+//        new QBadgeView(this).bindTarget(ivMessage).setBadgeNumber(Net.getMegsSize());
+//        ivMessage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(MyMessageActivity.this, MessageReminderActivity.class));
+//            }
+//        });
     }
 
     private void initDatas(){
