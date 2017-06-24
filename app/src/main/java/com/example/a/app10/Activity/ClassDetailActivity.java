@@ -12,6 +12,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,6 +53,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                     case 0:
                         Toast.makeText(ClassDetailActivity.this,"报名时间已结束",Toast.LENGTH_SHORT).show();
                         btnJoin.setText("无法报名");
+                        btnJoin.setClickable(false);
                         btnJoin.setBackgroundResource(R.drawable.not_click_button);
                         break;
                     case 1:
@@ -92,6 +94,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
 
         courseId =getIntent().getStringExtra("courseId");
         userid=Net.getPersonID();
+        Log.v("tagUserId","%%%%%%%%%%%%%%%%%%%%%%%%%"+userid);
 
         init();
     }
@@ -193,6 +196,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void handle(String s) {
                 try {
+                    Log.v("tagRe",s);
                     JSONObject object=new JSONObject(s);
                     int result=object.getInt("code");
                     Message message=new Message();
@@ -264,10 +268,12 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
     private void getData() {
         String url= MyInternet.MAIN_URL+"course/courseRelease_detail?courseId="
                 +courseId+"&userid="+userid;
+        Log.v("tagUser",url);
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
                 try {
+                    Log.v("tagAll",s);
                     JSONObject object=new JSONObject(s);
                     courseTitle=object.getString("courseTitle");
                     startDate=object.getString("startDate");
@@ -309,8 +315,8 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
 //        tvFee.setHeight(CURRENT_LINES*tvFee.getLineHeight());
 
         if (isEntere){//判断是否已报名
-            btnJoin.setText("已报名");
-            btnJoin.setBackgroundResource(R.drawable.not_click_button);
+            btnJoin.setText("取消报名");
+            btnJoin.setBackgroundResource(R.drawable.redbutton);
         } else {
 
         }
