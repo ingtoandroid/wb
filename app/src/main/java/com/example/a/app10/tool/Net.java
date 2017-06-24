@@ -174,7 +174,7 @@ public class Net {
     }
     public Call setHeadImage(File file){
         String url=URLString.head_image;
-        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("avatar",file.getName(),RequestBody.create(MediaType.parse("application/octet-stream"),file)).build();
+        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("avatar",file.getName(),RequestBody.create(MediaType.parse("application/jpg"),file)).build();
         return post(url,requestBody);
     }
 
@@ -212,8 +212,8 @@ public class Net {
     }
 
     public Call getMyReservation() {
-//        String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
         String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
+//        String url = URLString.order_new_type_list + "?" + "infoid=" + "6b8c6112-305e-4bb2-991b-b00805669fe0";
         return get(url);
     }
 

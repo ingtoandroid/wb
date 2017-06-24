@@ -83,7 +83,7 @@ public class ModifyDataActivity extends AppCompatActivity {
         ed_username = (EditText)findViewById(R.id.username);
         tx_phoneNumber = (TextView)findViewById(R.id.phone_number);
 //        ed_sex = (EditText)findViewById(R.id.sex);
-        ed_location = (EditText)findViewById(R.id.location);
+//        ed_location = (EditText)findViewById(R.id.location);
         ed_signature = (EditText)findViewById(R.id.signature);
         tx_saveInfo = (TextView)findViewById(R.id.save_info);
         relativeLayout=(RelativeLayout)findViewById(R.id.head_image_change_item);
@@ -148,7 +148,7 @@ public class ModifyDataActivity extends AppCompatActivity {
                     public void run() {
                         ed_username.setText(nickName);
                         tx_phoneNumber.setText(telephone);
-                        if(sex.equals("1")){
+                        if(sex.equals("男")){
                             radioGroup.check(R.id.rb1);
                         }else {
                             radioGroup.check(R.id.rb2);
@@ -233,7 +233,13 @@ public class ModifyDataActivity extends AppCompatActivity {
             Call call=Net.getInstance().setHeadImage(new File(getPath(uri)));
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Request request, IOException e) {
+                public void onFailure(Request request, final IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ModifyDataActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     e.printStackTrace();
                 }
 
@@ -244,6 +250,7 @@ public class ModifyDataActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(s);
                         int megs = jsonObject.getInt("megs");
                         if(megs == 0){
+                            Net.setPhotoUrl(jsonObject.getString("modelName"));
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {

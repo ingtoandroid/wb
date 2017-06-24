@@ -173,6 +173,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
             @Override
             public void onPrepared(MediaPlayer mp) {
                 player.start();
+                player.setLooping(true);
                 player.pause();
             }
         });
@@ -226,6 +227,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                                 player.setDataSource(VideoDetail.this, Uri.parse(uri));
                                 player.prepare();
+                                player.setLooping(true);
 
 
                             } catch (IllegalArgumentException e) {

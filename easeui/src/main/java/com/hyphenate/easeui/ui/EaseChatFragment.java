@@ -1,11 +1,13 @@
 package com.hyphenate.easeui.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
@@ -14,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -171,13 +174,18 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
             @Override
             public boolean onPressToSpeakBtnTouch(View v, MotionEvent event) {
-                return voiceRecorderView.onPressToSpeakBtnTouch(v, event, new EaseVoiceRecorderCallback() {
-                    
-                    @Override
-                    public void onVoiceRecordComplete(String voiceFilePath, int voiceTimeLength) {
-                        sendVoiceMessage(voiceFilePath, voiceTimeLength);
-                    }
-                });
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getContext(), "未授予麦克风权限", Toast.LENGTH_SHORT).show();
+                    return false;
+                }else {
+                    return voiceRecorderView.onPressToSpeakBtnTouch(v, event, new EaseVoiceRecorderCallback() {
+
+                        @Override
+                        public void onVoiceRecordComplete(String voiceFilePath, int voiceTimeLength) {
+                            sendVoiceMessage(voiceFilePath, voiceTimeLength);
+                        }
+                    });
+                }
             }
 
             @Override
@@ -915,24 +923,25 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
      * capture new image
      */
     protected void selectPicFromCamera() {
-        if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(getContext(), "未授予照相机权限", Toast.LENGTH_SHORT).show();
+        }else{
+            if (!EaseCommonUtils.isSdcardExist()) {
+                Toast.makeText(getActivity(), R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
-        int current= Build.VERSION.SDK_INT;
-        if(current<24){
-            startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(cameraFile)),REQUEST_CODE_CAMERA);
-        }
-        else
-        {
-            Uri u= FileProvider.getUriForFile(getContext(),"com.ys.android.fileprovider",cameraFile);
-            startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, u), REQUEST_CODE_CAMERA);
-        }
+            cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+                    + System.currentTimeMillis() + ".jpg");
+            //noinspection ResultOfMethodCallIgnored
+            cameraFile.getParentFile().mkdirs();
+            int current = Build.VERSION.SDK_INT;
+            if (current < 24) {
+                startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)), REQUEST_CODE_CAMERA);
+            } else {
+                Uri u = FileProvider.getUriForFile(getContext(), "com.ys.android.fileprovider", cameraFile);
+                startActivityForResult(new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, u), REQUEST_CODE_CAMERA);
+            }
 
 //        Intent intent=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //        int current= Build.VERSION.SDK_INT;
@@ -956,12 +965,17 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 //                startActivityForResult(intent,REQUEST_CODE_CAMERA);
 //            }
 //        }
+        }
     }
 
     /**
      * select local image
      */
     protected void selectPicFromLocal() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "未授予读写权限", Toast.LENGTH_SHORT).show();
+        }
+        else {
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
             intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -970,7 +984,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         } else {
             intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         }
-        startActivityForResult(intent, REQUEST_CODE_LOCAL);
+        startActivityForResult(intent, REQUEST_CODE_LOCAL);}
     }
 
     /*select local video*/

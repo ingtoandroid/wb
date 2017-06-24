@@ -111,6 +111,7 @@
                         android:textCursorDrawable="@null"
                         android:inputType="textMultiLine"
                         android:gravity="left|top"
+                        android:textSize="12sp"
                         />
                     <TextView
                         android:layout_width="match_parent"

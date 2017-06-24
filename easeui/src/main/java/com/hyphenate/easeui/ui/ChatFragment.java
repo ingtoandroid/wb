@@ -1,14 +1,17 @@
 package com.hyphenate.easeui.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -290,9 +293,13 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     public boolean onExtendMenuItemClick(int itemId, View view) {
         switch (itemId) {
         case ITEM_VIDEO:
-            Intent intent = new Intent(getActivity(), ImageGridActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);
-            break;
+            if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext(), "未授予读写权限", Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(getActivity(), ImageGridActivity.class);
+                startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);
+
+            }break;
         case ITEM_FILE: //file
             selectFileFromLocal();
             break;
@@ -314,23 +321,29 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
      * select file
      */
     protected void selectFileFromLocal() {
-        Intent intent = null;
-        if (Build.VERSION.SDK_INT < 19) { //api 19 and later, we can't use this way, demo just select from images
-            intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("*/*");
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "未授予读写权限", Toast.LENGTH_SHORT).show();
         } else {
-            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent intent = null;
+            if (Build.VERSION.SDK_INT < 19) { //api 19 and later, we can't use this way, demo just select from images
+                intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+            } else {
+                intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Files.FileColumns);
+            }
+            startActivityForResult(intent, REQUEST_CODE_SELECT_FILE);
         }
-        startActivityForResult(intent, REQUEST_CODE_SELECT_FILE);
     }
-    
     /**
      * make a voice call
      */
     protected void startVoiceCall() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "未授予麦克风权限", Toast.LENGTH_SHORT).show();
+        }else{
         if (!EMClient.getInstance().isConnected()) {
             Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
         } else {
@@ -339,12 +352,17 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             // voiceCallBtn.setEnabled(false);
             inputMenu.hideExtendMenuContainer();
         }
-    }
+    }}
     
     /**
      * make a video call
      */
     protected void startVideoCall() {
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "未授予麦克风权限", Toast.LENGTH_SHORT).show();
+        }else if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getContext(), "未授予摄像头权限", Toast.LENGTH_SHORT).show();
+        }else {
         if (!EMClient.getInstance().isConnected())
             Toast.makeText(getActivity(), R.string.not_connect_to_server, Toast.LENGTH_SHORT).show();
         else {
@@ -353,7 +371,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             // videoCallBtn.setEnabled(false);
             inputMenu.hideExtendMenuContainer();
         }
-    }
+    }}
     
     /**
      * chat row provider 

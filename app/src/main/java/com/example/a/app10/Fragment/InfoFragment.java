@@ -210,5 +210,7 @@ public class InfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        username.setText(Net.getPersonName());
+        Glide.with(getContext()).load(Net.getPhotoUrl()).into(headImage);
     }
 }

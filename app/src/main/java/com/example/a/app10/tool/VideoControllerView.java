@@ -112,7 +112,7 @@ public class VideoControllerView extends FrameLayout {
 
     public VideoControllerView(Context context,int type) {
         this(context, true);
-        type=type;
+        this.type=type;
         Log.i(TAG, TAG);
     }
 
@@ -162,9 +162,9 @@ public class VideoControllerView extends FrameLayout {
     protected View makeControllerView() {
         LayoutInflater inflate = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(type==1)
-        mRoot = inflate.inflate(R.layout.media_controller, null);
+            mRoot = inflate.inflate(R.layout.media_controller, null);
         else
-        mRoot=inflate.inflate(R.layout.media_controller2,null);
+            mRoot=inflate.inflate(R.layout.media_controller2,null);
 
         initControllerView(mRoot);
 
@@ -367,6 +367,9 @@ public class VideoControllerView extends FrameLayout {
 
         int position = mPlayer.getCurrentPosition();
         int duration = mPlayer.getDuration();
+        if(duration<0)
+            duration=0;
+        Log.e("dur",""+duration);
         if (mProgress != null) {
             if (duration > 0) {
                 // use long to avoid overflow
@@ -661,6 +664,7 @@ public class VideoControllerView extends FrameLayout {
             }
 
             long duration = mPlayer.getDuration();
+            Log.e("dur",""+duration);
             long newposition = (duration * progress) / 1000L;
             mPlayer.seekTo( (int) newposition);
             if (mCurrentTime != null)
