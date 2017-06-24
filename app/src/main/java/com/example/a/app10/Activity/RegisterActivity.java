@@ -159,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
         String phoneNumber = ed_phonenumber.getText().toString().trim();
 
         if(phoneNumber.length()>0){
-            coutDownTimerUtils.start();
+
             Call call = Net.getInstance().getCodeForRegister(phoneNumber);
             call.enqueue(new Callback() {
                 @Override
@@ -210,6 +210,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     Toast.makeText(RegisterActivity.this,"发送成功",Toast.LENGTH_SHORT).show();
+                                    coutDownTimerUtils.start();
                                 }
                             });
                         }

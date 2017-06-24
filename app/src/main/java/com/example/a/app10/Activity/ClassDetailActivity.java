@@ -3,10 +3,12 @@ package com.example.a.app10.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.IntDef;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -171,6 +173,10 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                 onBackPressed();
                 break;
             case R.id.btnJoin:
+                if(Net.getPersonID().equals("")){
+                    Intent intent = new Intent(ClassDetailActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
                 if (!isEntere){
                     join();
                 } else{

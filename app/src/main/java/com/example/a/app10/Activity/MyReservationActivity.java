@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -37,7 +38,7 @@ public class MyReservationActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private List<MyReservation> datas;
-    private ImageView back;
+    private ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,7 @@ public class MyReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_reservation);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        back = (ImageView)findViewById(R.id.back_reservation);
+        back = (ImageButton) findViewById(R.id.back_reservation);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +127,7 @@ public class MyReservationActivity extends AppCompatActivity {
             holder.item_time_reservation.setText(myReservation.getItem_time_reservation());
             int str_type = myReservation.getType();
 
-            if(str_type == 2){
+            if(str_type == 0){
                 holder.item_consultation_reservation.setEnabled(false);
                 holder.item_evaluate_reservation.setEnabled(false);
 
@@ -139,7 +140,7 @@ public class MyReservationActivity extends AppCompatActivity {
 //                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
 //                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
             }
-            else if(str_type == 0){
+            else if(str_type == 1){
                 holder.item_cancle_reservation.setEnabled(false);
                 holder.item_evaluate_reservation.setEnabled(false);
 
@@ -149,7 +150,7 @@ public class MyReservationActivity extends AppCompatActivity {
 //                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
 //                holder.item_evaluate_reservation.setBackgroundColor(Color.rgb(225,225,225));
             }
-            else if(str_type == 1){
+            else if(str_type == 2){
                 holder.item_cancle_reservation.setEnabled(false);
                 holder.item_consultation_reservation.setEnabled(false);
 
@@ -157,6 +158,15 @@ public class MyReservationActivity extends AppCompatActivity {
                 holder.item_consultation_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
 //                holder.item_cancle_reservation.setBackgroundColor(Color.rgb(225,225,225));
 //                holder.item_consultation_reservation.setBackgroundColor(Color.rgb(225,225,225));
+            }
+            else if(str_type == -1){
+                holder.item_cancle_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+                holder.item_consultation_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+                holder.item_evaluate_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+
+                holder.item_cancle_reservation.setEnabled(false);
+                holder.item_evaluate_reservation.setEnabled(false);
+                holder.item_consultation_reservation.setEnabled(false);
             }
 
             holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {

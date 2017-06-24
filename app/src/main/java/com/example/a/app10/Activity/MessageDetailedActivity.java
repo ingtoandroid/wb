@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,7 +40,7 @@ import java.util.List;
 
 public class MessageDetailedActivity extends AppCompatActivity {
 
-    private ImageView back;
+    private ImageButton back;
     private EditText ed_message;
     private String questionID;
     private String messager;
@@ -59,7 +60,7 @@ public class MessageDetailedActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
 
-        back = (ImageView)findViewById(R.id.back);
+        back = (ImageButton) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

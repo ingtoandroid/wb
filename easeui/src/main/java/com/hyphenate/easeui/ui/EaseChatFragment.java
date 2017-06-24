@@ -419,6 +419,44 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                     Toast.makeText(getActivity(), R.string.unable_to_get_loaction, Toast.LENGTH_SHORT).show();
                 }
                 
+            } else if(requestCode==REQUEST_CODE_VIDEO){//VIDEO
+                if (data != null) {
+                    /*找本地视频并发送*/
+                        Cursor cursor=getContext().getContentResolver().query(data.getData(),null,null,null,null);
+                        cursor.moveToFirst();
+                        String path=cursor.getString(1);// 图片文件路径   
+                        String dur=cursor.getString(3);// 图片
+                        File file = new File(PathUtil.getInstance().getImagePath(), "thvideo" + System.currentTimeMillis());
+                        try {
+                            FileOutputStream fos = new FileOutputStream(file);
+                            Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(path, 3);
+                            ThumbBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            fos.close();
+                            sendVideoMessage(path, file.getAbsolutePath(), Integer.valueOf(dur));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+//                    Uri selectedVideo = data.getData();
+//                    String[] filePathColumn = { MediaStore.Video.Media.DATA };
+//                    Cursor cursor = getContext().getContentResolver().query(selectedVideo ,filePathColumn, null, null, null);
+//                    cursor.moveToFirst();
+//                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                    String videoPath = cursor.getString(columnIndex);
+//                    cursor.close();
+
+
+                }
+
+
+
+            } else if(requestCode==REQUEST_CODE_SELECT_FILE){
+                if (data != null) {
+                    Uri uri = data.getData();
+                    if (uri != null) {
+                        sendFileByUri(uri);
+                    }
+                }
+
             }
 
         }

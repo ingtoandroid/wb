@@ -24,7 +24,7 @@ public class CoutDownTimerUtils extends CountDownTimer {
     public void onFinish() {
         textView.setText("重新获取验证码");
         textView.setClickable(true);
-        textView.setBackgroundResource(R.drawable.code_normal);
+        //textView.setBackgroundResource(R.drawable.code_normal);
 
     }
 
@@ -33,11 +33,12 @@ public class CoutDownTimerUtils extends CountDownTimer {
         textView.setClickable(false);
         textView.setText(l/1000+"秒后可重新发送");
         /*设置为不能点击*/
-        textView.setBackgroundResource(R.drawable.code_press);
+        //textView.setBackgroundResource(R.drawable.code_press);
         SpannableString spannableString=new SpannableString(textView.getText().toString());
-        ForegroundColorSpan span=new ForegroundColorSpan(Color.RED);
-        spannableString.setSpan(span,0,2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-        textView.setText(spannableString);
+        //ForegroundColorSpan span=new ForegroundColorSpan(Color.RED);
+        //spannableString.setSpan(span,0,2, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        //textView.setText(spannableString);
+
 
     }
 }

@@ -9,7 +9,7 @@ public class URLString {
 
     final static public String protocol = "http://";
 
-    final static public String hostname = "192.168.1.129";
+    final static public String hostname = "192.168.1.131";
 
     final static public String port = "8080";
     final static public String project = "yjtyms/yjty_App/";
@@ -20,7 +20,7 @@ public class URLString {
     final static public String login=path+"user/login";
     final static public String register=path+"user/register";
     final static public String send_code=path+"user/send_code";
-        final static public String reset_pwd = path+"user/pwd_reset";
+    final static public String reset_pwd = path+"user/pwd_reset";
     final static public String head_image=path+"associator/modelName_associator_save";
 
     //myAPI

@@ -10,7 +10,7 @@
         android:layout_height="75dp"
         android:id="@+id/set_newpassword_title"
         android:gravity="bottom">
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -196,6 +196,7 @@
             android:text="安全退出"
             android:textColor="@color/text_red"
             android:layout_marginTop="20dp"
+            android:id="@+id/exit"
             style="?android:attr/borderlessButtonStyle"/>
     </RelativeLayout>
 </RelativeLayout>

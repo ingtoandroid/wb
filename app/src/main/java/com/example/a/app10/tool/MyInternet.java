@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class MyInternet {
 
-    public static final String MAIN_URL="http://192.168.1.129:8080/yjtyms/yjty_App/";
+    public static final String MAIN_URL="http://192.168.1.162:8080/yjtyms/yjty_App/";
 
     public static void getMessage(String url, OkHttpClient client, final MyInterface myInterface, final Activity context){
         Request request=new Request.Builder()

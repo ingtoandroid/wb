@@ -66,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
                         if(code == 0){
                             try {
                                 Net.setUserUUID(jsonObject.getString("userUUID"));
-                                Net.setPhotoUrl(jsonObject.getString("photoUrl"));
+                                Net.setPhotoUrl(jsonObject.getString("filePath"));
                                 Net.setRemark(jsonObject.getString("remark"));
                                 Net.setPersonName(jsonObject.getString("personName"));
                                 Net.setPersonID(jsonObject.getString("personId"));
@@ -102,7 +102,7 @@ public class SplashActivity extends AppCompatActivity {
             });
         }
         else{
-            Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
+            Intent intent=new Intent(SplashActivity.this,Main1Activity.class);
             startActivity(intent);
             finish();
         }
@@ -141,7 +141,7 @@ public class SplashActivity extends AppCompatActivity {
                         if(code == 0){
                             try {
                                 Net.setUserUUID(jsonObject.getString("userUUID"));
-                                Net.setPhotoUrl(jsonObject.getString("photoUrl"));
+                                Net.setPhotoUrl(jsonObject.getString("filePath"));
                                 Net.setRemark(jsonObject.getString("remark"));
                                 Net.setPersonName(jsonObject.getString("personName"));
                                 Net.setPersonID(jsonObject.getString("personId"));
