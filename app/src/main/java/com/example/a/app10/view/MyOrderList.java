@@ -58,8 +58,9 @@ public class MyOrderList extends View {
             canvas.drawLine(0,i*(height/3),width,i*(height/3),paint);//画横线边框
         }
         canvas.drawLine(0,height-1,width,height-1,paint);//画底线
+        float a=width/7;
         for (int i=1;i<=7;i++){
-            canvas.drawLine(i*(width/7),0,i*(width/7),height,paint);//画竖线边框
+            canvas.drawLine(i*a,0,i*a,height,paint);//画竖线边框
         }
         paint.setColor(getResources().getColor(R.color.main));
         for (int i=0;i<21;i++){

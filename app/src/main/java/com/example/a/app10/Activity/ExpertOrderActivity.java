@@ -386,7 +386,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
     public String getDate(String s){//字符串转“01.01”格式
         //DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        return s.substring(5,6)+"."+s.substring(8,9);
+        Log.v("tagtag",s);
+        return s.substring(5,7)+"."+s.substring(8,10);
     }
 
     public int getState(boolean b){//获取状态
