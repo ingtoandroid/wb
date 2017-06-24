@@ -16,6 +16,7 @@ import com.example.a.app10.Activity.ClassActivity;
 import com.example.a.app10.Activity.NewsActivity;
 import com.example.a.app10.Activity.Professor;
 import com.example.a.app10.Activity.ProfessorDetailActivity;
+import com.example.a.app10.Activity.QuestionDetailedActivity;
 import com.example.a.app10.Activity.QuickQuestionActivity;
 import com.example.a.app10.Activity.ScienceActivity;
 import com.example.a.app10.Activity.ShipinActivity;
@@ -217,6 +218,7 @@ public class IndexFragment extends Fragment {
                         QuestionItem questionItem = new QuestionItem();
                         questionItem.setQuestionID(item.getString("questionId"));
                         questionItem.setQuestionTitle(item.getString("questionTitle"));
+                        questionItem.setQuestionContent(item.getString("questionContent"));
                         questionItem.setUsername(item.getString("userName"));
                         questionItem.setCreateTime_sys(item.getString("createTime_sys"));
                         questionItem.setPhotoUrl(item.getString("photoUrl"));
@@ -235,7 +237,7 @@ public class IndexFragment extends Fragment {
                         tiWenAdapter.setItemOnClickListener(new TiWenAdapter.ItemOnClickListener() {
                             @Override
                             public void onClick(View view, int position) {
-                                Intent intent=new Intent(getContext(),QuestionDetail.class);
+                                Intent intent=new Intent(getContext(),QuestionDetailedActivity.class);
                                 intent.putExtra("questionID",list2.get(position).getQuestionID());
                                 startActivity(intent);
                             }
