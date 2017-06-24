@@ -92,6 +92,19 @@ public class MyClassActivity extends ToolBarBaseActivity {
         hideProgress();
         rv.setLayoutManager(new LinearLayoutManager(this));
         MyClassAdapter adapter=new MyClassAdapter(list,this);
+        adapter.setLisenter(new MyClassAdapter.OnItenClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(MyClassActivity.this,ClassDetailActivity.class);
+                intent.putExtra("courseId",list.get(position).getCourseId());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
         rv.setAdapter(adapter);
         rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
         rv.setVisibility(View.VISIBLE);

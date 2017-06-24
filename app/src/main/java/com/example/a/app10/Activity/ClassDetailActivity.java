@@ -95,7 +95,6 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
 
         courseId =getIntent().getStringExtra("courseId");
         userid=Net.getPersonID();
-        Log.v("tagUserId","%%%%%%%%%%%%%%%%%%%%%%%%%"+userid);
 
         init();
     }
