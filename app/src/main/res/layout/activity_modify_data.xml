@@ -152,14 +152,35 @@
                 android:paddingTop="@dimen/data_modification_item_pidding"
                 android:text="@string/sex"
                 android:textColor="@color/stringDark"/>
-            <EditText
+            <RadioGroup
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_weight="1"
-                android:text="男"
-                android:textSize="15sp"
-                android:background="@null"
-                android:id="@+id/sex"/>
+                android:id="@+id/rg"
+                android:layout_gravity="center_vertical">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男"
+                    android:id="@+id/rb1"
+                    android:layout_marginRight="30dp"
+                    android:checked="true"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="女"
+                    android:id="@+id/rb2"
+                    android:layout_marginRight="30dp"/>
+            </RadioGroup>
+            <!--<EditText-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="男"-->
+                <!--android:textSize="15sp"-->
+                <!--android:background="@null"-->
+                <!--android:id="@+id/sex"/>-->
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
