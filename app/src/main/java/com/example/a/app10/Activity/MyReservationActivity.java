@@ -183,6 +183,7 @@ public class MyReservationActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MyReservationActivity.this,Comment.class);
+                    intent.putExtra("orderId",myReservation.getOrderId());
                     startActivity(intent);
                 }
             });

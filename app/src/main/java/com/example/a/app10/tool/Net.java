@@ -292,6 +292,10 @@ public class Net {
         String url = URLString.question_list+"?"+"personId="+personID;
         return get(url);
     }
+    public Call comment(String orderId,String pingfen,String evaluate){
+        String url=URLString.course_comment+"?orderId="+orderId+"&pingfe="+pingfen+"&evaluate="+evaluate;
+        return get(url);
+    }
 
 
     /*专家*/
