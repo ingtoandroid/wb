@@ -138,7 +138,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 float singleWidth=form.getWidth()/7;
                 float singleHeight=form.getHeight()/3;
                 int index=((int)(y/singleHeight))*7+(int) (x/singleWidth);
-                if (index>=20){
+                if (index>20){
                    return true;
                 }
                 if (isChosen){
@@ -147,9 +147,9 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 if (form.getState(index)==MyOrderList.FREE){
                     form.setState(index,MyOrderList.CHOSEN);
                     form.invalidate();//强制刷新
-                    showBottom();
                     isChosen=true;
                     choseIndex=index;
+                    showBottom();
                 }
                 return true;
             }

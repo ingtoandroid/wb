@@ -212,8 +212,8 @@ public class Net {
     }
 
     public Call getMyReservation() {
-//        String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
-        String url = URLString.order_new_type_list + "?" + "infoid=" + "6b8c6112-305e-4bb2-991b-b00805669fe0";
+        String url = URLString.order_new_type_list + "?" + "infoid=" + personID;
+//        String url = URLString.order_new_type_list + "?" + "infoid=" + "6b8c6112-305e-4bb2-991b-b00805669fe0";
         return get(url);
     }
 

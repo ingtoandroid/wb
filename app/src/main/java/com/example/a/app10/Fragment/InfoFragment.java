@@ -90,10 +90,10 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if(Net.getPersonID().equals("")){
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-        }
+//        if(Net.getPersonID().equals("")){
+//            Intent intent = new Intent(getContext(), LoginActivity.class);
+//            startActivity(intent);
+//        }
 
 
         View view=inflater.inflate(R.layout.fragment_info,container,false);
@@ -210,5 +210,7 @@ public class InfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        username.setText(Net.getPersonName());
+        Glide.with(getContext()).load(Net.getPhotoUrl()).into(headImage);
     }
 }

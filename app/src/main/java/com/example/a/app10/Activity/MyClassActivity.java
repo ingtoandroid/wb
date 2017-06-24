@@ -52,12 +52,7 @@ public class MyClassActivity extends ToolBarBaseActivity {
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
-            @Override
-            public void onClick() {
-                startActivity(new Intent(MyClassActivity.this, MessageReminderActivity.class));
-            }
-        });
+
 
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();

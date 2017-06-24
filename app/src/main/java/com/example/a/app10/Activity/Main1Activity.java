@@ -71,4 +71,5 @@ public class Main1Activity extends AppCompatActivity {
         startActivity(home);
 
     }
+
 }
