@@ -75,6 +75,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
                         Toast.makeText(ClassDetailActivity.this,"取消报名成功",Toast.LENGTH_SHORT).show();
                         btnJoin.setText("我要报名");
                         btnJoin.setBackgroundResource(R.drawable.button_side_press);
+                        isEntere=false;
                         break;
                     case 3:
                         Toast.makeText(ClassDetailActivity.this,"您未报名此课程",Toast.LENGTH_SHORT).show();

@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.a.app10.Adapter.OrderAdapter;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ProfessorItem;
 import com.example.a.app10.tool.MyInternet;
@@ -67,6 +68,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     private EditText etTitle,etContent;
     private String[] rawDates=new String[7];
     private List<String> spinnerTexts,startTime,endTime,timeIds;
+    private List<Boolean> isShow;
     private boolean isChosen=false;//是否已经有被选中的表格
     private int choseIndex=0;//被选中的标号
     private int choseTimeIndex=0;
@@ -168,23 +170,24 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
             public void handle(String s) {
                 spinnerTexts=new ArrayList<>();
                 startTime=new ArrayList<>();
-                timeIds=new ArrayList<String>();
+                timeIds=new ArrayList<>();
+                isShow=new ArrayList<>();
                 endTime=new ArrayList<>();//几个数组的初始化
                 spinnerTexts.add("选择时间");
                 startTime.add("");
                 timeIds.add("");
+                isShow.add(true);
                 endTime.add("");//默认项
                 try {
                     JSONObject all=new JSONObject(s);
                     JSONArray array=all.getJSONArray("dataList");
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
-                        if (object.getBoolean("abled")){
                             spinnerTexts.add(object.getString("time"));
                             startTime.add(object.getString("serviceStartTime"));
                             endTime.add(object.getString("serviceEndTime"));
                             timeIds.add(object.getString("timeId"));
-                        }
+                            isShow.add(object.getBoolean("abled"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -193,12 +196,17 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void mainThread() {
-                ArrayAdapter<String> adapter=new ArrayAdapter<>(ExpertOrderActivity.this,R.layout.spinner_item,spinnerTexts);
+                //ArrayAdapter<String> adapter=new ArrayAdapter<>(ExpertOrderActivity.this,R.layout.spinner_item,spinnerTexts);
+                final OrderAdapter adapter=new OrderAdapter(ExpertOrderActivity.this,spinnerTexts,isShow);
                 spinner.setAdapter(adapter);
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        choseTimeIndex=i;
+                        if (isShow.get(i)){
+                            choseTimeIndex=i;
+                        } else {
+                            spinner.setSelection(0);
+                        }
                     }
 
                     @Override
@@ -251,6 +259,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 if(Net.getPersonID().equals("")){
                     Intent intent = new Intent(ExpertOrderActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    return;
                 }
                 order();
                 break;
@@ -279,9 +288,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void mainThread() {
-                btnOrder.setClickable(false);
-                btnOrder.setBackgroundResource(R.drawable.not_click_button);
                 Toast.makeText(ExpertOrderActivity.this,str,Toast.LENGTH_SHORT).show();
+                showBottom();
             }
         },this);
     }
