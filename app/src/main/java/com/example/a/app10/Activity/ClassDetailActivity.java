@@ -196,6 +196,7 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void handle(String s) {
                 try {
+                    Log.v("tagRe",s);
                     JSONObject object=new JSONObject(s);
                     int result=object.getInt("code");
                     Message message=new Message();
@@ -314,8 +315,8 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
 //        tvFee.setHeight(CURRENT_LINES*tvFee.getLineHeight());
 
         if (isEntere){//判断是否已报名
-            btnJoin.setText("已报名");
-            btnJoin.setBackgroundResource(R.drawable.not_click_button);
+            btnJoin.setText("取消报名");
+            btnJoin.setBackgroundResource(R.drawable.redbutton);
         } else {
 
         }
