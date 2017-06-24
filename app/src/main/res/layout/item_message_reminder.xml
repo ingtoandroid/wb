@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:text="查看详情"
             android:textColor="@color/textGreen"
+            android:layout_below="@+id/message_detail_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:id="@+id/view_details"/>

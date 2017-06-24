@@ -66,7 +66,7 @@ public class SplashActivity extends AppCompatActivity {
                         if(code == 0){
                             try {
                                 Net.setUserUUID(jsonObject.getString("userUUID"));
-                                Net.setPhotoUrl(jsonObject.getString("photoUrl"));
+                                Net.setPhotoUrl(jsonObject.getString("filePath"));
                                 Net.setRemark(jsonObject.getString("remark"));
                                 Net.setPersonName(jsonObject.getString("personName"));
                                 Net.setPersonID(jsonObject.getString("personId"));

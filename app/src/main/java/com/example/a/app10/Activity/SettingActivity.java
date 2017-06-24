@@ -85,7 +85,13 @@ public class SettingActivity extends AppCompatActivity {
         editor.putString("id", "-1");
         editor.putString("pwd", "-1");
         editor.commit();
-        
+        Net.setUserUUID("");
+        Net.setUsername("");
+        Net.setHx_pwd("");
+        Net.setPersonID("");
+        Net.setPersonName("");
+        Net.setPhotoUrl("");
+        Net.setMegsSize(0);
         Intent intent = new Intent(SettingActivity.this,SplashActivity.class);
         startActivity(intent);
         finish();
