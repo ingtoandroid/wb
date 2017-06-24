@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -60,4 +61,13 @@ public class Main1Activity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent home = new Intent(Intent.ACTION_MAIN);
+        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        home.addCategory(Intent.CATEGORY_HOME);
+        startActivity(home);
+
+    }
 }
