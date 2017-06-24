@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -66,6 +68,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     private FrameLayout container;
     private RecyclerView recyclerView;
     private VideoRecycleAdapter adapter;
+    private TextView count;
     private ScrollView scrollView;
     private String  id;
     private String uri=null;
@@ -156,6 +159,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         videoSurface = (SurfaceView) findViewById(R.id.videoSurface);
         recyclerView=(RecyclerView)findViewById(R.id.video_pinglun);
         scrollView=(ScrollView)findViewById(R.id.scroll);
+        count=(TextView)findViewById(R.id.text_count);
 
         SurfaceHolder videoHolder = videoSurface.getHolder();
         container=(FrameLayout)findViewById(R.id.videoSurfaceContainer);
@@ -182,6 +186,22 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                     startActivity(intent);
                 }
                 commit();
+            }
+        });
+        ed.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                count.setText(ed.getText().length()+"/300");
             }
         });
         showView(0);
@@ -408,6 +428,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                                 public void run() {
                                     Toast.makeText(VideoDetail.this, "评论成功", Toast.LENGTH_SHORT).show();
                                     ed.setText("");
+                                    showRecyclerView(0);
                                 }
                             });
                         }
@@ -446,6 +467,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                                 public void run() {
                                     Toast.makeText(VideoDetail.this, "提问成功", Toast.LENGTH_SHORT).show();
                                     ed.setText("");
+                                    showRecyclerView(1);
                                 }
                             });
                         }

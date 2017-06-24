@@ -212,7 +212,7 @@ public class IndexFragment extends Fragment {
                     JSONTokener jsonTokener = new JSONTokener(str_response);
                     JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                     JSONArray jsonArray = jsonObject.getJSONArray("datalist");
-                    for(int i = 0 ;i<jsonArray.length();i++){
+                    for(int i = 0 ;i<2;i++){
                         JSONObject item = jsonArray.getJSONObject(i);
                         QuestionItem questionItem = new QuestionItem();
                         questionItem.setQuestionID(item.getString("questionId"));
@@ -228,6 +228,7 @@ public class IndexFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         tiWenAdapter=new TiWenAdapter(getContext(),list2);
                         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
                         indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
@@ -256,6 +257,11 @@ public class IndexFragment extends Fragment {
                     JSONArray jsonArray = jsonObject.getJSONArray("datalist");
                     Gson gson=new Gson();
                     list3=gson.fromJson(jsonArray.toString(),new TypeToken<List<ShipinItem>>(){}.getType());
+                    List<ShipinItem> listtem=new ArrayList<ShipinItem>();
+                    for(int i=0;i<3;i++){
+                        listtem.add(list3.get(i));
+                    }
+                    list3=listtem;
                 }
                 catch (JSONException e){
                     e.printStackTrace();

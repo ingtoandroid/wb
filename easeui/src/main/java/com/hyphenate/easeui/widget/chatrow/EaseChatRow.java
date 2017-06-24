@@ -131,11 +131,11 @@ public abstract class EaseChatRow extends LinearLayout {
         //set nickname and avatar
         if(message.direct() == Direct.SEND){
             //EaseUserUtils.setUserAvatar(context, EMClient.getInstance().getCurrentUser(), userAvatarView);
-            if(paths[0]!=null)
+            if(paths!=null&&paths[0]!=null)
             Glide.with(context).load(paths[0]).transform(new GlideCircleTransform(context)).into(userAvatarView);
         }else{
             //EaseUserUtils.setUserAvatar(context, message.getFrom(), userAvatarView);
-            if(paths[1]!=null)
+            if(paths!=null&&paths[1]!=null)
             Glide.with(context).load(paths[1]).transform(new GlideCircleTransform(context)).into(userAvatarView);
 
             EaseUserUtils.setUserNick(message.getFrom(), usernickView);

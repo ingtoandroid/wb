@@ -1,16 +1,11 @@
 package com.example.a.app10.Activity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
@@ -29,8 +24,6 @@ import com.hyphenate.util.EasyUtils;
 import com.hyphenate.util.HanziToPinyin;
 
 import java.security.Permission;
-import java.util.ArrayList;
-import java.util.List;
 
 public class chat extends AppCompatActivity {
 
@@ -61,7 +54,7 @@ public class chat extends AppCompatActivity {
         paths[0]=Net.getPhotoUrl();
         paths[1]=headurl;
         getPermission();
-        ((MyApplication) getApplication()).init();
+        //((MyApplication) getApplication()).init();
         init();
         EaseUI.getInstance().setSettingsProvider(new EaseUI.EaseSettingsProvider() {
             @Override
@@ -85,7 +78,7 @@ public class chat extends AppCompatActivity {
             }
         });
 
-        chatFragment = new EaseChatFragment();
+        chatFragment = new ChatFragment();
         Bundle b=new Bundle();
         b.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         b.putString(EaseConstant.EXTRA_USER_ID,toChatUsername);
@@ -133,11 +126,12 @@ public class chat extends AppCompatActivity {
         chatFragment.onBackPressed();
         }
     private void init(){
+        DemoHelper.getInstance().init(this);
         /*登陆*/
         new Thread(new Runnable() {
             @Override
             public void run() {
-                EMClient.getInstance().login(Net.getInstance().getUsername(), Net.getHx_pwd(), new EMCallBack() {
+                EMClient.getInstance().login(Net.getUsername(), Net.getHx_pwd(), new EMCallBack() {
                     @Override
                     public void onSuccess() {
                         //Toast.makeText(chat.this,"success",Toast.LENGTH_LONG).show();
@@ -185,9 +179,6 @@ public class chat extends AppCompatActivity {
         ActivityCompat.requestPermissions(chat.this,
                 strings, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
     }
-    }
-
-
 
 //    @Override
 //    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

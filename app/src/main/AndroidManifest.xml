@@ -27,13 +27,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".tool.MyApplication">
-        <!--<provider-->
-            <!--android:authorities=""-->
-            <!--android:name=""-->
+        android:name="com.hyphenate.easeui.DemoApplication">
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1140170613115884#ysapp1" />
+            android:value="	1168170607178561#yuejiansports" />
         <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -82,12 +79,13 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity.PersonalActivity"
             android:screenOrientation="portrait">
-            
+
         </activity>
         <activity android:name=".Activity.ResetPwdActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.RegisterActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name="com.hyphenate.easeui.video.util.RecorderVideoActivity"></activity>
         <activity android:name=".Activity.SettingActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.ModifyDataActivity"
@@ -125,13 +123,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
         <activity android:name=".Activity.Comment"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".Activity.AboutUsActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".Activity.chat"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="com.hyphenate.easeui.ui.VoiceCallActivity"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.VideoCallActivity"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.ImageGridActivity"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.EaseShowVideoActivity"></activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.ys.android.fileprovider"
