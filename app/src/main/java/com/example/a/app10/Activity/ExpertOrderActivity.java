@@ -147,9 +147,9 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 if (form.getState(index)==MyOrderList.FREE){
                     form.setState(index,MyOrderList.CHOSEN);
                     form.invalidate();//强制刷新
-                    showBottom();
                     isChosen=true;
                     choseIndex=index;
+                    showBottom();
                 }
                 return true;
             }
