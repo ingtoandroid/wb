@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MessageDetail;
 import com.example.a.app10.bean.QuestionDetail;
+import com.example.a.app10.bean.URLString;
 import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -162,8 +163,8 @@ public class MessageDetailedActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                         messager = jsonObject.getString("nickName");
-                        headImageUrl = jsonObject.getString("filePath");
-                        messageDetail.setHeadImage(jsonObject.getString("filePath"));
+                        headImageUrl = URLString.path_head_image+jsonObject.getString("filePath");
+                        messageDetail.setHeadImage(URLString.path_head_image+jsonObject.getString("filePath"));
                         messageDetail.setMessageContent(jsonObject.getString("questionContent"));
                         messageDetail.setMessageData(jsonObject.getString("questionDate"));
                         messageDetail.setType("追问");

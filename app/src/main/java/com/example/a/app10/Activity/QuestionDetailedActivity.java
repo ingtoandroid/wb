@@ -29,6 +29,7 @@ import com.example.a.app10.R;
 import com.example.a.app10.bean.MyClassItem;
 import com.example.a.app10.bean.MyCourse;
 import com.example.a.app10.bean.QuestionDetail;
+import com.example.a.app10.bean.URLString;
 import com.example.a.app10.tool.Net;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -129,8 +130,8 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                         questioner = jsonObject.getString("nickName");
-                        headImageUrl = jsonObject.getString("filePath");
-                        questionDetail.setHeadImage(jsonObject.getString("filePath"));
+                        headImageUrl = URLString.path_head_image+jsonObject.getString("filePath");
+                        questionDetail.setHeadImage(URLString.path_head_image+jsonObject.getString("filePath"));
                         questionDetail.setQuestionContent(jsonObject.getString("questionContent"));
                         questionDetail.setQuestionData(jsonObject.getString("questionDate"));
                         questionDetail.setType("追问");

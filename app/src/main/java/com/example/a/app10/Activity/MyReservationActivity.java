@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a.app10.R;
 import com.example.a.app10.bean.MyReservation;
@@ -85,7 +86,7 @@ public class MyReservationActivity extends AppCompatActivity {
                         MyReservation myReservation = new MyReservation();
                         myReservation.setItem_content_reservation(jObject.getString("ordertitle"));
                         myReservation.setItem_username_reservation(jObject.getString("expertName"));
-                        myReservation.setItem_time_reservation(jObject.getString("orderStartTime")+"-"+jObject.getString("orderEndTime"));
+                        myReservation.setItem_time_reservation(jObject.getString("orderDate")+" "+jObject.getString("orderStartTime")+"-"+jObject.getString("orderEndTime"));
                         myReservation.setOrderContent(jObject.getString("orderContent"));
                         myReservation.setOrderDate(jObject.getString("orderDate"));
                         myReservation.setOrderId(jObject.getString("orderId"));
@@ -131,7 +132,7 @@ public class MyReservationActivity extends AppCompatActivity {
                 holder.item_consultation_reservation.setEnabled(false);
                 holder.item_evaluate_reservation.setEnabled(false);
 
-                holder.item_cancle_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
+                holder.item_consultation_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
                 holder.item_evaluate_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
 
 //                Resources resource = (Resources) getBaseContext().getResources();
@@ -169,6 +170,47 @@ public class MyReservationActivity extends AppCompatActivity {
                 holder.item_consultation_reservation.setEnabled(false);
             }
 
+            holder.item_cancle_reservation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Call call = Net.getInstance().cancelOrder(myReservation.getOrderId());
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Request request, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Response response) throws IOException {
+                            String str_response = response.body().string();
+                            JSONTokener jsonTokener = new JSONTokener(str_response);
+                            try {
+                                JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+                                String megs = jsonObject.getString("megs");
+                                if(megs.equals("取消成功")){
+                                    myReservation.setType(-1);
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            recyclerView.setAdapter(new MyAdapter());
+                                        }
+                                    });
+                                }
+                                else if(megs.equals("取消失败")){
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(MyReservationActivity.this,"取消失败",Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            });
             holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
