@@ -232,7 +232,16 @@ public class IndexFragment extends Fragment {
                         tiWenAdapter=new TiWenAdapter(getContext(),list2);
                         LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
                         indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
+                        tiWenAdapter.setItemOnClickListener(new TiWenAdapter.ItemOnClickListener() {
+                            @Override
+                            public void onClick(View view, int position) {
+                                Intent intent=new Intent(getContext(),QuestionDetail.class);
+                                intent.putExtra("questionID",list2.get(position).getQuestionID());
+                                startActivity(intent);
+                            }
+                        });
                         indexTiwenRecycleView.setAdapter(tiWenAdapter);
+
 
                     }
                 });
