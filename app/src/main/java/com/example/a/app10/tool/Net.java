@@ -309,6 +309,11 @@ public class Net {
         return get(url);
     }
 
+    public Call cancelOrder(String ordId){
+        String url = URLString.expert_order_cancel +"?"+"orderId=" + ordId;
+        return  get(url);
+    }
+
     //  get/post请求
     private Call get(String url){
         Request request = new Request.Builder().url(url).build();

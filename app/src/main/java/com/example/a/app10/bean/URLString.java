@@ -54,5 +54,7 @@ public class URLString {
     //专家
     final static public String expert_list=path+"expert/get_expert_list";
     final static public String class_list=path+"course/courseRelease_list";
+    final static public String expert_order_cancel = path + "expert/expert_order_cancel";
+    final static public String expert_order_pingfe = path + "expert/expert_order_pingfe";
 }
 
