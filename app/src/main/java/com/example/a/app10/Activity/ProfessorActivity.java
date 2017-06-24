@@ -46,6 +46,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     private TextView tvSideTitle1,tvSideTitle2,tvSideTitle3;
     private String[] sideTitles=new String[3];
     private String[] buttonTexts,buttonCode;
+    private String expertArea="";
     private final int EVEAY_MAX_LINE=9;
     private int[] numbers=new int[3];//每个组的数据数目
 
@@ -96,12 +97,19 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
 
+        if (getIntent().getStringExtra("expertArea")!=null){
+            expertArea=getIntent().getStringExtra("expertArea");
+        }
+
         new LoadTask().execute(null,null,null);
 
     }
 
     private void getData() {
         String url= MyInternet.MAIN_URL+"expert/get_expert_list";
+        if (expertArea.length()>1){
+            url=MyInternet.MAIN_URL+"expert/get_expert_page_list?expertArea="+expertArea;
+        }
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
