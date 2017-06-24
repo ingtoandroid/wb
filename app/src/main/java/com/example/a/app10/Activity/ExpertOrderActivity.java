@@ -138,7 +138,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 float singleWidth=form.getWidth()/7;
                 float singleHeight=form.getHeight()/3;
                 int index=((int)(y/singleHeight))*7+(int) (x/singleWidth);
-                if (index>=20){
+                if (index>20){
                    return true;
                 }
                 if (isChosen){
