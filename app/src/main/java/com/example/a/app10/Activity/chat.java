@@ -34,16 +34,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class chat extends AppCompatActivity {
-
-    public static chat activityInstance;
     private EaseChatFragment chatFragment;
     private String toChatUsername;
     private String headurl;
     private String[] paths = {"", ""};
     private static String[] PERMISSIONS = {
-            Manifest.permission_group.STORAGE,
-            Manifest.permission_group.LOCATION,
-            Manifest.permission_group.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.LOCATION_HARDWARE,
+            Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO,
     };
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
@@ -53,8 +51,7 @@ public class chat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat2);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        activityInstance = this;
+
         if (getIntent().hasExtra("name"))
             toChatUsername = getIntent().getExtras().getString("name");
         //得到对方账号
@@ -100,7 +97,7 @@ public class chat extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        activityInstance = null;
+
         EMClient.getInstance().logout(true);
 
     }
@@ -183,6 +180,7 @@ public class chat extends AppCompatActivity {
         }
         String[] strings = new String[list.size()];
         list.toArray(strings);
+        Log.e("list",""+strings.length);
         ActivityCompat.requestPermissions(chat.this,
                 strings, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
     }

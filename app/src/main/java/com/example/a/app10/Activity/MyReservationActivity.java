@@ -165,8 +165,7 @@ public class MyReservationActivity extends AppCompatActivity {
                 holder.item_evaluate_reservation.setBackgroundResource(R.drawable.button_reservation_disable);
 
                 holder.item_cancle_reservation.setEnabled(false);
-                holder.item_evaluate_reservation.setEnabled(false);
-                holder.item_consultation_reservation.setEnabled(false);
+
             }
 
             holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {

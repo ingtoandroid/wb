@@ -91,7 +91,7 @@
                 android:id="@+id/time_current"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:layout_width="65dp"
+                android:layout_width="60dp"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -110,11 +110,13 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_gravity="center_vertical"
-                android:layout_width="65dp"
-                android:layout_marginLeft="10dp"
+                android:layout_width="60dp"
+                android:layout_marginLeft="5dp"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
                 android:textColor="@color/video_bar_text"
+                android:singleLine="true"
+
                 />
         </LinearLayout>
         <!--<ImageButton-->
