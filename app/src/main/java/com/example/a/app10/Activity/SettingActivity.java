@@ -79,6 +79,12 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tx_usernameSetting.setText(Net.getPersonName());
+    }
+
     private void exit(){
         SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();

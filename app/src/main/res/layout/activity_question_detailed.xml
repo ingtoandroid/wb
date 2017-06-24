@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/say"
             android:layout_gravity="center_vertical"
+            android:id="@+id/say"
             android:layout_marginLeft="10dp"/>
         <EditText
             android:layout_width="0dp"
@@ -65,8 +66,11 @@
             android:id="@+id/edit_question"
             android:hint="想说点什么..."
             android:background="@null"
+            android:layout_gravity="bottom"
             android:textSize="12sp"
-            android:textColor="@color/stringCenter"/>
+            android:textColor="@color/stringCenter"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,6 +78,7 @@
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:id="@+id/askPurse"
-            android:background="@drawable/button_reservation"/>
+            android:background="@drawable/button_reservation"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 </RelativeLayout>
