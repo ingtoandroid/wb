@@ -174,7 +174,7 @@ public class Net {
     }
     public Call setHeadImage(File file){
         String url=URLString.head_image;
-        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("avatar",file.getName(),RequestBody.create(MediaType.parse("application/octet-stream"),file)).build();
+        RequestBody requestBody=new MultipartBuilder().addFormDataPart("infoId",personID).addFormDataPart("avatar",file.getName(),RequestBody.create(MediaType.parse("application/jpg"),file)).build();
         return post(url,requestBody);
     }
 

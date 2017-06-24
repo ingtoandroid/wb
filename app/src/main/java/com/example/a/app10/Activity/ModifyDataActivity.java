@@ -233,7 +233,13 @@ public class ModifyDataActivity extends AppCompatActivity {
             Call call=Net.getInstance().setHeadImage(new File(getPath(uri)));
             call.enqueue(new Callback() {
                 @Override
-                public void onFailure(Request request, IOException e) {
+                public void onFailure(Request request, final IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(ModifyDataActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     e.printStackTrace();
                 }
 
@@ -244,6 +250,7 @@ public class ModifyDataActivity extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject(s);
                         int megs = jsonObject.getInt("megs");
                         if(megs == 0){
+                            Net.setPhotoUrl(jsonObject.getString("modelName"));
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
