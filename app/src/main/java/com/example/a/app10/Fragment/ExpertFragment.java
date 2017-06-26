@@ -103,7 +103,7 @@ public class ExpertFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Intent intent=new Intent(getContext(),ProfessorActivity.class);
-                intent.putExtra("expertArea",list.get(position).getKey());
+                intent.putExtra("expertArea",list.get(position).getValue());
                 startActivity(intent);
             }
         });

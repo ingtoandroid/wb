@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -47,6 +48,10 @@ public class QuickQuestionActivity extends ToolBarBaseActivity {
     }
 
     private void sendQuestion(){
+        if (Net.getPersonID()==""){
+            startActivity(new Intent(QuickQuestionActivity.this,LoginActivity.class));
+            return;
+        }
         Call call = Net.getInstance().quickQuestion(Net.getPersonID(),et.getText().toString());
         et.setText("");
         call.enqueue(new Callback() {

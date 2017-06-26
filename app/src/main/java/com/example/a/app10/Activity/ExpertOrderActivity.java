@@ -315,6 +315,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
     private void getData(String date) {
         String url= MyInternet.MAIN_URL+"expert/get_expert_order_service?expertId="+professor.getExpertId()+date;
+        Log.v("tagUrl","   "+url);
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
