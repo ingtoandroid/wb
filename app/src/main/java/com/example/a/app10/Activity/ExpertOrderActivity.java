@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -199,6 +198,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 //ArrayAdapter<String> adapter=new ArrayAdapter<>(ExpertOrderActivity.this,R.layout.spinner_item,spinnerTexts);
                 final OrderAdapter adapter=new OrderAdapter(ExpertOrderActivity.this,spinnerTexts,isShow);
                 spinner.setAdapter(adapter);
+
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

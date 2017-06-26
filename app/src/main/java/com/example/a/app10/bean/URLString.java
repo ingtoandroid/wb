@@ -49,9 +49,12 @@ public class URLString {
     final static public String deleteMessage = path+"message/deleateMessage";
     final static public String quickQuestion = path+"question/quickQuestion";
     final static public String question_list = path+"question/question_list";
+    final static public String course_comment=path+"expert/expert_order_pingfe";
 
     //专家
     final static public String expert_list=path+"expert/get_expert_list";
     final static public String class_list=path+"course/courseRelease_list";
+    final static public String expert_order_cancel = path + "expert/expert_order_cancel";
+    final static public String expert_order_pingfe = path + "expert/expert_order_pingfe";
 }
 

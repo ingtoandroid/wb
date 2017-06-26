@@ -292,6 +292,10 @@ public class Net {
         String url = URLString.question_list+"?"+"personId="+personID;
         return get(url);
     }
+    public Call comment(String orderId,String pingfen,String evaluate){
+        String url=URLString.course_comment+"?orderId="+orderId+"&pingfe="+pingfen+"&evaluate="+evaluate;
+        return get(url);
+    }
 
 
     /*专家*/
@@ -303,6 +307,11 @@ public class Net {
     public Call getClassList(String s){
         String url=URLString.class_list+s;
         return get(url);
+    }
+
+    public Call cancelOrder(String ordId){
+        String url = URLString.expert_order_cancel +"?"+"orderId=" + ordId;
+        return  get(url);
     }
 
     //  get/post请求

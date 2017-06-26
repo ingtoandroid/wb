@@ -127,6 +127,7 @@ public class QuestionActivity extends AppCompatActivity {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
             String str_url = URLString.path_head_image+datas.get(position).getHeadImageURL();
+//            String str_url = datas.get(position).getHeadImageURL();
 //            String str_url = URLString.path_head_image+"lemon/fileDownload?fileName=associator/20170615/1111.png";
             Glide.with(QuestionActivity.this).load(str_url).into(holder.headImage);
             holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
