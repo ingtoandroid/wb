@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 
 import com.example.a.app10.Adapter.NewsAdapter;
@@ -33,8 +34,12 @@ public class NewsActivity extends ToolBarBaseActivity{
 
     private RecyclerView rv;
     private List<NewsItem> list;
+    private LinearLayout llLoading;
+    private int currentPosition=0;
+    private boolean loading=false;
 
     private OkHttpClient client;
+    private int pageIndex=1;//从第一页开始获取
 
 
     @Override
@@ -61,6 +66,7 @@ public class NewsActivity extends ToolBarBaseActivity{
         list=new ArrayList<>();
 
         rv= (RecyclerView) findViewById(R.id.rv);
+        llLoading= (LinearLayout) findViewById(R.id.llLoading);
         client=new OkHttpClient();
         hideDrawer();
 
@@ -72,13 +78,16 @@ public class NewsActivity extends ToolBarBaseActivity{
     }
 
     private void getData() {
-        String url= MyInternet.MAIN_URL+"news/get_news_list";
+        String url= MyInternet.MAIN_URL+"news/get_news_list?pageIndex="+pageIndex;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
                 try {
                     JSONObject object2=new JSONObject(s);
                     JSONArray array=object2.getJSONArray("dataList");
+                    if (array.length()<=0){
+                        return;
+                    }
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
                         NewsItem item=new NewsItem(object.getString("newsId"),
@@ -128,6 +137,7 @@ public class NewsActivity extends ToolBarBaseActivity{
     //配置并显示列表
     public void showRecycler(){
         hideProgress();
+        hideBottomProgress();
         rv.setVisibility(View.VISIBLE);
         NewsAdapter adapter=new NewsAdapter(list,this);
         adapter.setLisenter(new NewsAdapter.OnItenClickListener() {
@@ -144,6 +154,49 @@ public class NewsActivity extends ToolBarBaseActivity{
         });
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isSlideToBottom(recyclerView)) {
+                    loadMore();
+                }
+            }
+        });
         rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
+        rv.scrollToPosition(currentPosition);
+        Log.v("tag","current"+currentPosition);
+        loading=false;
+    }
+
+    private void loadMore() {//加载更多
+        if (loading){
+            return;
+        }
+        loading=true;
+        showBottomProgress();
+        pageIndex++;
+        currentPosition=list.size()-6;
+        getData();
+    }
+
+    private void showBottomProgress() {
+        llLoading.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBottomProgress(){
+        llLoading.setVisibility(View.GONE);
+    }
+
+    private boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null) return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
     }
 }

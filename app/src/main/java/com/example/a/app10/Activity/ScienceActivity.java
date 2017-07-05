@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -35,6 +36,8 @@ import q.rorbin.badgeview.QBadgeView;
 public class ScienceActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
     private RecyclerView rv;
+    private LinearLayout llLoading;
+    private boolean isShaiXuan=false;
     private List<NewsItem> list;
     private final int NUMBERBUTTONS =27;
     private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,R.id.btn19,
@@ -52,6 +55,10 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     private String[] buttonTexts,buttonCode;
     private final int EVEAY_MAX_LINE=9;
     private int[] numbers=new int[3];
+    private int pageIndex=0;
+    private int currentPosition=0;
+    private String catalogCode=null;
+    private boolean loading=false;
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;
@@ -95,6 +102,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         list=new ArrayList<>();
         buttonTexts=new String[NUMBERBUTTONS];
         buttonCode=new String[NUMBERBUTTONS];
+        llLoading= (LinearLayout) findViewById(R.id.llLoading);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
@@ -104,7 +112,8 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     }
 
     private void getData() {
-        String url= MyInternet.MAIN_URL+"sports/get_sports_list";
+        pageIndex++;
+        String url= MyInternet.MAIN_URL+"sports/get_sports_list?pageIndex="+pageIndex;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
@@ -224,6 +233,9 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         }
 
         if (currentId==R.id.btnSure){
+            isShaiXuan=true;
+            pageIndex=0;//页号初始化
+            list=new ArrayList<>();//列表清空
             reLoad();
             return;
         }
@@ -248,23 +260,22 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
             }
         }
         if (a.length()>1){
-            reGetData(a);
+            catalogCode=a;
+            reGetData();
         }
 
         closeDrawer();
         recycle();//筛选条件复原
     }
 
-    private void reGetData(String a) {
-        String url=MyInternet.MAIN_URL+"sports/get_sports_list?catalogCode="+a;
-        Log.v("aaaaa",a);
+    private void reGetData() {
+        pageIndex++;
+        String url=MyInternet.MAIN_URL+"sports/get_sports_list?catalogCode="+catalogCode+"&pageIndex="+pageIndex;
         showProgress("加载中");
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
-
                 try {
-                    list=new ArrayList<>();
                     JSONObject all=new JSONObject(s);
                     JSONArray array=all.getJSONArray("dataList");
                     for (int i=0;i<array.length();i++){
@@ -273,7 +284,6 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                                 object.getString("title"),object.getString("publishTime"),
                                 object.getString("authorName"),object.getString("filePath"));
                         list.add(item);
-
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -309,6 +319,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     //配置并显示列表
     public void showRecycler(){
         hideProgress();
+        hideBottomProgress();
         adapter=new NewsAdapter(list,this);
         adapter.setLisenter(new NewsAdapter.OnItenClickListener() {
             @Override
@@ -323,9 +334,24 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
 
             }
         });
-        rv.setAdapter(adapter);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
 
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isSlideToBottom(recyclerView)) {
+                    loadMore();
+                }
+            }
+        });
+        rv.setAdapter(adapter);
+        rv.scrollToPosition(currentPosition);
         rv.setVisibility(View.VISIBLE);
+        loading=false;
     }
 
     private class MyListener implements View.OnClickListener{//更多的点击事件
@@ -345,5 +371,38 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         public MyListener(int line){
             this.line=line;
         }
+    }
+
+    private void loadMore() {//加载更多
+        if (list.size()<6){
+            return;
+        }
+        if (loading){
+            return;
+        }
+        loading=true;
+        showBottomProgress();
+        currentPosition=list.size()-6;
+        Log.v("tag","loadmore");
+        if (isShaiXuan){
+            reGetData();
+        } else {
+            getData();
+        }
+    }
+
+    private void showBottomProgress() {
+        llLoading.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBottomProgress(){
+        llLoading.setVisibility(View.GONE);
+    }
+
+    private boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null) return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
     }
 }

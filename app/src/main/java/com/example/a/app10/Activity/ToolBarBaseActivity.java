@@ -96,7 +96,6 @@ public abstract class ToolBarBaseActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(rightTitle)){
             menu.findItem(R.id.item1).setTitle(rightTitle);
         }
-
         return super.onPrepareOptionsMenu(menu);
     }
 

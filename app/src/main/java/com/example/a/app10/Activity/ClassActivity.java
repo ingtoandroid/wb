@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.a.app10.Adapter.ClassAdapter;
 import com.example.a.app10.Adapter.ClassItem;
@@ -40,8 +41,12 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
 
     private RecyclerView rv;
     private List<ClassItem> list;
+    private LinearLayout llLoading;
     private Button btnClub, btnPersonal;
     private boolean isClub= true;
+    private int pageIndex=0;
+    private int currentPosition=0;
+    private boolean change=false;
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;
@@ -66,6 +71,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
 
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();
+        llLoading= (LinearLayout) findViewById(R.id.llLoading);
 
         btnClub= (Button) findViewById(R.id.btnClub);
         btnClub.setOnClickListener(this);
@@ -91,6 +97,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
                     btnClub.setTextColor(getResources().getColor(R.color.textGreen));
                     btnPersonal.setTextColor(Color.rgb(50,50,50));
                     isClub=true;
+                    change=true;
                     loadClub();
                 }
                 break;
@@ -99,6 +106,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
                     btnPersonal.setTextColor(getResources().getColor(R.color.textGreen));
                     btnClub.setTextColor(Color.rgb(50,50,50));
                     isClub=false;
+                    change=true;
                     loadOrder();
                 }
                 break;
@@ -106,10 +114,12 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
     }
 
     private void loadOrder() {
+        pageIndex=1;
         new LoadTask().execute(2,null,null);
     }
 
     private void loadClub() {
+        pageIndex=1;
         new LoadTask().execute(1,null,null);
     }
 
@@ -134,6 +144,7 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
 
     private void showRecycler() {
         hideProgress();
+        hideBottomProgress();
         rv.setLayoutManager(new LinearLayoutManager(this));
         ClassAdapter adapter=new ClassAdapter(list,this);
         adapter.setLisenter(new ClassAdapter.OnItenClickListener(){
@@ -151,12 +162,34 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         });
         rv.setAdapter(adapter);
         rv.setVisibility(View.VISIBLE);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isSlideToBottom(recyclerView)) {
+                    loadMore();
+                }
+            }
+        });
+        if (!change){
+            rv.scrollToPosition(currentPosition);
+        }
     }
 
     private void getData(int i) {
-        list=new ArrayList<>();
+        if (change){
+            list=new ArrayList<>();
+            pageIndex=1;
+        } else {//加载更多
+            pageIndex++;
+        }
 
-        Call call= Net.getInstance().getClassList("?pageIndex=1&courseType="+i);
+        Call call= Net.getInstance().getClassList("?pageIndex="+pageIndex+"&courseType="+i);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -166,10 +199,18 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
             @Override
             public void onResponse(Response response) throws IOException {
                 String string=response.body().string();
-                Log.v("tagS",string);
                 try {
                     JSONObject jsonObject = new JSONObject(string);
                     JSONArray jsonArray=jsonObject.getJSONArray("datalist");
+                    if (jsonArray.length()<=0){//无法加载更多
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                hideBottomProgress();
+                            }
+                        });
+                        return;
+                    }
                     for (int i=0;i<jsonArray.length();i++){
                         JSONObject object=jsonArray.getJSONObject(i);
                         list.add(new ClassItem(object.getString("imageUrl"),
@@ -192,5 +233,28 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         });
 
 
+    }
+
+    private void loadMore() {//加载更多
+        showBottomProgress();
+        change=false;
+        currentPosition=list.size()-4;
+        getData(isClub? 1:2);
+    }
+
+
+    private boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null) return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
+    }
+
+    private void showBottomProgress() {
+        llLoading.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBottomProgress(){
+        llLoading.setVisibility(View.GONE);
     }
 }

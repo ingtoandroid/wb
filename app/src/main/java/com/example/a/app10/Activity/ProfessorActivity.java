@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,11 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     private String expertArea="";
     private final int EVEAY_MAX_LINE=9;
     private int[] numbers=new int[3];//每个组的数据数目
+    private LinearLayout llLoading;
+    private int pageIndex=0;
+    private int currentPosition=0;
+    private boolean isShaiXuan=false;
+    private String aa=null;//筛选列表用到的参数
 
     @Override
     protected int getSideMenu() {
@@ -72,6 +78,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         });
 
         rv= (RecyclerView) findViewById(R.id.rv);
+        llLoading= (LinearLayout) findViewById(R.id.llLoading);
         for (int i = 0; i< NUMBERBUTTONS; i++){
             sideButtons[i]= (Button) findViewById(sideButtonsIds[i]);
             sideButtons[i].setOnClickListener(this);
@@ -106,16 +113,17 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     }
 
     private void getData() {
-        String url= MyInternet.MAIN_URL+"expert/get_expert_list";
-        if (expertArea.length()>1){
-            url=MyInternet.MAIN_URL+"expert/get_expert_page_list?expertArea="+expertArea;
-        }
+        pageIndex++;
+        String url= MyInternet.MAIN_URL+"expert/get_expert_page_list?expertArea="+expertArea+"&pageIndex="+pageIndex;
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
                 try {
                     JSONObject obj =new JSONObject(s);
                     JSONArray array=obj.getJSONArray("datalist");
+                    if (array.length()<=0){
+                        return;
+                    }
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
                         ProfessorItem item=new ProfessorItem(object.getString("imageUrl"),
@@ -296,6 +304,9 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
 
     //根据筛选条件重新加载列表
     private void reLoad() {
+        isShaiXuan=true;
+        pageIndex=0;
+        currentPosition=0;
         String a="";
         for (int i=0;i<EVEAY_MAX_LINE;i++){//研究方向
             if (isChosen[i]){
@@ -314,16 +325,20 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         }
         if (a.length()>1){
             showProgress("加载中");
-            reGetData(a);
+            aa=a;
+            reGetData();
         }
 
         closeDrawer();
         recycle();//筛选条件复原
     }
 
-    private void reGetData(String a) {
-        list=new ArrayList<>();
-        String url=MyInternet.MAIN_URL+"expert/get_expert_page_list?"+a;
+    private void reGetData() {
+        if (pageIndex==0){
+            list=new ArrayList<>();//首次加载，清空数组
+        }
+        pageIndex++;
+        String url=MyInternet.MAIN_URL+"expert/get_expert_page_list?"+aa+"pageIndex="+pageIndex;
         Log.v("tag",url);
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
@@ -331,6 +346,9 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
                 try {
                     JSONObject all=new JSONObject(s);
                     JSONArray array=all.getJSONArray("datalist");
+                    if (array.length()<=0){
+                        return;
+                    }
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
                         ProfessorItem item=new ProfessorItem(object.getString("imageUrl"),
@@ -373,6 +391,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     //配置并显示列表
     public void showRecycler(){
         hideProgress();
+        hideBottomProgress();
         adapter=new ProfessorAdapter(list,this);
         adapter.setLisenter(new ProfessorAdapter.OnItenClickListener() {
             @Override
@@ -389,6 +408,21 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
             }
         });
         rv.setAdapter(adapter);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isSlideToBottom(recyclerView)) {
+                    loadMore();
+                }
+            }
+        });
+        rv.scrollToPosition(currentPosition);
         //adapter.notifyDataSetChanged();
         rv.setVisibility(View.VISIBLE);
     }
@@ -410,5 +444,34 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         public MyListener(int line){
             this.line=line;
         }
+    }
+
+    private void loadMore() {//加载更多
+        if (list.size()<5){
+            return;
+        }
+        showBottomProgress();
+        currentPosition=list.size()-5;
+        if (isShaiXuan){
+            reGetData();
+        } else {
+            getData();
+        }
+    }
+
+
+    private boolean isSlideToBottom(RecyclerView recyclerView) {
+        if (recyclerView == null) return false;
+        if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
+    }
+
+    private void showBottomProgress() {
+        llLoading.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBottomProgress(){
+        llLoading.setVisibility(View.GONE);
     }
 }

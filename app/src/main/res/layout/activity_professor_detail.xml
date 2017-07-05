@@ -8,67 +8,74 @@
     tools:context="com.example.a.app10.Activity.ProfessorDetailActivity">
     <LinearLayout
         android:visibility="invisible"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:id="@+id/llContent"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/professor_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="vertical"
-            android:background="#fff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textColor="@color/stringCenter"
-                android:text="个人简介"
-                android:textSize="20sp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:textColor="@color/stringCenter"
-                android:id="@+id/tvIndroduction"
-                android:text="互动性强，体验式授课，能用专业经验为学员提供针对性的培训方案"
-                android:textSize="15sp"
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp"
+            android:layout_height="match_parent">
+            <include layout="@layout/professor_item"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
             <LinearLayout
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:background="#fff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <Button
-                    android:textColor="#fff"
-                    android:id="@+id/btnOrder"
-                    android:text="预约"
+                <TextView
+                    android:textColor="@color/stringCenter"
+                    android:text="个人简介"
                     android:textSize="20sp"
-                    android:background="@drawable/button_side_press"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp" />
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/stringCenter"
+                    android:id="@+id/tvIndroduction"
+                    android:text="互动性强，体验式授课，能用专业经验为学员提供针对性的培训方案"
+                    android:textSize="15sp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:textColor="#fff"
+                        android:id="@+id/btnOrder"
+                        android:text="预约"
+                        android:textSize="20sp"
+                        android:background="@drawable/button_side_press"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <TextView
-            android:textColor="@color/stringDark"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:text="视频列表"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/stringDark"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:text="视频列表"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvVideo"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:layout_marginLeft="10dp"
             android:textColor="@color/stringDark"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
@@ -76,6 +83,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <android.support.v7.widget.RecyclerView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:id="@+id/rvCourse"
             android:layout_width="match_parent"
