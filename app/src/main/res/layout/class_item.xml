@@ -30,7 +30,8 @@
                 android:textSize="20sp"
                 android:text="HIIT适应性训练"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:maxLines="2"/>
             <TextView
                 android:textColor="@color/stringLight"
                 android:id="@+id/tvNumber"

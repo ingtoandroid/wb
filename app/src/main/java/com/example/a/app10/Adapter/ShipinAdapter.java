@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ShipinItem;
 
@@ -33,7 +34,9 @@ public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(list.get(position).getVideoTitle());
         holder.count.setText("已有"+list.get(position).getPlayNum().toString()+"人参加");
-        holder.time.setText(list.get(position).getStartDate().toString());
+        holder.time.setText("开课时间:"+list.get(position).getStartDate().toString());
+        Glide.with(context).load(list.get(position).getImageUrl()).into(holder.imageView);
+
     }
 
     @Override

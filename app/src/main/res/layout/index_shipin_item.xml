@@ -1,57 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--课程列表的子项布局-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical|right"
-    android:layout_marginBottom="10dp">
-<ImageView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/index_shipin_item_image"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:src="@drawable/tem1"
-    android:scaleType="fitXY"/>
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_centerVertical="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentEnd="true"
-    android:layout_marginRight="10dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/index_shipin_item_title"
-        android:textSize="20sp"
-        android:textColor="@color/stringDark"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/index_shipin_item_count"
-        android:textSize="10sp"
-        android:textColor="@color/stringCenter"
-        android:layout_marginTop="10dp"/>
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_height="150dp">
+    <ImageView
+        android:id="@+id/index_shipin_item_image"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/index_shipin_item_time"
-            android:textColor="@color/stringCenter"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/index_shipin_item_time"
-            android:textColor="@color/stringCenter"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_weight="6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_weight="5"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="@color/stringDark"
+                android:id="@+id/index_shipin_item_title"
+                android:textSize="20sp"
+                android:text="HIIT适应性训练"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"/>
+            <TextView
+                android:textColor="@color/stringLight"
+                android:id="@+id/index_shipin_item_count"
+                android:layout_marginTop="5dp"
+                android:text="1564364654人已参加"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="@color/stringLight"
+                android:id="@+id/index_shipin_item_time"
+                android:layout_marginTop="15dp"
+                android:text="开课时间：   2015.5.5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
 </RelativeLayout>

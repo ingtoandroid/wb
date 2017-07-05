@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.a.app10.Adapter.ClassAdapter;
 import com.example.a.app10.Adapter.VideoAdapter;
@@ -39,6 +41,10 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
     private List<ShipinItem> list;
     private Button btnClub,btnOrder;
     private boolean isClub= true;
+    private int totalPages=0;
+    private int currentPages=0;
+    private int type=0;
+    private int currentCount=0;
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;
@@ -64,8 +70,33 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         btnClub.setOnClickListener(this);
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
+        rv.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            boolean isSlidingToLast = false;
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if(newState == RecyclerView.SCROLL_STATE_IDLE){
+                    int lastVisibleItem = manager.findLastCompletelyVisibleItemPosition();
+                    int totalItemCount = manager.getItemCount();
+                    if (lastVisibleItem == (totalItemCount - 1) && isSlidingToLast) {
+                        //加载更多功能的代码
+                        currentCount=manager.getItemCount();
+                        getData2(type);
+                    }
 
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if(dy>0)
+                    isSlidingToLast=true;
+            }
+        });
         new LoadTask().execute(1,null,null);
+        type=1;
     }
 
     @Override
@@ -97,10 +128,12 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
 
     private void loadOrder() {
         new ShipinActivity.LoadTask().execute(2,null,null);
+        type=2;
     }
 
     private void loadClub() {
         new ShipinActivity.LoadTask().execute(1,null,null);
+        type=1;
     }
 
     private class LoadTask extends AsyncTask<Integer,Integer,Void> {
@@ -145,7 +178,8 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
 
     private void getData(int i) {
         list=new ArrayList<>();
-
+        currentPages=0;
+        totalPages=0;
         Call call= Net.getInstance().shipinList(0,i);
         call.enqueue(new Callback() {
             @Override
@@ -158,6 +192,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
                 String string=response.body().string();
                 try {
                     JSONObject jsonObject = new JSONObject(string);
+                    totalPages=jsonObject.getInt("totalPages");
                     JSONArray jsonArray=jsonObject.getJSONArray("datalist");
                     Gson gson=new Gson();
                     list=gson.fromJson(jsonArray.toString(),new TypeToken<List<ShipinItem>>(){}.getType());
@@ -175,10 +210,51 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         });
 
         //测试用手动延迟
+    }
+    private void getData2(int i) {
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        }
+        catch (InterruptedException e){
             e.printStackTrace();
         }
+        if(++currentPages<totalPages){
+        Call call= Net.getInstance().shipinList(currentPages,i);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                String string=response.body().string();
+                try {
+                    JSONObject jsonObject = new JSONObject(string);
+                    JSONArray jsonArray=jsonObject.getJSONArray("datalist");
+                    Gson gson=new Gson();
+                    List list2=new ArrayList<ShipinItem>();
+                    list2=gson.fromJson(jsonArray.toString(),new TypeToken<List<ShipinItem>>(){}.getType());
+                    list.addAll(list2);
+                    Log.e("size",""+list.size());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showRecycler();
+                            rv.scrollToPosition(currentCount);
+                        }
+                    });
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //测试用手动延迟
     }
+    else
+        {
+            Toast.makeText(this, "没有更多", Toast.LENGTH_SHORT).show();
+        }}
 }
