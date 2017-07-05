@@ -34,16 +34,25 @@
         android:background="#e1e1e1"
         android:layout_below="@+id/set_newpassword_title"
         android:id="@+id/first_divid"/>
-    <TextView
-        android:layout_width="match_parent"
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="悦健体育"-->
+        <!--android:textColor="@color/textGreen"-->
+        <!--android:textSize="20sp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:layout_below="@+id/first_divid"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:id="@+id/title"/>-->
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="悦健体育"
-        android:textColor="@color/textGreen"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
+        android:background="@drawable/title_about_us"
+        android:id="@+id/title"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/first_divid"
-        android:layout_marginTop="40dp"
-        android:id="@+id/title"/>
+        android:layout_marginTop="40dp"/>
     <TextView
         android:layout_width="60dp"
         android:layout_height="wrap_content"
@@ -67,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="悦健体育版权所有"
+        android:text="慧健体育版权所有"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="30dp"/>
 </RelativeLayout>

@@ -11,7 +11,7 @@ public class URLString {
 
     final static public String hostname = "120.76.165.146";
 
-    final static public String port = "8080";
+    final static public String port = "80";
     final static public String project = "yjtyms/yjty_App/";
     final static public String super_project = "yjtyms/";
     final static public String path = protocol+hostname+"/"+project;

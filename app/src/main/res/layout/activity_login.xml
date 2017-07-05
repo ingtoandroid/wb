@@ -10,16 +10,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.a.app10.Activity.LoginActivity">
 
-    <TextView
-        android:layout_width="match_parent"
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/login_title"-->
+        <!--android:textSize="40sp"-->
+        <!--android:typeface="sans"-->
+        <!--android:textColor="@color/textGreen"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:id="@+id/title"/>-->
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_title"
-        android:textSize="40sp"
-        android:typeface="sans"
-        android:textColor="@color/textGreen"
-        android:gravity="center"
+        android:background="@drawable/title"
         android:layout_marginTop="50dp"
-        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
         android:id="@+id/title"/>
 
     <EditText
