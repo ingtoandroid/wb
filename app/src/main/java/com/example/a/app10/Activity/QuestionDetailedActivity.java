@@ -143,7 +143,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                             qDetail.setExpertname(jObject.getString("expertName"));
                             qDetail.setQuestionData(jObject.getString("answerDate"));
                             qDetail.setQuestionContent(jObject.getString("answer"));
-                            qDetail.setHeadImage(jObject.getString("filePath"));
+                            qDetail.setHeadImage(URLString.path_head_image+jObject.getString("filePath"));
                             qDetail.setType(jObject.getString("answerType"));
                             list.add(qDetail);
                         }

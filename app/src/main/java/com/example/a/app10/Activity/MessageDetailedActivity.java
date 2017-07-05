@@ -176,7 +176,7 @@ public class MessageDetailedActivity extends AppCompatActivity {
                             mDetail.setExpertname(jObject.getString("expertName"));
                             mDetail.setMessageData(jObject.getString("answerDate"));
                             mDetail.setMessageContent(jObject.getString("answer"));
-                            mDetail.setHeadImage(jObject.getString("filePath"));
+                            mDetail.setHeadImage(URLString.path_head_image+jObject.getString("filePath"));
                             mDetail.setType(jObject.getString("answerType"));
                             list.add(mDetail);
                         }
