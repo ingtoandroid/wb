@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.a.app10.Adapter.ClassAdapter;
@@ -40,6 +41,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
     private RecyclerView rv;
     private List<ShipinItem> list;
     private Button btnClub,btnOrder;
+    private LinearLayout llLoading;
     private boolean isClub= true;
     private int totalPages=0;
     private int currentPages=0;
@@ -64,6 +66,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         });
 
         rv= (RecyclerView) findViewById(R.id.rv);
+        llLoading= (LinearLayout) findViewById(R.id.llLoading);
         list=new ArrayList<>();
 
         btnClub= (Button) findViewById(R.id.btnClub);
@@ -157,6 +160,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
 
     private void showRecycler() {
         hideProgress();
+        hideBottomProgress();
         rv.setLayoutManager(new LinearLayoutManager(this));
         VideoAdapter adapter=new VideoAdapter(list,this);
         adapter.setListener(new VideoAdapter.OnItenClickListener(){
@@ -218,6 +222,7 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         catch (InterruptedException e){
             e.printStackTrace();
         }
+        showBottomProgress();
         if(++currentPages<totalPages){
         Call call= Net.getInstance().shipinList(currentPages,i);
         call.enqueue(new Callback() {
@@ -257,4 +262,12 @@ public class ShipinActivity extends ToolBarBaseActivity implements View.OnClickL
         {
             Toast.makeText(this, "没有更多", Toast.LENGTH_SHORT).show();
         }}
+
+    private void showBottomProgress() {
+        llLoading.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBottomProgress(){
+        llLoading.setVisibility(View.GONE);
+    }
 }
