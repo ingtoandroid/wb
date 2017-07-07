@@ -237,7 +237,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
     private void changeDate(int i, int i1, int i2) {
         showProgress("加载中");
-        String date="&dateStr="+i+"/"+i1+"/"+i2;
+        String date="&dateStr="+i+"-"+(i1+1)+"-"+i2;
         getData(date);
     }
 

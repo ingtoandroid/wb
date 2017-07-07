@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ThemedSpinnerAdapter;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,8 +34,16 @@ public class SplashActivity extends AppCompatActivity {
 
         Window window=getWindow();//设置透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//        init();
         init();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     private void init(){
         SharedPreferences sharedPreferences=getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         String name=sharedPreferences.getString("id","-1");
@@ -76,6 +85,8 @@ public class SplashActivity extends AppCompatActivity {
                             }catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
+                            new
                             Intent intent = new Intent(SplashActivity.this,Main1Activity.class);
                             startActivity(intent);
                             finish();
