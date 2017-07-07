@@ -27,14 +27,25 @@ import java.io.IOException;
 
 public class SplashActivity extends AppCompatActivity {
     private Handler handler = new Handler();
+    private boolean isFinish=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         Window window=getWindow();//设置透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//        init();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                    isFinish=true;
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         init();
     }
 
@@ -85,8 +96,7 @@ public class SplashActivity extends AppCompatActivity {
                             }catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
-                            new
+                            while (!isFinish);
                             Intent intent = new Intent(SplashActivity.this,Main1Activity.class);
                             startActivity(intent);
                             finish();
@@ -113,6 +123,7 @@ public class SplashActivity extends AppCompatActivity {
             });
         }
         else{
+            while (!isFinish);
             Intent intent=new Intent(SplashActivity.this,Main1Activity.class);
             startActivity(intent);
             finish();
