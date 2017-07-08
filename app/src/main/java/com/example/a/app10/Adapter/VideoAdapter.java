@@ -42,7 +42,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.MyViewHolder
         ShipinItem item=list.get(position);
         holder.tvTitle.setText(item.getVideoTitle());
         holder.tvNumber.setText(item.getPlayNum()+"人已参加");
-        holder.tvTime.setText("开课时间 "+item.getStartDate());
+        holder.tvTime.setText("类型: "+item.getVideoType());
         Glide.with(context).load(item.getImageUrl()).into(holder.iv);
 
         if (listener!=null){

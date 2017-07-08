@@ -34,7 +34,7 @@ public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.title.setText(list.get(position).getVideoTitle());
         holder.count.setText("已有"+list.get(position).getPlayNum().toString()+"人参加");
-        holder.time.setText("开课时间:"+list.get(position).getStartDate().toString());
+        holder.time.setText("类型:"+list.get(position).getVideoType().toString());
         Glide.with(context).load(list.get(position).getImageUrl()).into(holder.imageView);
 
     }

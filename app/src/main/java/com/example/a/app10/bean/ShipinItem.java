@@ -17,6 +17,16 @@ public class ShipinItem {
     private String videoTitle;
     private String playNum;
 
+    public String getVideoType() {
+        return videoType;
+    }
+
+    public void setVideoType(String videoType) {
+        this.videoType = videoType;
+    }
+
+    private String videoType;
+
     public String getImageUrl() {
         return imageUrl;
     }

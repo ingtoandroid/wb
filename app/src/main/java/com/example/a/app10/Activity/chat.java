@@ -60,7 +60,6 @@ public class chat extends AppCompatActivity {
         paths[0] = Net.getPhotoUrl();
         paths[1] = headurl;
         getPermission();
-        //((MyApplication) getApplication()).init();
         init();
         EaseUI.getInstance().setSettingsProvider(new EaseUI.EaseSettingsProvider() {
             @Override

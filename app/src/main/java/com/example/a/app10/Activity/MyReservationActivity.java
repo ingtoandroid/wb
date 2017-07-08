@@ -92,6 +92,7 @@ public class MyReservationActivity extends AppCompatActivity {
                         myReservation.setOrderId(jObject.getString("orderId"));
                         myReservation.setOrderType(jObject.getString("orderType"));
                         myReservation.setFilePath(jObject.getString("filePath"));
+                        myReservation.setItem_expert_userName(jObject.getString("userName"));
                         myReservation.setType(jObject.getInt("type"));
                         datas.add(myReservation);
                     }
@@ -215,7 +216,7 @@ public class MyReservationActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MyReservationActivity.this,chat.class);
-                    intent.putExtra("name",datas.get(position).getItem_username_reservation());
+                    intent.putExtra("name",datas.get(position).getItem_expert_userName());
                     intent.putExtra("filePath",datas.get(position).getFilePath());
                     startActivity(intent);
                 }

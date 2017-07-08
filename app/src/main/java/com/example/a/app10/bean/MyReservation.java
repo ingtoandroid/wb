@@ -5,6 +5,7 @@ package com.example.a.app10.bean;
  */
 
 public class MyReservation {
+
     public String getItem_content_reservation() {
         return item_content_reservation;
     }
@@ -32,6 +33,16 @@ public class MyReservation {
     private String item_content_reservation;
     private String item_username_reservation;
     private String item_time_reservation;
+
+    public String getItem_expert_userName() {
+        return item_expert_userName;
+    }
+
+    public void setItem_expert_userName(String item_expert_userName) {
+        this.item_expert_userName = item_expert_userName;
+    }
+
+    private String item_expert_userName;
 
     public String getOrderContent() {
         return orderContent;

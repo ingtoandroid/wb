@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -13,6 +14,13 @@ import android.widget.TextView;
 
 import com.example.a.app10.Adapter.ViewPagerAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.tool.Net;
+
+import java.lang.ref.WeakReference;
+
+import static android.support.v4.view.ViewPager.SCROLL_STATE_DRAGGING;
+import static android.support.v4.view.ViewPager.SCROLL_STATE_IDLE;
+import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 
 public class Main1Activity extends AppCompatActivity {
 
@@ -38,8 +46,35 @@ public class Main1Activity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mainTab));
         viewPager.setOffscreenPageLimit(1);
-        mainTab.setOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
+        mainTab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition()==2) {
+                    if (Net.getPersonID().equals("")) {
+                        Intent intent = new Intent(Main1Activity.this, LoginActivity.class);
+                        mainTab.getTabAt(0).select();
+                        startActivity(intent);
+                    }
+                    else {
+                        viewPager.setCurrentItem(tab.getPosition());
 
+                    }
+                }
+                else{
+                    viewPager.setCurrentItem(tab.getPosition());
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
     private void setTabs(){
         for(int i=0;i<tab_titles.length;i++){

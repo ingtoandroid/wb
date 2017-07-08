@@ -128,12 +128,13 @@ public class SplashActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         Thread.sleep(3000);
+                        Intent intent=new Intent(SplashActivity.this,Main1Activity.class);
+                        startActivity(intent);
+                        finish();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Intent intent=new Intent(SplashActivity.this,Main1Activity.class);
-                    startActivity(intent);
-                    finish();
+
                 }
             }).start();
 
