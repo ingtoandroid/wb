@@ -39,7 +39,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(3000);
-                    isFinish=true;
+                    //isFinish=true;
                 }
                 catch (InterruptedException e){
                     e.printStackTrace();
@@ -123,10 +123,20 @@ public class SplashActivity extends AppCompatActivity {
             });
         }
         else{
-            while (!isFinish);
-            Intent intent=new Intent(SplashActivity.this,Main1Activity.class);
-            startActivity(intent);
-            finish();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent=new Intent(SplashActivity.this,Main1Activity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }).start();
+
         }
     }
     private void checkOutToLogin(String username,String password){
