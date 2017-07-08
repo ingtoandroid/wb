@@ -32,6 +32,7 @@ import q.rorbin.badgeview.QBadgeView;
 
 public class NewsActivity extends ToolBarBaseActivity{
 
+    private boolean end=false;
     private RecyclerView rv;
     private List<NewsItem> list;
     private LinearLayout llLoading;
@@ -86,6 +87,7 @@ public class NewsActivity extends ToolBarBaseActivity{
                     JSONObject object2=new JSONObject(s);
                     JSONArray array=object2.getJSONArray("dataList");
                     if (array.length()<=0){
+                        end=true;
                         return;
                     }
                     for (int i=0;i<array.length();i++){
@@ -175,7 +177,7 @@ public class NewsActivity extends ToolBarBaseActivity{
     }
 
     private void loadMore() {//加载更多
-        if (loading){
+        if (loading||end){
             return;
         }
         loading=true;

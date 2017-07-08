@@ -5,13 +5,13 @@ package com.example.a.app10.bean;
  */
 
 public class VideoProItem {
-    private String videoId,videoTitle,playNum,startDate,imageUrl;
+    private String videoId,videoTitle,playNum, videoType,imageUrl;
 
-    public VideoProItem(String videoId, String videoTitle, String playNum, String startDate, String imageUrl) {
+    public VideoProItem(String videoId, String videoTitle, String playNum, String videoType, String imageUrl) {
         this.videoId = videoId;
         this.videoTitle = videoTitle;
         this.playNum = playNum;
-        this.startDate = startDate;
+        this.videoType = videoType;
         this.imageUrl = imageUrl;
     }
 
@@ -39,12 +39,12 @@ public class VideoProItem {
         this.playNum = playNum;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getVideoType() {
+        return videoType;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setVideoType(String videoType) {
+        this.videoType = videoType;
     }
 
     public String getImageUrl() {

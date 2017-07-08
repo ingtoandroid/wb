@@ -35,6 +35,7 @@ import q.rorbin.badgeview.QBadgeView;
 
 public class ScienceActivity extends ToolBarBaseActivity implements View.OnClickListener {
 
+    private boolean end=false;
     private RecyclerView rv;
     private LinearLayout llLoading;
     private boolean isShaiXuan=false;
@@ -121,6 +122,10 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                     JSONObject all=new JSONObject(s);
                     JSONArray array=all.getJSONArray("dataList");
                     int index=array.length();
+                    if (index<=0){
+                        end=true;
+                        return;
+                    }
                     for (int i=0;i<index;i++){
                         JSONObject object=array.getJSONObject(i);
                         NewsItem item=new NewsItem(object.getString("newsId"),
@@ -278,6 +283,10 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
                 try {
                     JSONObject all=new JSONObject(s);
                     JSONArray array=all.getJSONArray("dataList");
+                    if (array.length()<=0){
+                        end=true;
+                        return;
+                    }
                     for (int i=0;i<array.length();i++){
                         JSONObject object=array.getJSONObject(i);
                         NewsItem item=new NewsItem(object.getString("newsId"),
@@ -377,7 +386,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         if (list.size()<6){
             return;
         }
-        if (loading){
+        if (loading||end){
             return;
         }
         loading=true;

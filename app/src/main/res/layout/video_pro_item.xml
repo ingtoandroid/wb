@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_marginTop="15dp"
-                android:text="开课时间：   2015.5.5"
+                android:text="视频类型：   2015.5.5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

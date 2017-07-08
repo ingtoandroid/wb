@@ -53,12 +53,12 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
 public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Callback  {
 
-    private static SurfaceView videoSurface;
+    private  SurfaceView videoSurface;
     private TextView pinglun;
     private TextView tiwen;
     private Button comment;
     public static MediaPlayer player;
-    public static VideoControllerView controller;
+    public  VideoControllerView controller;
     private int screenWidth;
     private int screenHeight;
     private int width;
@@ -485,5 +485,11 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 }
             });
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        player.release();
     }
 }

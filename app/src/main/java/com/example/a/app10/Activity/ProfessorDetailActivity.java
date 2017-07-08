@@ -203,9 +203,10 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
             JSONArray array=object.getJSONArray("videoList");
             for (int i=0;i<array.length();i++){
                 JSONObject obj=array.getJSONObject(i);
+                Log.v("tag",array.toString());
                 VideoProItem item=new VideoProItem(obj.getString("videoId"),
                         obj.getString("videoTitle"), obj.getString("playNum"),
-                        obj.getString("startDate"),obj.getString("imageUrl"));
+                        obj.getString("videoType"),obj.getString("imageUrl"));
                 listVideo.add(item);
             }
         } catch (JSONException e) {

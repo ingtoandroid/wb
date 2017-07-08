@@ -51,7 +51,7 @@ public class VideoProAdapter extends RecyclerView.Adapter<VideoProAdapter.MyView
         VideoProItem item=list.get(position);
         holder.tvTitle.setText(item.getVideoTitle());
         holder.tvNumber.setText(item.getPlayNum()+"人已参加");
-        holder.tvTime.setText(item.getStartDate());
+        holder.tvTime.setText(item.getVideoType());
         if (item.getImageUrl().length()>1){
             Glide.with(context).load(item.getImageUrl()).into(holder.iv);
         }

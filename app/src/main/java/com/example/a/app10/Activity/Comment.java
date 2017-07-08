@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -104,6 +105,7 @@ public class Comment extends AppCompatActivity {
                                 public void run() {
                                     Toast.makeText(Comment.this, ""+mes, Toast.LENGTH_SHORT).show();
                                     editText.setText("");
+                                    startActivity(new Intent(Comment.this,MyReservationActivity.class));
                                 }
                             });
                         }

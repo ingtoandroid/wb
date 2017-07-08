@@ -54,6 +54,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     private int pageIndex=0;
     private int currentPosition=0;
     private boolean isShaiXuan=false;
+    private boolean end=false;
     private String aa=null;//筛选列表用到的参数
 
     @Override
@@ -122,6 +123,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
                     JSONObject obj =new JSONObject(s);
                     JSONArray array=obj.getJSONArray("datalist");
                     if (array.length()<=0){
+                        end=true;
                         return;
                     }
                     for (int i=0;i<array.length();i++){
@@ -347,6 +349,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
                     JSONObject all=new JSONObject(s);
                     JSONArray array=all.getJSONArray("datalist");
                     if (array.length()<=0){
+                        end=true;
                         return;
                     }
                     for (int i=0;i<array.length();i++){
@@ -447,7 +450,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     }
 
     private void loadMore() {//加载更多
-        if (list.size()<5){
+        if (list.size()<5||end){
             return;
         }
         showBottomProgress();
