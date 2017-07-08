@@ -279,7 +279,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
                 +"&servieId="+serviceIds[choseIndex]
                 +"&serviceStartTime="+startTime.get(choseTimeIndex)
                 +"&serviceEndTime="+endTime.get(choseTimeIndex)
-                +"&orderDate="+rawDates[choseIndex/7];
+                +"&orderDate="+rawDates[choseIndex%7];
+        Log.v("tag",url);
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {

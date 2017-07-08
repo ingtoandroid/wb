@@ -53,7 +53,7 @@ public class MyClassAdapter extends RecyclerView.Adapter<MyClassAdapter.MyViewHo
         holder.tvTitle.setText(item.getCourseTitle());
         holder.tvNumber.setText("开课时间："+item.getStartDate());
         holder.tvFinish.setText(item.getState());
-        Glide.with(context).load("http://192.168.1.129:8080/yjtyms/"+item.getModelName()).into(holder.iv);
+        Glide.with(context).load(item.getModelName()).into(holder.iv);
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
