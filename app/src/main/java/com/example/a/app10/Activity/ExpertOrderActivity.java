@@ -284,7 +284,12 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
             public void handle(String s) {
-                str=s;
+                try {
+                    JSONObject object=new JSONObject(s);
+                    str=object.getString("megs");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
