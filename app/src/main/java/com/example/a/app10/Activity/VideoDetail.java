@@ -28,9 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a.app10.Adapter.VideoRecycleAdapter;
-import com.example.a.app10.R;
 import com.example.a.app10.bean.CommentItem;
-import com.example.a.app10.bean.ShipinItem;
 import com.example.a.app10.tool.Net;
 import com.example.a.app10.tool.VideoControllerView;
 import com.google.gson.Gson;
@@ -43,13 +41,12 @@ import com.squareup.okhttp.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Comment;
+import com.example.a.app10.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
 
 public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Callback  {
 
@@ -73,6 +70,8 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     private String  id;
     private String uri=null;
     private EditText ed;
+    private boolean isPrepare=false;
+    private int per=0;
     List<CommentItem> list;
     private int type=0;
     private VideoControllerView.MediaPlayerControl mediaPlayerControl=new VideoControllerView.MediaPlayerControl() {
@@ -93,7 +92,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
 
         @Override
         public int getBufferPercentage() {
-            return 0;
+            return per;
         }
 
         @Override
@@ -103,7 +102,10 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
 
         @Override
         public int getDuration() {
-            return player.getDuration();
+            if(!isPrepare)
+                return 0;
+            else
+                return player.getDuration();
         }
 
         @Override
@@ -173,8 +175,30 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
             @Override
             public void onPrepared(MediaPlayer mp) {
                 player.start();
+                isPrepare=true;
                 player.setLooping(true);
                 player.pause();
+            }
+        });
+        player.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+            @Override
+            public void onSeekComplete(MediaPlayer mp) {
+                player.start();
+
+
+            }
+        });
+        player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Log.e("error",""+what+""+extra);
+                return false;
+            }
+        });
+        player.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                per=percent;
             }
         });
         screenWidth=getWindowManager().getDefaultDisplay().getWidth();
@@ -222,10 +246,11 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 try {
                     JSONObject jsonObject = new JSONObject(string);
                     uri = jsonObject.getString("filePath");
+
                     Log.e("path",""+uri);
                             try {
                                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                player.setDataSource(VideoDetail.this, Uri.parse(uri));
+                                player.setDataSource(uri);
                                 player.prepare();
                                 player.setLooping(true);
 
@@ -487,9 +512,11 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         }
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        controller.hide();
         player.release();
     }
 }

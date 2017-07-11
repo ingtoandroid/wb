@@ -253,11 +253,5 @@
                 android:background="@drawable/get_into"
                 android:layout_marginRight="10dp"/>
         </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/dividColor"
-            android:id="@+id/seventh_divid"
-            android:layout_below="@+id/city_item"/>
     </RelativeLayout>
 </RelativeLayout>

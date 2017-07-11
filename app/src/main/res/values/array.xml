@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="expert_tabs">
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string-array name="expert_tabs" tools:ignore="MissingTranslation">
         <item>@drawable/run</item>
         <item>@drawable/mind</item>
         <item>@drawable/basketball</item>
@@ -10,18 +10,7 @@
         <item>@drawable/ride</item>
         <item>@drawable/gym</item>
     </string-array>
-    <string-array name="expert_tab_text">
-        <item>跑步</item>
-        <item>心理</item>
-        <item>篮球</item>
-        <item>技能</item>
-        <item>游泳</item>
-        <item>瑜伽</item>
-        <item>骑行</item>
-        <item>体操</item>
-
-    </string-array>
-    <string-array name="pics">
+    <string-array name="pics" tools:ignore="MissingTranslation">
         <item>@drawable/star1</item>
         <item>@drawable/star2</item>
         <item>@drawable/star3</item>

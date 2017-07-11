@@ -1,9 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
     <string name="app_name">慧健体育</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title1">首页</string>\
+    <string name="title1">首页</string>
     <string name="title2">专家</string>
     <string name="title3">我的</string>
     <string name="index_string1">找专家</string>

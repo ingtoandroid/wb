@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.a.app10.Activity.ClassDetailActivity;
@@ -212,5 +213,11 @@ public class InfoFragment extends Fragment {
         super.onResume();
         username.setText(Net.getPersonName());
         Glide.with(getContext()).load(Net.getPhotoUrl()).into(headImage);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 }

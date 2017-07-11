@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -25,8 +26,8 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 public class Main1Activity extends AppCompatActivity {
 
     private ViewPager viewPager;
-    private ViewPagerAdapter mViewPagerAdapter;
     private TabLayout mainTab;
+    private int lastTab=0;
     private int[] tab_titles=new int[]{R.string.title1,R.string.title2,R.string.title3};
     private int[] tab_images=new int[]{R.drawable.index,R.drawable.expert,R.drawable.info};
     private ViewPagerAdapter viewPagerAdapter;
@@ -46,35 +47,6 @@ public class Main1Activity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mainTab));
         viewPager.setOffscreenPageLimit(1);
-        mainTab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition()==2) {
-                    if (Net.getPersonID().equals("")) {
-                        Intent intent = new Intent(Main1Activity.this, LoginActivity.class);
-                        mainTab.getTabAt(0).select();
-                        startActivity(intent);
-                    }
-                    else {
-                        viewPager.setCurrentItem(tab.getPosition());
-
-                    }
-                }
-                else{
-                    viewPager.setCurrentItem(tab.getPosition());
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
     }
     private void setTabs(){
         for(int i=0;i<tab_titles.length;i++){
@@ -87,6 +59,36 @@ public class Main1Activity extends AppCompatActivity {
             imageView.setImageResource(tab_images[i]);
             mainTab.addTab(tab);
         }
+        mainTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition()==2){
+                    if(Net.getPersonID().equals("")){
+                        Intent intent=new Intent(Main1Activity.this,LoginActivity.class);
+                        startActivity(intent);
+                        mainTab.getTabAt(lastTab).select();
+
+                    }
+                    else{
+                        viewPager.setCurrentItem(tab.getPosition());
+                    }
+                }
+                else{
+                    viewPager.setCurrentItem(tab.getPosition());
+                }
+                lastTab=tab.getPosition();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
     private void initState() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -107,4 +109,8 @@ public class Main1Activity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return false;
+    }
 }
