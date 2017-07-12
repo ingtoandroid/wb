@@ -57,12 +57,6 @@ public class NewsActivity extends ToolBarBaseActivity{
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
-            @Override
-            public void onClick() {
-                startActivity(new Intent(NewsActivity.this, MessageReminderActivity.class));
-            }
-        });
 
         list=new ArrayList<>();
 

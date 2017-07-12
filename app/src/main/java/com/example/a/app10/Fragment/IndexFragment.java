@@ -213,7 +213,8 @@ public class IndexFragment extends Fragment {
                     JSONTokener jsonTokener = new JSONTokener(str_response);
                     JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                     JSONArray jsonArray = jsonObject.getJSONArray("datalist");
-                    for(int i = 0 ;i<2;i++){
+                    int size=jsonArray.length()<2?jsonArray.length():2;
+                    for(int i = 0 ;i<size;i++){
                         JSONObject item = jsonArray.getJSONObject(i);
                         QuestionItem questionItem = new QuestionItem();
                         questionItem.setQuestionID(item.getString("questionId"));

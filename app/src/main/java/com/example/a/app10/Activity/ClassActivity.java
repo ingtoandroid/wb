@@ -62,12 +62,6 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
                 onBackPressed();
             }
         });
-        setRightButton(R.drawable.message_reminder, "消息", new MyOnClickListener() {
-            @Override
-            public void onClick() {
-                startActivity(new Intent(ClassActivity.this, MessageReminderActivity.class));
-            }
-        });
 
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();
