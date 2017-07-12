@@ -47,6 +47,7 @@ public class Main1Activity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mainTab));
         viewPager.setOffscreenPageLimit(1);
+
     }
     private void setTabs(){
         for(int i=0;i<tab_titles.length;i++){
@@ -75,8 +76,9 @@ public class Main1Activity extends AppCompatActivity {
                 }
                 else{
                     viewPager.setCurrentItem(tab.getPosition());
+                    lastTab=tab.getPosition();
                 }
-                lastTab=tab.getPosition();
+
             }
 
             @Override
@@ -90,14 +92,6 @@ public class Main1Activity extends AppCompatActivity {
             }
         });
     }
-    private void initState() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -107,10 +101,5 @@ public class Main1Activity extends AppCompatActivity {
         home.addCategory(Intent.CATEGORY_HOME);
         startActivity(home);
 
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return false;
     }
 }

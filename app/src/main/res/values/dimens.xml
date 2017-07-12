@@ -5,4 +5,6 @@
     <dimen name="text_size_setteing">15sp</dimen>
     <dimen name="data_modification_item_title">100dp</dimen>
     <dimen name="data_modification_item_pidding">20dp</dimen>
+    <dimen name="side_button_height">37dp</dimen>
+    <dimen name="side_button_width">80dp</dimen>
 </resources>

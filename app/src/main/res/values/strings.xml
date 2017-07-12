@@ -23,7 +23,7 @@
     <string name="video_string2">提问</string>
     <string name="video_button_string">发表评论</string>
     <string name="video_pinglun_bottom">0/300</string>
-    <string name="login_title">悦健体育网</string>
+    <string name="login_title">慧健体育网</string>
     <string name="forget_pwd">忘记密码？</string>
     <string name="login">登录</string>
     <string name="registe">注册</string>
@@ -39,7 +39,7 @@
     <string name="input_phonenumber">请输入手机号码</string>
     <string name="input_valid">请输入验证码</string>
     <string name="set_newpassword">设置新密码（至少6位数）</string>
-    <string name="agree_consent">绑定后意味同意悦健体育的</string>
+    <string name="agree_consent">绑定后意味同意慧健体育的</string>
     <string name="service_agreement">《服务协议》</string>
     <string name="send_verification">发送验证码</string>
     <string name="setting">设置</string>

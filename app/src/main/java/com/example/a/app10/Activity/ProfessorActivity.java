@@ -1,15 +1,20 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,23 +37,19 @@ import java.util.List;
 public class ProfessorActivity extends ToolBarBaseActivity implements View.OnClickListener {
     private RecyclerView rv;
     private List<ProfessorItem> list;
-    private static int NUMBERBUTTONS =27;
     private OkHttpClient client;
-    private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,R.id.btn19,
-            R.id.btn21,R.id.btn22,R.id.btn23,R.id.btn24,R.id.btn25,R.id.btn26,R.id.btn27,R.id.btn28,R.id.btn29,
-            R.id.btn31,R.id.btn32,R.id.btn33,R.id.btn34,R.id.btn35,R.id.btn36,R.id.btn37,R.id.btn38,R.id.btn39,};
-    private Button[] sideButtons = new Button[NUMBERBUTTONS];
+    private List<Button> listButton;
     private Button btnRecycle,btnSure;
     //储存选择结果的标志数组
-    private boolean[] isChosen=new boolean[NUMBERBUTTONS];
+    private List<Boolean> isChosen1;
     private EditText et;
+    private GridLayout grid1,grid2,grid3;
     private Button btnSearch;
     private ProfessorAdapter adapter;
     private TextView tvSideTitle1,tvSideTitle2,tvSideTitle3;
     private String[] sideTitles=new String[3];
-    private String[] buttonTexts,buttonCode;
+    private List<String> buttonTexts,buttonCode;
     private String expertArea="";
-    private final int EVEAY_MAX_LINE=9;
     private int[] numbers=new int[3];//每个组的数据数目
     private LinearLayout llLoading;
     private int pageIndex=0;
@@ -56,6 +57,8 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     private boolean isShaiXuan=false;
     private boolean end=false;
     private String aa=null;//筛选列表用到的参数
+    private int butonWidth,buttonHeight;
+    private Resources resources;
 
     @Override
     protected int getSideMenu() {
@@ -80,12 +83,11 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
 
         rv= (RecyclerView) findViewById(R.id.rv);
         llLoading= (LinearLayout) findViewById(R.id.llLoading);
-        for (int i = 0; i< NUMBERBUTTONS; i++){
-            sideButtons[i]= (Button) findViewById(sideButtonsIds[i]);
-            sideButtons[i].setOnClickListener(this);
 
-            isChosen[i]=false;
-        }
+        buttonHeight=(int) getResources().getDimension(R.dimen.side_button_height);
+        butonWidth=(int) getResources().getDimension(R.dimen.side_button_width);
+        resources=getResources();
+
         btnRecycle= (Button) findViewById(R.id.btnRecycle);
         btnRecycle.setOnClickListener(this);
         btnSure= (Button) findViewById(R.id.btnSure);
@@ -93,14 +95,19 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         btnSearch= (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
         et= (EditText) findViewById(R.id.et);
+        grid1= (GridLayout) findViewById(R.id.grid1);
+        grid2= (GridLayout) findViewById(R.id.grid2);
+        grid3= (GridLayout) findViewById(R.id.grid3);
 
+        listButton=new ArrayList<>();
+        isChosen1=new ArrayList<>();
+        buttonTexts=new ArrayList<>();
+        buttonCode=new ArrayList<>();
         list=new ArrayList<>();
         tvSideTitle1= (TextView) findViewById(R.id.tvSideTitle1);
         tvSideTitle2= (TextView) findViewById(R.id.tvSideTitle2);
         tvSideTitle3= (TextView) findViewById(R.id.tvSideTitle3);
         client=new OkHttpClient();
-        buttonTexts=new String[NUMBERBUTTONS];
-        buttonCode=new String[NUMBERBUTTONS];
         adapter=new ProfessorAdapter(list,this);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
@@ -145,6 +152,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
             }
         },this);
 
+
         String listUrl=MyInternet.MAIN_URL+"expert/get_expert_search_list";
         MyInternet.getMessage(listUrl, client, new MyInternet.MyInterface() {
             @Override
@@ -163,19 +171,55 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         tvSideTitle1.setText(sideTitles[0]);
         tvSideTitle2.setText(sideTitles[1]);
         tvSideTitle3.setText(sideTitles[2]);
-        for (int i=0;i<3;i++){
-            int length=numbers[i]<6 ? numbers[i] :6;
-            for (int j=0;j<length;j++){
-                int index=i*EVEAY_MAX_LINE+j;
-                if (j==5){
-                    //最后一个按钮的处理
-                    sideButtons[index].setVisibility(View.VISIBLE);
-                    sideButtons[index].setText("更多");
-                    sideButtons[index].setOnClickListener(new MyListener(i));
-                } else {
-                    sideButtons[index].setVisibility(View.VISIBLE);
-                    sideButtons[index].setText(buttonTexts[index]);
-                }
+        int count=numbers[0]+numbers[1]+numbers[2];
+        for (int i=0;i<count;i++){
+            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(butonWidth,buttonHeight);
+            GridLayout.LayoutParams params=new GridLayout.LayoutParams(params1);
+            params.rightMargin=20;params.bottomMargin=10;
+            Button button=new Button(ProfessorActivity.this);
+            button.setText(buttonTexts.get(i));
+            button.setTextColor(resources.getColor(R.color.main));
+            button.setBackgroundResource(R.drawable.button_side);
+            button.setMaxLines(1);
+            button.setOnClickListener(this);
+            button.setVisibility(View.GONE);
+            button.setLayoutParams(params);
+            listButton.add(button);
+            isChosen1.add(false);
+        }
+        int index1=6>numbers[0]?numbers[0]:6;
+        for (int i=0;i<numbers[0];i++){
+            grid1.addView(listButton.get(i));
+        }
+        for (int a=0;a<index1;a++){
+            listButton.get(a).setVisibility(View.VISIBLE);
+            if(a==5){
+                listButton.get(a).setText("更多");
+                listButton.get(a).setOnClickListener(new MyListener(0));
+            }
+        }
+
+        int index2=6>numbers[1]?numbers[1]:6;
+        for (int i=numbers[0];i<numbers[0]+numbers[1];i++){
+            grid2.addView(listButton.get(i));
+        }
+        for (int a=numbers[0];a<numbers[0]+index2;a++){
+            listButton.get(a).setVisibility(View.VISIBLE);
+            if(a==numbers[0]+5){
+                listButton.get(a).setText("更多");
+                listButton.get(a).setOnClickListener(new MyListener(1));
+            }
+        }
+
+        int index3=6>numbers[2]?numbers[2]:6;
+        for (int i=numbers[0]+numbers[1];i<numbers[0]+numbers[1]+numbers[2];i++){
+            grid3.addView(listButton.get(i));
+        }
+        for (int a=numbers[0]+numbers[1];a<numbers[0]+numbers[1]+index3;a++){
+            listButton.get(a).setVisibility(View.VISIBLE);
+            if(a==numbers[0]+numbers[1]+5){
+                listButton.get(a).setText("更多");
+                listButton.get(a).setOnClickListener(new MyListener(2));
             }
         }
     }
@@ -190,22 +234,22 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
             for (int i=0;i<array1.length();i++){
                 JSONObject object=array1.getJSONObject(i);
                 numbers[0]++;
-                buttonTexts[EVEAY_MAX_LINE*0+i]=object.getString("key");
-                buttonCode[EVEAY_MAX_LINE*0+i]=object.getString("value");
+                buttonTexts.add(object.getString("key"));
+                buttonCode.add(object.getString("value"));
             }
             JSONArray array2=all.getJSONArray("sclyList");
             for (int i=0;i<array2.length();i++){
                 JSONObject object=array2.getJSONObject(i);
                 numbers[1]++;
-                buttonTexts[EVEAY_MAX_LINE*1+i]=object.getString("key");
-                buttonCode[EVEAY_MAX_LINE*1+i]=object.getString("value");
+                buttonTexts.add(object.getString("key"));
+                buttonCode.add(object.getString("value"));
             }
             JSONArray array3=all.getJSONArray("zjlxList");
             for (int i=0;i<array3.length();i++){
                 JSONObject object=array3.getJSONObject(i);
                 numbers[2]++;
-                buttonTexts[EVEAY_MAX_LINE*2+i]=object.getString("key");
-                buttonCode[EVEAY_MAX_LINE*2+i]=object.getString("value");
+                buttonTexts.add(object.getString("key"));
+                buttonCode.add(object.getString("value"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -222,23 +266,18 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     public void onClick(View view) {
         int currentId=view.getId();
         //判断是否是菜单上的按钮
-        for (int i = 0; i< NUMBERBUTTONS; i++){
-            if (currentId==sideButtonsIds[i]){
-                if (isChosen[i]==false){
-                    int group=i/EVEAY_MAX_LINE;
-                    for (int j=group*EVEAY_MAX_LINE;j<(group+1)*EVEAY_MAX_LINE;j++){//去除原有其他标记
-                        isChosen[j]=false;
-                        sideButtons[j].setBackgroundResource(R.drawable.button_side);
-                        sideButtons[j].setTextColor(getResources().getColor(R.color.main));
-                    }
-                    sideButtons[i].setBackgroundResource(R.drawable.button_side_press);
-                    sideButtons[i].setTextColor(Color.WHITE);
-                    isChosen[i]=true;
+        for (int i = 0; i< listButton.size(); i++){
+            if (view.equals(listButton.get(i))){
+                if (!isChosen1.get(i)){
+                    clearGroup(i);
+                    view.setBackgroundResource(R.drawable.button_side_press);
+                    listButton.get(i).setTextColor(Color.WHITE);
+                    isChosen1.set(i,true);
                 } else {
                     Button button= (Button) view;
                     button.setBackgroundResource(R.drawable.button_side);
                     button.setTextColor(getResources().getColor(R.color.main));
-                    isChosen[i]=false;
+                    isChosen1.set(i,false);
                 }
                 return;
             }
@@ -258,6 +297,32 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
             search();
             return;
         }
+    }
+
+    private void clearGroup(int index) {//清除同组标记
+        int group;
+        if (index<numbers[0]+numbers[1]){
+            if (index<numbers[0]){//一组
+                for (int i=0;i<numbers[0];i++){
+                    isChosen1.set(i,false);
+                    listButton.get(i).setBackgroundResource(R.drawable.button_side);
+                    listButton.get(i).setTextColor(getResources().getColor(R.color.main));
+                }
+            } else {//二组
+                for (int i=numbers[0];i<numbers[0]+numbers[1];i++){
+                    isChosen1.set(i,false);
+                    listButton.get(i).setBackgroundResource(R.drawable.button_side);
+                    listButton.get(i).setTextColor(getResources().getColor(R.color.main));
+                }
+            }
+        } else {
+            for (int i=numbers[0]+numbers[1];i<numbers[0]+numbers[1]+numbers[2];i++){
+                isChosen1.set(i,false);
+                listButton.get(i).setBackgroundResource(R.drawable.button_side);
+                listButton.get(i).setTextColor(getResources().getColor(R.color.main));
+            }
+        }
+
     }
 
     private void search() {//搜索专家
@@ -296,11 +361,11 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     }
 
     private void recycle() {//筛选条件复原
-        for (int i = 0; i< NUMBERBUTTONS; i++){
-            Button button=sideButtons[i];
+        for (int i = 0; i< listButton.size(); i++){
+            Button button=listButton.get(i);
             button.setBackgroundResource(R.drawable.button_side);
             button.setTextColor(getResources().getColor(R.color.main));
-            isChosen[i]=false;
+            isChosen1.set(i,false);
         }
     }
 
@@ -310,19 +375,19 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         pageIndex=0;
         currentPosition=0;
         String a="";
-        for (int i=0;i<EVEAY_MAX_LINE;i++){//研究方向
-            if (isChosen[i]){
-                a+="expertArea="+buttonCode[i]+"&";
+        for (int i=0;i<numbers[0];i++){//研究方向
+            if (isChosen1.get(i)){
+                a+="expertArea="+buttonCode.get(i)+"&";
             }
         }
-        for (int i=EVEAY_MAX_LINE;i<EVEAY_MAX_LINE*2;i++){//擅长领域
-            if (isChosen[i]){
-                a+="goodField="+buttonCode[i]+"&";
+        for (int i=numbers[0];i<numbers[0]+numbers[1];i++){//擅长领域
+            if (isChosen1.get(i)){
+                a+="goodField="+buttonCode.get(i)+"&";
             }
         }
-        for (int i=EVEAY_MAX_LINE*2;i<EVEAY_MAX_LINE*3;i++){//专家类型
-            if (isChosen[i]){
-                a+="expertType="+buttonCode[i];
+        for (int i=numbers[0]+numbers[1];i<listButton.size();i++){//专家类型
+            if (isChosen1.get(i)){
+                a+="expertType="+buttonCode.get(i);
             }
         }
         if (a.length()>1){
@@ -436,11 +501,26 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
 
         @Override
         public void onClick(View view) {
-            view.setOnClickListener(this);//修改监听器
-            for (int i=5;i<9;i++){
-                int index=line*EVEAY_MAX_LINE+i;
-                sideButtons[index].setVisibility(View.VISIBLE);
-                sideButtons[index].setText(buttonTexts[index]);
+            view.setOnClickListener(ProfessorActivity.this);//修改监听器
+            switch (line){
+                case 0:
+                    for (int i=5;i<numbers[0];i++){
+                        listButton.get(i).setVisibility(View.VISIBLE);
+                        listButton.get(i).setText(buttonTexts.get(i));
+                    }
+                    break;
+                case 1:
+                    for (int i=numbers[0]+5;i<numbers[0]+numbers[1];i++){
+                        listButton.get(i).setVisibility(View.VISIBLE);
+                        listButton.get(i).setText(buttonTexts.get(i));
+                    }
+                    break;
+                case 2:
+                    for (int i=numbers[0]+numbers[1]+5;i<numbers[0]+numbers[1]+numbers[2];i++){
+                        listButton.get(i).setVisibility(View.VISIBLE);
+                        listButton.get(i).setText(buttonTexts.get(i));
+                    }
+                    break;
             }
         }
 

@@ -1,8 +1,10 @@
 package com.example.a.app10.Activity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,26 +44,23 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     private LinearLayout llLoading;
     private boolean isShaiXuan=false;
     private List<NewsItem> list;
-    private final int NUMBERBUTTONS =27;
-    private int[] sideButtonsIds={R.id.btn11,R.id.btn12,R.id.btn13,R.id.btn14,R.id.btn15,R.id.btn16,R.id.btn17,R.id.btn18,R.id.btn19,
-            R.id.btn21,R.id.btn22,R.id.btn23,R.id.btn24,R.id.btn25,R.id.btn26,R.id.btn27,R.id.btn28,R.id.btn29,
-            R.id.btn31,R.id.btn32,R.id.btn33,R.id.btn34,R.id.btn35,R.id.btn36,R.id.btn37,R.id.btn38,R.id.btn39,};
-    private Button[] sideButtons = new Button[NUMBERBUTTONS];
     private Button btnRecycle,btnSure;
     //储存选择结果的标志数组
-    private boolean[] isChosen=new boolean[NUMBERBUTTONS];
-    private boolean[] isShow=new boolean[NUMBERBUTTONS];
+    private List<Button> listButton;
+    private List<Boolean> isChosen1;
+    private List<String> buttonTexts,buttonCode;
+    private GridLayout grid1,grid2,grid3;
     private OkHttpClient client;
     private NewsAdapter adapter;
     private TextView tvSideTitle1,tvSideTitle2,tvSideTitle3;
     private String[] sideTitles=new String[3];
-    private String[] buttonTexts,buttonCode;
-    private final int EVEAY_MAX_LINE=9;
     private int[] numbers=new int[3];
     private int pageIndex=0;
     private int currentPosition=0;
     private String catalogCode=null;
     private boolean loading=false;
+    private int butonWidth,buttonHeight;
+    private Resources resources;
     @Override
     protected int getSideMenu() {
         return R.layout.activity_science_side;
@@ -85,13 +86,17 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
 
         rv= (RecyclerView) findViewById(R.id.rv);
-        for (int i = 0; i< NUMBERBUTTONS; i++){
-            sideButtons[i]= (Button) findViewById(sideButtonsIds[i]);
-            sideButtons[i].setOnClickListener(this);
-
-            isChosen[i]=false;
-            isShow[i]=false;
-        }
+        grid1= (GridLayout) findViewById(R.id.grid1);
+        grid2= (GridLayout) findViewById(R.id.grid2);
+        grid3= (GridLayout) findViewById(R.id.grid3);
+        buttonHeight=(int) getResources().getDimension(R.dimen.side_button_height);
+        butonWidth=(int) getResources().getDimension(R.dimen.side_button_width);
+        resources=getResources();
+        listButton=new ArrayList<>();
+        isChosen1=new ArrayList<>();
+        buttonTexts=new ArrayList<>();
+        buttonCode=new ArrayList<>();
+        list=new ArrayList<>();
         btnRecycle= (Button) findViewById(R.id.btnRecycle);
         btnRecycle.setOnClickListener(this);
         btnSure= (Button) findViewById(R.id.btnSure);
@@ -101,8 +106,6 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         tvSideTitle3= (TextView) findViewById(R.id.tvSideTitle3);
         client=new OkHttpClient();
         list=new ArrayList<>();
-        buttonTexts=new String[NUMBERBUTTONS];
-        buttonCode=new String[NUMBERBUTTONS];
         llLoading= (LinearLayout) findViewById(R.id.llLoading);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -162,20 +165,55 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         tvSideTitle1.setText(sideTitles[0]);
         tvSideTitle2.setText(sideTitles[1]);
         tvSideTitle3.setText(sideTitles[2]);
-        for (int i=0;i<3;i++){
-            int length=numbers[i]<6 ? numbers[i] :6;
-            for (int j=0;j<length;j++){
-                int index=i*EVEAY_MAX_LINE+j;
-                if (j==5){
-                    //最后一个按钮的处理
-                    //最后一个按钮的处理
-                    sideButtons[index].setVisibility(View.VISIBLE);
-                    sideButtons[index].setText("更多");
-                    sideButtons[index].setOnClickListener(new MyListener(i));
-                } else {
-                    sideButtons[index].setVisibility(View.VISIBLE);
-                    sideButtons[index].setText(buttonTexts[index]);
-                }
+        int count=numbers[0]+numbers[1]+numbers[2];
+        for (int i=0;i<count;i++){
+            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(butonWidth,buttonHeight);
+            GridLayout.LayoutParams params=new GridLayout.LayoutParams(params1);
+            params.rightMargin=20;params.bottomMargin=10;
+            Button button=new Button(ScienceActivity.this);
+            button.setText(buttonTexts.get(i));
+            button.setTextColor(resources.getColor(R.color.main));
+            button.setBackgroundResource(R.drawable.button_side);
+            button.setMaxLines(1);
+            button.setOnClickListener(this);
+            button.setVisibility(View.GONE);
+            button.setLayoutParams(params);
+            listButton.add(button);
+            isChosen1.add(false);
+        }
+        int index1=6>numbers[0]?numbers[0]:6;
+        for (int i=0;i<numbers[0];i++){
+            grid1.addView(listButton.get(i));
+        }
+        for (int a=0;a<index1;a++){
+            listButton.get(a).setVisibility(View.VISIBLE);
+            if(a==5){
+                listButton.get(a).setText("更多");
+                listButton.get(a).setOnClickListener(new MyListener(0));
+            }
+        }
+
+        int index2=6>numbers[1]?numbers[1]:6;
+        for (int i=numbers[0];i<numbers[0]+numbers[1];i++){
+            grid2.addView(listButton.get(i));
+        }
+        for (int a=numbers[0];a<numbers[0]+index2;a++){
+            listButton.get(a).setVisibility(View.VISIBLE);
+            if(a==numbers[0]+5){
+                listButton.get(a).setText("更多");
+                listButton.get(a).setOnClickListener(new MyListener(1));
+            }
+        }
+
+        int index3=6>numbers[2]?numbers[2]:6;
+        for (int i=numbers[0]+numbers[1];i<numbers[0]+numbers[1]+numbers[2];i++){
+            grid3.addView(listButton.get(i));
+        }
+        for (int a=numbers[0]+numbers[1];a<numbers[0]+numbers[1]+index3;a++){
+            listButton.get(a).setVisibility(View.VISIBLE);
+            if(a==numbers[0]+numbers[1]+5){
+                listButton.get(a).setText("更多");
+                listButton.get(a).setOnClickListener(new MyListener(2));
             }
         }
     }
@@ -187,12 +225,11 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
             for (int i=0;i<3;i++){
                 JSONObject obj=array.getJSONObject(i);
                 sideTitles[i]=obj.getString("catalogName");
-                Log.v("tagSc",sideTitles[i]);
                 JSONArray array1=obj.getJSONArray("childList");
                 for (int j=0;j<array1.length();j++){
                     JSONObject object=array1.getJSONObject(j);
-                    buttonTexts[i*EVEAY_MAX_LINE+j]=object.getString("catalogName");
-                    buttonCode[i*EVEAY_MAX_LINE+j]=object.getString("catalogCode");
+                    buttonTexts.add(object.getString("catalogName"));
+                    buttonCode.add(object.getString("catalogCode"));
                     numbers[i]++;
                 }
             }
@@ -210,23 +247,18 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     public void onClick(View view) {
         int currentId=view.getId();
         //判断是否是菜单上的按钮
-        for (int i = 0; i< NUMBERBUTTONS; i++){
-            if (currentId==sideButtonsIds[i]){
-                if (isChosen[i]==false){
-                    int group=i/EVEAY_MAX_LINE;
-                    for (int j=group*EVEAY_MAX_LINE;j<(group+1)*EVEAY_MAX_LINE;j++){//去除原有其他标记
-                        isChosen[j]=false;
-                        sideButtons[j].setBackgroundResource(R.drawable.button_side);
-                        sideButtons[j].setTextColor(getResources().getColor(R.color.main));
-                    }
-                    sideButtons[i].setBackgroundResource(R.drawable.button_side_press);
-                    sideButtons[i].setTextColor(Color.WHITE);
-                    isChosen[i]=true;
+        for (int i = 0; i< listButton.size(); i++){
+            if (view.equals(listButton.get(i))){
+                if (!isChosen1.get(i)){
+                    clearGroup(i);
+                    view.setBackgroundResource(R.drawable.button_side_press);
+                    listButton.get(i).setTextColor(Color.WHITE);
+                    isChosen1.set(i,true);
                 } else {
                     Button button= (Button) view;
                     button.setBackgroundResource(R.drawable.button_side);
                     button.setTextColor(getResources().getColor(R.color.main));
-                    isChosen[i]=false;
+                    isChosen1.set(i,false);
                 }
                 return;
             }
@@ -248,20 +280,20 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     }
 
     private void recycle() {
-        for (int i = 0; i< NUMBERBUTTONS; i++){
-            Button button=sideButtons[i];
+        for (int i = 0; i< listButton.size(); i++){
+            Button button=listButton.get(i);
             button.setBackgroundResource(R.drawable.button_side);
             button.setTextColor(getResources().getColor(R.color.main));
-            isChosen[i]=false;
+            isChosen1.set(i,false);
         }
     }
 
     //根据筛选条件重新加载列表
     private void reLoad() {
         String a="";
-        for (int i=0;i<NUMBERBUTTONS;i++){
-            if (isChosen[i]){
-                a+=buttonCode[i]+",";
+        for (int i=0;i<listButton.size();i++){
+            if (isChosen1.get(i)){
+                a+=buttonCode.get(i)+",";
             }
         }
         if (a.length()>1){
@@ -369,11 +401,26 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
 
         @Override
         public void onClick(View view) {
-            view.setOnClickListener(this);//修改监听器
-            for (int i=5;i<9;i++){
-                int index=line*EVEAY_MAX_LINE+i;
-                sideButtons[index].setVisibility(View.VISIBLE);
-                sideButtons[index].setText(buttonTexts[index]);
+            view.setOnClickListener(ScienceActivity.this);//修改监听器
+            switch (line){
+                case 0:
+                    for (int i=5;i<numbers[0];i++){
+                        listButton.get(i).setVisibility(View.VISIBLE);
+                        listButton.get(i).setText(buttonTexts.get(i));
+                    }
+                    break;
+                case 1:
+                    for (int i=numbers[0]+5;i<numbers[0]+numbers[1];i++){
+                        listButton.get(i).setVisibility(View.VISIBLE);
+                        listButton.get(i).setText(buttonTexts.get(i));
+                    }
+                    break;
+                case 2:
+                    for (int i=numbers[0]+numbers[1]+5;i<numbers[0]+numbers[1]+numbers[2];i++){
+                        listButton.get(i).setVisibility(View.VISIBLE);
+                        listButton.get(i).setText(buttonTexts.get(i));
+                    }
+                    break;
             }
         }
 
@@ -413,5 +460,31 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset() >= recyclerView.computeVerticalScrollRange())
             return true;
         return false;
+    }
+
+    private void clearGroup(int index) {//清除同组标记
+        int group;
+        if (index<numbers[0]+numbers[1]){
+            if (index<numbers[0]){//一组
+                for (int i=0;i<numbers[0];i++){
+                    isChosen1.set(i,false);
+                    listButton.get(i).setBackgroundResource(R.drawable.button_side);
+                    listButton.get(i).setTextColor(getResources().getColor(R.color.main));
+                }
+            } else {//二组
+                for (int i=numbers[0];i<numbers[0]+numbers[1];i++){
+                    isChosen1.set(i,false);
+                    listButton.get(i).setBackgroundResource(R.drawable.button_side);
+                    listButton.get(i).setTextColor(getResources().getColor(R.color.main));
+                }
+            }
+        } else {
+            for (int i=numbers[0]+numbers[1];i<numbers[0]+numbers[1]+numbers[2];i++){
+                isChosen1.set(i,false);
+                listButton.get(i).setBackgroundResource(R.drawable.button_side);
+                listButton.get(i).setTextColor(getResources().getColor(R.color.main));
+            }
+        }
+
     }
 }
