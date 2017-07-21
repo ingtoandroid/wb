@@ -13,6 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3c000000"></LinearLayout>
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,7 +31,7 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
             <TextView
-                android:textColor="@color/stringDark"
+                android:textColor="@color/textWhiteColor"
                 android:id="@+id/index_shipin_item_title"
                 android:textSize="20sp"
                 android:text="HIIT适应性训练"
@@ -35,14 +39,14 @@
                 android:layout_height="wrap_content"
                 android:maxLines="2"/>
             <TextView
-                android:textColor="@color/stringLight"
+                android:textColor="@color/textWhiteColor"
                 android:id="@+id/index_shipin_item_count"
                 android:layout_marginTop="5dp"
                 android:text="1564364654人已参加"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
-                android:textColor="@color/stringLight"
+                android:textColor="@color/textWhiteColor"
                 android:id="@+id/index_shipin_item_time"
                 android:layout_marginTop="15dp"
                 android:text="开课时间：   2015.5.5"

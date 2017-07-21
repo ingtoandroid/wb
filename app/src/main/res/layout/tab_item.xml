@@ -19,6 +19,8 @@
         android:layout_below="@+id/tab_img"
         android:textSize="14sp"
         android:layout_marginBottom="0dp"
+        android:textColor="@color/statetext"
+
 
         />
 

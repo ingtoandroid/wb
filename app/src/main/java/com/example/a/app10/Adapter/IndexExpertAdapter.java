@@ -35,8 +35,8 @@ public class IndexExpertAdapter extends RecyclerView.Adapter<IndexExpertAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Glide.with(context).load(list.get(position).getImageUrl()).into(holder.imageView);
-        holder.name.setText(list.get(position).getExpertName());
-        holder.type.setText(list.get(position).getExpertArea());
+        holder.name.setText(list.get(position).getUserTitle());
+        //holder.type.setText(list.get(position).getExpertArea());
 
     }
 

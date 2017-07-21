@@ -25,12 +25,13 @@ import static android.support.v4.view.ViewPager.SCROLL_STATE_SETTLING;
 
 public class Main1Activity extends AppCompatActivity {
 
-    private ViewPager viewPager;
+    public static  ViewPager viewPager;
     private TabLayout mainTab;
     private int lastTab=0;
     private int[] tab_titles=new int[]{R.string.title1,R.string.title2,R.string.title3};
     private int[] tab_images=new int[]{R.drawable.index,R.drawable.expert,R.drawable.info};
     private ViewPagerAdapter viewPagerAdapter;
+    public static boolean isLogin=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +65,7 @@ public class Main1Activity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if(tab.getPosition()==2){
-                    if(Net.getPersonID().equals("")){
+                    if(!isLogin){
                         Intent intent=new Intent(Main1Activity.this,LoginActivity.class);
                         startActivity(intent);
                         mainTab.getTabAt(lastTab).select();
@@ -102,4 +103,17 @@ public class Main1Activity extends AppCompatActivity {
         startActivity(home);
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(Net.getPersonID().equals(""))
+                    isLogin=false;
+                else
+                    isLogin=true;
+            }
+    }).start();}
 }

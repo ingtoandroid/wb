@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.a.app10.Activity.ClassActivity;
+import com.example.a.app10.Activity.Main1Activity;
 import com.example.a.app10.Activity.NewsActivity;
 import com.example.a.app10.Activity.Professor;
 import com.example.a.app10.Activity.ProfessorDetailActivity;
@@ -122,8 +123,9 @@ public class IndexFragment extends Fragment {
         findExpert.setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), Professor.class);
-                startActivity(intent);
+//                Intent intent=new Intent(getContext(), Professor.class);
+//                startActivity(intent);
+                Main1Activity.viewPager.setCurrentItem(1);
             }
         });
 

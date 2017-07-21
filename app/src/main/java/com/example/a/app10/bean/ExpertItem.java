@@ -9,6 +9,16 @@ public class ExpertItem  {
     private String expertId;
     private String expertArea;
     private String imageUrl ;
+
+    public String getUserTitle() {
+        return userTitle;
+    }
+
+    public void setUserTitle(String userTitle) {
+        this.userTitle = userTitle;
+    }
+
+    private String userTitle;
     public String getExpertName() {
         return expertName;
     }

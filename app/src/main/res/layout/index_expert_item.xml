@@ -25,7 +25,7 @@
             android:layout_weight="0.5"
             android:gravity="center"
             android:textSize="15sp"
-            android:textColor="@color/stringCenter"
+            android:textColor="#34c87a"
             android:padding="8dp"/>
         <TextView
             android:layout_width="wrap_content"

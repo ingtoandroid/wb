@@ -1,5 +1,6 @@
 package com.example.a.app10.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -7,6 +8,7 @@ import android.graphics.PixelFormat;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -22,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -72,6 +76,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     private EditText ed;
     private boolean isPrepare=false;
     private int per=0;
+    private AlertDialog dialog;
     List<CommentItem> list;
     private int type=0;
     private VideoControllerView.MediaPlayerControl mediaPlayerControl=new VideoControllerView.MediaPlayerControl() {
@@ -177,7 +182,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 player.start();
                 isPrepare=true;
                 player.setLooping(true);
-                player.pause();
+                //player.pause();
             }
         });
         player.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
@@ -210,6 +215,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                     Intent intent = new Intent(VideoDetail.this,LoginActivity.class);
                     startActivity(intent);
                 }else {
+                    showPrograssBar();
                     commit();
                 }
             }
@@ -450,6 +456,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    dismiss();
                                     Toast.makeText(VideoDetail.this, "评论成功", Toast.LENGTH_SHORT).show();
                                     ed.setText("");
                                     showRecyclerView(0);
@@ -518,5 +525,16 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         super.onDestroy();
         controller.hide();
         player.release();
+    }
+    private void showPrograssBar(){
+        if(dialog==null){
+            AlertDialog.Builder builder=new AlertDialog.Builder(VideoDetail.this);
+            builder.setView(LayoutInflater.from(VideoDetail.this).inflate(R.layout.dialog3,null));
+            dialog=builder.create();
+        }
+        dialog.show();
+    }
+    private void dismiss(){
+        dialog.dismiss();
     }
 }

@@ -44,4 +44,6 @@
     <color name="expert_bar">#59d8ab</color>
     <color name="expert_bar_text">#feffff</color>
     <color name="black">#000</color>
+    <color name="textselected">#34c87a</color>
+    <color name="textnotselected">#c6c5ca</color>
 </resources>
