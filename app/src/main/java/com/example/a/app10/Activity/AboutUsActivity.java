@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-
 import com.example.a.app10.R;
+
 
 public class AboutUsActivity extends AppCompatActivity {
     ImageButton im_back;

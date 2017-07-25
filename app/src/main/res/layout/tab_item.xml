@@ -18,10 +18,8 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/tab_img"
         android:textSize="14sp"
-        android:layout_marginBottom="0dp"
-        android:textColor="@color/statetext"
+        android:layout_marginBottom="0dp"/>
+        <!--android:textColor="@color/statetext"-->
 
-
-        />
 
 </LinearLayout>
