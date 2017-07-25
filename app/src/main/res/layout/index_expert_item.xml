@@ -7,12 +7,11 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:background="@drawable/expert_item_bg">
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="140dp"
         android:layout_height="125dp"
         android:id="@+id/expert_item_image"
-        android:src="@drawable/expert"
-        android:scaleType="fitXY"/>
+        android:src="@drawable/expert" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
