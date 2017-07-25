@@ -109,7 +109,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/index_recycleview"
                 android:layout_width="match_parent"
-                android:layout_height="177dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="7dp"></android.support.v7.widget.RecyclerView>
 
             <LinearLayout
