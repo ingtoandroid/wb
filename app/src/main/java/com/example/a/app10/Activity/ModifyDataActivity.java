@@ -41,6 +41,8 @@ import org.json.JSONTokener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModifyDataActivity extends AppCompatActivity {
 
@@ -62,6 +64,9 @@ public class ModifyDataActivity extends AppCompatActivity {
     private RelativeLayout relativeLayout;
     private int REQUEST_CODE_LOCAL=0;
     private RadioGroup radioGroup;
+    private static String[] PERMISSIONS = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    };
 
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
     @Override
@@ -75,6 +80,7 @@ public class ModifyDataActivity extends AppCompatActivity {
         initEvent();
 
         getPersonalInfo();
+        getPermission();
     }
 
     private void init(){
@@ -207,8 +213,8 @@ public class ModifyDataActivity extends AppCompatActivity {
 
     protected void selectPicFromLocal() {
         if(ContextCompat.checkSelfPermission(ModifyDataActivity.this,Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-             
-
+             Toast.makeText(ModifyDataActivity.this,"未授予读写权限",Toast.LENGTH_LONG).show();
+            return;
         }
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
@@ -228,51 +234,51 @@ public class ModifyDataActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
-        if(requestCode==REQUEST_CODE_LOCAL){
-            final Uri uri=data.getData();
-            Call call=Net.getInstance().setHeadImage(new File(getPath(uri)));
-            call.enqueue(new Callback() {
-                @Override
-                public void onFailure(Request request, final IOException e) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(ModifyDataActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    e.printStackTrace();
-                }
+        if(requestCode==REQUEST_CODE_LOCAL) {
+            final Uri uri = ( data != null ? data.getData() : null );
+            if (uri != null) {
+                Call call = Net.getInstance().setHeadImage(new File(getPath(uri)));
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Request request, final IOException e) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(ModifyDataActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        e.printStackTrace();
+                    }
 
-                @Override
-                public void onResponse(Response response) throws IOException {
-                    String s=response.body().string();
-                    try {
-                        JSONObject jsonObject = new JSONObject(s);
-                        int megs = jsonObject.getInt("megs");
-                        if(megs == 0){
-                            Net.setPhotoUrl(jsonObject.getString("modelName"));
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Glide.with(ModifyDataActivity.this).load(uri).into(im_headImage);
-                                    Toast.makeText(ModifyDataActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                        else if(megs == -1){
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(ModifyDataActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    @Override
+                    public void onResponse(Response response) throws IOException {
+                        String s = response.body().string();
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            int megs = jsonObject.getInt("megs");
+                            if (megs == 0) {
+                                Net.setPhotoUrl(jsonObject.getString("modelName"));
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Glide.with(ModifyDataActivity.this).load(uri).into(im_headImage);
+                                        Toast.makeText(ModifyDataActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else if (megs == -1) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(ModifyDataActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } catch (JSONException E) {
+                            E.printStackTrace();
                         }
                     }
-                    catch (JSONException E){
-                        E.printStackTrace();
-                    }
-                }
-            });
+                });
+            }
         }
     }
 
@@ -305,5 +311,20 @@ public class ModifyDataActivity extends AppCompatActivity {
             return  file.getAbsolutePath();
         }
 
+    }
+
+    private void getPermission() {
+        List<String> list = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(ModifyDataActivity.this, PERMISSIONS[0]) != PackageManager.PERMISSION_GRANTED) {
+            list.add(PERMISSIONS[0]);
+        }
+
+        String[] strings = new String[list.size()];
+        list.toArray(strings);
+        Log.e("list",""+strings.length);
+        if(strings.length != 0) {
+            ActivityCompat.requestPermissions(ModifyDataActivity.this,
+                    strings, MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
     }
 }

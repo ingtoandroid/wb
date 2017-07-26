@@ -66,7 +66,6 @@ public class ClassActivity extends ToolBarBaseActivity implements View.OnClickLi
         rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();
         llLoading= (LinearLayout) findViewById(R.id.llLoading);
-
         btnClub= (Button) findViewById(R.id.btnClub);
         btnClub.setOnClickListener(this);
         btnPersonal = (Button) findViewById(R.id.btnPersonal);
