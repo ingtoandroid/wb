@@ -21,12 +21,13 @@ import java.util.List;
  */
 
 public class ShipinAdapter extends RecyclerView.Adapter<ShipinAdapter.ViewHolder> {
-    private List<ShipinItem> list;
+    private List<ShipinItem> list=new ArrayList<>();
     private Context context;
     private ItemOnClickListener itemOnClickListener;
     public ShipinAdapter(Context context,List<ShipinItem> list) {
         super();
-        this.list=list;
+        if(list!=null)
+            this.list=list;
         this.context=context;
     }
 

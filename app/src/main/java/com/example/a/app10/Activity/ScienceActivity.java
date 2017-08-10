@@ -182,6 +182,9 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
             isChosen1.add(false);
         }
         int index1=6>numbers[0]?numbers[0]:6;
+        grid1.removeAllViews();
+        grid2.removeAllViews();
+        grid3.removeAllViews();
         for (int i=0;i<numbers[0];i++){
             grid1.addView(listButton.get(i));
         }

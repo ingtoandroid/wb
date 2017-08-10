@@ -199,63 +199,63 @@ public class IndexFragment extends Fragment {
                 }
             }
         });
-        Call call1=Net.getInstance().getQuestionList();
-        call1.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                list2=new ArrayList<QuestionItem>();
-                String str_response = response.body().string();
-
-                try {
-                    JSONTokener jsonTokener = new JSONTokener(str_response);
-                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
-                    JSONArray jsonArray = jsonObject.getJSONArray("datalist");
-                    int size=jsonArray.length()<2?jsonArray.length():2;
-                    for(int i = 0 ;i<size;i++){
-                        JSONObject item = jsonArray.getJSONObject(i);
-                        QuestionItem questionItem = new QuestionItem();
-                        questionItem.setQuestionID(item.getString("questionId"));
-                        questionItem.setQuestionTitle(item.getString("questionTitle"));
-                        questionItem.setQuestionContent(item.getString("questionContent"));
-                        questionItem.setUsername(item.getString("userName"));
-                        questionItem.setCreateTime_sys(item.getString("createTime_sys"));
-                        questionItem.setPhotoUrl(item.getString("photoUrl"));
-                        list2.add(questionItem);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        tiWenAdapter=new TiWenAdapter(getContext(),list2);
-                        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
-                        indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
-                        tiWenAdapter.setItemOnClickListener(new TiWenAdapter.ItemOnClickListener() {
-                            @Override
-                            public void onClick(View view, int position) {
-                                Intent intent=new Intent(getContext(),QuestionDetailedActivity.class);
-                                intent.putExtra("questionID",list2.get(position).getQuestionID());
-                                startActivity(intent);
-                            }
-                        });
-                        indexTiwenRecycleView.setAdapter(tiWenAdapter);
-
-
-                    }
-                });
-
-            }
-
-
-
-        });
+//        Call call1=Net.getInstance().getQuestionList();
+//        call1.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Request request, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Response response) throws IOException {
+//                list2=new ArrayList<QuestionItem>();
+//                String str_response = response.body().string();
+//
+//                try {
+//                    JSONTokener jsonTokener = new JSONTokener(str_response);
+//                    JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+//                    JSONArray jsonArray = jsonObject.getJSONArray("datalist");
+//                    int size=jsonArray.length()<2?jsonArray.length():2;
+//                    for(int i = 0 ;i<size;i++){
+//                        JSONObject item = jsonArray.getJSONObject(i);
+//                        QuestionItem questionItem = new QuestionItem();
+//                        questionItem.setQuestionID(item.getString("questionId"));
+//                        questionItem.setQuestionTitle(item.getString("questionTitle"));
+//                        questionItem.setQuestionContent(item.getString("questionContent"));
+//                        questionItem.setUsername(item.getString("userName"));
+//                        questionItem.setCreateTime_sys(item.getString("createTime_sys"));
+//                        questionItem.setPhotoUrl(item.getString("photoUrl"));
+//                        list2.add(questionItem);
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        tiWenAdapter=new TiWenAdapter(getContext(),list2);
+//                        LinearLayoutManager linearLayoutManager1=new LinearLayoutManager(getContext(),LinearLayout.VERTICAL,false);
+//                        indexTiwenRecycleView.setLayoutManager(linearLayoutManager1);
+//                        tiWenAdapter.setItemOnClickListener(new TiWenAdapter.ItemOnClickListener() {
+//                            @Override
+//                            public void onClick(View view, int position) {
+//                                Intent intent=new Intent(getContext(),QuestionDetailedActivity.class);
+//                                intent.putExtra("questionID",list2.get(position).getQuestionID());
+//                                startActivity(intent);
+//                            }
+//                        });
+//                        indexTiwenRecycleView.setAdapter(tiWenAdapter);
+//
+//
+//                    }
+//                });
+//
+//            }
+//
+//
+//
+//        });
         Call call2=Net.getInstance().shipinList(0,1);
         call2.enqueue(new Callback() {
             @Override

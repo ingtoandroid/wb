@@ -76,6 +76,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
     private EditText ed;
     private boolean isPrepare=false;
     private int per=0;
+    private ProgressBar progressBar;
     private AlertDialog dialog;
     List<CommentItem> list;
     private int type=0;
@@ -167,7 +168,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         recyclerView=(RecyclerView)findViewById(R.id.video_pinglun);
         scrollView=(ScrollView)findViewById(R.id.scroll);
         count=(TextView)findViewById(R.id.text_count);
-
+        progressBar=(ProgressBar)findViewById(R.id.progress);
         SurfaceHolder videoHolder = videoSurface.getHolder();
         container=(FrameLayout)findViewById(R.id.videoSurfaceContainer);
         linearLayout=(LinearLayout)findViewById(R.id.line);
@@ -182,6 +183,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
                 player.start();
                 isPrepare=true;
                 player.setLooping(true);
+                progressBar.setVisibility(View.GONE);
                 //player.pause();
             }
         });
@@ -530,6 +532,7 @@ public class VideoDetail extends AppCompatActivity implements SurfaceHolder.Call
         if(dialog==null){
             AlertDialog.Builder builder=new AlertDialog.Builder(VideoDetail.this);
             builder.setView(LayoutInflater.from(VideoDetail.this).inflate(R.layout.dialog3,null));
+
             dialog=builder.create();
         }
         dialog.show();

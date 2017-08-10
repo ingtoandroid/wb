@@ -9,12 +9,12 @@ public class URLString {
 
     final static public String protocol = "http://";
 
-    final static public String hostname = "120.76.165.146";
+    final static public String hostname = "124.133.38.252";
 
-    final static public String port = "80";
-    final static public String project = "yjtyms/yjty_App/";
+    final static public String port = "8080";
+    final static public String project = "/yjty_App/";
     final static public String super_project = "yjtyms/";
-    final static public String path = protocol+hostname+"/"+project;
+    final static public String path = protocol+hostname+":8080"+"/"+project;
     final static public String path_head_image = protocol+hostname+":"+port+"/"+super_project;
     //userAPI
     final static public String login=path+"user/login";

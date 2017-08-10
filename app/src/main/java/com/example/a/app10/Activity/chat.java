@@ -11,10 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.example.a.app10.R;
-import com.example.a.app10.tool.MyApplication;
 import com.example.a.app10.tool.Net;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
