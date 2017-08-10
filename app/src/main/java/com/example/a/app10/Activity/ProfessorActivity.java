@@ -24,6 +24,7 @@ import com.example.a.app10.Adapter.ProfessorAdapter;
 import com.example.a.app10.R;
 import com.example.a.app10.bean.ProfessorItem;
 import com.example.a.app10.tool.MyInternet;
+import com.example.a.app10.view.FlowLayout;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
@@ -43,7 +44,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
     //储存选择结果的标志数组
     private List<Boolean> isChosen1;
     private EditText et;
-    private GridLayout grid1,grid2,grid3;
+    private FlowLayout grid1,grid2,grid3;
     private Button btnSearch;
     private ProfessorAdapter adapter;
     private TextView tvSideTitle1,tvSideTitle2,tvSideTitle3;
@@ -95,9 +96,9 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         btnSearch= (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(this);
         et= (EditText) findViewById(R.id.et);
-        grid1= (GridLayout) findViewById(R.id.grid1);
-        grid2= (GridLayout) findViewById(R.id.grid2);
-        grid3= (GridLayout) findViewById(R.id.grid3);
+        grid1= (FlowLayout) findViewById(R.id.grid1);
+        grid2= (FlowLayout) findViewById(R.id.grid2);
+        grid3= (FlowLayout) findViewById(R.id.grid3);
 
         listButton=new ArrayList<>();
         isChosen1=new ArrayList<>();
@@ -173,7 +174,7 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         tvSideTitle3.setText(sideTitles[2]);
         int count=numbers[0]+numbers[1]+numbers[2];
         for (int i=0;i<count;i++){
-            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(butonWidth,buttonHeight);
+            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             GridLayout.LayoutParams params=new GridLayout.LayoutParams(params1);
             params.rightMargin=20;params.bottomMargin=10;
             Button button=new Button(ProfessorActivity.this);

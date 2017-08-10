@@ -40,9 +40,8 @@
                     android:textColor="@color/stringDark" />
             </LinearLayout>
 
-            <GridLayout
+            <com.example.a.app10.view.FlowLayout
                 android:layout_marginTop="10dp"
-                android:columnCount="3"
                 android:id="@+id/grid1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -68,9 +67,8 @@
                     android:textColor="@color/stringDark" />
             </LinearLayout>
 
-            <GridLayout
+            <com.example.a.app10.view.FlowLayout
                 android:layout_marginTop="10dp"
-                android:columnCount="3"
                 android:id="@+id/grid2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -96,9 +94,8 @@
                     android:textColor="@color/stringDark" />
             </LinearLayout>
 
-            <GridLayout
+            <com.example.a.app10.view.FlowLayout
                 android:layout_marginTop="10dp"
-                android:columnCount="3"
                 android:id="@+id/grid3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

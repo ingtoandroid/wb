@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
@@ -25,6 +26,7 @@ import com.example.a.app10.bean.NewsItem;
 import com.example.a.app10.tool.KopItemDecoration;
 import com.example.a.app10.tool.MyInternet;
 import com.example.a.app10.tool.Net;
+import com.example.a.app10.view.FlowLayout;
 import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONArray;
@@ -49,7 +51,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
     private List<Button> listButton;
     private List<Boolean> isChosen1;
     private List<String> buttonTexts,buttonCode;
-    private GridLayout grid1,grid2,grid3;
+    private FlowLayout grid1,grid2,grid3;
     private OkHttpClient client;
     private NewsAdapter adapter;
     private TextView tvSideTitle1,tvSideTitle2,tvSideTitle3;
@@ -86,9 +88,9 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         new QBadgeView(this).bindTarget(toolbar).setBadgeNumber(Net.getMegsSize());
 
         rv= (RecyclerView) findViewById(R.id.rv);
-        grid1= (GridLayout) findViewById(R.id.grid1);
-        grid2= (GridLayout) findViewById(R.id.grid2);
-        grid3= (GridLayout) findViewById(R.id.grid3);
+        grid1= (FlowLayout) findViewById(R.id.grid1);
+        grid2= (FlowLayout) findViewById(R.id.grid2);
+        grid3= (FlowLayout) findViewById(R.id.grid3);
         buttonHeight=(int) getResources().getDimension(R.dimen.side_button_height);
         butonWidth=(int) getResources().getDimension(R.dimen.side_button_width);
         resources=getResources();
@@ -107,10 +109,8 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         client=new OkHttpClient();
         list=new ArrayList<>();
         llLoading= (LinearLayout) findViewById(R.id.llLoading);
-
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
-
         new LoadTask().execute(null,null,null);
 
     }
@@ -167,8 +167,9 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         tvSideTitle3.setText(sideTitles[2]);
         int count=numbers[0]+numbers[1]+numbers[2];
         for (int i=0;i<count;i++){
-            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(butonWidth,buttonHeight);
+            LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             GridLayout.LayoutParams params=new GridLayout.LayoutParams(params1);
+            //RecyclerView.LayoutParams params=new RecyclerView.LayoutParams(params1);
             params.rightMargin=20;params.bottomMargin=10;
             Button button=new Button(ScienceActivity.this);
             button.setText(buttonTexts.get(i));
