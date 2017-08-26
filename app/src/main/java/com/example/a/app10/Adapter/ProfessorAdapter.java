@@ -58,7 +58,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.MyVi
         holder.tvName.setText(item.getName());
         holder.tvContent.setText(item.getContent());
         Glide.with(context).load(item.getImgUrl()).into(holder.image);
-        holder.ivGrade.setImageBitmap(BitmapFactory.decodeResource(resources,gradeImageIds[item.getGrade()]));
+//        holder.ivGrade.setImageBitmap(BitmapFactory.decodeResource(resources,gradeImageIds[item.getGrade()]));
 
         if (listener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class ProfessorAdapter extends RecyclerView.Adapter<ProfessorAdapter.MyVi
             tvName= (TextView) itemView.findViewById(R.id.tvName);
             tvContent= (TextView) itemView.findViewById(R.id.tvContent);
             image= (ImageView) itemView.findViewById(R.id.image);
-            ivGrade= (ImageView) itemView.findViewById(R.id.ivGrade);
+//            ivGrade= (ImageView) itemView.findViewById(R.id.ivGrade);
         }
     }
 }

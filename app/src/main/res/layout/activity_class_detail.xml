@@ -21,21 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="25dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/line_back">
+                <ImageButton
                     android:id="@+id/btnBack"
                     android:background="@drawable/back"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp" />
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"></LinearLayout>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="35dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="10dp"
@@ -60,35 +55,37 @@
                         android:textColor="#fff"
                         android:text="开课时间
                             2017.01.02"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"/>
                     <LinearLayout
                         android:background="#fff"
                         android:layout_margin="2dp"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"></LinearLayout>
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"></LinearLayout>
                     <TextView
                         android:id="@+id/tvEnterNum"
                         android:textColor="#fff"
-                        android:text="报名人数
-                            2017.01.02"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content" />
+                        android:text="报名人数\n2017.01.02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"/>
                     <LinearLayout
                         android:background="#fff"
                         android:layout_margin="2dp"
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"></LinearLayout>
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"></LinearLayout>
                     <TextView
                         android:id="@+id/tvClassroom"
                         android:textColor="#fff"
                         android:text="场地
                             2017.01.02"
-                        android:layout_width="0dp"
-                        android:layout_weight="2"
-                        android:layout_height="wrap_content" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -98,8 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
         <LinearLayout
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
+            android:paddingTop="30dp"
             android:orientation="vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -137,7 +133,7 @@
                 <TextView
                     android:id="@+id/tvOpen1"
                     android:gravity="right"
-                    android:textColor="@color/main"
+                    android:textColor="@color/textGreen"
                     android:text="展开全部"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -179,7 +175,7 @@
                 <TextView
                     android:id="@+id/tvOpen2"
                     android:gravity="right"
-                    android:textColor="@color/main"
+                    android:textColor="@color/textGreen"
                     android:text="展开全部"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -221,7 +217,7 @@
                 <TextView
                     android:id="@+id/tvOpen3"
                     android:gravity="right"
-                    android:textColor="@color/main"
+                    android:textColor="@color/textGreen"
                     android:text="展开全部"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

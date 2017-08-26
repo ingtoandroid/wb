@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.a.app10.R;
@@ -27,6 +28,7 @@ import java.io.IOException;
 public class Comment extends AppCompatActivity {
     private ImageView imageView;
     private ImageView back;
+    private LinearLayout line_back;
     private Button commit;
     private EditText editText;
     private String orderid="";
@@ -47,7 +49,7 @@ public class Comment extends AppCompatActivity {
         editText=(EditText)findViewById(R.id.input);
         back=(ImageButton) findViewById(R.id.back_imag);
         commit=(Button)findViewById(R.id.comment);
-
+        line_back = (LinearLayout) findViewById(R.id.line_back);
     }
     private void initEvent(){
         imageView.setOnTouchListener(new View.OnTouchListener() {

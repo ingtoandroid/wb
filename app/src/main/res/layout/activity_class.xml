@@ -22,12 +22,12 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
-        <LinearLayout
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="7dp"
-            android:background="#ddd"
-            android:layout_width="1dp"
-            android:layout_height="match_parent"></LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_marginTop="7dp"-->
+            <!--android:layout_marginBottom="7dp"-->
+            <!--android:background="#ddd"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent"></LinearLayout>-->
         <Button
             android:textColor="@color/stringLight"
             android:id="@+id/btnPersonal"

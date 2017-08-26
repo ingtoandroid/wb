@@ -62,13 +62,17 @@
                 <TextView
                     android:gravity="center"
                     android:text="专家预约时间表"
+                    android:textColor="@color/textGreen"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
-                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"/>
+                <ImageButton
                     android:id="@+id/btnChooseDate"
                     android:background="@drawable/choose_time"
-                    android:layout_width="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <include

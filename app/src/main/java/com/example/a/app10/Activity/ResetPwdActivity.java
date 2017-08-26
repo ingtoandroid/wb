@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class ResetPwdActivity extends AppCompatActivity {
     private EditText ed_new_password;
     private Button login;
     private ImageButton back;
+    private LinearLayout line_back;
     private Handler handler = new Handler();
     private CoutDownTimerUtils coutDownTimerUtils;
     @Override
@@ -51,6 +53,7 @@ public class ResetPwdActivity extends AppCompatActivity {
 
     private void init(){
         back = (ImageButton)findViewById(R.id.back);
+        line_back = (LinearLayout)findViewById(R.id.line_back);
         send_verification = (TextView)findViewById(R.id.send_verification);
         login = (Button)findViewById(R.id.bu_login_set_newpwd);
         ed_phonenumber = (EditText)findViewById(R.id.input_phontnumber);
@@ -61,6 +64,12 @@ public class ResetPwdActivity extends AppCompatActivity {
 
     private void initEvent(){
         back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        line_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

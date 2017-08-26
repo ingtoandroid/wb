@@ -33,12 +33,12 @@
                     android:text="蓝色季风"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <ImageView
-                    android:id="@+id/ivGrade"
-                    android:src="@drawable/star1"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/ivGrade"-->
+                    <!--android:src="@drawable/star1"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content" />-->
             </LinearLayout>
             <TextView
                 android:textColor="@color/stringCenter"

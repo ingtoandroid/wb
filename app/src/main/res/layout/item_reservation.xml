@@ -16,12 +16,14 @@
             android:id="@+id/item_top"
             >
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="在这里预约内容"
                 android:textSize="20sp"
                 android:textColor="@color/stringDark"
-                android:id="@+id/item_content_reservation"/>
+                android:id="@+id/item_content_reservation"
+                android:ellipsize="end"
+                android:singleLine="true"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

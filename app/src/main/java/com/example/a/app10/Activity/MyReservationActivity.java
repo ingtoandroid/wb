@@ -1,13 +1,16 @@
 package com.example.a.app10.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +45,7 @@ public class MyReservationActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyReservation> datas;
     private ImageButton back;
+    private LinearLayout line_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,13 @@ public class MyReservationActivity extends AppCompatActivity {
 
         back = (ImageButton) findViewById(R.id.back_reservation);
         back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        line_back = (LinearLayout)findViewById(R.id.line_back);
+        line_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -174,7 +187,65 @@ public class MyReservationActivity extends AppCompatActivity {
             holder.item_cancle_reservation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Call call = Net.getInstance().cancelOrder(myReservation.getOrderId());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MyReservationActivity.this);
+                    RelativeLayout relativeLayout = (RelativeLayout)getLayoutInflater().inflate(R.layout.alert_dialog,null);
+                    builder.setView(relativeLayout);
+                    builder.setCancelable(true);
+                    final AlertDialog dialog = builder.create();
+                    dialog.show();
+                    Button btn_cencel = (Button)relativeLayout.findViewById(R.id.cancel);
+                    Button btn_sure = (Button)relativeLayout.findViewById(R.id.btnSure);
+                    btn_cencel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    btn_sure.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            Call call = Net.getInstance().cancelOrder(myReservation.getOrderId());
+                            call.enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Request request, IOException e) {
+
+                                }
+
+                                @Override
+                                public void onResponse(Response response) throws IOException {
+                                    String str_response = response.body().string();
+                                    JSONTokener jsonTokener = new JSONTokener(str_response);
+                                    try {
+                                        JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
+                                        String megs = jsonObject.getString("megs");
+                                        if(megs.equals("取消成功")){
+                                            myReservation.setType(-1);
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(MyReservationActivity.this,"取消成功",Toast.LENGTH_SHORT).show();
+                                                    recyclerView.removeAllViews();
+                                                    recyclerView.setAdapter(new MyAdapter());
+                                                }
+                                            });
+                                        }
+                                        else if(megs.equals("取消失败")){
+                                            runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    Toast.makeText(MyReservationActivity.this,"取消失败",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                    /*Call call = Net.getInstance().cancelOrder(myReservation.getOrderId());
                     call.enqueue(new Callback() {
                         @Override
                         public void onFailure(Request request, IOException e) {
@@ -210,6 +281,7 @@ public class MyReservationActivity extends AppCompatActivity {
                             }
                         }
                     });
+                    */
                 }
             });
             holder.item_consultation_reservation.setOnClickListener(new View.OnClickListener() {

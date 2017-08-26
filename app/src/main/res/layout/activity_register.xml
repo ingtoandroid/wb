@@ -9,14 +9,19 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:id="@+id/set_newpassword_title">
-        <ImageButton
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/backblack"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/back"/>
+            android:id="@+id/line_back">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backblack"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/back"/>
+        </LinearLayout>
         <!--android:src="@drawable/get_into"-->
         <TextView
             android:layout_width="wrap_content"

@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,7 +59,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     private View head;
     private MyOrderList form;
     private CardView cardDetail;
-    private Button btnChooseDate,btnOrder;
+    private ImageButton btnChooseDate;
+    private Button btnOrder;
     private DatePickerDialog dialog;
     private Spinner spinner;
     private String userid;
@@ -72,7 +74,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
     private int choseIndex=0;//被选中的标号
     private int choseTimeIndex=0;
     private String str="";
-    private int[] states=new int[21];
+    private int[] states = new int[21];
     private String[] serviceIds=new String[21];
     private String monday,tues,wens,thur,fri,sat,sun;
     private TextView tvName,tvContent,tvMonday,tvTuesday,tvWens,tvThur,tvFri,tvSat,tvSun;
@@ -102,8 +104,8 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
         head=findViewById(R.id.head);
         image= (CircleImageView) findViewById(R.id.image);
         Glide.with(this).load(professor.getImgUrl()).into(image);
-        ivGrade= (ImageView) findViewById(R.id.ivGrade);
-        ivGrade.setImageResource(grades[professor.getGrade()]);
+//        ivGrade= (ImageView) findViewById(R.id.ivGrade);
+//        ivGrade.setImageResource(grades[professor.getGrade()]);
         tvName= (TextView) findViewById(R.id.tvName);
         tvName.setTextColor(Color.WHITE);
         tvName.setText(professor.getName());
@@ -121,7 +123,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
 
         head.setBackgroundColor(Color.TRANSPARENT);
         cardDetail= (CardView) findViewById(R.id.cardDetail);
-        btnChooseDate= (Button) findViewById(R.id.btnChooseDate);
+        btnChooseDate= (ImageButton) findViewById(R.id.btnChooseDate);
         btnChooseDate.setOnClickListener(this);
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);

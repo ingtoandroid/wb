@@ -6,8 +6,15 @@
     android:layout_marginRight="10dp"
     android:layout_height="150dp">
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/alphaImage"/>
+    <ImageView
         android:id="@+id/image"
         android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <LinearLayout

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ import java.util.List;
 public class MessageDetailedActivity extends AppCompatActivity {
 
     private ImageButton back;
+    private LinearLayout line_back;
     private EditText ed_message;
     private String questionID;
     private String messager;
@@ -61,6 +63,13 @@ public class MessageDetailedActivity extends AppCompatActivity {
 
         list = new ArrayList<>();
 
+        line_back = (LinearLayout)findViewById(R.id.line_back);
+        line_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         back = (ImageButton) findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,8 +172,8 @@ public class MessageDetailedActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                         messager = jsonObject.getString("nickName");
-                        headImageUrl = URLString.path_head_image+jsonObject.getString("filePath");
-                        messageDetail.setHeadImage(URLString.path_head_image+jsonObject.getString("filePath"));
+                        headImageUrl = jsonObject.getString("filePath");
+                        messageDetail.setHeadImage(jsonObject.getString("filePath"));
                         messageDetail.setMessageContent(jsonObject.getString("questionContent"));
                         messageDetail.setMessageData(jsonObject.getString("questionDate"));
                         messageDetail.setType("追问");
@@ -176,7 +185,7 @@ public class MessageDetailedActivity extends AppCompatActivity {
                             mDetail.setExpertname(jObject.getString("expertName"));
                             mDetail.setMessageData(jObject.getString("answerDate"));
                             mDetail.setMessageContent(jObject.getString("answer"));
-                            mDetail.setHeadImage(URLString.path_head_image+jObject.getString("filePath"));
+                            mDetail.setHeadImage(jObject.getString("filePath"));
                             mDetail.setType(jObject.getString("answerType"));
                             list.add(mDetail);
                         }

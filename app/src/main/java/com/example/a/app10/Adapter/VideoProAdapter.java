@@ -1,6 +1,7 @@
 package com.example.a.app10.Adapter;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,7 @@ public class VideoProAdapter extends RecyclerView.Adapter<VideoProAdapter.MyView
         holder.tvTitle.setText(item.getVideoTitle());
         holder.tvNumber.setText(item.getPlayNum()+"人已参加");
         holder.tvTime.setText(item.getVideoType());
+        holder.imageView.setAlpha(100);
         if (item.getImageUrl().length()>1){
             Glide.with(context).load(item.getImageUrl()).into(holder.iv);
         }
@@ -83,13 +85,14 @@ public class VideoProAdapter extends RecyclerView.Adapter<VideoProAdapter.MyView
 
         TextView tvTitle,tvNumber,tvTime;
         ImageView iv;
-
+        ImageView imageView;
         public MyViewHolder(View itemView) {
             super(itemView);
             tvTitle= (TextView) itemView.findViewById(R.id.tvTitle);
             tvNumber= (TextView) itemView.findViewById(R.id.tvNumber);
             tvTime= (TextView) itemView.findViewById(R.id.tvTime);
             iv= (ImageView) itemView.findViewById(R.id.image);
+            imageView = (ImageView) itemView.findViewById(R.id.alphaImage);
         }
     }
 

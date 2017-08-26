@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.annotation.IntDef;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,9 +38,11 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
 
     private TextView tvClassContent, tvFee, tvRisk,tvOpen1,
             tvOpen2,tvOpen3,tvTitle,tvStartDate,tvEnterNum,tvClassroom;
+    private LinearLayout line_back;
     private final int CURRENT_LINES= 3;
     private boolean[] isOpen={false,false,false};//标记三个文本是否展开
-    private Button btnBack,btnJoin;
+    private Button btnJoin;
+    private ImageButton btnBack;
     private ProgressDialog mProgressDialog;
     private String courseId,userid;
     private String courseTitle,startDate,entereNum,classroom,courseContent,feeExplain,risk;
@@ -113,11 +118,18 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
         tvStartDate= (TextView) findViewById(R.id.tvStartDate);
         tvEnterNum= (TextView) findViewById(R.id.tvEnterNum);
         tvClassroom= (TextView) findViewById(R.id.tvClassroom);
-        btnBack= (Button) findViewById(R.id.btnBack);
+        btnBack= (ImageButton) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
         btnJoin= (Button) findViewById(R.id.btnJoin);
         btnJoin.setOnClickListener(this);
         client=new OkHttpClient();
+        line_back = (LinearLayout)findViewById(R.id.line_back);
+        line_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         tvClassContent.setMaxLines(CURRENT_LINES);
         tvFee.setMaxLines(CURRENT_LINES);
@@ -304,8 +316,9 @@ public class ClassDetailActivity extends AppCompatActivity implements View.OnCli
     private void show() {
         hideProgress();
         tvTitle.setText(courseTitle);
-        tvStartDate.setText("开课时间"+"\n"+startDate);
-        tvEnterNum.setText("报名人数"+"\n"+entereNum);
+        String str[] = startDate.split("-");
+        tvStartDate.setText("开课时间"+"\n"+str[0]+"."+str[1]+"."+str[2].substring(0,2));
+        tvEnterNum.setText("报名人数"+"\n"+entereNum+"人");
         tvClassroom.setText("场地"+"\n"+classroom);
         tvClassContent.setText(courseContent);
         tvFee.setText(feeExplain);

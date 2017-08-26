@@ -79,6 +79,14 @@ public class QuestionItem {
         this.questionID = questionID;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     private String questionID;
     private String questionTitle;
     private String expertId;
@@ -86,6 +94,7 @@ public class QuestionItem {
     private String questionType;
     private String infoID;
     private String username;
+    private String nickName;
     private String createTime_sys;
     private String photoUrl;
 }

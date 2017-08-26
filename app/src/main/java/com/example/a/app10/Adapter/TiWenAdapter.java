@@ -36,11 +36,11 @@ public class TiWenAdapter extends  RecyclerView.Adapter<TiWenAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(list.get(position).getQuestionContent());
+        holder.title.setText(list.get(position).getNickName());
         holder.time.setText(list.get(position).getCreateTime_sys());
         //holder.imageView.setImageBitmap(BitmapFactory.decodeResource(context.getResources(),));
         Glide.with(context).load(list.get(position).getPhotoUrl()).into(holder.imageView);
-//        holder.question.setText(list.get(position).getQuestionContent());
+        holder.question.setText(list.get(position).getQuestionContent());
 
     }
 

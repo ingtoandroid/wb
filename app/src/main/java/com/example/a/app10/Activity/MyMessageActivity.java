@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class MyMessageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyMessage> datas;
     private ImageButton back_message;
+    private LinearLayout line_back;
     private ImageView ivMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,7 @@ public class MyMessageActivity extends AppCompatActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-
-
+        line_back = (LinearLayout)findViewById(R.id.line_back);
         datas = new ArrayList<>();
         initDatas();
 //        MyMessage myMessage = new MyMessage();
@@ -70,6 +71,12 @@ public class MyMessageActivity extends AppCompatActivity {
         recyclerView.setAdapter(new MyAdapter());
         back_message = (ImageButton) findViewById(R.id.back_messaage);
         back_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        line_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -135,7 +142,7 @@ public class MyMessageActivity extends AppCompatActivity {
         public void onBindViewHolder(MyAdapter.MyViewHolder holder, final int position) {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
-            String str_url = URLString.path_head_image+datas.get(position).getHeadImageURL();
+            String str_url = datas.get(position).getHeadImageURL();
 //            String str_url = datas.get(position).getHeadImageURL();
 //            String str_url = URLString.path_head_image+"lemon/fileDownload?fileName=associator/20170615/1111.png";
             Glide.with(MyMessageActivity.this).load(str_url).into(holder.headImage);

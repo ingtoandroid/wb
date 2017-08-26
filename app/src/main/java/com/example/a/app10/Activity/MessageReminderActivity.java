@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class MessageReminderActivity extends AppCompatActivity {
     List<MessageReminder> list;
     TextView deleteText;
     ImageButton back;
+    LinearLayout line_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,13 @@ public class MessageReminderActivity extends AppCompatActivity {
 
         Net.setMegsSize(0);
 
+        line_back = (LinearLayout)findViewById(R.id.line_back) ;
+        line_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         deleteText = (TextView)findViewById(R.id.deleteMessage);
         deleteText.setOnClickListener(new View.OnClickListener() {
             @Override

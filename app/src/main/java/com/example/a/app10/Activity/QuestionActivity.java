@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -49,6 +50,7 @@ public class QuestionActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<MyData> datas;
     private ImageButton back_question;
+    private LinearLayout line_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,13 @@ public class QuestionActivity extends AppCompatActivity {
         recyclerView.setAdapter(new MyAdapter());
         back_question = (ImageButton) findViewById(R.id.back_question);
         back_question.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        line_back = (LinearLayout)findViewById(R.id.line_back);
+        line_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -126,7 +135,7 @@ public class QuestionActivity extends AppCompatActivity {
         public void onBindViewHolder(MyViewHolder holder, final int position) {
             holder.usernameText.setText(datas.get(position).getUsername());
             holder.contentText.setText(datas.get(position).getContent());
-            String str_url = URLString.path_head_image+datas.get(position).getHeadImageURL();
+            String str_url = datas.get(position).getHeadImageURL();
 //            String str_url = datas.get(position).getHeadImageURL();
 //            String str_url = URLString.path_head_image+"lemon/fileDownload?fileName=associator/20170615/1111.png";
             Glide.with(QuestionActivity.this).load(str_url).into(holder.headImage);

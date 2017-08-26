@@ -11,14 +11,20 @@
         android:layout_height="75dp"
         android:background="@drawable/backgroundcolor"
         android:id="@+id/title">
-        <ImageButton
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="10dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/back"
-            android:id="@+id/back_reservation"/>
+            android:id="@+id/line_back"
+            android:layout_alignParentBottom="true">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/back"
+                android:id="@+id/back_reservation"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

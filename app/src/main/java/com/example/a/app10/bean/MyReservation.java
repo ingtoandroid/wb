@@ -116,5 +116,5 @@ public class MyReservation {
     private String orderType;
     private String orderId;
     private String filePath;
-    private int type;
+    public int type;
 }

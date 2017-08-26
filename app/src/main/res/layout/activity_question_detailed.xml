@@ -11,14 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/title">
-        <ImageButton
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/backblack"
-            android:id="@+id/back"
-            android:layout_marginBottom="13dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="10dp"/>
+            android:id="@+id/line_back"
+            android:layout_alignParentBottom="true">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backblack"
+                android:id="@+id/back"
+                android:layout_marginBottom="13dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,13 +57,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/send_question_bottom"
         android:layout_alignParentBottom="true">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/say"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/say"
-            android:layout_marginLeft="10dp"/>
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/say"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:id="@+id/say"-->
+            <!--android:layout_marginLeft="10dp"/>-->
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"

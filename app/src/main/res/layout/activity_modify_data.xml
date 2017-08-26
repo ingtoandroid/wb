@@ -11,13 +11,18 @@
         android:id="@+id/data_setting_title"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp">
-        <ImageButton
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/backblack"
-            android:id="@+id/back"
-            android:layout_marginBottom="12dp"
-            android:layout_alignParentBottom="true"/>
+            android:id="@+id/line_back">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/backblack"
+                android:id="@+id/back"
+                android:layout_marginBottom="12dp"
+                android:layout_alignParentBottom="true"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

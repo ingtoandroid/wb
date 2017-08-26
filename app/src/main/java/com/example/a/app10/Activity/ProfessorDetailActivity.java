@@ -68,7 +68,7 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         btnOrder= (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
         image= (ImageView) findViewById(R.id.image);
-        ivGrade= (ImageView) findViewById(R.id.ivGrade);
+//        ivGrade= (ImageView) findViewById(R.id.ivGrade);
         tvContent= (TextView) findViewById(R.id.tvContent);
         tvName= (TextView) findViewById(R.id.tvName);
         tvIntroduction= (TextView) findViewById(R.id.tvIndroduction);
@@ -162,7 +162,7 @@ public class ProfessorDetailActivity extends ToolBarBaseActivity implements View
         tvName.setText(name);
         tvContent.setText("研究方向： "+content);
         tvIntroduction.setText(indroduction);
-        ivGrade.setImageResource(grades[expertGrade]);
+//        ivGrade.setImageResource(grades[expertGrade]);
     }
 
     private void getData() {

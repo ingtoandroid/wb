@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
     private List<MyCourse> courses;
     private RecyclerView recyclerView;
     private ImageButton imageView;
+    private LinearLayout line_back;
     private Button askPurse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,14 @@ public class QuestionDetailedActivity extends AppCompatActivity {
 
         imageView = (ImageButton)findViewById(R.id.back);
         imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        line_back = (LinearLayout)findViewById(R.id.line_back);
+        line_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -130,8 +140,8 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = (JSONObject) jsonTokener.nextValue();
                         questioner = jsonObject.getString("nickName");
-                        headImageUrl = URLString.path_head_image+jsonObject.getString("filePath");
-                        questionDetail.setHeadImage(URLString.path_head_image+jsonObject.getString("filePath"));
+                        headImageUrl = jsonObject.getString("filePath");
+                        questionDetail.setHeadImage(jsonObject.getString("filePath"));
                         questionDetail.setQuestionContent(jsonObject.getString("questionContent"));
                         questionDetail.setQuestionData(jsonObject.getString("questionDate"));
                         questionDetail.setType("追问");
@@ -143,7 +153,7 @@ public class QuestionDetailedActivity extends AppCompatActivity {
                             qDetail.setExpertname(jObject.getString("expertName"));
                             qDetail.setQuestionData(jObject.getString("answerDate"));
                             qDetail.setQuestionContent(jObject.getString("answer"));
-                            qDetail.setHeadImage(URLString.path_head_image+jObject.getString("filePath"));
+                            qDetail.setHeadImage(jObject.getString("filePath"));
                             qDetail.setType(jObject.getString("answerType"));
                             list.add(qDetail);
                         }

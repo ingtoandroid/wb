@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -176,15 +177,22 @@ public class ProfessorActivity extends ToolBarBaseActivity implements View.OnCli
         for (int i=0;i<count;i++){
             LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             GridLayout.LayoutParams params=new GridLayout.LayoutParams(params1);
-            params.rightMargin=20;params.bottomMargin=10;
+             params.rightMargin=20;params.bottomMargin=10;
             Button button=new Button(ProfessorActivity.this);
+            button.setLayoutParams(params);
+            button.setIncludeFontPadding(false);
+           // button.getLayoutParams().width = 270;
+            button.getLayoutParams().height = 80;
+            button.setPadding(10,0,10,0);
+            button.setMinHeight(0);
+            button.setMinWidth(0);
+            button.setTextAppearance(ProfessorActivity.this,R.style.Widget_AppCompat_Button_Borderless);
             button.setText(buttonTexts.get(i));
             button.setTextColor(resources.getColor(R.color.main));
             button.setBackgroundResource(R.drawable.button_side);
             button.setMaxLines(1);
             button.setOnClickListener(this);
             button.setVisibility(View.GONE);
-            button.setLayoutParams(params);
             listButton.add(button);
             isChosen1.add(false);
         }

@@ -60,13 +60,14 @@
                         android:layout_height="40dp" />
                 </LinearLayout>
             </LinearLayout>
+
             <TextView
-                android:textColor="@color/stringDark"
-                android:textSize="20sp"
-                android:layout_marginTop="10dp"
-                android:text="视频列表"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="专家视频"
+                android:textColor="@color/stringDark"
+                android:textSize="20sp" />
             </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvVideo"
@@ -74,14 +75,15 @@
             android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
         <TextView
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/stringDark"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:text="课程列表"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="专家课程"
+            android:textColor="@color/stringDark"
+            android:textSize="20sp" />
         <android.support.v7.widget.RecyclerView
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

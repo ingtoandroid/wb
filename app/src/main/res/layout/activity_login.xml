@@ -108,79 +108,79 @@
         android:id="@+id/bu_reg"
         style="?android:attr/borderlessButtonStyle"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bu_reg"
-        android:text="@string/quick_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:id="@+id/quick_login"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/bu_reg"-->
+        <!--android:text="@string/quick_login"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="70dp"-->
+        <!--android:id="@+id/quick_login"/>-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/weibo"
-        android:layout_below="@+id/quick_login"
-        android:layout_toLeftOf="@+id/qq"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="30dp"
-        android:src="@drawable/background" />
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:id="@+id/weibo"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:layout_toLeftOf="@+id/qq"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:src="@drawable/background" />-->
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/weibo"
-        android:layout_below="@+id/quick_login"
-        android:layout_toLeftOf="@+id/qq"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="37dp"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/weibo"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:layout_toLeftOf="@+id/qq"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_marginRight="37dp"/>-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/quick_login"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/qq"
-        android:src="@drawable/background" />
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/qq"-->
+        <!--android:src="@drawable/background" />-->
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/qq"
-        android:layout_below="@+id/quick_login"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/qq"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_centerHorizontal="true"/>-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/weixin"
-        android:src="@drawable/background"
-        android:layout_below="@+id/quick_login"
-        android:layout_toRightOf="@+id/qq"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp" />
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:id="@+id/weixin"-->
+        <!--android:src="@drawable/background"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:layout_toRightOf="@+id/qq"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginLeft="30dp" />-->
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/weixin"
-        android:layout_below="@+id/quick_login"
-        android:layout_toRightOf="@+id/qq"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="37dp"
-        android:layout_centerHorizontal="true"/>
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/weixin"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:layout_toRightOf="@+id/qq"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:layout_marginLeft="37dp"-->
+        <!--android:layout_centerHorizontal="true"/>-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/quick_login"
-        android:id="@+id/modify_data"
-        android:text=""/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/quick_login"-->
+        <!--android:id="@+id/modify_data"-->
+        <!--android:text=""/>-->
 
 </RelativeLayout>

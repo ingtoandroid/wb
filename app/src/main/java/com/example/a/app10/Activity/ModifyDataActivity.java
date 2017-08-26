@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -54,6 +55,7 @@ public class ModifyDataActivity extends AppCompatActivity {
     private String headImageUrl = "";
 
     private ImageButton back;
+    private LinearLayout line_back;
     private ImageView im_headImage;
     private EditText ed_username;
     private TextView tx_phoneNumber;
@@ -84,6 +86,7 @@ public class ModifyDataActivity extends AppCompatActivity {
     }
 
     private void init(){
+        line_back = (LinearLayout)findViewById(R.id.line_back);
         back = (ImageButton) findViewById(R.id.back);
         im_headImage = (ImageView)findViewById(R.id.head_image);
         ed_username = (EditText)findViewById(R.id.username);
@@ -103,7 +106,12 @@ public class ModifyDataActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        line_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         tx_saveInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

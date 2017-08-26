@@ -64,12 +64,18 @@ public class Main1Activity extends AppCompatActivity {
         mainTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition()==2){
+                if(tab.getPosition() == 2){
                     if(!isLogin){
-                        Intent intent=new Intent(Main1Activity.this,LoginActivity.class);
-                        startActivity(intent);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent=new Intent(Main1Activity.this,LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        }).start();
+                        //mainTab.getTabAt(2).select();
                         mainTab.getTabAt(lastTab).select();
-
+                        viewPager.setCurrentItem(lastTab);
                     }
                     else{
                         viewPager.setCurrentItem(tab.getPosition());
@@ -115,5 +121,6 @@ public class Main1Activity extends AppCompatActivity {
                 else
                     isLogin=true;
             }
-    }).start();}
+        }).start();
+    }
 }

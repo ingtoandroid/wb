@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private CoutDownTimerUtils coutDownTimerUtils;
 
     private ImageButton back;
+    private LinearLayout line_back;
     private Button login;
     private EditText ed_phonenumber;
     private EditText ed_verification_code;
@@ -49,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
     private void initViews(){
         back = (ImageButton)findViewById(R.id.back);
+        line_back = (LinearLayout)findViewById(R.id.line_back);
         login=(Button)findViewById(R.id.bu_login_set_newpwd);
         ed_phonenumber = (EditText)findViewById(R.id.input_phontnumber);
         ed_verification_code = (EditText)findViewById(R.id.input_verification);
@@ -82,7 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        line_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void checkOutToRegister(){

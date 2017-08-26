@@ -21,6 +21,7 @@ import java.util.Set;
 
 public class SettingActivity extends AppCompatActivity {
     private ImageButton back;
+    private LinearLayout line_back;
     private LinearLayout about_us_item;
     private LinearLayout username_item;
     private TextView tx_usernameSetting;
@@ -38,6 +39,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private void init(){
         back = (ImageButton) findViewById(R.id.back);
+        line_back = (LinearLayout)findViewById(R.id.line_back);
         about_us_item = (LinearLayout)findViewById(R.id.about_us_item);
         username_item = (LinearLayout)findViewById(R.id.username_item);
         tx_usernameSetting = (TextView)findViewById(R.id.username_setting);
@@ -47,6 +49,12 @@ public class SettingActivity extends AppCompatActivity {
 
     private void initEvent(){
         back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        line_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

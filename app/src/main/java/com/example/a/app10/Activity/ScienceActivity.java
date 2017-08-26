@@ -70,7 +70,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        setMyTitle("科普处方");
+        setMyTitle("健身处方");
         setLeftButton(R.drawable.back, new MyOnClickListener() {
             @Override
             public void onClick() {
@@ -98,7 +98,7 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         isChosen1=new ArrayList<>();
         buttonTexts=new ArrayList<>();
         buttonCode=new ArrayList<>();
-        list=new ArrayList<>();
+       // list=new ArrayList<>();
         btnRecycle= (Button) findViewById(R.id.btnRecycle);
         btnRecycle.setOnClickListener(this);
         btnSure= (Button) findViewById(R.id.btnSure);
@@ -169,16 +169,26 @@ public class ScienceActivity extends ToolBarBaseActivity implements View.OnClick
         for (int i=0;i<count;i++){
             LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             GridLayout.LayoutParams params=new GridLayout.LayoutParams(params1);
-            //RecyclerView.LayoutParams params=new RecyclerView.LayoutParams(params1);
+
+//            FlowLayout.LayoutParams params = new FrameLayout.LayoutParams(params1);
+            //RecyclerView.LayoutParams params=new RecyclerView.LayoutParams(。params1);
             params.rightMargin=20;params.bottomMargin=10;
+
             Button button=new Button(ScienceActivity.this);
+            button.setIncludeFontPadding(false);
+            button.setLayoutParams(params);
+            button.setTextAppearance(ScienceActivity.this,R.style.Widget_AppCompat_Button_Borderless_Colored);
+            // button.getLayoutParams().width = 270;
+            button.getLayoutParams().height = 80;
+            button.setPadding(10,10,10,10);
+            button.setMinHeight(0);
+            button.setMinWidth(0);
+            button.setBackgroundColor(Color.rgb(255,255,255));
             button.setText(buttonTexts.get(i));
-            button.setTextColor(resources.getColor(R.color.main));
+            button.setTextColor(resources.getColor(R.color.textGreen));
             button.setBackgroundResource(R.drawable.button_side);
-            button.setMaxLines(1);
             button.setOnClickListener(this);
             button.setVisibility(View.GONE);
-            button.setLayoutParams(params);
             listButton.add(button);
             isChosen1.add(false);
         }

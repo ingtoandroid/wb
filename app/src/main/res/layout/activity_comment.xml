@@ -14,13 +14,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="bottom">
-            <ImageButton
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/back_imag"
-                android:background="@drawable/backblack"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="12dp" />
+                android:id="@+id/line_back">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/back_imag"
+                    android:background="@drawable/backblack"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="12dp" />
+            </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

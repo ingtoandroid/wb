@@ -9,24 +9,21 @@
     android:visibility="invisible"
     android:background="#fff"
     tools:context="com.example.a.app10.Activity.NewsDetailActivity">
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/backgroundcolor"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
         <TextView
             android:id="@+id/title"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="资讯详情"
-            android:textColor="@color/stringDark" />
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:text="健身处方详情"
+            android:textColor="@color/stringDark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>
-
     <LinearLayout
         android:background="#ddd"
         android:layout_width="match_parent"
