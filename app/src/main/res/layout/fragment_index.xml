@@ -1,7 +1,7 @@
-<ScrollView
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:scr="http://schemas.android.com/apk/res-auto">
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +11,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
 
         <ImageView
             android:id="@+id/imageView"
@@ -68,6 +70,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/index_right" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -218,53 +221,105 @@
                 android:background="@color/index_split"></TextView>
 
             <LinearLayout
-                android:id="@+id/quick_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:paddingBottom="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="5dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/index_tiwen" />
-
+                android:orientation="horizontal">
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:id="@+id/call_phone"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp">
-
-                    <TextView
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:paddingBottom="10dp">
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/index_tiwen_string1"
-                        android:textSize="25sp"
-                        android:textColor="@color/stringDark"/>
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/dianhua"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="电话咨询"
+                            android:textSize="25sp"
+                            android:textColor="@color/stringDark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="400-020-0808"
+                            android:textSize="15sp"
+                            android:textColor="@color/textGreen"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
                         android:layout_marginTop="5dp"
-                        android:text="@string/index_tiwen_string2"
-                        android:textSize="15sp"
-                        android:textColor="@color/stringCenter"/>
+                        android:layout_marginBottom="5dp"
+                        android:background="#000000"/>
                 </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/quick_question"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:scaleType="fitXY"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/index_right" />
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="1"
+                    android:paddingBottom="10dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/index_tiwen" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/index_tiwen_string1"
+                            android:textSize="25sp"
+                            android:textColor="@color/stringDark"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/index_tiwen_string2"
+                            android:textSize="15sp"
+                            android:textColor="@color/stringCenter"/>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|right"
+                        android:scaleType="fitXY"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/index_right" />
+                </LinearLayout>
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"

@@ -19,7 +19,7 @@ import java.util.List;
  * 课程列表的适配器
  */
 
-public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder> {
+    public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.MyViewHolder> {
 
     private List<ClassItem> list;
     private Context context;

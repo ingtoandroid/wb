@@ -1,9 +1,14 @@
 package com.example.a.app10.Fragment;
 
 
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.a.app10.Activity.ClassActivity;
 import com.example.a.app10.Activity.Main1Activity;
+import com.example.a.app10.Activity.ModifyDataActivity;
 import com.example.a.app10.Activity.NewsActivity;
 import com.example.a.app10.Activity.Professor;
 import com.example.a.app10.Activity.ProfessorDetailActivity;
@@ -26,6 +33,7 @@ import com.example.a.app10.Adapter.IndexExpertAdapter;
 import com.example.a.app10.Adapter.ShipinAdapter;
 import com.example.a.app10.Adapter.TiWenAdapter;
 import com.example.a.app10.R;
+import com.example.a.app10.bean.CommomDialog;
 import com.example.a.app10.bean.ExpertItem;
 import com.example.a.app10.bean.ProfessorItem;
 import com.example.a.app10.bean.QuestionDetail;
@@ -48,6 +56,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.a.app10.R.layout.dialog;
+
 public class IndexFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -65,6 +75,7 @@ public class IndexFragment extends Fragment {
     private LinearLayout shipin;
     private LinearLayout ketang;
     private LinearLayout zixun;
+    private LinearLayout call_phone;
     private List<ExpertItem> list1;
     private List<QuestionItem> list2;
     private List<ShipinItem> list3;
@@ -103,6 +114,7 @@ public class IndexFragment extends Fragment {
         shipin=(LinearLayout)view.findViewById(R.id.index_shipin);
         ketang=(LinearLayout)view.findViewById(R.id.index_ketang);
         zixun=(LinearLayout)view.findViewById(R.id.index_zixun);
+        call_phone = (LinearLayout)view.findViewById(R.id.call_phone);
         getData();
         init();
         return view;
@@ -155,6 +167,27 @@ public class IndexFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), NewsActivity.class);
                 startActivity(intent);
+            }
+        });
+        call_phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(getContext(),"未授予电话权限",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                new CommomDialog(getContext(), R.style.dialog, "400-020-0808", new CommomDialog.OnCloseListener() {
+                    @Override
+                    public void onClick(Dialog dialog, boolean confirm) {
+                        if(confirm){
+                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+"4000200808"));
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    }
+                }).setTitle("提示").show();
+
             }
         });
     }
