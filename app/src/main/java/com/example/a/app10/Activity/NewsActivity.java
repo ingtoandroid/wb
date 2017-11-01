@@ -38,6 +38,7 @@ public class NewsActivity extends ToolBarBaseActivity{
     private LinearLayout llLoading;
     private int currentPosition=0;
     private boolean loading=false;
+    private NewsAdapter adapter;
 
     private OkHttpClient client;
     private int pageIndex=1;//从第一页开始获取
@@ -58,9 +59,40 @@ public class NewsActivity extends ToolBarBaseActivity{
             }
         });
 
+        rv= (RecyclerView) findViewById(R.id.rv);
         list=new ArrayList<>();
 
-        rv= (RecyclerView) findViewById(R.id.rv);
+        adapter=new NewsAdapter(list,this);
+        adapter.setLisenter(new NewsAdapter.OnItenClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(NewsActivity.this,NewsDetailActivity.class);
+                intent.putExtra("newsId",list.get(position).getNewsId());
+                startActivity(intent);
+            }
+            @Override
+            public void onItemLongClick(View view, int position) {
+
+            }
+        });
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(adapter);
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (isSlideToBottom(recyclerView)) {
+                    loadMore();
+                }
+            }
+        });
+        rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
+
         llLoading= (LinearLayout) findViewById(R.id.llLoading);
         client=new OkHttpClient();
         hideDrawer();
@@ -135,38 +167,9 @@ public class NewsActivity extends ToolBarBaseActivity{
         hideProgress();
         hideBottomProgress();
         rv.setVisibility(View.VISIBLE);
-        NewsAdapter adapter=new NewsAdapter(list,this);
-        adapter.setLisenter(new NewsAdapter.OnItenClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent=new Intent(NewsActivity.this,NewsDetailActivity.class);
-                intent.putExtra("newsId",list.get(position).getNewsId());
-                startActivity(intent);
-            }
-            @Override
-            public void onItemLongClick(View view, int position) {
 
-            }
-        });
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter);
-        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (isSlideToBottom(recyclerView)) {
-                    loadMore();
-                }
-            }
-        });
-        rv.addItemDecoration(new KopItemDecoration(this,KopItemDecoration.VERTICAL_LIST));
-        rv.scrollToPosition(currentPosition);
-        Log.v("tag","current"+currentPosition);
+        adapter.notifyDataSetChanged();
+        //rv.scrollToPosition(currentPosition);
         loading=false;
     }
 

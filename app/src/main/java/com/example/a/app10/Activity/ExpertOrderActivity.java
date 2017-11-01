@@ -165,6 +165,7 @@ public class ExpertOrderActivity extends AppCompatActivity implements View.OnCli
         String url=MyInternet.MAIN_URL+
                 "expert/get_expert_order_service_time?expertId="+professor.getExpertId()
                 +"&serviceId="+serviceIds[choseIndex]
+                +"&orderDate="+rawDates[choseIndex%7]
                 +"&serviceTimeType="+((choseIndex/7)+1);
         MyInternet.getMessage(url, client, new MyInternet.MyInterface() {
             @Override
